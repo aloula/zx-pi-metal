@@ -1,8 +1,15 @@
 *.o
+*.d
 z80_test
 spectrum_test
 zxsdl
+cpm_test
 *.dSYM/
 roms
 misc/
 .DS_Store
+circle/
+circle-zx/*.elf
+circle-zx/*.img
+circle-zx/*.lst
+circle-zx/*.map
