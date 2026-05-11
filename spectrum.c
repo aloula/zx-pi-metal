@@ -388,6 +388,7 @@ static void zx_render_scanline_to_fb(ZXSpectrum *zx, int scanline) {
 /* Convert beeper events from this frame into PCM audio samples.
  * Walk the event list and sample the speaker state at evenly-spaced
  * T-state positions corresponding to the audio sample rate. */
+#define ZX_BEEPER_LEVEL 256
 static void zx_render_audio(ZXSpectrum *zx) {
     int event_idx = 0;
     uint8_t level = 0;
@@ -416,7 +417,7 @@ static void zx_render_audio(ZXSpectrum *zx) {
         }
 
         /* Convert 1-bit speaker to signed 16-bit PCM. */
-        zx->audio_buffer[i] = level ? 8192 : -8192;
+        zx->audio_buffer[i] = level ? ZX_BEEPER_LEVEL : -ZX_BEEPER_LEVEL;
     }
 }
 

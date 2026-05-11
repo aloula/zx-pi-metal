@@ -2,6 +2,8 @@
 
 #include <circle/string.h>
 #include <circle/usb/usbhid.h>
+#include <circle/usb/usbgamepad.h>
+#include <circle/usb/usbgamepadxbox360.h>
 #include <string.h>
 
 extern "C" {
@@ -73,13 +75,14 @@ enum
 CKernel *CKernel::s_pThis = 0;
 
 CKernel::CKernel(void)
-:   m_Screen(m_Options.GetWidth(), m_Options.GetHeight(), Font12x22),
+    :   m_Screen(m_Options.GetWidth(), m_Options.GetHeight(), Font12x22),
     m_Timer(&m_Interrupt),
     m_Logger(m_Options.GetLogLevel(), &m_Timer),
-    m_SoundOut(&m_Interrupt, ZX_AUDIO_RATE, 2048),
+    m_SoundOut(&m_Interrupt, ZX_AUDIO_RATE, 384 * 10),
     m_EMMC(&m_Interrupt, &m_Timer, &m_ActLED),
     m_USBHCI(&m_Interrupt, &m_Timer, TRUE),
     m_pKeyboard(0),
+    m_pGamePad(0),
     m_ShutdownMode(ShutdownNone),
     m_DrawX(0),
     m_DrawY(0),
@@ -87,6 +90,11 @@ CKernel::CKernel(void)
     m_InputSequence(0),
     m_InputModifiers(0),
     m_AppliedSequence(0),
+    m_GamePadSequence(0),
+    m_AppliedGamePadSequence(0),
+    m_LastGamePadButtons(0),
+    m_LastGamePadLeftX(128),
+    m_LastGamePadLeftY(128),
     m_JoyPressed(0),
     m_F2Pressed(FALSE),
     m_ResetRequested(FALSE),
@@ -105,10 +113,12 @@ CKernel::CKernel(void)
     m_F6Pressed(FALSE),
     m_FastTapeMode(TRUE),
     m_TurboFrameCounter(0),
-    m_AudioActive(FALSE)
+    m_AudioActive(FALSE),
+    m_AudioArmed(FALSE)
 {
     memset((void *)m_InputKeys, 0, sizeof(m_InputKeys));
     memset(m_LastInputKeys, 0, sizeof(m_LastInputKeys));
+    memset((void *)&m_GamePadState, 0, sizeof(m_GamePadState));
     memset(m_KeyPressed, 0, sizeof(m_KeyPressed));
     memset(m_Framebuffer, 0, sizeof(m_Framebuffer));
     memset(m_SnapshotNames, 0, sizeof(m_SnapshotNames));
@@ -138,10 +148,18 @@ boolean CKernel::Initialize(void)
 
     if (ok) ok = m_Interrupt.Initialize();
     if (ok) ok = m_Timer.Initialize();
-    if (ok) ok = m_SoundOut.AllocateQueue(150);
-    if (ok) m_SoundOut.SetWriteFormat(SoundFormatSigned16, 1);
-    if (ok) ok = m_SoundOut.Start();
-    if (ok) m_AudioActive = TRUE;
+    if (ok) {
+        if (m_SoundOut.AllocateQueue(150)) {
+            m_SoundOut.SetWriteFormat(SoundFormatSigned16, 1);
+            if (m_SoundOut.Start()) {
+                m_AudioActive = TRUE;
+            } else {
+                m_Logger.Write(FromKernel, LogWarning, "HDMI audio unavailable; continuing without sound");
+            }
+        } else {
+            m_Logger.Write(FromKernel, LogWarning, "Cannot allocate HDMI audio queue; continuing without sound");
+        }
+    }
     if (ok) ok = m_EMMC.Initialize();
     if (ok) ok = m_USBHCI.Initialize();
 
@@ -171,7 +189,6 @@ boolean CKernel::Initialize(void)
     CDevice *pPartition = m_DeviceNameService.GetDevice("emmc1-1", TRUE);
     if (pPartition != 0 && m_FileSystem.Mount(pPartition)) {
         m_FileSystemMounted = TRUE;
-        ReloadSnapshots();
         m_Logger.Write(FromKernel, LogNotice, "Snapshot storage mounted: emmc1-1");
     } else {
         m_Logger.Write(FromKernel, LogWarning, "Cannot mount emmc1-1 (.z80 loader disabled)");
@@ -189,7 +206,7 @@ TShutdownMode CKernel::Run(void)
     while (m_ShutdownMode == ShutdownNone) {
         const boolean updated = m_USBHCI.UpdatePlugAndPlay();
 
-        if (updated && m_pKeyboard == 0) {
+    if (updated && m_pKeyboard == 0) {
             m_pKeyboard = (CUSBKeyboardDevice *)m_DeviceNameService.GetDevice("ukbd1", FALSE);
             if (m_pKeyboard != 0) {
                 m_pKeyboard->RegisterRemovedHandler(KeyboardRemovedHandler);
@@ -198,7 +215,22 @@ TShutdownMode CKernel::Run(void)
             }
         }
 
-        if (m_InputSequence != m_AppliedSequence) {
+        if (updated && m_pGamePad == 0) {
+            m_pGamePad = (CUSBGamePadDevice *)m_DeviceNameService.GetDevice("upad", 1, FALSE);
+            if (m_pGamePad != 0) {
+                m_pGamePad->RegisterRemovedHandler(GamePadRemovedHandler);
+                m_pGamePad->RegisterStatusHandler(GamePadStatusHandler);
+
+                const TGamePadState *pState = m_pGamePad->GetInitialState();
+                if (pState != 0) {
+                    GamePadStatusHandler(0, pState);
+                }
+
+                m_Logger.Write(FromKernel, LogNotice, "USB gamepad connected.");
+            }
+        }
+
+        if (m_InputSequence != m_AppliedSequence || m_GamePadSequence != m_AppliedGamePadSequence) {
             ApplyInputReport();
         }
 
@@ -212,6 +244,10 @@ TShutdownMode CKernel::Run(void)
             if (m_OsdDirty) {
                 RenderOSD();
                 m_OsdDirty = FALSE;
+            }
+            if (m_AudioActive) {
+                memset(m_ZX.audio_buffer, 0, sizeof(m_ZX.audio_buffer));
+                (void)m_SoundOut.Write(m_ZX.audio_buffer, (size_t)(ZX_AUDIO_SAMPLES * sizeof(int16_t)));
             }
             CTimer::SimpleusDelay(5000);
             continue;
@@ -234,7 +270,12 @@ TShutdownMode CKernel::Run(void)
             BlitSpectrumFramebuffer();
             if (m_AudioActive) {
                 const int bytes = (int)(ZX_AUDIO_SAMPLES * sizeof(int16_t));
-                (void)m_SoundOut.Write(m_ZX.audio_buffer, (size_t)bytes);
+                if (m_AudioArmed) {
+                    (void)m_SoundOut.Write(m_ZX.audio_buffer, (size_t)bytes);
+                } else {
+                    memset(m_ZX.audio_buffer, 0, sizeof(m_ZX.audio_buffer));
+                    (void)m_SoundOut.Write(m_ZX.audio_buffer, (size_t)bytes);
+                }
             }
         } else {
             m_TurboFrameCounter++;
@@ -274,6 +315,31 @@ void CKernel::KeyboardRemovedHandler(CDevice *pDevice, void *pContext)
     }
     CLogger::Get()->Write(FromKernel, LogNotice, "USB keyboard removed.");
     s_pThis->m_pKeyboard = 0;
+}
+
+void CKernel::GamePadStatusHandler(unsigned nDeviceIndex, const TGamePadState *pState)
+{
+    (void)nDeviceIndex;
+    if (s_pThis == 0 || pState == 0) {
+        return;
+    }
+
+    s_pThis->m_GamePadState = *pState;
+    s_pThis->m_GamePadSequence++;
+}
+
+void CKernel::GamePadRemovedHandler(CDevice *pDevice, void *pContext)
+{
+    (void)pDevice;
+    (void)pContext;
+    if (s_pThis == 0) {
+        return;
+    }
+
+    CLogger::Get()->Write(FromKernel, LogNotice, "USB gamepad removed.");
+    s_pThis->m_pGamePad = 0;
+    memset((void *)&s_pThis->m_GamePadState, 0, sizeof(s_pThis->m_GamePadState));
+    s_pThis->m_GamePadSequence++;
 }
 
 void CKernel::SetZXKeyState(int row, int bit, boolean pressed)
@@ -353,8 +419,9 @@ void CKernel::ApplyInputReport(void)
     const boolean f6_now = HasRawKey(raw_keys, HID_F6);
     if (f6_now && !m_F6Pressed) {
         m_FastTapeMode = !m_FastTapeMode;
+        tzx_set_speedup(&m_Tape, m_FastTapeMode ? 4 : 1);
         if (m_FastTapeMode) {
-            strncpy(m_OsdStatus, "Turbo tape: ON", sizeof(m_OsdStatus) - 1);
+            strncpy(m_OsdStatus, "Turbo tape: 4x", sizeof(m_OsdStatus) - 1);
             m_Logger.Write(FromKernel, LogNotice, "Turbo tape mode enabled");
         } else {
             strncpy(m_OsdStatus, "Turbo tape: OFF", sizeof(m_OsdStatus) - 1);
@@ -400,6 +467,19 @@ void CKernel::ApplyInputReport(void)
     for (unsigned i = 0; i < 6; i++) {
         m_LastInputKeys[i] = raw_keys[i];
     }
+
+    TGamePadState gamepad_state;
+    unsigned gamepad_first;
+    unsigned gamepad_second;
+    do {
+        gamepad_first = m_GamePadSequence;
+        gamepad_state = m_GamePadState;
+        gamepad_second = m_GamePadSequence;
+    } while (gamepad_first != gamepad_second);
+
+    m_AppliedGamePadSequence = gamepad_second;
+    const unsigned gamepad_buttons = gamepad_state.buttons;
+    const unsigned gamepad_changed = gamepad_buttons ^ m_LastGamePadButtons;
 
     boolean desired_keys[8][5];
     memset(desired_keys, 0, sizeof(desired_keys));
@@ -477,6 +557,96 @@ void CKernel::ApplyInputReport(void)
                 break;
             }
         }
+
+    }
+
+    const int left_x = (gamepad_state.naxes > GamePadAxisLeftX) ? gamepad_state.axes[GamePadAxisLeftX].value : 128;
+    const int left_y = (gamepad_state.naxes > GamePadAxisLeftY) ? gamepad_state.axes[GamePadAxisLeftY].value : 128;
+    const boolean left_left = left_x < 96;
+    const boolean left_right = left_x > 160;
+    const boolean left_up = left_y < 96;
+    const boolean left_down = left_y > 160;
+
+    if (!m_OsdActive) {
+        if ((gamepad_buttons & GamePadButtonLeft) || left_left) {
+            desired_joy |= ZX_JOY_LEFT;
+        }
+        if ((gamepad_buttons & GamePadButtonRight) || left_right) {
+            desired_joy |= ZX_JOY_RIGHT;
+        }
+        if ((gamepad_buttons & GamePadButtonUp) || left_up) {
+            desired_joy |= ZX_JOY_UP;
+        }
+        if ((gamepad_buttons & GamePadButtonDown) || left_down) {
+            desired_joy |= ZX_JOY_DOWN;
+        }
+
+        if (gamepad_buttons & (GamePadButtonA | GamePadButtonB | GamePadButtonRB | GamePadButtonRT)) {
+            desired_joy |= ZX_JOY_FIRE;
+        }
+    }
+
+    if ((gamepad_buttons & GamePadButtonStart) && (gamepad_changed & GamePadButtonStart)) {
+        if (m_OsdActive) {
+            const char *name = m_SnapshotNames[m_SelectedSnapshot];
+            const boolean loaded = HasZ80Extension(name)
+                ? LoadSnapshot(m_SelectedSnapshot)
+                : LoadTape(m_SelectedSnapshot);
+            if (loaded) {
+                m_OsdActive = FALSE;
+            } else {
+                m_OsdDirty = TRUE;
+            }
+        } else {
+            ToggleOSD();
+        }
+    }
+
+    if ((gamepad_buttons & GamePadButtonBack) && (gamepad_changed & GamePadButtonBack)) {
+        if (m_OsdActive) {
+            ToggleOSD();
+        } else {
+            m_ResetRequested = TRUE;
+        }
+    }
+
+    if (m_OsdActive) {
+        if ((gamepad_buttons & GamePadButtonA) && (gamepad_changed & GamePadButtonA)) {
+            const char *name = m_SnapshotNames[m_SelectedSnapshot];
+            const boolean loaded = HasZ80Extension(name)
+                ? LoadSnapshot(m_SelectedSnapshot)
+                : LoadTape(m_SelectedSnapshot);
+            if (loaded) {
+                m_OsdActive = FALSE;
+            } else {
+                m_OsdDirty = TRUE;
+            }
+        }
+        const boolean osd_up_now = ((gamepad_buttons & GamePadButtonUp) != 0) || left_up;
+        const boolean osd_down_now = ((gamepad_buttons & GamePadButtonDown) != 0) || left_down;
+        const boolean osd_up_prev = ((m_LastGamePadButtons & GamePadButtonUp) != 0) ||
+            (m_LastGamePadLeftY < 96);
+        const boolean osd_down_prev = ((m_LastGamePadButtons & GamePadButtonDown) != 0) ||
+            (m_LastGamePadLeftY > 160);
+
+        if (osd_up_now && !osd_up_prev) {
+            if (m_SelectedSnapshot > 0) {
+                m_SelectedSnapshot--;
+                if (m_SelectedSnapshot < m_OsdTopRow) {
+                    m_OsdTopRow = m_SelectedSnapshot;
+                }
+                m_OsdDirty = TRUE;
+            }
+        }
+        if (osd_down_now && !osd_down_prev) {
+            if (m_SelectedSnapshot + 1 < m_SnapshotCount) {
+                m_SelectedSnapshot++;
+                if (m_SelectedSnapshot >= m_OsdTopRow + OSDVisibleRows) {
+                    m_OsdTopRow = m_SelectedSnapshot - OSDVisibleRows + 1;
+                }
+                m_OsdDirty = TRUE;
+            }
+        }
     }
 
     for (int row = 0; row < 8; row++) {
@@ -495,6 +665,9 @@ void CKernel::ApplyInputReport(void)
         m_ResetRequested = TRUE;
     }
     m_F2Pressed = f2_now;
+    m_LastGamePadButtons = gamepad_buttons;
+    m_LastGamePadLeftX = left_x;
+    m_LastGamePadLeftY = left_y;
 }
 
 void CKernel::ResetSpectrum(void)
@@ -738,35 +911,35 @@ void CKernel::ReloadSnapshots(void)
         return;
     }
 
+    auto add_snapshot = [this](const char *name) {
+        if (name == 0 || name[0] == '\0') {
+            return;
+        }
+        if (!(HasZ80Extension(name) || HasTapeExtension(name))) {
+            return;
+        }
+
+        unsigned pos = m_SnapshotCount;
+        while (pos > 0 && strcmp(name, m_SnapshotNames[pos - 1]) < 0) {
+            memcpy(m_SnapshotNames[pos], m_SnapshotNames[pos - 1], sizeof(m_SnapshotNames[pos]));
+            pos--;
+        }
+        strncpy(m_SnapshotNames[pos], name, sizeof(m_SnapshotNames[pos]) - 1);
+        m_SnapshotNames[pos][sizeof(m_SnapshotNames[pos]) - 1] = '\0';
+        m_SnapshotCount++;
+    };
+
     TDirentry entry;
     TFindCurrentEntry current;
     unsigned found = m_FileSystem.RootFindFirst(&entry, &current);
     while (found != 0 && m_SnapshotCount < MaxSnapshots) {
-        char name[FS_TITLE_LEN + 1];
-        strncpy(name, entry.chTitle, FS_TITLE_LEN);
-        name[FS_TITLE_LEN] = '\0';
-        for (int i = FS_TITLE_LEN - 1; i >= 0 && name[i] == ' '; i--) {
-            name[i] = '\0';
-        }
-
-        if (name[0] != '\0'
-            && !(entry.nAttributes & FS_ATTRIB_SYSTEM)
-            && (HasZ80Extension(name) || HasTapeExtension(name))) {
-            unsigned pos = m_SnapshotCount;
-            while (pos > 0 && strcmp(name, m_SnapshotNames[pos - 1]) < 0) {
-                memcpy(m_SnapshotNames[pos], m_SnapshotNames[pos - 1], FS_TITLE_LEN + 1);
-                pos--;
-            }
-            strncpy(m_SnapshotNames[pos], name, FS_TITLE_LEN);
-            m_SnapshotNames[pos][FS_TITLE_LEN] = '\0';
-            m_SnapshotCount++;
-        }
+        add_snapshot(entry.chTitle);
         found = m_FileSystem.RootFindNext(&entry, &current);
     }
 
     m_Logger.Write(FromKernel, LogNotice, "Snapshots found: %u", m_SnapshotCount);
     if (m_SnapshotCount == 0) {
-        strncpy(m_OsdStatus, "No .z80 files found in SD root", sizeof(m_OsdStatus) - 1);
+        strncpy(m_OsdStatus, "No TAP/TZX/Z80 files found", sizeof(m_OsdStatus) - 1);
     } else {
         m_OsdStatus[0] = '\0';
     }
@@ -844,6 +1017,7 @@ boolean CKernel::LoadSnapshot(unsigned index)
     m_Logger.Write(FromKernel, LogNotice, "Loaded snapshot: %s", m_SnapshotNames[index]);
     strncpy(m_OsdStatus, "Snapshot loaded", sizeof(m_OsdStatus) - 1);
     m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
+    m_AudioArmed = TRUE;
     return TRUE;
 }
 
@@ -893,9 +1067,11 @@ boolean CKernel::LoadTape(unsigned index)
 
     m_TapeLoaded = TRUE;
     tzx_stop(&m_Tape);
+    tzx_set_speedup(&m_Tape, m_FastTapeMode ? 4 : 1);
     strncpy(m_OsdStatus, "Tape loaded. Type LOAD \"\" then F3", sizeof(m_OsdStatus) - 1);
     m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
     m_Logger.Write(FromKernel, LogNotice, "Tape loaded: %s", m_SnapshotNames[index]);
+    m_AudioArmed = TRUE;
     return TRUE;
 }
 

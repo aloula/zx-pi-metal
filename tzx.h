@@ -92,6 +92,9 @@ typedef struct {
     /* Loop support (single nesting level). */
     int loop_start_offset;
     int loop_count;
+
+    /* Playback speed multiplier (1 = normal timing). */
+    unsigned speedup;
 } TZXPlayer;
 
 /* Load a TZX or TAP file. The data pointer must remain valid while
@@ -105,6 +108,9 @@ void tzx_play(TZXPlayer *p, uint64_t cpu_clocks);
 
 /* Stop playback. Sets EAR level to 0. */
 void tzx_stop(TZXPlayer *p);
+
+/* Set playback speed multiplier (1 = normal timing). */
+void tzx_set_speedup(TZXPlayer *p, unsigned speedup);
 
 /* Returns 1 if tape is currently playing. */
 int tzx_is_playing(TZXPlayer *p);
