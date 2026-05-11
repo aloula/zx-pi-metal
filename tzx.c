@@ -73,6 +73,7 @@ static inline uint32_t r32(const uint8_t *p) {
 
 static int tzx_parse_next_block(TZXPlayer *p);
 static uint32_t tzx_next_pulse(TZXPlayer *p);
+static inline uint32_t tzx_scale_pause(const TZXPlayer *p, uint32_t pause);
 
 /* ===================================================================
  * PUBLIC API
@@ -82,6 +83,7 @@ int tzx_load(TZXPlayer *p, const uint8_t *data, int len) {
     memset(p, 0, sizeof(TZXPlayer));
     p->data = data;
     p->len = len;
+    p->speedup = 1;
 
     /* Detect format: TZX starts with "ZXTape!\x1A". */
     if (len >= 10 && memcmp(data, "ZXTape!\x1A", 8) == 0) {
@@ -115,6 +117,11 @@ void tzx_play(TZXPlayer *p, uint64_t cpu_clocks) {
 void tzx_stop(TZXPlayer *p) {
     p->playing = 0;
     p->level = 0;
+}
+
+void tzx_set_speedup(TZXPlayer *p, unsigned speedup) {
+    if (!p) return;
+    p->speedup = speedup == 0 ? 1 : speedup;
 }
 
 int tzx_is_playing(TZXPlayer *p) {
@@ -171,7 +178,7 @@ static int tzx_parse_tap_block(TZXPlayer *p) {
     p->bit_pos = 7;
     p->pulse_half = 0;
     p->used_bits_last = 8;
-    p->pause_tstates = (uint32_t)PAUSE_MS * TSTATES_PER_MS;
+    p->pause_tstates = tzx_scale_pause(p, (uint32_t)PAUSE_MS * TSTATES_PER_MS);
     p->phase = TZX_PHASE_PILOT;
     p->offset += 2 + block_len;
 
@@ -225,7 +232,7 @@ static int tzx_parse_next_block(TZXPlayer *p) {
             p->bit_pos = 7;
             p->pulse_half = 0;
             p->used_bits_last = 8;
-            p->pause_tstates = (uint32_t)pause_ms * TSTATES_PER_MS;
+            p->pause_tstates = tzx_scale_pause(p, (uint32_t)pause_ms * TSTATES_PER_MS);
             p->phase = TZX_PHASE_PILOT;
             p->offset += 1 + 4 + data_len;
             return 1;
@@ -255,7 +262,7 @@ static int tzx_parse_next_block(TZXPlayer *p) {
             p->data_pos = 0;
             p->bit_pos = 7;
             p->pulse_half = 0;
-            p->pause_tstates = (uint32_t)pause_ms * TSTATES_PER_MS;
+            p->pause_tstates = tzx_scale_pause(p, (uint32_t)pause_ms * TSTATES_PER_MS);
             p->phase = TZX_PHASE_PILOT;
             p->offset += 1 + 18 + (int)data_len;
             return 1;
@@ -313,7 +320,7 @@ static int tzx_parse_next_block(TZXPlayer *p) {
             p->data_pos = 0;
             p->bit_pos = 7;
             p->pulse_half = 0;
-            p->pause_tstates = (uint32_t)pause_ms * TSTATES_PER_MS;
+            p->pause_tstates = tzx_scale_pause(p, (uint32_t)pause_ms * TSTATES_PER_MS);
             p->phase = TZX_PHASE_DATA;
             p->offset += 1 + 10 + (int)data_len;
             return 1;
@@ -337,7 +344,7 @@ static int tzx_parse_next_block(TZXPlayer *p) {
             p->data_len = (int)data_len;
             p->data_pos = 0;
             p->bit_pos = 7;
-            p->pause_tstates = (uint32_t)pause_ms * TSTATES_PER_MS;
+            p->pause_tstates = tzx_scale_pause(p, (uint32_t)pause_ms * TSTATES_PER_MS);
             p->phase = TZX_PHASE_DIRECT;
             p->offset += 1 + 8 + (int)data_len;
             return 1;
@@ -357,7 +364,7 @@ static int tzx_parse_next_block(TZXPlayer *p) {
                 p->playing = 0;
                 return 0;
             }
-            p->pause_tstates = (uint32_t)pause_ms * TSTATES_PER_MS;
+            p->pause_tstates = tzx_scale_pause(p, (uint32_t)pause_ms * TSTATES_PER_MS);
             p->phase = TZX_PHASE_PAUSE;
             return 1;
         }
@@ -623,7 +630,7 @@ static uint32_t tzx_next_pulse(TZXPlayer *p) {
         case TZX_PHASE_TONE:
             if (p->tone_remaining > 0) {
                 p->tone_remaining--;
-                return p->tone_pulse;
+            return p->tone_pulse;
             }
             p->phase = TZX_PHASE_IDLE;
             continue;
@@ -677,4 +684,13 @@ static uint32_t tzx_next_pulse(TZXPlayer *p) {
 
         }  /* switch (p->phase) */
     }  /* for (;;) */
+}
+
+static inline uint32_t tzx_scale_pause(const TZXPlayer *p, uint32_t pause) {
+    unsigned speedup = (p && p->speedup) ? p->speedup : 1;
+    if (speedup <= 1) {
+        return pause;
+    }
+    pause /= speedup;
+    return pause == 0 ? 1 : pause;
 }

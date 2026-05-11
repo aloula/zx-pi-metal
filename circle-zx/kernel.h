@@ -10,9 +10,11 @@
 #include <circle/logger.h>
 #include <circle/screen.h>
 #include <circle/serial.h>
-#include <circle/sound/pwmsoundbasedevice.h>
+#include <circle/sound/hdmisoundbasedevice.h>
 #include <circle/timer.h>
 #include <circle/types.h>
+#include <circle/usb/usbgamepad.h>
+#include <circle/usb/usbgamepadxbox360.h>
 #include <circle/usb/usbhcidevice.h>
 #include <circle/usb/usbkeyboard.h>
 #include <circle/fs/fat/fatfs.h>
@@ -47,6 +49,8 @@ private:
 
     static void KeyboardRawHandler(unsigned char modifiers, const unsigned char raw_keys[6]);
     static void KeyboardRemovedHandler(CDevice *pDevice, void *pContext);
+    static void GamePadStatusHandler(unsigned nDeviceIndex, const TGamePadState *pState);
+    static void GamePadRemovedHandler(CDevice *pDevice, void *pContext);
 
     void ApplyInputReport(void);
     void ResetSpectrum(void);
@@ -72,12 +76,13 @@ private:
     CInterruptSystem m_Interrupt;
     CTimer m_Timer;
     CLogger m_Logger;
-    CPWMSoundBaseDevice m_SoundOut;
+    CHDMISoundBaseDevice m_SoundOut;
     CEMMCDevice m_EMMC;
     CUSBHCIDevice m_USBHCI;
     CFATFileSystem m_FileSystem;
 
     CUSBKeyboardDevice *volatile m_pKeyboard;
+    CUSBGamePadDevice *volatile m_pGamePad;
     volatile TShutdownMode m_ShutdownMode;
 
     ZXSpectrum m_ZX;
@@ -91,6 +96,12 @@ private:
     volatile unsigned char m_InputKeys[6];
     unsigned char m_LastInputKeys[6];
     unsigned m_AppliedSequence;
+    volatile unsigned m_GamePadSequence;
+    unsigned m_AppliedGamePadSequence;
+    TGamePadState m_GamePadState;
+    unsigned m_LastGamePadButtons;
+    int m_LastGamePadLeftX;
+    int m_LastGamePadLeftY;
 
     boolean m_KeyPressed[8][5];
     unsigned char m_JoyPressed;
@@ -103,7 +114,7 @@ private:
     unsigned m_SnapshotCount;
     unsigned m_SelectedSnapshot;
     unsigned m_OsdTopRow;
-    char m_SnapshotNames[MaxSnapshots][FS_TITLE_LEN + 1];
+    char m_SnapshotNames[MaxSnapshots][64];
     char m_OsdStatus[64];
     uint8_t *m_pSnapshotBuffer;
     uint8_t *m_pTapeBuffer;
@@ -116,6 +127,7 @@ private:
     boolean m_FastTapeMode;
     unsigned m_TurboFrameCounter;
     boolean m_AudioActive;
+    boolean m_AudioArmed;
 
     static CKernel *s_pThis;
 };
