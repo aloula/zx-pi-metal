@@ -4,7 +4,7 @@
 
 # Path to your Circle checkout (override from command line if needed):
 #   make CIRCLEHOME=/path/to/circle
-CIRCLEHOME ?= ../../circle
+CIRCLEHOME ?= ../circle
 RASPPI ?= 3
 AARCH ?= 32
 
