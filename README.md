@@ -11,6 +11,7 @@ The active frontend is `circle-zx/`.
 - USB keyboard input mapping
 - Kempston joystick mapping (keyboard)
 - OSD browser for `.z80`, `.tap`, `.tzx`
+- OSD keyboard typing reference (readable text)
 - Tape playback controls and turbo tape mode
 - PWM beeper audio output
 
@@ -68,7 +69,7 @@ Put `.z80`, `.tap`, or `.tzx` files in the SD card root directory used by `emmc1
 Inside OSD:
 
 - **Up/Down**: select file
-- **Enter**: load selected file
+- **Enter**: toggle keyboard layout (first item) or load selected file
 - **Esc/F1**: close OSD
 
 ## TAP/TZX Loading Flow

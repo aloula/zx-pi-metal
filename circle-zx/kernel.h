@@ -59,6 +59,9 @@ private:
     void SetZXKeyState(int row, int bit, boolean pressed);
     void SetZXJoyState(unsigned mask, boolean pressed);
     void ToggleOSD(void);
+    unsigned GetOSDEntryCount(void) const;
+    void OSDMoveSelection(int delta);
+    boolean OSDActivateSelection(void);
     void ReloadSnapshots(void);
     boolean LoadTape(unsigned index);
     boolean LoadSnapshot(unsigned index);
@@ -111,6 +114,7 @@ private:
     boolean m_OsdActive;
     boolean m_OsdDirty;
     boolean m_FileSystemMounted;
+    boolean m_ShowKeyboardLayout;
     unsigned m_SnapshotCount;
     unsigned m_SelectedSnapshot;
     unsigned m_OsdTopRow;

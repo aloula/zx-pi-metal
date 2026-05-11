@@ -11,6 +11,21 @@ extern "C" {
 }
 
 static const char FromKernel[] = "zx-circle";
+static const char *const KeyboardLayoutLines[] = {
+    "PC -> ZX quick reference",
+    "Shift -> CAPS SHIFT",
+    "Ctrl  -> SYMBOL SHIFT",
+    "A..Z / 0..9 -> same keys",
+    "Enter -> ENTER",
+    "Space -> BREAK/SPACE",
+    "Backspace -> CAPS SHIFT + 0",
+    "Arrows -> Kempston U/D/L/R",
+    "Tab -> Kempston FIRE",
+    "F2 reset  F3 play tape",
+    "F4 stop tape  F6 turbo"
+};
+static const unsigned KeyboardLayoutLineCount =
+    sizeof(KeyboardLayoutLines) / sizeof(KeyboardLayoutLines[0]);
 
 static char zx_upper(char c)
 {
@@ -102,6 +117,7 @@ CKernel::CKernel(void)
     m_OsdActive(FALSE),
     m_OsdDirty(FALSE),
     m_FileSystemMounted(FALSE),
+    m_ShowKeyboardLayout(FALSE),
     m_SnapshotCount(0),
     m_SelectedSnapshot(0),
     m_OsdTopRow(0),
@@ -436,30 +452,12 @@ void CKernel::ApplyInputReport(void)
         if (HasRawKey(raw_keys, HID_ESCAPE) && !HasRawKey(m_LastInputKeys, HID_ESCAPE)) {
             ToggleOSD();
         } else if (HasRawKey(raw_keys, HID_UP) && !HasRawKey(m_LastInputKeys, HID_UP)) {
-            if (m_SelectedSnapshot > 0) {
-                m_SelectedSnapshot--;
-                if (m_SelectedSnapshot < m_OsdTopRow) {
-                    m_OsdTopRow = m_SelectedSnapshot;
-                }
-                m_OsdDirty = TRUE;
-            }
+            OSDMoveSelection(-1);
         } else if (HasRawKey(raw_keys, HID_DOWN) && !HasRawKey(m_LastInputKeys, HID_DOWN)) {
-            if (m_SelectedSnapshot + 1 < m_SnapshotCount) {
-                m_SelectedSnapshot++;
-                if (m_SelectedSnapshot >= m_OsdTopRow + OSDVisibleRows) {
-                    m_OsdTopRow = m_SelectedSnapshot - OSDVisibleRows + 1;
-                }
-                m_OsdDirty = TRUE;
-            }
+            OSDMoveSelection(1);
         } else if (HasRawKey(raw_keys, HID_ENTER) && !HasRawKey(m_LastInputKeys, HID_ENTER)) {
-            const char *name = m_SnapshotNames[m_SelectedSnapshot];
-            const boolean loaded = HasZ80Extension(name)
-                ? LoadSnapshot(m_SelectedSnapshot)
-                : LoadTape(m_SelectedSnapshot);
-            if (loaded) {
+            if (OSDActivateSelection()) {
                 m_OsdActive = FALSE;
-            } else {
-                m_OsdDirty = TRUE;
             }
         }
     }
@@ -588,14 +586,8 @@ void CKernel::ApplyInputReport(void)
 
     if ((gamepad_buttons & GamePadButtonStart) && (gamepad_changed & GamePadButtonStart)) {
         if (m_OsdActive) {
-            const char *name = m_SnapshotNames[m_SelectedSnapshot];
-            const boolean loaded = HasZ80Extension(name)
-                ? LoadSnapshot(m_SelectedSnapshot)
-                : LoadTape(m_SelectedSnapshot);
-            if (loaded) {
+            if (OSDActivateSelection()) {
                 m_OsdActive = FALSE;
-            } else {
-                m_OsdDirty = TRUE;
             }
         } else {
             ToggleOSD();
@@ -612,14 +604,8 @@ void CKernel::ApplyInputReport(void)
 
     if (m_OsdActive) {
         if ((gamepad_buttons & GamePadButtonA) && (gamepad_changed & GamePadButtonA)) {
-            const char *name = m_SnapshotNames[m_SelectedSnapshot];
-            const boolean loaded = HasZ80Extension(name)
-                ? LoadSnapshot(m_SelectedSnapshot)
-                : LoadTape(m_SelectedSnapshot);
-            if (loaded) {
+            if (OSDActivateSelection()) {
                 m_OsdActive = FALSE;
-            } else {
-                m_OsdDirty = TRUE;
             }
         }
         const boolean osd_up_now = ((gamepad_buttons & GamePadButtonUp) != 0) || left_up;
@@ -630,22 +616,10 @@ void CKernel::ApplyInputReport(void)
             (m_LastGamePadLeftY > 160);
 
         if (osd_up_now && !osd_up_prev) {
-            if (m_SelectedSnapshot > 0) {
-                m_SelectedSnapshot--;
-                if (m_SelectedSnapshot < m_OsdTopRow) {
-                    m_OsdTopRow = m_SelectedSnapshot;
-                }
-                m_OsdDirty = TRUE;
-            }
+            OSDMoveSelection(-1);
         }
         if (osd_down_now && !osd_down_prev) {
-            if (m_SelectedSnapshot + 1 < m_SnapshotCount) {
-                m_SelectedSnapshot++;
-                if (m_SelectedSnapshot >= m_OsdTopRow + OSDVisibleRows) {
-                    m_OsdTopRow = m_SelectedSnapshot - OSDVisibleRows + 1;
-                }
-                m_OsdDirty = TRUE;
-            }
+            OSDMoveSelection(1);
         }
     }
 
@@ -760,9 +734,80 @@ void CKernel::BlitSpectrumFramebuffer(void)
     }
 }
 
+unsigned CKernel::GetOSDEntryCount(void) const
+{
+    if (m_ShowKeyboardLayout) {
+        return 1 + KeyboardLayoutLineCount;
+    }
+    const unsigned snapshot_rows = (m_FileSystemMounted && m_SnapshotCount > 0) ? m_SnapshotCount : 1;
+    return 1 + snapshot_rows;
+}
+
+void CKernel::OSDMoveSelection(int delta)
+{
+    const unsigned total = GetOSDEntryCount();
+    if (total == 0 || delta == 0) {
+        return;
+    }
+
+    int next = (int)m_SelectedSnapshot + delta;
+    if (next < 0) {
+        next = 0;
+    } else if ((unsigned)next >= total) {
+        next = (int)total - 1;
+    }
+
+    if ((unsigned)next == m_SelectedSnapshot) {
+        return;
+    }
+
+    m_SelectedSnapshot = (unsigned)next;
+    if (m_SelectedSnapshot < m_OsdTopRow) {
+        m_OsdTopRow = m_SelectedSnapshot;
+    } else if (m_SelectedSnapshot >= m_OsdTopRow + OSDVisibleRows) {
+        m_OsdTopRow = m_SelectedSnapshot - OSDVisibleRows + 1;
+    }
+    m_OsdDirty = TRUE;
+}
+
+boolean CKernel::OSDActivateSelection(void)
+{
+    if (m_SelectedSnapshot == 0) {
+        m_ShowKeyboardLayout = !m_ShowKeyboardLayout;
+        m_OsdTopRow = 0;
+        m_SelectedSnapshot = 0;
+        if (m_ShowKeyboardLayout) {
+            strncpy(m_OsdStatus, "Keyboard typing reference shown", sizeof(m_OsdStatus) - 1);
+        } else {
+            strncpy(m_OsdStatus, "Keyboard layout hidden", sizeof(m_OsdStatus) - 1);
+        }
+        m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
+        m_OsdDirty = TRUE;
+        return FALSE;
+    }
+
+    if (m_ShowKeyboardLayout) {
+        return FALSE;
+    }
+
+    const unsigned snapshot_index = m_SelectedSnapshot - 1;
+    if (snapshot_index >= m_SnapshotCount) {
+        return FALSE;
+    }
+
+    const char *name = m_SnapshotNames[snapshot_index];
+    const boolean loaded = HasZ80Extension(name)
+        ? LoadSnapshot(snapshot_index)
+        : LoadTape(snapshot_index);
+    if (!loaded) {
+        m_OsdDirty = TRUE;
+    }
+    return loaded;
+}
+
 void CKernel::RenderOSD(void)
 {
-    const unsigned width = 46;
+    static const unsigned MaxPanelChars = 128;
     const unsigned panel_rows = OSDVisibleRows + 5;
     const unsigned cols = m_Screen.GetColumns();
     const unsigned rows = m_Screen.GetRows();
@@ -772,98 +817,130 @@ void CKernel::RenderOSD(void)
     unsigned draw_col1 = ((m_DrawX + ZX_FB_WIDTH * m_Scale) * cols) / m_Screen.GetWidth();
     unsigned draw_row1 = ((m_DrawY + ZX_FB_HEIGHT * m_Scale) * rows) / m_Screen.GetHeight();
 
-    if (draw_col1 <= draw_col0 + 2) draw_col1 = draw_col0 + 3;
+    if (draw_col1 <= draw_col0) draw_col1 = draw_col0 + 1;
     if (draw_row1 <= draw_row0 + 2) draw_row1 = draw_row0 + 3;
 
-    unsigned start_col = draw_col0 + 2;
+    unsigned start_col = draw_col0 + 1;
     unsigned start_row = draw_row0 + 2;
-
-    if (start_col + width + 1 >= draw_col1) {
-        start_col = (draw_col1 > width + 1) ? (draw_col1 - width - 1) : 1;
-    }
     if (start_row + panel_rows + 1 >= draw_row1) {
         start_row = (draw_row1 > panel_rows + 1) ? (draw_row1 - panel_rows - 1) : 1;
     }
 
+    unsigned end_col = (draw_col1 > 0) ? (draw_col1 - 1) : 0;
     if (start_col < 1) start_col = 1;
+    if (end_col > cols) end_col = cols;
+    if (end_col < start_col) end_col = start_col;
     if (start_row < 1) start_row = 1;
 
+    unsigned width = end_col - start_col + 1;
+    if (width > MaxPanelChars) {
+        width = MaxPanelChars;
+    }
+
     CString line;
-    char blank[64];
-    unsigned blank_len = width + 2;
-    if (blank_len > sizeof(blank) - 1) {
-        blank_len = sizeof(blank) - 1;
+    char rowbuf[MaxPanelChars + 1];
+    for (unsigned i = 0; i < width; i++) {
+        rowbuf[i] = ' ';
     }
-    for (unsigned i = 0; i < blank_len; i++) {
-        blank[i] = ' ';
-    }
-    blank[blank_len] = '\0';
+    rowbuf[width] = '\0';
 
     for (unsigned i = 0; i < panel_rows; i++) {
-        line.Format("\x1b[%u;%uH\x1b[44m%s\x1b[0m", start_row + i, start_col, blank);
+        line.Format("\x1b[%u;%uH%s", start_row + i, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
     }
-    line.Format("\x1b[%u;%uH\x1b[1;37;45m [ ZX Snapshot Loader ] \x1b[0m",
-                start_row, start_col + 1);
+    for (unsigned i = 0; i < width; i++) {
+        rowbuf[i] = ' ';
+    }
+    const char *title = "[ ZX Snapshot Loader ]";
+    unsigned title_len = (unsigned)strlen(title);
+    if (title_len > width) {
+        title_len = width;
+    }
+    const unsigned title_off = (width > title_len) ? (width - title_len) / 2 : 0;
+    memcpy(rowbuf + title_off, title, title_len);
+    line.Format("\x1b[%u;%uH%s", start_row, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
-
-    if (!m_FileSystemMounted) {
-        line.Format("\x1b[%u;%uH\x1b[1;33;44m Storage not mounted (emmc1-1) \x1b[0m",
-                    start_row + 2, start_col + 1);
-        m_Screen.Write((const char *)line, line.GetLength());
-        return;
-    }
-
-    if (m_SnapshotCount == 0) {
-        line.Format("\x1b[%u;%uH\x1b[1;33;44m No TAP/TZX/Z80 files in SD root \x1b[0m",
-                    start_row + 2, start_col + 1);
-        m_Screen.Write((const char *)line, line.GetLength());
-        return;
-    }
 
     for (unsigned i = 0; i < OSDVisibleRows; i++) {
         const unsigned row = start_row + 2 + i;
-        const unsigned index = m_OsdTopRow + i;
-        char rowbuf[64];
-        rowbuf[0] = ' ';
-        rowbuf[1] = ' ';
+        const unsigned entry_index = m_OsdTopRow + i;
         for (unsigned c = 0; c < width; c++) {
-            rowbuf[2 + c] = ' ';
+            rowbuf[c] = ' ';
         }
-        rowbuf[2 + width] = '\0';
+        rowbuf[width] = '\0';
 
-        if (index < m_SnapshotCount) {
-            rowbuf[0] = (index == m_SelectedSnapshot) ? '>' : ' ';
-            const char *name = m_SnapshotNames[index];
+        if (width > 0) {
+            rowbuf[0] = (entry_index == m_SelectedSnapshot) ? '>' : ' ';
+        }
+        if (width > 1) {
+            rowbuf[1] = ' ';
+        }
+
+        if (entry_index == 0) {
+            const char *toggle_msg = m_ShowKeyboardLayout
+                ? "Keyboard layout: ON (Enter to hide)"
+                : "Keyboard layout: OFF (Enter to show)";
             unsigned c = 0;
-            while (name[c] != '\0' && c < width) {
-                rowbuf[2 + c] = name[c];
+            while (toggle_msg[c] != '\0' && c + 2 < width) {
+                rowbuf[2 + c] = toggle_msg[c];
                 c++;
             }
-        }
-
-        if (index < m_SnapshotCount && index == m_SelectedSnapshot) {
-            line.Format("\x1b[%u;%uH\x1b[30;103m%s\x1b[0m", row, start_col, rowbuf);
+        } else if (m_ShowKeyboardLayout) {
+            const unsigned line_index = entry_index - 1;
+            if (line_index < KeyboardLayoutLineCount) {
+                const char *msg = KeyboardLayoutLines[line_index];
+                unsigned c = 0;
+                while (msg[c] != '\0' && c + 2 < width) {
+                    rowbuf[2 + c] = msg[c];
+                    c++;
+                }
+            }
         } else {
-            line.Format("\x1b[%u;%uH\x1b[37;44m%s\x1b[0m", row, start_col, rowbuf);
+            const unsigned snapshot_index = entry_index - 1;
+            if (!m_FileSystemMounted && snapshot_index == 0) {
+                const char *msg = "Storage not mounted (emmc1-1)";
+                unsigned c = 0;
+                while (msg[c] != '\0' && c + 2 < width) {
+                    rowbuf[2 + c] = msg[c];
+                    c++;
+                }
+            } else if (m_SnapshotCount == 0 && snapshot_index == 0) {
+                const char *msg = "No TAP/TZX/Z80 files in SD root";
+                unsigned c = 0;
+                while (msg[c] != '\0' && c + 2 < width) {
+                    rowbuf[2 + c] = msg[c];
+                    c++;
+                }
+            } else if (snapshot_index < m_SnapshotCount) {
+                const char *name = m_SnapshotNames[snapshot_index];
+                unsigned c = 0;
+                while (name[c] != '\0' && c + 2 < width) {
+                    rowbuf[2 + c] = name[c];
+                    c++;
+                }
+            }
         }
+        line.Format("\x1b[%u;%uH%s", row, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
     }
 
-    line.Format("\x1b[%u;%uH\x1b[36;44m Up/Down select  Enter load  F3/F4 tape  F6 turbo \x1b[0m",
-                start_row + 2 + OSDVisibleRows + 1, start_col + 1);
+    for (unsigned i = 0; i < width; i++) {
+        rowbuf[i] = ' ';
+    }
+    const char *help = "Up/Down select  Enter toggle/load  F3/F4 tape  F6 turbo";
+    for (unsigned i = 0; help[i] != '\0' && i < width; i++) {
+        rowbuf[i] = help[i];
+    }
+    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
-    char statusbuf[48];
-    for (unsigned i = 0; i < 46; i++) {
-        statusbuf[i] = ' ';
+    for (unsigned i = 0; i < width; i++) {
+        rowbuf[i] = ' ';
     }
-    statusbuf[46] = '\0';
-    for (unsigned i = 0; m_OsdStatus[i] != '\0' && i < 46; i++) {
-        statusbuf[i] = m_OsdStatus[i];
+    for (unsigned i = 0; m_OsdStatus[i] != '\0' && i < width; i++) {
+        rowbuf[i] = m_OsdStatus[i];
     }
-    line.Format("\x1b[%u;%uH\x1b[1;32;44m %s \x1b[0m",
-                start_row + 2 + OSDVisibleRows + 2, start_col, statusbuf);
+    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 2, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 }
 
@@ -879,19 +956,44 @@ void CKernel::ToggleOSD(void)
             }
         }
         ReloadSnapshots();
-        strncpy(m_OsdStatus, "Select a 48K .z80 snapshot", sizeof(m_OsdStatus) - 1);
+        m_ShowKeyboardLayout = FALSE;
+        m_SelectedSnapshot = 0;
+        m_OsdTopRow = 0;
+        strncpy(m_OsdStatus, "Enter toggles keyboard layout or loads file", sizeof(m_OsdStatus) - 1);
         m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
         m_OsdDirty = TRUE;
     } else {
         const unsigned cols = m_Screen.GetColumns();
         const unsigned rows = m_Screen.GetRows();
-        unsigned start_col = (m_DrawX * cols) / m_Screen.GetWidth() + 2;
+        unsigned draw_col0 = (m_DrawX * cols) / m_Screen.GetWidth();
+        unsigned draw_row0 = (m_DrawY * rows) / m_Screen.GetHeight();
+        unsigned draw_col1 = ((m_DrawX + ZX_FB_WIDTH * m_Scale) * cols) / m_Screen.GetWidth();
+        unsigned draw_row1 = ((m_DrawY + ZX_FB_HEIGHT * m_Scale) * rows) / m_Screen.GetHeight();
+
+        if (draw_col1 <= draw_col0) draw_col1 = draw_col0 + 1;
+        if (draw_row1 <= draw_row0 + 2) draw_row1 = draw_row0 + 3;
+
+        unsigned start_col = draw_col0 + 1;
         unsigned start_row = (m_DrawY * rows) / m_Screen.GetHeight() + 2;
         const unsigned total_rows = OSDVisibleRows + 5;
+        if (start_row + total_rows + 1 >= draw_row1) {
+            start_row = (draw_row1 > total_rows + 1) ? (draw_row1 - total_rows - 1) : 1;
+        }
+        unsigned end_col = (draw_col1 > 0) ? (draw_col1 - 1) : 0;
+        if (start_col < 1) start_col = 1;
+        if (end_col > cols) end_col = cols;
+        if (end_col < start_col) end_col = start_col;
+        unsigned width = end_col - start_col + 1;
+        if (width > 128) width = 128;
+
         CString line;
-        const char *blank48 = "                                                ";
+        char blank[129];
+        for (unsigned i = 0; i < width; i++) {
+            blank[i] = ' ';
+        }
+        blank[width] = '\0';
         for (unsigned i = 0; i < total_rows; i++) {
-            line.Format("\x1b[%u;%uH%s", start_row + i, start_col, blank48);
+            line.Format("\x1b[%u;%uH%s", start_row + i, start_col, blank);
             m_Screen.Write((const char *)line, line.GetLength());
         }
         m_OsdDirty = FALSE;
