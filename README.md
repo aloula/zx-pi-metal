@@ -1,6 +1,6 @@
 # ZX Spectrum 48K Bare Metal for Raspberry Pi 3B+
 
-This project runs a ZX Spectrum 48K emulator directly on Raspberry Pi hardware using the [Circle](https://github.com/rsta2/circle) bare-metal environment.
+This project combines the [ZOT ZX Spectrum](https://github.com/antirez/ZOT) emulator core with a Raspberry Pi bare-metal frontend built on the [Circle](https://github.com/rsta2/circle) environment.
 
 The active frontend is `circle-zx/`.
 
