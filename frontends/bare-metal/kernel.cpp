@@ -1,5 +1,5 @@
 #include "kernel.h"
-
+#include "../../src/sinclair_font.h"
 #include <circle/string.h>
 #include <circle/usb/usbhid.h>
 #include <circle/usb/usbgamepad.h>
@@ -91,7 +91,7 @@ enum
 CKernel *CKernel::s_pThis = 0;
 
 CKernel::CKernel(void)
-    :   m_Screen(m_Options.GetWidth(), m_Options.GetHeight(), Font12x22),
+    :   m_Screen(m_Options.GetWidth(), m_Options.GetHeight(), SinclairFont),
     m_Timer(&m_Interrupt),
     m_Logger(m_Options.GetLogLevel(), &m_Timer),
     m_SoundOut(&m_Interrupt, ZX_AUDIO_RATE, 384 * 10),
@@ -943,6 +943,8 @@ void CKernel::RenderOSD(void)
     }
     rowbuf[width] = '\0';
 
+    /* Set Spectrum colors: Black on White background. */
+    m_Screen.Write("\x1b[30;47m", 7);
     for (unsigned i = 0; i < panel_rows; i++) {
         line.Format("\x1b[%u;%uH%s", start_row + i, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
@@ -953,29 +955,29 @@ void CKernel::RenderOSD(void)
     for (unsigned i = 0; i < width; i++) {
         rowbuf[i] = ' ';
     }
-    const char *title = "[ ZX Snapshot Loader ]";
+    const char *title = " [ ZX SNAPSHOT LOADER ] ";
     unsigned title_len = (unsigned)strlen(title);
     if (title_len > width) {
         title_len = width;
     }
     const unsigned title_off = (width > title_len) ? (width - title_len) / 2 : 0;
     memcpy(rowbuf + title_off, title, title_len);
-    line.Format("\x1b[%u;%uH%s", start_row, start_col, rowbuf);
+    /* Title in Red on White background. */
+    line.Format("\x1b[%u;%uH\x1b[31;47m%s\x1b[30;47m", start_row, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     for (unsigned i = 0; i < OSDVisibleRows; i++) {
         const unsigned row = start_row + 2 + i;
         const unsigned entry_index = m_OsdTopRow + i;
+        boolean selected = (entry_index == m_SelectedSnapshot);
+
         for (unsigned c = 0; c < width; c++) {
             rowbuf[c] = ' ';
         }
         rowbuf[width] = '\0';
 
         if (width > 0) {
-            rowbuf[0] = (entry_index == m_SelectedSnapshot) ? '>' : ' ';
-        }
-        if (width > 1) {
-            rowbuf[1] = ' ';
+            rowbuf[0] = selected ? '>' : ' ';
         }
 
         if (entry_index == 0) {
@@ -1022,7 +1024,12 @@ void CKernel::RenderOSD(void)
                 }
             }
         }
-        line.Format("\x1b[%u;%uH%s", row, start_col, rowbuf);
+        /* Selection in Black on Cyan, normal in Black on White. */
+        if (selected) {
+            line.Format("\x1b[%u;%uH\x1b[30;46m%s\x1b[30;47m", row, start_col, rowbuf);
+        } else {
+            line.Format("\x1b[%u;%uH%s", row, start_col, rowbuf);
+        }
         m_Screen.Write((const char *)line, line.GetLength());
     }
 
@@ -1038,7 +1045,8 @@ void CKernel::RenderOSD(void)
     for (unsigned i = 0; help[i] != '\0' && i < width; i++) {
         rowbuf[i] = help[i];
     }
-    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
+    /* Help text in Blue on White. */
+    line.Format("\x1b[%u;%uH\x1b[34;47m%s\x1b[30;47m", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     for (unsigned i = 0; i < width; i++) {
@@ -1049,6 +1057,9 @@ void CKernel::RenderOSD(void)
     }
     line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 2, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
+
+    /* Reset color and hide cursor. */
+    m_Screen.Write("\x1b[0m\x1b[?25l", 10);
 }
 
 void CKernel::ToggleOSD(void)
