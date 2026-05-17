@@ -557,10 +557,26 @@ void CKernel::ApplyInputReport(void)
                 break;
 
             case HID_TAB: desired_joy |= ZX_JOY_FIRE; break;
-            case HID_UP: desired_joy |= ZX_JOY_UP; break;
-            case HID_DOWN: desired_joy |= ZX_JOY_DOWN; break;
-            case HID_LEFT: desired_joy |= ZX_JOY_LEFT; break;
-            case HID_RIGHT: desired_joy |= ZX_JOY_RIGHT; break;
+            case HID_UP:
+                desired_joy |= ZX_JOY_UP;
+                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
+                desired_keys[4][3] = TRUE; /* 7 */
+                break;
+            case HID_DOWN:
+                desired_joy |= ZX_JOY_DOWN;
+                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
+                desired_keys[4][4] = TRUE; /* 6 */
+                break;
+            case HID_LEFT:
+                desired_joy |= ZX_JOY_LEFT;
+                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
+                desired_keys[3][4] = TRUE; /* 5 */
+                break;
+            case HID_RIGHT:
+                desired_joy |= ZX_JOY_RIGHT;
+                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
+                desired_keys[4][2] = TRUE; /* 8 */
+                break;
 
             case HID_F2:
                 f2_now = TRUE;
