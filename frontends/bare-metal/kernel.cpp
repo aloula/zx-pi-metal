@@ -955,7 +955,7 @@ void CKernel::RenderOSD(void)
     for (unsigned i = 0; i < width; i++) {
         rowbuf[i] = ' ';
     }
-    const char *title = " [ ZX SNAPSHOT LOADER ] ";
+    const char *title = " [ ZX PI METAL LOADER ] ";
     unsigned title_len = (unsigned)strlen(title);
     if (title_len > width) {
         title_len = width;
@@ -1039,12 +1039,14 @@ void CKernel::RenderOSD(void)
     line.Format("Up/Down select  Enter toggle/load  F3/F4 tape  F6 turbo  [%s]",
                 m_ZX.machine_128k ? "128K" : "48K");
     const char *help = (const char *)line;
+    unsigned help_len = (unsigned)strlen(help);
+    if (help_len > width) help_len = width;
+    unsigned help_off = (width > help_len) ? (width - help_len) / 2 : 0;
+
     for (unsigned i = 0; i < width; i++) {
         rowbuf[i] = ' ';
     }
-    for (unsigned i = 0; help[i] != '\0' && i < width; i++) {
-        rowbuf[i] = help[i];
-    }
+    memcpy(rowbuf + help_off, help, help_len);
     /* Help text in Blue on White. */
     line.Format("\x1b[%u;%uH\x1b[34;47m%s\x1b[30;47m", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
@@ -1052,9 +1054,11 @@ void CKernel::RenderOSD(void)
     for (unsigned i = 0; i < width; i++) {
         rowbuf[i] = ' ';
     }
-    for (unsigned i = 0; m_OsdStatus[i] != '\0' && i < width; i++) {
-        rowbuf[i] = m_OsdStatus[i];
-    }
+    unsigned status_len = (unsigned)strlen(m_OsdStatus);
+    if (status_len > width) status_len = width;
+    unsigned status_off = (width > status_len) ? (width - status_len) / 2 : 0;
+    memcpy(rowbuf + status_off, m_OsdStatus, status_len);
+    /* Status bar in Black on White. */
     line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 2, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
