@@ -9,9 +9,9 @@ This project is a high-performance, bare-metal ZX Spectrum emulator for the Rasp
 - **Dual-Model Support**: Native ZX Spectrum 48K and 128K (Toastrack/Grey +2) emulation.
 - **Cycle-Accurate Audio**: Mid-frame AY-3-8910 event logging for perfect software envelopes and PCM effects.
 - **Hardware Quirks**: Full Floating Bus emulation (fixes *Arkanoid* and other beam-synced games).
-- **Bare-Metal Performance**: Boots in seconds with a custom **Splash Screen**.
-- **OSD File Browser**: Integrated browser for `.z80` snapshots, `.tap`, and `.tzx` tapes.
-- **Modern Input**: Support for USB keyboards and XBox 360-style gamepads (mapped to Kempston).
+- **Bare-Metal Performance**: Boots in seconds with an animated **Splash Screen** (fade-in/out).
+- **Spectrum-Themed OSD**: Integrated file browser for snapshots and tapes with classic Sinclair colors and typography.
+- **Modern Input**: Support for USB keyboards and XBox 360-style gamepads.
 - **Visuals**: Scaled RGB framebuffer with border effects.
 
 ## Project Structure
@@ -50,7 +50,7 @@ Copy the following to the FAT root of your SD card:
 3.  **Firmware**: Circle boot files from `circle/boot/` (`bootcode.bin`, `start.elf`, `fixup.dat`, etc).
 4.  **ROMs**:
     *   `128-0.rom` and `128-1.rom` (16KB each) for 128K mode.
-    *   Place these in the SD card root.
+    *   *Note: For Grey +2 models, rename `plus2-0.rom` and `plus2-1.rom` to the names above.*
     *   If no 128K ROMs are found, it defaults to 48K mode using the internal ROM.
 5.  **Games**: Place `.z80`, `.tap`, or `.tzx` files in the root or subdirectories.
 
@@ -61,8 +61,9 @@ Copy the following to the FAT root of your SD card:
 - **F3**: Play/Restart Tape
 - **F4**: Stop Tape
 - **F6**: Toggle Turbo Tape (4x speed)
-- **Arrow keys + Tab**: Kempston Joystick (Keyboard)
-- **Gamepad**: Left Stick/D-Pad + A/B/X/Y buttons
+- **Arrow keys**: **Spectrum Cursor Keys** (CS+5/6/7/8) + **Kempston Joystick**.
+- **Tab**: Kempston FIRE.
+- **Gamepad**: Left Stick/D-Pad + A/B/X/Y buttons (mapped to Kempston).
 - **Shift/Ctrl**: CAPS SHIFT / SYMBOL SHIFT
 
 ## TAP/TZX Loading Flow
