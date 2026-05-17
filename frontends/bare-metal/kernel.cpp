@@ -91,7 +91,7 @@ enum
 CKernel *CKernel::s_pThis = 0;
 
 CKernel::CKernel(void)
-    :   m_Screen(m_Options.GetWidth(), m_Options.GetHeight(), SinclairFont),
+    :   m_Screen(m_Options.GetWidth(), m_Options.GetHeight(), Font12x22),
     m_Timer(&m_Interrupt),
     m_Logger(m_Options.GetLogLevel(), &m_Timer),
     m_SoundOut(&m_Interrupt, ZX_AUDIO_RATE, 384 * 10),
@@ -943,8 +943,8 @@ void CKernel::RenderOSD(void)
     }
     rowbuf[width] = '\0';
 
-    /* Set Spectrum colors: Black on White background. */
-    m_Screen.Write("\x1b[30;47m", 7);
+    /* Set Spectrum colors: Black on White background. (8 bytes) */
+    m_Screen.Write("\x1b[30;47m", 8);
     for (unsigned i = 0; i < panel_rows; i++) {
         line.Format("\x1b[%u;%uH%s", start_row + i, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
