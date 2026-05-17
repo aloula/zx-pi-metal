@@ -137,6 +137,39 @@ static inline void zx_contend(ZXSpectrum *zx, uint16_t addr) {
         zx->frame_tstates += zx_contend_delay(zx->frame_tstates);
 }
 
+static void zx_sync_visible_memory(ZXSpectrum *zx) {
+    memcpy(zx->memory, zx->ram_banks[5], ZX_RAM_BANK_SIZE);
+    memcpy(zx->memory + ZX_RAM_BANK_SIZE, zx->ram_banks[2], ZX_RAM_BANK_SIZE);
+    memcpy(zx->memory + 2 * ZX_RAM_BANK_SIZE,
+           zx->ram_banks[zx->paging_7ffd & 0x07], ZX_RAM_BANK_SIZE);
+}
+
+static void zx_update_rom_bank(ZXSpectrum *zx, uint8_t bank) {
+    const uint8_t *rom = zx->rom_banks[bank & 1];
+    zx->rom = rom ? rom : zx->rom_banks[0];
+}
+
+static void zx_apply_7ffd(ZXSpectrum *zx, uint8_t val) {
+    zx->paging_7ffd = val;
+    zx->paging_locked = (val >> 5) & 0x01;
+    zx_update_rom_bank(zx, (val >> 4) & 0x01);
+    zx_sync_visible_memory(zx);
+}
+
+static uint8_t *zx_ram_ptr(ZXSpectrum *zx, uint16_t addr) {
+    if (addr < 0x8000)
+        return &zx->ram_banks[5][addr - 0x4000];
+    if (addr < 0xC000)
+        return &zx->ram_banks[2][addr - 0x8000];
+    return &zx->ram_banks[zx->paging_7ffd & 0x07][addr - 0xC000];
+}
+
+static const uint8_t *zx_screen_memory(const ZXSpectrum *zx) {
+    if (!zx->machine_128k)
+        return zx->memory;
+    return (zx->paging_7ffd & 0x08) ? zx->ram_banks[7] : zx->ram_banks[5];
+}
+
 /* Apply 48K I/O contention.
  *
  * Patterns (N = uncontended cycle, C = contention check + cycle):
@@ -190,6 +223,8 @@ static uint8_t zx_mem_read(void *ctx, uint16_t addr) {
     zx_contend(zx, addr);
     if (addr < 0x4000)
         return zx->rom[addr];
+    if (zx->machine_128k)
+        return *zx_ram_ptr(zx, addr);
     return zx->memory[addr - 0x4000];
 }
 
@@ -197,8 +232,11 @@ static void zx_mem_write(void *ctx, uint16_t addr, uint8_t val) {
     ZXSpectrum *zx = (ZXSpectrum *)ctx;
     zx_contend(zx, addr);
     /* ROM is read-only: writes to 0x0000-0x3FFF are silently ignored. */
-    if (addr >= 0x4000)
+    if (addr >= 0x4000) {
+        if (zx->machine_128k)
+            *zx_ram_ptr(zx, addr) = val;
         zx->memory[addr - 0x4000] = val;
+    }
 }
 
 /* I/O read: the Spectrum uses partial port decoding.
@@ -242,6 +280,9 @@ static uint8_t zx_io_read(void *ctx, uint16_t port) {
     if (!(port & 0xE0))
         return zx->kempston;
 
+    if (zx->machine_128k && (port & 0xC002) == 0xC000)
+        return zx->ay_registers[zx->ay_index & 0x0F];
+
     /* Unattached port: return 0xFF (no floating bus emulation). */
     return 0xFF;
 }
@@ -270,6 +311,23 @@ static void zx_io_write(void *ctx, uint16_t port, uint8_t val) {
                 zx->beeper_event_count++;
             }
         }
+        return;
+    }
+
+    if (zx->machine_128k && (port & 0x8002) == 0x0000) {
+        if (!zx->paging_locked)
+            zx_apply_7ffd(zx, val);
+        return;
+    }
+
+    if (zx->machine_128k && (port & 0xC002) == 0xC000) {
+        zx->ay_index = val & 0x0F;
+        return;
+    }
+
+    if (zx->machine_128k && (port & 0xC002) == 0x8000) {
+        zx->ay_registers[zx->ay_index & 0x0F] = val;
+        return;
     }
 }
 
@@ -282,6 +340,7 @@ static void zx_io_write(void *ctx, uint16_t port, uint8_t val) {
  * right border. Output is 3 bytes per pixel (R, G, B). */
 static void zx_render_display_line(ZXSpectrum *zx, int pixel_y, uint8_t *line_rgb) {
     const uint8_t *border_rgb = zx_palette[zx->border_color];
+    const uint8_t *screen = zx_screen_memory(zx);
 
     /* Left border: 32 pixels */
     for (int x = 0; x < ZX_BORDER_PX; x++) {
@@ -295,8 +354,8 @@ static void zx_render_display_line(ZXSpectrum *zx, int pixel_y, uint8_t *line_rg
     for (int col = 0; col < 32; col++) {
         uint16_t paddr = zx_pixel_addr(pixel_y, col);
         uint16_t aaddr = zx_attr_addr(char_row, col);
-        uint8_t pixels = zx->memory[paddr - 0x4000];
-        uint8_t attr = zx->memory[aaddr - 0x4000];
+        uint8_t pixels = screen[paddr - 0x4000];
+        uint8_t attr = screen[aaddr - 0x4000];
 
         /* Decode attribute byte:
          *   Bit 7: FLASH (swap ink/paper when flash_state is set)
@@ -430,6 +489,8 @@ void zx_init(ZXSpectrum *zx, const uint8_t *rom) {
 
     /* Store ROM pointer (not copied -- caller owns the data). */
     zx->rom = rom;
+    zx->rom_banks[0] = rom;
+    zx->rom_banks[1] = rom;
 
     /* Initialize CPU and wire up callbacks. */
     z80_init(&zx->cpu);
@@ -441,10 +502,14 @@ void zx_init(ZXSpectrum *zx, const uint8_t *rom) {
 
     /* All keys released (active LOW: 0xFF = no keys pressed). */
     memset(zx->keyboard, 0xFF, sizeof(zx->keyboard));
+
+    zx_apply_7ffd(zx, 0);
 }
 
 void zx_set_rom(ZXSpectrum *zx, const uint8_t *rom) {
-    zx->rom = rom;
+    zx->rom_banks[0] = rom;
+    zx->rom_banks[1] = rom;
+    zx_update_rom_bank(zx, (zx->paging_7ffd >> 4) & 0x01);
 }
 
 /* ===================================================================
@@ -615,8 +680,46 @@ static int zx_z80_decompress(const uint8_t *src, int src_len,
     return si;
 }
 
+static int zx_z80_is_48k_mode(uint16_t ext_len, uint8_t hw_mode) {
+    int is_v3 = (ext_len == 54 || ext_len == 55);
+
+    return hw_mode == 0 || hw_mode == 1 || (is_v3 && hw_mode == 3);
+}
+
+static int zx_z80_is_128k_mode(uint16_t ext_len, uint8_t hw_mode) {
+    int is_v3 = (ext_len == 54 || ext_len == 55);
+
+    if (is_v3)
+        return hw_mode == 4 || hw_mode == 5 || hw_mode == 6 || hw_mode == 12;
+
+    return hw_mode == 3 || hw_mode == 4;
+}
+
+static int zx_z80_page_bank(uint16_t ext_len, uint8_t hw_mode, uint8_t page_num) {
+    if (zx_z80_is_48k_mode(ext_len, hw_mode)) {
+        switch (page_num) {
+            case 8: return 5;
+            case 4: return 2;
+            case 5: return 0;
+            default: return -1;
+        }
+    }
+
+    if (zx_z80_is_128k_mode(ext_len, hw_mode) && page_num >= 3 && page_num <= 10)
+        return page_num - 3;
+
+    return -1;
+}
+
 int zx_load_z80(ZXSpectrum *zx, const uint8_t *data, int size) {
     if (size < 30) return -1;
+
+    memset(zx->memory, 0, sizeof(zx->memory));
+    memset(zx->ram_banks, 0, sizeof(zx->ram_banks));
+    memset(zx->ay_registers, 0, sizeof(zx->ay_registers));
+    zx->ay_index = 0;
+    zx->machine_128k = 0;
+    zx_apply_7ffd(zx, 0);
 
     /* ---------------------------------------------------------------
      * Parse the common 30-byte header (all versions).
@@ -668,17 +771,34 @@ int zx_load_z80(ZXSpectrum *zx, const uint8_t *data, int size) {
             if (mem_len < 49152) return -1;
             memcpy(zx->memory, mem_data, 49152);
         }
+
+        memcpy(zx->ram_banks[5], zx->memory, ZX_RAM_BANK_SIZE);
+        memcpy(zx->ram_banks[2], zx->memory + ZX_RAM_BANK_SIZE, ZX_RAM_BANK_SIZE);
+        memcpy(zx->ram_banks[0], zx->memory + 2 * ZX_RAM_BANK_SIZE, ZX_RAM_BANK_SIZE);
     } else {
         /* Version 2 or 3: extended header follows, then memory pages. */
-        if (size < 35) return -1;
+        if (size < 36) return -1;
         uint16_t ext_len = data[30] | (data[31] << 8);
+        if (32 + ext_len > size) return -1;
         pc = data[32] | (data[33] << 8);
         uint8_t hw_mode = data[34];
-        /* 48K-only loader: accept 48K and 48K+IF1 snapshots. */
-        if (hw_mode != 0 && hw_mode != 1) return -1;
+        uint8_t paging_reg = data[35];
+        int is_48k = zx_z80_is_48k_mode(ext_len, hw_mode);
+        int is_128k = zx_z80_is_128k_mode(ext_len, hw_mode);
+        if (!is_48k && !is_128k)
+            return -1;
+
+        zx->machine_128k = is_128k ? 1 : 0;
+        if (ext_len >= 23) {
+            zx->ay_index = data[38] & 0x0F;
+            memcpy(zx->ay_registers, data + 39, ZX_AY_REG_COUNT);
+        }
+        if (is_128k)
+            zx_apply_7ffd(zx, paging_reg);
 
         int page_offset = 32 + ext_len;
         if (page_offset > size) return -1;
+        uint8_t seen_banks = 0;
 
         /* Read memory page blocks. */
         while (page_offset + 3 <= size) {
@@ -686,38 +806,39 @@ int zx_load_z80(ZXSpectrum *zx, const uint8_t *data, int size) {
             uint8_t page_num = data[page_offset + 2];
             page_offset += 3;
 
-            /* Determine destination address from page number.
-             * For 48K Spectrum:
-             *   Page 4 -> 0x8000-0xBFFF
-             *   Page 5 -> 0xC000-0xFFFF
-             *   Page 8 -> 0x4000-0x7FFF */
-            uint16_t dest_addr;
-            switch (page_num) {
-                case 4: dest_addr = 0x8000; break;
-                case 5: dest_addr = 0xC000; break;
-                case 8: dest_addr = 0x4000; break;
-                default:
-                    /* Unknown page: skip it. */
-                    if (block_len == 0xFFFF)
-                        page_offset += 16384;
-                    else
-                        page_offset += block_len;
-                    continue;
+            int bank = zx_z80_page_bank(ext_len, hw_mode, page_num);
+            int data_len = (block_len == 0xFFFF) ? 16384 : block_len;
+            if (page_offset + data_len > size) return -1;
+            if (bank < 0) {
+                page_offset += data_len;
+                continue;
             }
 
             if (block_len == 0xFFFF) {
                 /* Uncompressed: 16384 bytes raw. */
-                if (page_offset + 16384 > size) return -1;
-                memcpy(zx->memory + (dest_addr - 0x4000), data + page_offset, 16384);
+                memcpy(zx->ram_banks[bank], data + page_offset, 16384);
                 page_offset += 16384;
             } else {
                 /* Compressed: decompress. */
-                if (page_offset + block_len > size) return -1;
                 if (zx_z80_decompress(data + page_offset, block_len,
-                                      zx->memory + (dest_addr - 0x4000), 16384) < 0)
+                                      zx->ram_banks[bank], 16384) < 0)
                     return -1;
                 page_offset += block_len;
             }
+
+            seen_banks |= (uint8_t)(1u << bank);
+        }
+
+        if (is_48k) {
+            if ((seen_banks & ((1u << 5) | (1u << 2) | (1u << 0)))
+                    != ((1u << 5) | (1u << 2) | (1u << 0)))
+                return -1;
+            zx_sync_visible_memory(zx);
+            zx->machine_128k = 0;
+            zx_apply_7ffd(zx, 0);
+        } else {
+            if (seen_banks != 0xFF) return -1;
+            zx_apply_7ffd(zx, paging_reg);
         }
     }
 

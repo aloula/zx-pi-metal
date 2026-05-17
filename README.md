@@ -1,4 +1,4 @@
-# ZX Spectrum 48K Bare Metal for Raspberry Pi 3B+
+# ZX Spectrum Bare Metal for Raspberry Pi 3B+
 
 This project combines the [ZOT ZX Spectrum](https://github.com/antirez/ZOT) emulator core with a Raspberry Pi bare-metal frontend built on the [Circle](https://github.com/rsta2/circle) environment.
 
@@ -6,7 +6,7 @@ The active frontend is `circle-zx/`.
 
 ## Features
 
-- ZX Spectrum 48K emulation core
+- ZX Spectrum 48K core with native 128K snapshot paging
 - Scaled framebuffer output
 - USB keyboard input mapping
 - Kempston joystick mapping (keyboard)
@@ -82,7 +82,9 @@ Inside OSD:
 
 ## Notes
 
-- `.z80` support is 48K snapshots only.
+- `.z80` support includes 48K snapshots plus native 128K RAM-bank restore and `7FFD` paging.
+- The bundled ROM image is still the 48K ROM; 128K snapshots use that ROM in both ROM slots unless you add distinct 128K ROMs later.
+- AY register state is restored for 128K snapshots, but audio output is still beeper-only.
 - CP/M is out of scope for this bare-metal frontend.
 
 ## License
