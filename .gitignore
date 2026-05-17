@@ -3,7 +3,6 @@
 z80_test
 spectrum_test
 zxsdl
-cpm_test
 *.dSYM/
 roms
 misc/

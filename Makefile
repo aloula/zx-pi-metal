@@ -1,36 +1,29 @@
 CC = cc
-CFLAGS = -Wall -Wextra -O2 -g
+CFLAGS = -Wall -Wextra -O2 -g -Isrc
 LDFLAGS =
 SDL_CFLAGS = $(shell sdl2-config --cflags)
 SDL_LIBS = $(shell sdl2-config --libs)
 
-all: z80_test spectrum_test cpm_test cpmcon cpm_debug zxsdl
+SRC = src/z80.c src/spectrum.c src/tzx.c
+HDR = src/z80.h src/spectrum.h src/tzx.h src/rom.h
 
-z80_test: z80_test.c z80.c z80.h
-	$(CC) $(CFLAGS) -o z80_test z80_test.c z80.c $(LDFLAGS)
+all: z80_test spectrum_test zxsdl
 
-spectrum_test: spectrum_test.c spectrum.c spectrum.h z80.c z80.h rom.h
-	$(CC) $(CFLAGS) -o spectrum_test spectrum_test.c spectrum.c z80.c $(LDFLAGS)
+z80_test: tests/z80_test.c src/z80.c src/z80.h
+	$(CC) $(CFLAGS) -o z80_test tests/z80_test.c src/z80.c $(LDFLAGS)
 
-cpm_test: cpm_test.c cpm.c cpm.h z80.c z80.h
-	$(CC) $(CFLAGS) -o cpm_test cpm_test.c cpm.c z80.c $(LDFLAGS)
+spectrum_test: tests/spectrum_test.c $(SRC) $(HDR)
+	$(CC) $(CFLAGS) -o spectrum_test tests/spectrum_test.c $(SRC) $(LDFLAGS)
 
-cpmcon: cpmcon.c cpm.c cpm.h z80.c z80.h
-	$(CC) $(CFLAGS) -o cpmcon cpmcon.c cpm.c z80.c $(LDFLAGS)
-
-cpm_debug: cpm_debug.c cpm.c cpm.h z80.c z80.h
-	$(CC) $(CFLAGS) -o cpm_debug cpm_debug.c cpm.c z80.c $(LDFLAGS)
-
-zxsdl: zxsdl.c spectrum.c spectrum.h z80.c z80.h rom.h tzx.c tzx.h
-	$(CC) $(CFLAGS) $(SDL_CFLAGS) -o zxsdl zxsdl.c spectrum.c z80.c tzx.c $(SDL_LIBS)
+zxsdl: frontends/sdl/zxsdl.c $(SRC) $(HDR)
+	$(CC) $(CFLAGS) $(SDL_CFLAGS) -o zxsdl frontends/sdl/zxsdl.c $(SRC) $(SDL_LIBS)
 
 circle_zx:
-	$(MAKE) -C circle-zx
+	$(MAKE) -C frontends/bare-metal CIRCLEHOME=../../circle
 
-test: z80_test spectrum_test cpm_test
+test: z80_test spectrum_test
 	./z80_test
 	./spectrum_test
-	./cpm_test
 
 fulltest: z80_test spectrum_test
 	./z80_test
@@ -39,6 +32,7 @@ fulltest: z80_test spectrum_test
 	./spectrum_test
 
 clean:
-	rm -rf z80_test spectrum_test cpm_test cpmcon zxsdl *.o *.dSYM
+	rm -rf z80_test spectrum_test zxsdl *.o *.dSYM
+	$(MAKE) -C frontends/bare-metal clean
 
 .PHONY: all test fulltest clean circle_zx
