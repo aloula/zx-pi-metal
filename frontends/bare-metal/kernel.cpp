@@ -167,6 +167,7 @@ boolean CKernel::Initialize(void)
     boolean ok = TRUE;
 
     if (ok) ok = m_Screen.Initialize();
+    if (ok) m_Screen.Write("\x1b[?25l", 6); /* Hide cursor */
     if (ok) ok = m_Serial.Initialize(115200);
 
     if (ok) ok = m_Logger.Initialize(&m_Serial);
@@ -906,6 +907,7 @@ boolean CKernel::OSDActivateSelection(void)
 
 void CKernel::RenderOSD(void)
 {
+    m_Screen.Write("\x1b[?25l", 6); /* Hide cursor */
     static const unsigned MaxPanelChars = 128;
     const unsigned panel_rows = OSDVisibleRows + 3; /* Title + Entries + Help + Status */
     const unsigned cols = m_Screen.GetColumns();
