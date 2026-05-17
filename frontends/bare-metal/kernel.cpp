@@ -925,9 +925,6 @@ void CKernel::RenderOSD(void)
 {
     m_Screen.Write("\x1b[?25l", 6); /* Hide cursor */
 
-    /* Always draw the background first as the base layer. */
-    BlitSpectrumFramebuffer();
-
     static const unsigned MaxPanelChars = 128;
     const unsigned panel_rows = OSDVisibleRows + 3; /* Title + Entries + Help + Status */
     const unsigned cols = m_Screen.GetColumns();
@@ -1102,6 +1099,9 @@ void CKernel::ToggleOSD(void)
 {
     m_OsdActive = !m_OsdActive;
     if (m_OsdActive) {
+        /* Capture the current game screen state once. */
+        BlitSpectrumFramebuffer();
+
         if (!m_FileSystemMounted) {
             CDevice *pPartition = m_DeviceNameService.GetDevice("emmc1-1", TRUE);
             if (pPartition != 0 && m_FileSystem.Mount(pPartition)) {

@@ -320,7 +320,7 @@ Address of section .init set to 0x8000
  .text          0x00008070        0x0 main.o
  .text.startup  0x00008070       0x40 main.o
                 0x00008070                main
- .text          0x000080b0     0x3760 kernel.o
+ .text          0x000080b0     0x375c kernel.o
                 0x000080b0                CKernel::KeyboardRawHandler(unsigned char, unsigned char const*)
                 0x0000810c                CKernel::GamePadStatusHandler(unsigned int, TGamePadState const*)
                 0x00008148                CKernel::KeyboardRemovedHandler(CDevice*, void*)
@@ -346,11 +346,12 @@ Address of section .init set to 0x8000
                 0x00009594                CKernel::~CKernel()
                 0x00009684                CKernel::Initialize()
                 0x00009948                CKernel::RenderOSD()
-                0x0000a244                CKernel::ToggleOSD()
-                0x0000a504                CKernel::ApplyInputReport()
-                0x0000b3dc                CKernel::Run()
- .text          0x0000b810       0x10 compat.o
-                0x0000b810                printf
+                0x0000a23c                CKernel::ToggleOSD()
+                0x0000a500                CKernel::ApplyInputReport()
+                0x0000b3d8                CKernel::Run()
+ .text          0x0000b80c       0x10 compat.o
+                0x0000b80c                printf
+ *fill*         0x0000b81c        0x4 
  .text          0x0000b820     0x4c54 z80.o
                 0x000100d8                z80_step
                 0x00010184                z80_init
@@ -2774,121 +2775,121 @@ END GROUP
 OUTPUT(kernel8-32.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000    0xddad6
+.debug_info     0x00000000    0xddadd
  .debug_info    0x00000000     0x351c main.o
- .debug_info    0x0000351c     0x8788 kernel.o
- .debug_info    0x0000bca4       0x6b compat.o
- .debug_info    0x0000bd0f     0x4b8f z80.o
- .debug_info    0x0001089e     0x323d spectrum.o
- .debug_info    0x00013adb      0xd2d tzx.o
- .debug_info    0x00014808     0x249d ../../circle/lib/usb/libusb.a(usbhostcontroller.o)
- .debug_info    0x00016ca5     0x2ad4 ../../circle/lib/usb/libusb.a(usbkeyboard.o)
- .debug_info    0x00019779     0x138c ../../circle/lib/usb/libusb.a(usbrequest.o)
- .debug_info    0x0001ab05     0x40e6 ../../circle/lib/usb/libusb.a(usbstandardhub.o)
- .debug_info    0x0001ebeb     0x9958 ../../circle/lib/usb/libusb.a(dwhcidevice.o)
- .debug_info    0x00028543     0x2424 ../../circle/lib/usb/libusb.a(dwhciframeschednper.o)
- .debug_info    0x0002a967     0x1057 ../../circle/lib/usb/libusb.a(dwhciframeschednsplit.o)
- .debug_info    0x0002b9be     0x1e34 ../../circle/lib/usb/libusb.a(dwhciframeschedper.o)
- .debug_info    0x0002d7f2     0x171c ../../circle/lib/usb/libusb.a(dwhcirootport.o)
- .debug_info    0x0002ef0e     0x2657 ../../circle/lib/usb/libusb.a(dwhcixactqueue.o)
- .debug_info    0x00031565     0x328a ../../circle/lib/usb/libusb.a(dwhcixferstagedata.o)
- .debug_info    0x000347ef     0x12a0 ../../circle/lib/usb/libusb.a(dwhciframeschediso.o)
- .debug_info    0x00035a8f     0x3f63 ../../circle/lib/usb/libusb.a(usbdevice.o)
- .debug_info    0x000399f2     0x330b ../../circle/lib/usb/libusb.a(usbdevicefactory.o)
- .debug_info    0x0003ccfd     0x1634 ../../circle/lib/usb/libusb.a(usbendpoint.o)
- .debug_info    0x0003e331     0x264d ../../circle/lib/usb/libusb.a(usbfunction.o)
- .debug_info    0x0004097e     0x21ab ../../circle/lib/usb/libusb.a(usbgamepadps3.o)
- .debug_info    0x00042b29     0x2337 ../../circle/lib/usb/libusb.a(usbgamepadps4.o)
- .debug_info    0x00044e60     0x259d ../../circle/lib/usb/libusb.a(usbgamepadstandard.o)
- .debug_info    0x000473fd     0x201b ../../circle/lib/usb/libusb.a(usbgamepadswitchpro.o)
- .debug_info    0x00049418     0x1d40 ../../circle/lib/usb/libusb.a(usbgamepadxbox360.o)
- .debug_info    0x0004b158     0x1c67 ../../circle/lib/usb/libusb.a(usbgamepadxboxone.o)
- .debug_info    0x0004cdbf     0x2bcc ../../circle/lib/usb/libusb.a(usbhiddevice.o)
- .debug_info    0x0004f98b     0x3883 ../../circle/lib/usb/libusb.a(usbmassdevice.o)
- .debug_info    0x0005320e     0x3299 ../../circle/lib/usb/libusb.a(usbmidihost.o)
- .debug_info    0x000564a7     0x2461 ../../circle/lib/usb/libusb.a(usbmouse.o)
- .debug_info    0x00058908     0x201a ../../circle/lib/usb/libusb.a(usbprinter.o)
- .debug_info    0x0005a922      0xd36 ../../circle/lib/usb/libusb.a(usbstring.o)
- .debug_info    0x0005b658     0x1e89 ../../circle/lib/usb/libusb.a(usbserialch341.o)
- .debug_info    0x0005d4e1     0x1f91 ../../circle/lib/usb/libusb.a(usbserialcp210x.o)
- .debug_info    0x0005f472     0x26b2 ../../circle/lib/usb/libusb.a(usbserialpl2303.o)
- .debug_info    0x00061b24     0x210f ../../circle/lib/usb/libusb.a(usbserialft231x.o)
- .debug_info    0x00063c33     0x1a52 ../../circle/lib/usb/libusb.a(usbserialcdc.o)
- .debug_info    0x00065685     0x2413 ../../circle/lib/usb/libusb.a(usbtouchscreen.o)
- .debug_info    0x00067a98     0x1500 ../../circle/lib/usb/libusb.a(dwhciregister.o)
- .debug_info    0x00068f98     0x42ec ../../circle/lib/usb/libusb.a(lan7800.o)
- .debug_info    0x0006d284     0x4800 ../../circle/lib/usb/libusb.a(smsc951x.o)
- .debug_info    0x00071a84     0x2ad8 ../../circle/lib/usb/libusb.a(usbbluetooth.o)
- .debug_info    0x0007455c     0x33e8 ../../circle/lib/usb/libusb.a(usbcdcethernet.o)
- .debug_info    0x00077944     0x3540 ../../circle/lib/usb/libusb.a(usbfloppydevice.o)
- .debug_info    0x0007ae84     0x16b8 ../../circle/lib/usb/libusb.a(usbconfigparser.o)
- .debug_info    0x0007c53c     0x1d54 ../../circle/lib/usb/libusb.a(usbgamepad.o)
- .debug_info    0x0007e290     0x20c0 ../../circle/lib/usb/libusb.a(usbmidi.o)
- .debug_info    0x00080350     0x2f3b ../../circle/lib/usb/libusb.a(usbserialhost.o)
- .debug_info    0x0008328b     0x122a ../../circle/lib/usb/libusb.a(usbserial.o)
- .debug_info    0x000844b5     0x14e1 ../../circle/lib/input/libinput.a(keyboardbehaviour.o)
- .debug_info    0x00085996      0xfe0 ../../circle/lib/input/libinput.a(keymap.o)
- .debug_info    0x00086976     0x144a ../../circle/lib/input/libinput.a(mouse.o)
- .debug_info    0x00087dc0      0xe78 ../../circle/lib/input/libinput.a(touchscreen.o)
- .debug_info    0x00088c38     0x105a ../../circle/lib/input/libinput.a(mousebehaviour.o)
- .debug_info    0x00089c92     0x3764 ../../circle/lib/sound/libsound.a(soundbasedevice.o)
- .debug_info    0x0008d3f6     0x43e3 ../../circle/lib/sound/libsound.a(hdmisoundbasedevice.o)
- .debug_info    0x000917d9     0x3ea8 ../../circle/addon/SDCard/libsdcard.a(emmc.o)
- .debug_info    0x00095681      0xc4d ../../circle/addon/SDCard/libsdcard.a(mmchost.o)
- .debug_info    0x000962ce     0x6882 ../../circle/addon/SDCard/libsdcard.a(sdhost.o)
- .debug_info    0x0009cb50     0x2cc6 ../../circle/lib/fs/fat/libfatfs.a(fatfs.o)
- .debug_info    0x0009f816     0x201b ../../circle/lib/fs/fat/libfatfs.a(fatcache.o)
- .debug_info    0x000a1831     0x22c7 ../../circle/lib/fs/fat/libfatfs.a(fatinfo.o)
- .debug_info    0x000a3af8     0x173b ../../circle/lib/fs/fat/libfatfs.a(fat.o)
- .debug_info    0x000a5233     0x2915 ../../circle/lib/fs/fat/libfatfs.a(fatdir.o)
- .debug_info    0x000a7b48     0x173e ../../circle/lib/fs/libfs.a(partitionmanager.o)
- .debug_info    0x000a9286      0x6e9 ../../circle/lib/fs/libfs.a(partition.o)
- .debug_info    0x000a996f     0x147e ../../circle/lib/libcircle.a(actled.o)
- .debug_info    0x000aaded      0xf0f ../../circle/lib/libcircle.a(assert.o)
- .debug_info    0x000abcfc     0x24a6 ../../circle/lib/libcircle.a(bcmframebuffer.o)
- .debug_info    0x000ae1a2      0xd6e ../../circle/lib/libcircle.a(bcmpropertytags.o)
- .debug_info    0x000aef10     0x1711 ../../circle/lib/libcircle.a(classallocator.o)
- .debug_info    0x000b0621     0x11fc ../../circle/lib/libcircle.a(debug.o)
- .debug_info    0x000b181d      0xd7b ../../circle/lib/libcircle.a(device.o)
- .debug_info    0x000b2598     0x12ce ../../circle/lib/libcircle.a(devicenameservice.o)
- .debug_info    0x000b3866     0x26ea ../../circle/lib/libcircle.a(dmachannel.o)
- .debug_info    0x000b5f50     0x19ca ../../circle/lib/libcircle.a(koptions.o)
- .debug_info    0x000b791a     0x24af ../../circle/lib/libcircle.a(logger.o)
- .debug_info    0x000b9dc9     0x10cb ../../circle/lib/libcircle.a(machineinfo.o)
- .debug_info    0x000bae94      0x7d0 ../../circle/lib/libcircle.a(ptrlist.o)
- .debug_info    0x000bb664     0x159c ../../circle/lib/libcircle.a(screen.o)
- .debug_info    0x000bcc00     0x2cc9 ../../circle/lib/libcircle.a(serial.o)
- .debug_info    0x000bf8c9     0x2f6f ../../circle/lib/libcircle.a(string.o)
- .debug_info    0x000c2838     0x1c17 ../../circle/lib/libcircle.a(sysinit.o)
- .debug_info    0x000c444f     0x28e7 ../../circle/lib/libcircle.a(timer.o)
- .debug_info    0x000c6d36      0xb0a ../../circle/lib/libcircle.a(util.o)
- .debug_info    0x000c7840     0x1104 ../../circle/lib/libcircle.a(virtualgpiopin.o)
- .debug_info    0x000c8944      0x239 ../../circle/lib/libcircle.a(chainboot.o)
- .debug_info    0x000c8b7d      0xbb0 ../../circle/lib/libcircle.a(macaddress.o)
- .debug_info    0x000c972d      0x6db ../../circle/lib/libcircle.a(netdevice.o)
- .debug_info    0x000c9e08      0xe3e ../../circle/lib/libcircle.a(new.o)
- .debug_info    0x000cac46     0x1884 ../../circle/lib/libcircle.a(heapallocator.o)
- .debug_info    0x000cc4ca     0x10cb ../../circle/lib/libcircle.a(numberpool.o)
- .debug_info    0x000cd595     0x1065 ../../circle/lib/libcircle.a(ptrlistfiq.o)
- .debug_info    0x000ce5fa       0xd5 ../../circle/lib/libcircle.a(font12x22.o)
- .debug_info    0x000ce6cf     0x1563 ../../circle/lib/libcircle.a(exceptionhandler.o)
- .debug_info    0x000cfc32      0xfef ../../circle/lib/libcircle.a(memory.o)
- .debug_info    0x000d0c21      0x2be ../../circle/lib/libcircle.a(pagetable.o)
- .debug_info    0x000d0edf      0x222 ../../circle/lib/libcircle.a(synchronize.o)
- .debug_info    0x000d1101     0x11bf ../../circle/lib/libcircle.a(interrupt.o)
- .debug_info    0x000d22c0     0x2d82 ../../circle/lib/libcircle.a(gpiopin.o)
- .debug_info    0x000d5042      0xc13 ../../circle/lib/libcircle.a(alloc.o)
- .debug_info    0x000d5c55      0x5a4 ../../circle/lib/libcircle.a(display.o)
- .debug_info    0x000d61f9     0x1065 ../../circle/lib/libcircle.a(bcmmailbox.o)
- .debug_info    0x000d725e     0x49bc ../../circle/lib/libcircle.a(terminal.o)
- .debug_info    0x000dbc1a      0x5d7 ../../circle/lib/libcircle.a(pageallocator.o)
- .debug_info    0x000dc1f1      0xa4a ../../circle/lib/libcircle.a(gpiomanager.o)
- .debug_info    0x000dcc3b      0x449 ../../circle/lib/libcircle.a(chargenerator.o)
- .debug_info    0x000dd084       0x25 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_ldivmod.o)
- .debug_info    0x000dd0a9       0x24 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_info    0x000dd0cd      0x2d8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_paritysi2.o)
- .debug_info    0x000dd3a5      0x6f5 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
- .debug_info    0x000dda9a       0x3c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000351c     0x878f kernel.o
+ .debug_info    0x0000bcab       0x6b compat.o
+ .debug_info    0x0000bd16     0x4b8f z80.o
+ .debug_info    0x000108a5     0x323d spectrum.o
+ .debug_info    0x00013ae2      0xd2d tzx.o
+ .debug_info    0x0001480f     0x249d ../../circle/lib/usb/libusb.a(usbhostcontroller.o)
+ .debug_info    0x00016cac     0x2ad4 ../../circle/lib/usb/libusb.a(usbkeyboard.o)
+ .debug_info    0x00019780     0x138c ../../circle/lib/usb/libusb.a(usbrequest.o)
+ .debug_info    0x0001ab0c     0x40e6 ../../circle/lib/usb/libusb.a(usbstandardhub.o)
+ .debug_info    0x0001ebf2     0x9958 ../../circle/lib/usb/libusb.a(dwhcidevice.o)
+ .debug_info    0x0002854a     0x2424 ../../circle/lib/usb/libusb.a(dwhciframeschednper.o)
+ .debug_info    0x0002a96e     0x1057 ../../circle/lib/usb/libusb.a(dwhciframeschednsplit.o)
+ .debug_info    0x0002b9c5     0x1e34 ../../circle/lib/usb/libusb.a(dwhciframeschedper.o)
+ .debug_info    0x0002d7f9     0x171c ../../circle/lib/usb/libusb.a(dwhcirootport.o)
+ .debug_info    0x0002ef15     0x2657 ../../circle/lib/usb/libusb.a(dwhcixactqueue.o)
+ .debug_info    0x0003156c     0x328a ../../circle/lib/usb/libusb.a(dwhcixferstagedata.o)
+ .debug_info    0x000347f6     0x12a0 ../../circle/lib/usb/libusb.a(dwhciframeschediso.o)
+ .debug_info    0x00035a96     0x3f63 ../../circle/lib/usb/libusb.a(usbdevice.o)
+ .debug_info    0x000399f9     0x330b ../../circle/lib/usb/libusb.a(usbdevicefactory.o)
+ .debug_info    0x0003cd04     0x1634 ../../circle/lib/usb/libusb.a(usbendpoint.o)
+ .debug_info    0x0003e338     0x264d ../../circle/lib/usb/libusb.a(usbfunction.o)
+ .debug_info    0x00040985     0x21ab ../../circle/lib/usb/libusb.a(usbgamepadps3.o)
+ .debug_info    0x00042b30     0x2337 ../../circle/lib/usb/libusb.a(usbgamepadps4.o)
+ .debug_info    0x00044e67     0x259d ../../circle/lib/usb/libusb.a(usbgamepadstandard.o)
+ .debug_info    0x00047404     0x201b ../../circle/lib/usb/libusb.a(usbgamepadswitchpro.o)
+ .debug_info    0x0004941f     0x1d40 ../../circle/lib/usb/libusb.a(usbgamepadxbox360.o)
+ .debug_info    0x0004b15f     0x1c67 ../../circle/lib/usb/libusb.a(usbgamepadxboxone.o)
+ .debug_info    0x0004cdc6     0x2bcc ../../circle/lib/usb/libusb.a(usbhiddevice.o)
+ .debug_info    0x0004f992     0x3883 ../../circle/lib/usb/libusb.a(usbmassdevice.o)
+ .debug_info    0x00053215     0x3299 ../../circle/lib/usb/libusb.a(usbmidihost.o)
+ .debug_info    0x000564ae     0x2461 ../../circle/lib/usb/libusb.a(usbmouse.o)
+ .debug_info    0x0005890f     0x201a ../../circle/lib/usb/libusb.a(usbprinter.o)
+ .debug_info    0x0005a929      0xd36 ../../circle/lib/usb/libusb.a(usbstring.o)
+ .debug_info    0x0005b65f     0x1e89 ../../circle/lib/usb/libusb.a(usbserialch341.o)
+ .debug_info    0x0005d4e8     0x1f91 ../../circle/lib/usb/libusb.a(usbserialcp210x.o)
+ .debug_info    0x0005f479     0x26b2 ../../circle/lib/usb/libusb.a(usbserialpl2303.o)
+ .debug_info    0x00061b2b     0x210f ../../circle/lib/usb/libusb.a(usbserialft231x.o)
+ .debug_info    0x00063c3a     0x1a52 ../../circle/lib/usb/libusb.a(usbserialcdc.o)
+ .debug_info    0x0006568c     0x2413 ../../circle/lib/usb/libusb.a(usbtouchscreen.o)
+ .debug_info    0x00067a9f     0x1500 ../../circle/lib/usb/libusb.a(dwhciregister.o)
+ .debug_info    0x00068f9f     0x42ec ../../circle/lib/usb/libusb.a(lan7800.o)
+ .debug_info    0x0006d28b     0x4800 ../../circle/lib/usb/libusb.a(smsc951x.o)
+ .debug_info    0x00071a8b     0x2ad8 ../../circle/lib/usb/libusb.a(usbbluetooth.o)
+ .debug_info    0x00074563     0x33e8 ../../circle/lib/usb/libusb.a(usbcdcethernet.o)
+ .debug_info    0x0007794b     0x3540 ../../circle/lib/usb/libusb.a(usbfloppydevice.o)
+ .debug_info    0x0007ae8b     0x16b8 ../../circle/lib/usb/libusb.a(usbconfigparser.o)
+ .debug_info    0x0007c543     0x1d54 ../../circle/lib/usb/libusb.a(usbgamepad.o)
+ .debug_info    0x0007e297     0x20c0 ../../circle/lib/usb/libusb.a(usbmidi.o)
+ .debug_info    0x00080357     0x2f3b ../../circle/lib/usb/libusb.a(usbserialhost.o)
+ .debug_info    0x00083292     0x122a ../../circle/lib/usb/libusb.a(usbserial.o)
+ .debug_info    0x000844bc     0x14e1 ../../circle/lib/input/libinput.a(keyboardbehaviour.o)
+ .debug_info    0x0008599d      0xfe0 ../../circle/lib/input/libinput.a(keymap.o)
+ .debug_info    0x0008697d     0x144a ../../circle/lib/input/libinput.a(mouse.o)
+ .debug_info    0x00087dc7      0xe78 ../../circle/lib/input/libinput.a(touchscreen.o)
+ .debug_info    0x00088c3f     0x105a ../../circle/lib/input/libinput.a(mousebehaviour.o)
+ .debug_info    0x00089c99     0x3764 ../../circle/lib/sound/libsound.a(soundbasedevice.o)
+ .debug_info    0x0008d3fd     0x43e3 ../../circle/lib/sound/libsound.a(hdmisoundbasedevice.o)
+ .debug_info    0x000917e0     0x3ea8 ../../circle/addon/SDCard/libsdcard.a(emmc.o)
+ .debug_info    0x00095688      0xc4d ../../circle/addon/SDCard/libsdcard.a(mmchost.o)
+ .debug_info    0x000962d5     0x6882 ../../circle/addon/SDCard/libsdcard.a(sdhost.o)
+ .debug_info    0x0009cb57     0x2cc6 ../../circle/lib/fs/fat/libfatfs.a(fatfs.o)
+ .debug_info    0x0009f81d     0x201b ../../circle/lib/fs/fat/libfatfs.a(fatcache.o)
+ .debug_info    0x000a1838     0x22c7 ../../circle/lib/fs/fat/libfatfs.a(fatinfo.o)
+ .debug_info    0x000a3aff     0x173b ../../circle/lib/fs/fat/libfatfs.a(fat.o)
+ .debug_info    0x000a523a     0x2915 ../../circle/lib/fs/fat/libfatfs.a(fatdir.o)
+ .debug_info    0x000a7b4f     0x173e ../../circle/lib/fs/libfs.a(partitionmanager.o)
+ .debug_info    0x000a928d      0x6e9 ../../circle/lib/fs/libfs.a(partition.o)
+ .debug_info    0x000a9976     0x147e ../../circle/lib/libcircle.a(actled.o)
+ .debug_info    0x000aadf4      0xf0f ../../circle/lib/libcircle.a(assert.o)
+ .debug_info    0x000abd03     0x24a6 ../../circle/lib/libcircle.a(bcmframebuffer.o)
+ .debug_info    0x000ae1a9      0xd6e ../../circle/lib/libcircle.a(bcmpropertytags.o)
+ .debug_info    0x000aef17     0x1711 ../../circle/lib/libcircle.a(classallocator.o)
+ .debug_info    0x000b0628     0x11fc ../../circle/lib/libcircle.a(debug.o)
+ .debug_info    0x000b1824      0xd7b ../../circle/lib/libcircle.a(device.o)
+ .debug_info    0x000b259f     0x12ce ../../circle/lib/libcircle.a(devicenameservice.o)
+ .debug_info    0x000b386d     0x26ea ../../circle/lib/libcircle.a(dmachannel.o)
+ .debug_info    0x000b5f57     0x19ca ../../circle/lib/libcircle.a(koptions.o)
+ .debug_info    0x000b7921     0x24af ../../circle/lib/libcircle.a(logger.o)
+ .debug_info    0x000b9dd0     0x10cb ../../circle/lib/libcircle.a(machineinfo.o)
+ .debug_info    0x000bae9b      0x7d0 ../../circle/lib/libcircle.a(ptrlist.o)
+ .debug_info    0x000bb66b     0x159c ../../circle/lib/libcircle.a(screen.o)
+ .debug_info    0x000bcc07     0x2cc9 ../../circle/lib/libcircle.a(serial.o)
+ .debug_info    0x000bf8d0     0x2f6f ../../circle/lib/libcircle.a(string.o)
+ .debug_info    0x000c283f     0x1c17 ../../circle/lib/libcircle.a(sysinit.o)
+ .debug_info    0x000c4456     0x28e7 ../../circle/lib/libcircle.a(timer.o)
+ .debug_info    0x000c6d3d      0xb0a ../../circle/lib/libcircle.a(util.o)
+ .debug_info    0x000c7847     0x1104 ../../circle/lib/libcircle.a(virtualgpiopin.o)
+ .debug_info    0x000c894b      0x239 ../../circle/lib/libcircle.a(chainboot.o)
+ .debug_info    0x000c8b84      0xbb0 ../../circle/lib/libcircle.a(macaddress.o)
+ .debug_info    0x000c9734      0x6db ../../circle/lib/libcircle.a(netdevice.o)
+ .debug_info    0x000c9e0f      0xe3e ../../circle/lib/libcircle.a(new.o)
+ .debug_info    0x000cac4d     0x1884 ../../circle/lib/libcircle.a(heapallocator.o)
+ .debug_info    0x000cc4d1     0x10cb ../../circle/lib/libcircle.a(numberpool.o)
+ .debug_info    0x000cd59c     0x1065 ../../circle/lib/libcircle.a(ptrlistfiq.o)
+ .debug_info    0x000ce601       0xd5 ../../circle/lib/libcircle.a(font12x22.o)
+ .debug_info    0x000ce6d6     0x1563 ../../circle/lib/libcircle.a(exceptionhandler.o)
+ .debug_info    0x000cfc39      0xfef ../../circle/lib/libcircle.a(memory.o)
+ .debug_info    0x000d0c28      0x2be ../../circle/lib/libcircle.a(pagetable.o)
+ .debug_info    0x000d0ee6      0x222 ../../circle/lib/libcircle.a(synchronize.o)
+ .debug_info    0x000d1108     0x11bf ../../circle/lib/libcircle.a(interrupt.o)
+ .debug_info    0x000d22c7     0x2d82 ../../circle/lib/libcircle.a(gpiopin.o)
+ .debug_info    0x000d5049      0xc13 ../../circle/lib/libcircle.a(alloc.o)
+ .debug_info    0x000d5c5c      0x5a4 ../../circle/lib/libcircle.a(display.o)
+ .debug_info    0x000d6200     0x1065 ../../circle/lib/libcircle.a(bcmmailbox.o)
+ .debug_info    0x000d7265     0x49bc ../../circle/lib/libcircle.a(terminal.o)
+ .debug_info    0x000dbc21      0x5d7 ../../circle/lib/libcircle.a(pageallocator.o)
+ .debug_info    0x000dc1f8      0xa4a ../../circle/lib/libcircle.a(gpiomanager.o)
+ .debug_info    0x000dcc42      0x449 ../../circle/lib/libcircle.a(chargenerator.o)
+ .debug_info    0x000dd08b       0x25 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_ldivmod.o)
+ .debug_info    0x000dd0b0       0x24 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_info    0x000dd0d4      0x2d8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_paritysi2.o)
+ .debug_info    0x000dd3ac      0x6f5 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
+ .debug_info    0x000ddaa1       0x3c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_dvmd_tls.o)
 
 .debug_abbrev   0x00000000    0x2199a
  .debug_abbrev  0x00000000      0x49f main.o
@@ -3007,225 +3008,225 @@ LOAD linker stubs
  .debug_abbrev  0x00021974       0x26 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_dvmd_tls.o)
 
 .debug_loclists
-                0x00000000    0x41310
+                0x00000000    0x412ec
  .debug_loclists
                 0x00000000       0x20 main.o
  .debug_loclists
-                0x00000020     0x224f kernel.o
+                0x00000020     0x222b kernel.o
  .debug_loclists
-                0x0000226f     0x6a93 z80.o
+                0x0000224b     0x6a93 z80.o
  .debug_loclists
-                0x00008d02     0x3302 spectrum.o
+                0x00008cde     0x3302 spectrum.o
  .debug_loclists
-                0x0000c004      0x818 tzx.o
+                0x0000bfe0      0x818 tzx.o
  .debug_loclists
-                0x0000c81c      0x7d6 ../../circle/lib/usb/libusb.a(usbhostcontroller.o)
+                0x0000c7f8      0x7d6 ../../circle/lib/usb/libusb.a(usbhostcontroller.o)
  .debug_loclists
-                0x0000cff2      0x5c3 ../../circle/lib/usb/libusb.a(usbkeyboard.o)
+                0x0000cfce      0x5c3 ../../circle/lib/usb/libusb.a(usbkeyboard.o)
  .debug_loclists
-                0x0000d5b5      0x607 ../../circle/lib/usb/libusb.a(usbrequest.o)
+                0x0000d591      0x607 ../../circle/lib/usb/libusb.a(usbrequest.o)
  .debug_loclists
-                0x0000dbbc      0x79d ../../circle/lib/usb/libusb.a(usbstandardhub.o)
+                0x0000db98      0x79d ../../circle/lib/usb/libusb.a(usbstandardhub.o)
  .debug_loclists
-                0x0000e359     0x1fb4 ../../circle/lib/usb/libusb.a(dwhcidevice.o)
+                0x0000e335     0x1fb4 ../../circle/lib/usb/libusb.a(dwhcidevice.o)
  .debug_loclists
-                0x0001030d      0x48e ../../circle/lib/usb/libusb.a(dwhciframeschednper.o)
+                0x000102e9      0x48e ../../circle/lib/usb/libusb.a(dwhciframeschednper.o)
  .debug_loclists
-                0x0001079b      0x312 ../../circle/lib/usb/libusb.a(dwhciframeschednsplit.o)
+                0x00010777      0x312 ../../circle/lib/usb/libusb.a(dwhciframeschednsplit.o)
  .debug_loclists
-                0x00010aad      0x447 ../../circle/lib/usb/libusb.a(dwhciframeschedper.o)
+                0x00010a89      0x447 ../../circle/lib/usb/libusb.a(dwhciframeschedper.o)
  .debug_loclists
-                0x00010ef4      0x1e0 ../../circle/lib/usb/libusb.a(dwhcirootport.o)
+                0x00010ed0      0x1e0 ../../circle/lib/usb/libusb.a(dwhcirootport.o)
  .debug_loclists
-                0x000110d4      0xa30 ../../circle/lib/usb/libusb.a(dwhcixactqueue.o)
+                0x000110b0      0xa30 ../../circle/lib/usb/libusb.a(dwhcixactqueue.o)
  .debug_loclists
-                0x00011b04      0xaae ../../circle/lib/usb/libusb.a(dwhcixferstagedata.o)
+                0x00011ae0      0xaae ../../circle/lib/usb/libusb.a(dwhcixferstagedata.o)
  .debug_loclists
-                0x000125b2      0x504 ../../circle/lib/usb/libusb.a(dwhciframeschediso.o)
+                0x0001258e      0x504 ../../circle/lib/usb/libusb.a(dwhciframeschediso.o)
  .debug_loclists
-                0x00012ab6      0xb7c ../../circle/lib/usb/libusb.a(usbdevice.o)
+                0x00012a92      0xb7c ../../circle/lib/usb/libusb.a(usbdevice.o)
  .debug_loclists
-                0x00013632      0x75e ../../circle/lib/usb/libusb.a(usbdevicefactory.o)
+                0x0001360e      0x75e ../../circle/lib/usb/libusb.a(usbdevicefactory.o)
  .debug_loclists
-                0x00013d90      0x528 ../../circle/lib/usb/libusb.a(usbendpoint.o)
+                0x00013d6c      0x528 ../../circle/lib/usb/libusb.a(usbendpoint.o)
  .debug_loclists
-                0x000142b8      0x595 ../../circle/lib/usb/libusb.a(usbfunction.o)
+                0x00014294      0x595 ../../circle/lib/usb/libusb.a(usbfunction.o)
  .debug_loclists
-                0x0001484d      0x3eb ../../circle/lib/usb/libusb.a(usbgamepadps3.o)
+                0x00014829      0x3eb ../../circle/lib/usb/libusb.a(usbgamepadps3.o)
  .debug_loclists
-                0x00014c38      0x59b ../../circle/lib/usb/libusb.a(usbgamepadps4.o)
+                0x00014c14      0x59b ../../circle/lib/usb/libusb.a(usbgamepadps4.o)
  .debug_loclists
-                0x000151d3      0xe4e ../../circle/lib/usb/libusb.a(usbgamepadstandard.o)
+                0x000151af      0xe4e ../../circle/lib/usb/libusb.a(usbgamepadstandard.o)
  .debug_loclists
-                0x00016021      0x28e ../../circle/lib/usb/libusb.a(usbgamepadswitchpro.o)
+                0x00015ffd      0x28e ../../circle/lib/usb/libusb.a(usbgamepadswitchpro.o)
  .debug_loclists
-                0x000162af      0x474 ../../circle/lib/usb/libusb.a(usbgamepadxbox360.o)
+                0x0001628b      0x474 ../../circle/lib/usb/libusb.a(usbgamepadxbox360.o)
  .debug_loclists
-                0x00016723      0x291 ../../circle/lib/usb/libusb.a(usbgamepadxboxone.o)
+                0x000166ff      0x291 ../../circle/lib/usb/libusb.a(usbgamepadxboxone.o)
  .debug_loclists
-                0x000169b4      0x7d1 ../../circle/lib/usb/libusb.a(usbhiddevice.o)
+                0x00016990      0x7d1 ../../circle/lib/usb/libusb.a(usbhiddevice.o)
  .debug_loclists
-                0x00017185      0x875 ../../circle/lib/usb/libusb.a(usbmassdevice.o)
+                0x00017161      0x875 ../../circle/lib/usb/libusb.a(usbmassdevice.o)
  .debug_loclists
-                0x000179fa      0x8c5 ../../circle/lib/usb/libusb.a(usbmidihost.o)
+                0x000179d6      0x8c5 ../../circle/lib/usb/libusb.a(usbmidihost.o)
  .debug_loclists
-                0x000182bf      0xefd ../../circle/lib/usb/libusb.a(usbmouse.o)
+                0x0001829b      0xefd ../../circle/lib/usb/libusb.a(usbmouse.o)
  .debug_loclists
-                0x000191bc      0x191 ../../circle/lib/usb/libusb.a(usbprinter.o)
+                0x00019198      0x191 ../../circle/lib/usb/libusb.a(usbprinter.o)
  .debug_loclists
-                0x0001934d      0x299 ../../circle/lib/usb/libusb.a(usbstring.o)
+                0x00019329      0x299 ../../circle/lib/usb/libusb.a(usbstring.o)
  .debug_loclists
-                0x000195e6      0x291 ../../circle/lib/usb/libusb.a(usbserialch341.o)
+                0x000195c2      0x291 ../../circle/lib/usb/libusb.a(usbserialch341.o)
  .debug_loclists
-                0x00019877      0x346 ../../circle/lib/usb/libusb.a(usbserialcp210x.o)
+                0x00019853      0x346 ../../circle/lib/usb/libusb.a(usbserialcp210x.o)
  .debug_loclists
-                0x00019bbd      0x25c ../../circle/lib/usb/libusb.a(usbserialpl2303.o)
+                0x00019b99      0x25c ../../circle/lib/usb/libusb.a(usbserialpl2303.o)
  .debug_loclists
-                0x00019e19      0x29f ../../circle/lib/usb/libusb.a(usbserialft231x.o)
+                0x00019df5      0x29f ../../circle/lib/usb/libusb.a(usbserialft231x.o)
  .debug_loclists
-                0x0001a0b8      0x194 ../../circle/lib/usb/libusb.a(usbserialcdc.o)
+                0x0001a094      0x194 ../../circle/lib/usb/libusb.a(usbserialcdc.o)
  .debug_loclists
-                0x0001a24c      0xb2a ../../circle/lib/usb/libusb.a(usbtouchscreen.o)
+                0x0001a228      0xb2a ../../circle/lib/usb/libusb.a(usbtouchscreen.o)
  .debug_loclists
-                0x0001ad76      0x247 ../../circle/lib/usb/libusb.a(dwhciregister.o)
+                0x0001ad52      0x247 ../../circle/lib/usb/libusb.a(dwhciregister.o)
  .debug_loclists
-                0x0001afbd      0xb5c ../../circle/lib/usb/libusb.a(lan7800.o)
+                0x0001af99      0xb5c ../../circle/lib/usb/libusb.a(lan7800.o)
  .debug_loclists
-                0x0001bb19      0xe0d ../../circle/lib/usb/libusb.a(smsc951x.o)
+                0x0001baf5      0xe0d ../../circle/lib/usb/libusb.a(smsc951x.o)
  .debug_loclists
-                0x0001c926      0x403 ../../circle/lib/usb/libusb.a(usbbluetooth.o)
+                0x0001c902      0x403 ../../circle/lib/usb/libusb.a(usbbluetooth.o)
  .debug_loclists
-                0x0001cd29      0x79c ../../circle/lib/usb/libusb.a(usbcdcethernet.o)
+                0x0001cd05      0x79c ../../circle/lib/usb/libusb.a(usbcdcethernet.o)
  .debug_loclists
-                0x0001d4c5      0x7b0 ../../circle/lib/usb/libusb.a(usbfloppydevice.o)
+                0x0001d4a1      0x7b0 ../../circle/lib/usb/libusb.a(usbfloppydevice.o)
  .debug_loclists
-                0x0001dc75      0x4d8 ../../circle/lib/usb/libusb.a(usbconfigparser.o)
+                0x0001dc51      0x4d8 ../../circle/lib/usb/libusb.a(usbconfigparser.o)
  .debug_loclists
-                0x0001e14d      0x2bf ../../circle/lib/usb/libusb.a(usbgamepad.o)
+                0x0001e129      0x2bf ../../circle/lib/usb/libusb.a(usbgamepad.o)
  .debug_loclists
-                0x0001e40c      0xebc ../../circle/lib/usb/libusb.a(usbmidi.o)
+                0x0001e3e8      0xebc ../../circle/lib/usb/libusb.a(usbmidi.o)
  .debug_loclists
-                0x0001f2c8      0xbe0 ../../circle/lib/usb/libusb.a(usbserialhost.o)
+                0x0001f2a4      0xbe0 ../../circle/lib/usb/libusb.a(usbserialhost.o)
  .debug_loclists
-                0x0001fea8      0x8f7 ../../circle/lib/usb/libusb.a(usbserial.o)
+                0x0001fe84      0x8f7 ../../circle/lib/usb/libusb.a(usbserial.o)
  .debug_loclists
-                0x0002079f      0x5a2 ../../circle/lib/input/libinput.a(keyboardbehaviour.o)
+                0x0002077b      0x5a2 ../../circle/lib/input/libinput.a(keyboardbehaviour.o)
  .debug_loclists
-                0x00020d41      0x589 ../../circle/lib/input/libinput.a(keymap.o)
+                0x00020d1d      0x589 ../../circle/lib/input/libinput.a(keymap.o)
  .debug_loclists
-                0x000212ca      0x556 ../../circle/lib/input/libinput.a(mouse.o)
+                0x000212a6      0x556 ../../circle/lib/input/libinput.a(mouse.o)
  .debug_loclists
-                0x00021820      0x442 ../../circle/lib/input/libinput.a(touchscreen.o)
+                0x000217fc      0x442 ../../circle/lib/input/libinput.a(touchscreen.o)
  .debug_loclists
-                0x00021c62      0x6e3 ../../circle/lib/input/libinput.a(mousebehaviour.o)
+                0x00021c3e      0x6e3 ../../circle/lib/input/libinput.a(mousebehaviour.o)
  .debug_loclists
-                0x00022345     0x29dc ../../circle/lib/sound/libsound.a(soundbasedevice.o)
+                0x00022321     0x29dc ../../circle/lib/sound/libsound.a(soundbasedevice.o)
  .debug_loclists
-                0x00024d21     0x10bf ../../circle/lib/sound/libsound.a(hdmisoundbasedevice.o)
+                0x00024cfd     0x10bf ../../circle/lib/sound/libsound.a(hdmisoundbasedevice.o)
  .debug_loclists
-                0x00025de0     0x18b0 ../../circle/addon/SDCard/libsdcard.a(emmc.o)
+                0x00025dbc     0x18b0 ../../circle/addon/SDCard/libsdcard.a(emmc.o)
  .debug_loclists
-                0x00027690      0x4a8 ../../circle/addon/SDCard/libsdcard.a(mmchost.o)
+                0x0002766c      0x4a8 ../../circle/addon/SDCard/libsdcard.a(mmchost.o)
  .debug_loclists
-                0x00027b38     0x2873 ../../circle/addon/SDCard/libsdcard.a(sdhost.o)
+                0x00027b14     0x2873 ../../circle/addon/SDCard/libsdcard.a(sdhost.o)
  .debug_loclists
-                0x0002a3ab      0xbd2 ../../circle/lib/fs/fat/libfatfs.a(fatfs.o)
+                0x0002a387      0xbd2 ../../circle/lib/fs/fat/libfatfs.a(fatfs.o)
  .debug_loclists
-                0x0002af7d      0x92d ../../circle/lib/fs/fat/libfatfs.a(fatcache.o)
+                0x0002af59      0x92d ../../circle/lib/fs/fat/libfatfs.a(fatcache.o)
  .debug_loclists
-                0x0002b8aa      0x744 ../../circle/lib/fs/fat/libfatfs.a(fatinfo.o)
+                0x0002b886      0x744 ../../circle/lib/fs/fat/libfatfs.a(fatinfo.o)
  .debug_loclists
-                0x0002bfee      0x7fe ../../circle/lib/fs/fat/libfatfs.a(fat.o)
+                0x0002bfca      0x7fe ../../circle/lib/fs/fat/libfatfs.a(fat.o)
  .debug_loclists
-                0x0002c7ec      0xe1c ../../circle/lib/fs/fat/libfatfs.a(fatdir.o)
+                0x0002c7c8      0xe1c ../../circle/lib/fs/fat/libfatfs.a(fatdir.o)
  .debug_loclists
-                0x0002d608      0x128 ../../circle/lib/fs/libfs.a(partitionmanager.o)
+                0x0002d5e4      0x128 ../../circle/lib/fs/libfs.a(partitionmanager.o)
  .debug_loclists
-                0x0002d730      0x26e ../../circle/lib/fs/libfs.a(partition.o)
+                0x0002d70c      0x26e ../../circle/lib/fs/libfs.a(partition.o)
  .debug_loclists
-                0x0002d99e      0x189 ../../circle/lib/libcircle.a(actled.o)
+                0x0002d97a      0x189 ../../circle/lib/libcircle.a(actled.o)
  .debug_loclists
-                0x0002db27       0x55 ../../circle/lib/libcircle.a(assert.o)
+                0x0002db03       0x55 ../../circle/lib/libcircle.a(assert.o)
  .debug_loclists
-                0x0002db7c      0x7bd ../../circle/lib/libcircle.a(bcmframebuffer.o)
+                0x0002db58      0x7bd ../../circle/lib/libcircle.a(bcmframebuffer.o)
  .debug_loclists
-                0x0002e339      0x2d0 ../../circle/lib/libcircle.a(bcmpropertytags.o)
+                0x0002e315      0x2d0 ../../circle/lib/libcircle.a(bcmpropertytags.o)
  .debug_loclists
-                0x0002e609      0x5bf ../../circle/lib/libcircle.a(classallocator.o)
+                0x0002e5e5      0x5bf ../../circle/lib/libcircle.a(classallocator.o)
  .debug_loclists
-                0x0002ebc8      0x1de ../../circle/lib/libcircle.a(debug.o)
+                0x0002eba4      0x1de ../../circle/lib/libcircle.a(debug.o)
  .debug_loclists
-                0x0002eda6      0x43e ../../circle/lib/libcircle.a(device.o)
+                0x0002ed82      0x43e ../../circle/lib/libcircle.a(device.o)
  .debug_loclists
-                0x0002f1e4      0x785 ../../circle/lib/libcircle.a(devicenameservice.o)
+                0x0002f1c0      0x785 ../../circle/lib/libcircle.a(devicenameservice.o)
  .debug_loclists
-                0x0002f969     0x13a7 ../../circle/lib/libcircle.a(dmachannel.o)
+                0x0002f945     0x13a7 ../../circle/lib/libcircle.a(dmachannel.o)
  .debug_loclists
-                0x00030d10      0x6b1 ../../circle/lib/libcircle.a(koptions.o)
+                0x00030cec      0x6b1 ../../circle/lib/libcircle.a(koptions.o)
  .debug_loclists
-                0x000313c1      0x7ee ../../circle/lib/libcircle.a(logger.o)
+                0x0003139d      0x7ee ../../circle/lib/libcircle.a(logger.o)
  .debug_loclists
-                0x00031baf      0x51c ../../circle/lib/libcircle.a(machineinfo.o)
+                0x00031b8b      0x51c ../../circle/lib/libcircle.a(machineinfo.o)
  .debug_loclists
-                0x000320cb      0x35c ../../circle/lib/libcircle.a(ptrlist.o)
+                0x000320a7      0x35c ../../circle/lib/libcircle.a(ptrlist.o)
  .debug_loclists
-                0x00032427      0x566 ../../circle/lib/libcircle.a(screen.o)
+                0x00032403      0x566 ../../circle/lib/libcircle.a(screen.o)
  .debug_loclists
-                0x0003298d     0x145e ../../circle/lib/libcircle.a(serial.o)
+                0x00032969     0x145e ../../circle/lib/libcircle.a(serial.o)
  .debug_loclists
-                0x00033deb     0x260d ../../circle/lib/libcircle.a(string.o)
+                0x00033dc7     0x260d ../../circle/lib/libcircle.a(string.o)
  .debug_loclists
-                0x000363f8       0xcf ../../circle/lib/libcircle.a(sysinit.o)
+                0x000363d4       0xcf ../../circle/lib/libcircle.a(sysinit.o)
  .debug_loclists
-                0x000364c7      0xf62 ../../circle/lib/libcircle.a(timer.o)
+                0x000364a3      0xf62 ../../circle/lib/libcircle.a(timer.o)
  .debug_loclists
-                0x00037429     0x12c5 ../../circle/lib/libcircle.a(util.o)
+                0x00037405     0x12c5 ../../circle/lib/libcircle.a(util.o)
  .debug_loclists
-                0x000386ee      0x2c3 ../../circle/lib/libcircle.a(virtualgpiopin.o)
+                0x000386ca      0x2c3 ../../circle/lib/libcircle.a(virtualgpiopin.o)
  .debug_loclists
-                0x000389b1       0xfb ../../circle/lib/libcircle.a(chainboot.o)
+                0x0003898d       0xfb ../../circle/lib/libcircle.a(chainboot.o)
  .debug_loclists
-                0x00038aac      0x74d ../../circle/lib/libcircle.a(macaddress.o)
+                0x00038a88      0x74d ../../circle/lib/libcircle.a(macaddress.o)
  .debug_loclists
-                0x000391f9       0xb3 ../../circle/lib/libcircle.a(netdevice.o)
+                0x000391d5       0xb3 ../../circle/lib/libcircle.a(netdevice.o)
  .debug_loclists
-                0x000392ac      0x42b ../../circle/lib/libcircle.a(new.o)
+                0x00039288      0x42b ../../circle/lib/libcircle.a(new.o)
  .debug_loclists
-                0x000396d7      0x57b ../../circle/lib/libcircle.a(heapallocator.o)
+                0x000396b3      0x57b ../../circle/lib/libcircle.a(heapallocator.o)
  .debug_loclists
-                0x00039c52      0x22f ../../circle/lib/libcircle.a(numberpool.o)
+                0x00039c2e      0x22f ../../circle/lib/libcircle.a(numberpool.o)
  .debug_loclists
-                0x00039e81      0x82e ../../circle/lib/libcircle.a(ptrlistfiq.o)
+                0x00039e5d      0x82e ../../circle/lib/libcircle.a(ptrlistfiq.o)
  .debug_loclists
-                0x0003a6af      0x248 ../../circle/lib/libcircle.a(exceptionhandler.o)
+                0x0003a68b      0x248 ../../circle/lib/libcircle.a(exceptionhandler.o)
  .debug_loclists
-                0x0003a8f7      0x25d ../../circle/lib/libcircle.a(memory.o)
+                0x0003a8d3      0x25d ../../circle/lib/libcircle.a(memory.o)
  .debug_loclists
-                0x0003ab54       0x7c ../../circle/lib/libcircle.a(pagetable.o)
+                0x0003ab30       0x7c ../../circle/lib/libcircle.a(pagetable.o)
  .debug_loclists
-                0x0003abd0       0xb4 ../../circle/lib/libcircle.a(synchronize.o)
+                0x0003abac       0xb4 ../../circle/lib/libcircle.a(synchronize.o)
  .debug_loclists
-                0x0003ac84      0x9f6 ../../circle/lib/libcircle.a(interrupt.o)
+                0x0003ac60      0x9f6 ../../circle/lib/libcircle.a(interrupt.o)
  .debug_loclists
-                0x0003b67a     0x170b ../../circle/lib/libcircle.a(gpiopin.o)
+                0x0003b656     0x170b ../../circle/lib/libcircle.a(gpiopin.o)
  .debug_loclists
-                0x0003cd85      0x2b0 ../../circle/lib/libcircle.a(alloc.o)
+                0x0003cd61      0x2b0 ../../circle/lib/libcircle.a(alloc.o)
  .debug_loclists
-                0x0003d035      0x53d ../../circle/lib/libcircle.a(display.o)
+                0x0003d011      0x53d ../../circle/lib/libcircle.a(display.o)
  .debug_loclists
-                0x0003d572      0x273 ../../circle/lib/libcircle.a(bcmmailbox.o)
+                0x0003d54e      0x273 ../../circle/lib/libcircle.a(bcmmailbox.o)
  .debug_loclists
-                0x0003d7e5     0x28dd ../../circle/lib/libcircle.a(terminal.o)
+                0x0003d7c1     0x28dd ../../circle/lib/libcircle.a(terminal.o)
  .debug_loclists
-                0x000400c2      0x1c7 ../../circle/lib/libcircle.a(pageallocator.o)
+                0x0004009e      0x1c7 ../../circle/lib/libcircle.a(pageallocator.o)
  .debug_loclists
-                0x00040289      0x426 ../../circle/lib/libcircle.a(gpiomanager.o)
+                0x00040265      0x426 ../../circle/lib/libcircle.a(gpiomanager.o)
  .debug_loclists
-                0x000406af      0x207 ../../circle/lib/libcircle.a(chargenerator.o)
+                0x0004068b      0x207 ../../circle/lib/libcircle.a(chargenerator.o)
  .debug_loclists
-                0x000408b6       0x2d /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_paritysi2.o)
+                0x00040892       0x2d /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_paritysi2.o)
  .debug_loclists
-                0x000408e3      0xa2d /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
+                0x000408bf      0xa2d /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
 
 .debug_aranges  0x00000000      0xfc0
  .debug_aranges
@@ -3660,121 +3661,121 @@ LOAD linker stubs
  .debug_rnglists
                 0x00005965       0x8e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
 
-.debug_line     0x00000000    0x40aee
+.debug_line     0x00000000    0x40aec
  .debug_line    0x00000000      0x2b4 main.o
- .debug_line    0x000002b4     0x3316 kernel.o
- .debug_line    0x000035ca       0x41 compat.o
- .debug_line    0x0000360b     0x44d2 z80.o
- .debug_line    0x00007add     0x22f7 spectrum.o
- .debug_line    0x00009dd4      0xea9 tzx.o
- .debug_line    0x0000ac7d      0x74d ../../circle/lib/usb/libusb.a(usbhostcontroller.o)
- .debug_line    0x0000b3ca      0x6ea ../../circle/lib/usb/libusb.a(usbkeyboard.o)
- .debug_line    0x0000bab4      0x42e ../../circle/lib/usb/libusb.a(usbrequest.o)
- .debug_line    0x0000bee2      0xe3a ../../circle/lib/usb/libusb.a(usbstandardhub.o)
- .debug_line    0x0000cd1c     0x2916 ../../circle/lib/usb/libusb.a(dwhcidevice.o)
- .debug_line    0x0000f632      0x4c5 ../../circle/lib/usb/libusb.a(dwhciframeschednper.o)
- .debug_line    0x0000faf7      0x2e7 ../../circle/lib/usb/libusb.a(dwhciframeschednsplit.o)
- .debug_line    0x0000fdde      0x4f0 ../../circle/lib/usb/libusb.a(dwhciframeschedper.o)
- .debug_line    0x000102ce      0x425 ../../circle/lib/usb/libusb.a(dwhcirootport.o)
- .debug_line    0x000106f3      0x826 ../../circle/lib/usb/libusb.a(dwhcixactqueue.o)
- .debug_line    0x00010f19      0xd24 ../../circle/lib/usb/libusb.a(dwhcixferstagedata.o)
- .debug_line    0x00011c3d      0x54d ../../circle/lib/usb/libusb.a(dwhciframeschediso.o)
- .debug_line    0x0001218a     0x10d5 ../../circle/lib/usb/libusb.a(usbdevice.o)
- .debug_line    0x0001325f      0xbf0 ../../circle/lib/usb/libusb.a(usbdevicefactory.o)
- .debug_line    0x00013e4f      0x4a0 ../../circle/lib/usb/libusb.a(usbendpoint.o)
- .debug_line    0x000142ef      0x700 ../../circle/lib/usb/libusb.a(usbfunction.o)
- .debug_line    0x000149ef      0x62a ../../circle/lib/usb/libusb.a(usbgamepadps3.o)
- .debug_line    0x00015019      0xa4d ../../circle/lib/usb/libusb.a(usbgamepadps4.o)
- .debug_line    0x00015a66      0x922 ../../circle/lib/usb/libusb.a(usbgamepadstandard.o)
- .debug_line    0x00016388      0x69c ../../circle/lib/usb/libusb.a(usbgamepadswitchpro.o)
- .debug_line    0x00016a24      0x58d ../../circle/lib/usb/libusb.a(usbgamepadxbox360.o)
- .debug_line    0x00016fb1      0x587 ../../circle/lib/usb/libusb.a(usbgamepadxboxone.o)
- .debug_line    0x00017538      0x787 ../../circle/lib/usb/libusb.a(usbhiddevice.o)
- .debug_line    0x00017cbf      0xc90 ../../circle/lib/usb/libusb.a(usbmassdevice.o)
- .debug_line    0x0001894f      0x89f ../../circle/lib/usb/libusb.a(usbmidihost.o)
- .debug_line    0x000191ee      0x86d ../../circle/lib/usb/libusb.a(usbmouse.o)
- .debug_line    0x00019a5b      0x40e ../../circle/lib/usb/libusb.a(usbprinter.o)
- .debug_line    0x00019e69      0x4ca ../../circle/lib/usb/libusb.a(usbstring.o)
- .debug_line    0x0001a333      0x53c ../../circle/lib/usb/libusb.a(usbserialch341.o)
- .debug_line    0x0001a86f      0x5f1 ../../circle/lib/usb/libusb.a(usbserialcp210x.o)
- .debug_line    0x0001ae60      0x758 ../../circle/lib/usb/libusb.a(usbserialpl2303.o)
- .debug_line    0x0001b5b8      0x584 ../../circle/lib/usb/libusb.a(usbserialft231x.o)
- .debug_line    0x0001bb3c      0x369 ../../circle/lib/usb/libusb.a(usbserialcdc.o)
- .debug_line    0x0001bea5      0x976 ../../circle/lib/usb/libusb.a(usbtouchscreen.o)
- .debug_line    0x0001c81b      0x39b ../../circle/lib/usb/libusb.a(dwhciregister.o)
- .debug_line    0x0001cbb6      0xd86 ../../circle/lib/usb/libusb.a(lan7800.o)
- .debug_line    0x0001d93c      0xeb9 ../../circle/lib/usb/libusb.a(smsc951x.o)
- .debug_line    0x0001e7f5      0x635 ../../circle/lib/usb/libusb.a(usbbluetooth.o)
- .debug_line    0x0001ee2a      0x8f7 ../../circle/lib/usb/libusb.a(usbcdcethernet.o)
- .debug_line    0x0001f721      0xb6b ../../circle/lib/usb/libusb.a(usbfloppydevice.o)
- .debug_line    0x0002028c      0x448 ../../circle/lib/usb/libusb.a(usbconfigparser.o)
- .debug_line    0x000206d4      0x3b3 ../../circle/lib/usb/libusb.a(usbgamepad.o)
- .debug_line    0x00020a87      0x882 ../../circle/lib/usb/libusb.a(usbmidi.o)
- .debug_line    0x00021309      0x873 ../../circle/lib/usb/libusb.a(usbserialhost.o)
- .debug_line    0x00021b7c      0x501 ../../circle/lib/usb/libusb.a(usbserial.o)
- .debug_line    0x0002207d      0x445 ../../circle/lib/input/libinput.a(keyboardbehaviour.o)
- .debug_line    0x000224c2      0x488 ../../circle/lib/input/libinput.a(keymap.o)
- .debug_line    0x0002294a      0x345 ../../circle/lib/input/libinput.a(mouse.o)
- .debug_line    0x00022c8f      0x487 ../../circle/lib/input/libinput.a(touchscreen.o)
- .debug_line    0x00023116      0x68d ../../circle/lib/input/libinput.a(mousebehaviour.o)
- .debug_line    0x000237a3     0x1db6 ../../circle/lib/sound/libsound.a(soundbasedevice.o)
- .debug_line    0x00025559     0x1207 ../../circle/lib/sound/libsound.a(hdmisoundbasedevice.o)
- .debug_line    0x00026760     0x1623 ../../circle/addon/SDCard/libsdcard.a(emmc.o)
- .debug_line    0x00027d83      0x486 ../../circle/addon/SDCard/libsdcard.a(mmchost.o)
- .debug_line    0x00028209     0x2a1b ../../circle/addon/SDCard/libsdcard.a(sdhost.o)
- .debug_line    0x0002ac24      0xbf9 ../../circle/lib/fs/fat/libfatfs.a(fatfs.o)
- .debug_line    0x0002b81d      0xb45 ../../circle/lib/fs/fat/libfatfs.a(fatcache.o)
- .debug_line    0x0002c362      0x8f9 ../../circle/lib/fs/fat/libfatfs.a(fatinfo.o)
- .debug_line    0x0002cc5b      0x7b7 ../../circle/lib/fs/fat/libfatfs.a(fat.o)
- .debug_line    0x0002d412      0xe53 ../../circle/lib/fs/fat/libfatfs.a(fatdir.o)
- .debug_line    0x0002e265      0x3da ../../circle/lib/fs/libfs.a(partitionmanager.o)
- .debug_line    0x0002e63f      0x24b ../../circle/lib/fs/libfs.a(partition.o)
- .debug_line    0x0002e88a      0x327 ../../circle/lib/libcircle.a(actled.o)
- .debug_line    0x0002ebb1      0x13b ../../circle/lib/libcircle.a(assert.o)
- .debug_line    0x0002ecec      0x718 ../../circle/lib/libcircle.a(bcmframebuffer.o)
- .debug_line    0x0002f404      0x2a2 ../../circle/lib/libcircle.a(bcmpropertytags.o)
- .debug_line    0x0002f6a6      0x577 ../../circle/lib/libcircle.a(classallocator.o)
- .debug_line    0x0002fc1d      0x2f5 ../../circle/lib/libcircle.a(debug.o)
- .debug_line    0x0002ff12      0x310 ../../circle/lib/libcircle.a(device.o)
- .debug_line    0x00030222      0x7a5 ../../circle/lib/libcircle.a(devicenameservice.o)
- .debug_line    0x000309c7     0x108c ../../circle/lib/libcircle.a(dmachannel.o)
- .debug_line    0x00031a53      0x8be ../../circle/lib/libcircle.a(koptions.o)
- .debug_line    0x00032311      0xa1c ../../circle/lib/libcircle.a(logger.o)
- .debug_line    0x00032d2d      0x5cc ../../circle/lib/libcircle.a(machineinfo.o)
- .debug_line    0x000332f9      0x3e9 ../../circle/lib/libcircle.a(ptrlist.o)
- .debug_line    0x000336e2      0x45c ../../circle/lib/libcircle.a(screen.o)
- .debug_line    0x00033b3e     0x14f8 ../../circle/lib/libcircle.a(serial.o)
- .debug_line    0x00035036     0x1a9d ../../circle/lib/libcircle.a(string.o)
- .debug_line    0x00036ad3      0x3cd ../../circle/lib/libcircle.a(sysinit.o)
- .debug_line    0x00036ea0     0x10d4 ../../circle/lib/libcircle.a(timer.o)
- .debug_line    0x00037f74      0xaf1 ../../circle/lib/libcircle.a(util.o)
- .debug_line    0x00038a65      0x3c5 ../../circle/lib/libcircle.a(virtualgpiopin.o)
- .debug_line    0x00038e2a       0xe4 ../../circle/lib/libcircle.a(chainboot.o)
- .debug_line    0x00038f0e      0x457 ../../circle/lib/libcircle.a(macaddress.o)
- .debug_line    0x00039365      0x17a ../../circle/lib/libcircle.a(netdevice.o)
- .debug_line    0x000394df      0x285 ../../circle/lib/libcircle.a(new.o)
- .debug_line    0x00039764      0x566 ../../circle/lib/libcircle.a(heapallocator.o)
- .debug_line    0x00039cca      0x250 ../../circle/lib/libcircle.a(numberpool.o)
- .debug_line    0x00039f1a      0x61e ../../circle/lib/libcircle.a(ptrlistfiq.o)
- .debug_line    0x0003a538       0x4a ../../circle/lib/libcircle.a(font12x22.o)
- .debug_line    0x0003a582      0x396 ../../circle/lib/libcircle.a(exceptionhandler.o)
- .debug_line    0x0003a918      0x379 ../../circle/lib/libcircle.a(memory.o)
- .debug_line    0x0003ac91      0x13f ../../circle/lib/libcircle.a(pagetable.o)
- .debug_line    0x0003add0      0x154 ../../circle/lib/libcircle.a(synchronize.o)
- .debug_line    0x0003af24      0x8ad ../../circle/lib/libcircle.a(interrupt.o)
- .debug_line    0x0003b7d1     0x117a ../../circle/lib/libcircle.a(gpiopin.o)
- .debug_line    0x0003c94b      0x26e ../../circle/lib/libcircle.a(alloc.o)
- .debug_line    0x0003cbb9      0x1eb ../../circle/lib/libcircle.a(display.o)
- .debug_line    0x0003cda4      0x37d ../../circle/lib/libcircle.a(bcmmailbox.o)
- .debug_line    0x0003d121     0x2a2c ../../circle/lib/libcircle.a(terminal.o)
- .debug_line    0x0003fb4d      0x294 ../../circle/lib/libcircle.a(pageallocator.o)
- .debug_line    0x0003fde1      0x3e5 ../../circle/lib/libcircle.a(gpiomanager.o)
- .debug_line    0x000401c6      0x181 ../../circle/lib/libcircle.a(chargenerator.o)
- .debug_line    0x00040347       0x6c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_ldivmod.o)
- .debug_line    0x000403b3       0x4e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x00040401       0xad /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_paritysi2.o)
- .debug_line    0x000404ae      0x5f6 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
- .debug_line    0x00040aa4       0x4a /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x000002b4     0x3314 kernel.o
+ .debug_line    0x000035c8       0x41 compat.o
+ .debug_line    0x00003609     0x44d2 z80.o
+ .debug_line    0x00007adb     0x22f7 spectrum.o
+ .debug_line    0x00009dd2      0xea9 tzx.o
+ .debug_line    0x0000ac7b      0x74d ../../circle/lib/usb/libusb.a(usbhostcontroller.o)
+ .debug_line    0x0000b3c8      0x6ea ../../circle/lib/usb/libusb.a(usbkeyboard.o)
+ .debug_line    0x0000bab2      0x42e ../../circle/lib/usb/libusb.a(usbrequest.o)
+ .debug_line    0x0000bee0      0xe3a ../../circle/lib/usb/libusb.a(usbstandardhub.o)
+ .debug_line    0x0000cd1a     0x2916 ../../circle/lib/usb/libusb.a(dwhcidevice.o)
+ .debug_line    0x0000f630      0x4c5 ../../circle/lib/usb/libusb.a(dwhciframeschednper.o)
+ .debug_line    0x0000faf5      0x2e7 ../../circle/lib/usb/libusb.a(dwhciframeschednsplit.o)
+ .debug_line    0x0000fddc      0x4f0 ../../circle/lib/usb/libusb.a(dwhciframeschedper.o)
+ .debug_line    0x000102cc      0x425 ../../circle/lib/usb/libusb.a(dwhcirootport.o)
+ .debug_line    0x000106f1      0x826 ../../circle/lib/usb/libusb.a(dwhcixactqueue.o)
+ .debug_line    0x00010f17      0xd24 ../../circle/lib/usb/libusb.a(dwhcixferstagedata.o)
+ .debug_line    0x00011c3b      0x54d ../../circle/lib/usb/libusb.a(dwhciframeschediso.o)
+ .debug_line    0x00012188     0x10d5 ../../circle/lib/usb/libusb.a(usbdevice.o)
+ .debug_line    0x0001325d      0xbf0 ../../circle/lib/usb/libusb.a(usbdevicefactory.o)
+ .debug_line    0x00013e4d      0x4a0 ../../circle/lib/usb/libusb.a(usbendpoint.o)
+ .debug_line    0x000142ed      0x700 ../../circle/lib/usb/libusb.a(usbfunction.o)
+ .debug_line    0x000149ed      0x62a ../../circle/lib/usb/libusb.a(usbgamepadps3.o)
+ .debug_line    0x00015017      0xa4d ../../circle/lib/usb/libusb.a(usbgamepadps4.o)
+ .debug_line    0x00015a64      0x922 ../../circle/lib/usb/libusb.a(usbgamepadstandard.o)
+ .debug_line    0x00016386      0x69c ../../circle/lib/usb/libusb.a(usbgamepadswitchpro.o)
+ .debug_line    0x00016a22      0x58d ../../circle/lib/usb/libusb.a(usbgamepadxbox360.o)
+ .debug_line    0x00016faf      0x587 ../../circle/lib/usb/libusb.a(usbgamepadxboxone.o)
+ .debug_line    0x00017536      0x787 ../../circle/lib/usb/libusb.a(usbhiddevice.o)
+ .debug_line    0x00017cbd      0xc90 ../../circle/lib/usb/libusb.a(usbmassdevice.o)
+ .debug_line    0x0001894d      0x89f ../../circle/lib/usb/libusb.a(usbmidihost.o)
+ .debug_line    0x000191ec      0x86d ../../circle/lib/usb/libusb.a(usbmouse.o)
+ .debug_line    0x00019a59      0x40e ../../circle/lib/usb/libusb.a(usbprinter.o)
+ .debug_line    0x00019e67      0x4ca ../../circle/lib/usb/libusb.a(usbstring.o)
+ .debug_line    0x0001a331      0x53c ../../circle/lib/usb/libusb.a(usbserialch341.o)
+ .debug_line    0x0001a86d      0x5f1 ../../circle/lib/usb/libusb.a(usbserialcp210x.o)
+ .debug_line    0x0001ae5e      0x758 ../../circle/lib/usb/libusb.a(usbserialpl2303.o)
+ .debug_line    0x0001b5b6      0x584 ../../circle/lib/usb/libusb.a(usbserialft231x.o)
+ .debug_line    0x0001bb3a      0x369 ../../circle/lib/usb/libusb.a(usbserialcdc.o)
+ .debug_line    0x0001bea3      0x976 ../../circle/lib/usb/libusb.a(usbtouchscreen.o)
+ .debug_line    0x0001c819      0x39b ../../circle/lib/usb/libusb.a(dwhciregister.o)
+ .debug_line    0x0001cbb4      0xd86 ../../circle/lib/usb/libusb.a(lan7800.o)
+ .debug_line    0x0001d93a      0xeb9 ../../circle/lib/usb/libusb.a(smsc951x.o)
+ .debug_line    0x0001e7f3      0x635 ../../circle/lib/usb/libusb.a(usbbluetooth.o)
+ .debug_line    0x0001ee28      0x8f7 ../../circle/lib/usb/libusb.a(usbcdcethernet.o)
+ .debug_line    0x0001f71f      0xb6b ../../circle/lib/usb/libusb.a(usbfloppydevice.o)
+ .debug_line    0x0002028a      0x448 ../../circle/lib/usb/libusb.a(usbconfigparser.o)
+ .debug_line    0x000206d2      0x3b3 ../../circle/lib/usb/libusb.a(usbgamepad.o)
+ .debug_line    0x00020a85      0x882 ../../circle/lib/usb/libusb.a(usbmidi.o)
+ .debug_line    0x00021307      0x873 ../../circle/lib/usb/libusb.a(usbserialhost.o)
+ .debug_line    0x00021b7a      0x501 ../../circle/lib/usb/libusb.a(usbserial.o)
+ .debug_line    0x0002207b      0x445 ../../circle/lib/input/libinput.a(keyboardbehaviour.o)
+ .debug_line    0x000224c0      0x488 ../../circle/lib/input/libinput.a(keymap.o)
+ .debug_line    0x00022948      0x345 ../../circle/lib/input/libinput.a(mouse.o)
+ .debug_line    0x00022c8d      0x487 ../../circle/lib/input/libinput.a(touchscreen.o)
+ .debug_line    0x00023114      0x68d ../../circle/lib/input/libinput.a(mousebehaviour.o)
+ .debug_line    0x000237a1     0x1db6 ../../circle/lib/sound/libsound.a(soundbasedevice.o)
+ .debug_line    0x00025557     0x1207 ../../circle/lib/sound/libsound.a(hdmisoundbasedevice.o)
+ .debug_line    0x0002675e     0x1623 ../../circle/addon/SDCard/libsdcard.a(emmc.o)
+ .debug_line    0x00027d81      0x486 ../../circle/addon/SDCard/libsdcard.a(mmchost.o)
+ .debug_line    0x00028207     0x2a1b ../../circle/addon/SDCard/libsdcard.a(sdhost.o)
+ .debug_line    0x0002ac22      0xbf9 ../../circle/lib/fs/fat/libfatfs.a(fatfs.o)
+ .debug_line    0x0002b81b      0xb45 ../../circle/lib/fs/fat/libfatfs.a(fatcache.o)
+ .debug_line    0x0002c360      0x8f9 ../../circle/lib/fs/fat/libfatfs.a(fatinfo.o)
+ .debug_line    0x0002cc59      0x7b7 ../../circle/lib/fs/fat/libfatfs.a(fat.o)
+ .debug_line    0x0002d410      0xe53 ../../circle/lib/fs/fat/libfatfs.a(fatdir.o)
+ .debug_line    0x0002e263      0x3da ../../circle/lib/fs/libfs.a(partitionmanager.o)
+ .debug_line    0x0002e63d      0x24b ../../circle/lib/fs/libfs.a(partition.o)
+ .debug_line    0x0002e888      0x327 ../../circle/lib/libcircle.a(actled.o)
+ .debug_line    0x0002ebaf      0x13b ../../circle/lib/libcircle.a(assert.o)
+ .debug_line    0x0002ecea      0x718 ../../circle/lib/libcircle.a(bcmframebuffer.o)
+ .debug_line    0x0002f402      0x2a2 ../../circle/lib/libcircle.a(bcmpropertytags.o)
+ .debug_line    0x0002f6a4      0x577 ../../circle/lib/libcircle.a(classallocator.o)
+ .debug_line    0x0002fc1b      0x2f5 ../../circle/lib/libcircle.a(debug.o)
+ .debug_line    0x0002ff10      0x310 ../../circle/lib/libcircle.a(device.o)
+ .debug_line    0x00030220      0x7a5 ../../circle/lib/libcircle.a(devicenameservice.o)
+ .debug_line    0x000309c5     0x108c ../../circle/lib/libcircle.a(dmachannel.o)
+ .debug_line    0x00031a51      0x8be ../../circle/lib/libcircle.a(koptions.o)
+ .debug_line    0x0003230f      0xa1c ../../circle/lib/libcircle.a(logger.o)
+ .debug_line    0x00032d2b      0x5cc ../../circle/lib/libcircle.a(machineinfo.o)
+ .debug_line    0x000332f7      0x3e9 ../../circle/lib/libcircle.a(ptrlist.o)
+ .debug_line    0x000336e0      0x45c ../../circle/lib/libcircle.a(screen.o)
+ .debug_line    0x00033b3c     0x14f8 ../../circle/lib/libcircle.a(serial.o)
+ .debug_line    0x00035034     0x1a9d ../../circle/lib/libcircle.a(string.o)
+ .debug_line    0x00036ad1      0x3cd ../../circle/lib/libcircle.a(sysinit.o)
+ .debug_line    0x00036e9e     0x10d4 ../../circle/lib/libcircle.a(timer.o)
+ .debug_line    0x00037f72      0xaf1 ../../circle/lib/libcircle.a(util.o)
+ .debug_line    0x00038a63      0x3c5 ../../circle/lib/libcircle.a(virtualgpiopin.o)
+ .debug_line    0x00038e28       0xe4 ../../circle/lib/libcircle.a(chainboot.o)
+ .debug_line    0x00038f0c      0x457 ../../circle/lib/libcircle.a(macaddress.o)
+ .debug_line    0x00039363      0x17a ../../circle/lib/libcircle.a(netdevice.o)
+ .debug_line    0x000394dd      0x285 ../../circle/lib/libcircle.a(new.o)
+ .debug_line    0x00039762      0x566 ../../circle/lib/libcircle.a(heapallocator.o)
+ .debug_line    0x00039cc8      0x250 ../../circle/lib/libcircle.a(numberpool.o)
+ .debug_line    0x00039f18      0x61e ../../circle/lib/libcircle.a(ptrlistfiq.o)
+ .debug_line    0x0003a536       0x4a ../../circle/lib/libcircle.a(font12x22.o)
+ .debug_line    0x0003a580      0x396 ../../circle/lib/libcircle.a(exceptionhandler.o)
+ .debug_line    0x0003a916      0x379 ../../circle/lib/libcircle.a(memory.o)
+ .debug_line    0x0003ac8f      0x13f ../../circle/lib/libcircle.a(pagetable.o)
+ .debug_line    0x0003adce      0x154 ../../circle/lib/libcircle.a(synchronize.o)
+ .debug_line    0x0003af22      0x8ad ../../circle/lib/libcircle.a(interrupt.o)
+ .debug_line    0x0003b7cf     0x117a ../../circle/lib/libcircle.a(gpiopin.o)
+ .debug_line    0x0003c949      0x26e ../../circle/lib/libcircle.a(alloc.o)
+ .debug_line    0x0003cbb7      0x1eb ../../circle/lib/libcircle.a(display.o)
+ .debug_line    0x0003cda2      0x37d ../../circle/lib/libcircle.a(bcmmailbox.o)
+ .debug_line    0x0003d11f     0x2a2c ../../circle/lib/libcircle.a(terminal.o)
+ .debug_line    0x0003fb4b      0x294 ../../circle/lib/libcircle.a(pageallocator.o)
+ .debug_line    0x0003fddf      0x3e5 ../../circle/lib/libcircle.a(gpiomanager.o)
+ .debug_line    0x000401c4      0x181 ../../circle/lib/libcircle.a(chargenerator.o)
+ .debug_line    0x00040345       0x6c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_ldivmod.o)
+ .debug_line    0x000403b1       0x4e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x000403ff       0xad /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_paritysi2.o)
+ .debug_line    0x000404ac      0x5f6 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x00040aa2       0x4a /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-a+simd/hard/libgcc.a(_dvmd_tls.o)
 
 .debug_str      0x00000000    0x1cbcb
  .debug_str     0x00000000    0x1cbcb main.o

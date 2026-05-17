@@ -50,7 +50,7 @@ Disassembly of section .text:
     8090:	e3500000 	cmp	r0, #0
     8094:	0a000003 	beq	80a8 <main+0x38>
     8098:	e1a0000d 	mov	r0, sp
-    809c:	eb000cce 	bl	b3dc <CKernel::Run()>
+    809c:	eb000ccd 	bl	b3d8 <CKernel::Run()>
     80a0:	e3500002 	cmp	r0, #2
     80a4:	0a000000 	beq	80ac <main+0x3c>
     80a8:	eb00d780 	bl	3deb0 <halt>
@@ -1679,1984 +1679,1984 @@ Disassembly of section .text:
     994c:	e2806e8a 	add	r6, r0, #2208	@ 0x8a0
     9950:	e286600c 	add	r6, r6, #12
     9954:	e24dd0cc 	sub	sp, sp, #204	@ 0xcc
-    9958:	e59f18b0 	ldr	r1, [pc, #2224]	@ a210 <CKernel::RenderOSD()+0x8c8>
-    995c:	e3a02006 	mov	r2, #6
-    9960:	e1a05000 	mov	r5, r0
+    9958:	e1a05000 	mov	r5, r0
+    995c:	e59f18a4 	ldr	r1, [pc, #2212]	@ a208 <CKernel::RenderOSD()+0x8c0>
+    9960:	e3a02006 	mov	r2, #6
     9964:	e2858a83 	add	r8, r5, #536576	@ 0x83000
     9968:	e58d0024 	str	r0, [sp, #36]	@ 0x24
     996c:	e1a00006 	mov	r0, r6
     9970:	eb00c547 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9974:	e1a00005 	mov	r0, r5
-    9978:	ebfffb7b 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
-    997c:	e1a00006 	mov	r0, r6
-    9980:	eb00c5e0 	bl	3b108 <CScreenDevice::GetColumns() const>
-    9984:	e1a04000 	mov	r4, r0
-    9988:	e1a00006 	mov	r0, r6
-    998c:	eb00c5df 	bl	3b110 <CScreenDevice::GetRows() const>
-    9990:	e59872c8 	ldr	r7, [r8, #712]	@ 0x2c8
-    9994:	e1a09000 	mov	r9, r0
-    9998:	e1a00006 	mov	r0, r6
-    999c:	eb00c5d5 	bl	3b0f8 <CScreenDevice::GetWidth() const>
-    99a0:	e598a2cc 	ldr	sl, [r8, #716]	@ 0x2cc
-    99a4:	e0070497 	mul	r7, r7, r4
-    99a8:	e00a099a 	mul	sl, sl, r9
-    99ac:	e737f017 	udiv	r7, r7, r0
-    99b0:	e1a00006 	mov	r0, r6
-    99b4:	eb00c5d1 	bl	3b100 <CScreenDevice::GetHeight() const>
-    99b8:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
-    99bc:	e59852c8 	ldr	r5, [r8, #712]	@ 0x2c8
-    99c0:	e3a02d05 	mov	r2, #320	@ 0x140
-    99c4:	e73af01a 	udiv	sl, sl, r0
-    99c8:	e1a00006 	mov	r0, r6
-    99cc:	e0255392 	mla	r5, r2, r3, r5
-    99d0:	eb00c5c8 	bl	3b0f8 <CScreenDevice::GetWidth() const>
-    99d4:	e59822d0 	ldr	r2, [r8, #720]	@ 0x2d0
-    99d8:	e59832cc 	ldr	r3, [r8, #716]	@ 0x2cc
-    99dc:	e0050594 	mul	r5, r4, r5
-    99e0:	e0833402 	add	r3, r3, r2, lsl #8
-    99e4:	e735f015 	udiv	r5, r5, r0
-    99e8:	e0090399 	mul	r9, r9, r3
-    99ec:	e1a00006 	mov	r0, r6
-    99f0:	e58d501c 	str	r5, [sp, #28]
-    99f4:	eb00c5c1 	bl	3b100 <CScreenDevice::GetHeight() const>
-    99f8:	e733f019 	udiv	r3, r9, r0
-    99fc:	e1570005 	cmp	r7, r5
-    9a00:	22872001 	addcs	r2, r7, #1
-    9a04:	258d201c 	strcs	r2, [sp, #28]
-    9a08:	21a07002 	movcs	r7, r2
-    9a0c:	e28a2002 	add	r2, sl, #2
-    9a10:	32877001 	addcc	r7, r7, #1
-    9a14:	e1520003 	cmp	r2, r3
-    9a18:	228a3003 	addcs	r3, sl, #3
-    9a1c:	e28aa012 	add	sl, sl, #18
-    9a20:	e15a0003 	cmp	sl, r3
-    9a24:	3a000002 	bcc	9a34 <CKernel::RenderOSD()+0xec>
-    9a28:	e3530011 	cmp	r3, #17
-    9a2c:	33a03011 	movcc	r3, #17
-    9a30:	e2432010 	sub	r2, r3, #16
-    9a34:	e59d301c 	ldr	r3, [sp, #28]
-    9a38:	e3530000 	cmp	r3, #0
-    9a3c:	0a0001b6 	beq	a11c <CKernel::RenderOSD()+0x7d4>
-    9a40:	e3570001 	cmp	r7, #1
-    9a44:	e2433001 	sub	r3, r3, #1
-    9a48:	21a01007 	movcs	r1, r7
-    9a4c:	33a01001 	movcc	r1, #1
-    9a50:	e3520001 	cmp	r2, #1
-    9a54:	e28d5034 	add	r5, sp, #52	@ 0x34
-    9a58:	33a02001 	movcc	r2, #1
-    9a5c:	e1530004 	cmp	r3, r4
-    9a60:	21a03004 	movcs	r3, r4
-    9a64:	e58d2020 	str	r2, [sp, #32]
-    9a68:	e1a02001 	mov	r2, r1
-    9a6c:	e1a00005 	mov	r0, r5
-    9a70:	e1530001 	cmp	r3, r1
-    9a74:	20622003 	rsbcs	r2, r2, r3
-    9a78:	30622001 	rsbcc	r2, r2, r1
-    9a7c:	e58d1010 	str	r1, [sp, #16]
-    9a80:	e2827002 	add	r7, r2, #2
-    9a84:	e58d201c 	str	r2, [sp, #28]
-    9a88:	e3570080 	cmp	r7, #128	@ 0x80
-    9a8c:	e58d700c 	str	r7, [sp, #12]
-    9a90:	31a04007 	movcc	r4, r7
-    9a94:	23a04080 	movcs	r4, #128	@ 0x80
-    9a98:	eb00caa9 	bl	3c544 <CString::CString()>
-    9a9c:	e3570000 	cmp	r7, #0
-    9aa0:	0a0001ac 	beq	a158 <CKernel::RenderOSD()+0x810>
-    9aa4:	e28d9044 	add	r9, sp, #68	@ 0x44
-    9aa8:	e3a03000 	mov	r3, #0
-    9aac:	e1a02009 	mov	r2, r9
-    9ab0:	e3a01020 	mov	r1, #32
-    9ab4:	e2833001 	add	r3, r3, #1
-    9ab8:	e4c21001 	strb	r1, [r2], #1
-    9abc:	e1530004 	cmp	r3, r4
-    9ac0:	3afffffb 	bcc	9ab4 <CKernel::RenderOSD()+0x16c>
-    9ac4:	e28430c8 	add	r3, r4, #200	@ 0xc8
-    9ac8:	e59f1744 	ldr	r1, [pc, #1860]	@ a214 <CKernel::RenderOSD()+0x8cc>
-    9acc:	e08d3003 	add	r3, sp, r3
-    9ad0:	e3a02005 	mov	r2, #5
-    9ad4:	e1a0c003 	mov	ip, r3
-    9ad8:	e1a00006 	mov	r0, r6
-    9adc:	e58d3018 	str	r3, [sp, #24]
-    9ae0:	e3a03000 	mov	r3, #0
-    9ae4:	e54c3084 	strb	r3, [ip, #-132]	@ 0xffffff7c
-    9ae8:	eb00c4e9 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9aec:	e59f1724 	ldr	r1, [pc, #1828]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    9af0:	e3a02005 	mov	r2, #5
-    9af4:	e1a00006 	mov	r0, r6
-    9af8:	eb00c4e5 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9afc:	e59d7020 	ldr	r7, [sp, #32]
-    9b00:	e3063898 	movw	r3, #26776	@ 0x6898
-    9b04:	e3403004 	movt	r3, #4
-    9b08:	e58d4014 	str	r4, [sp, #20]
-    9b0c:	e287b00f 	add	fp, r7, #15
-    9b10:	e59d4010 	ldr	r4, [sp, #16]
-    9b14:	e283ae45 	add	sl, r3, #1104	@ 0x450
-    9b18:	e58d3028 	str	r3, [sp, #40]	@ 0x28
-    9b1c:	e58d802c 	str	r8, [sp, #44]	@ 0x2c
-    9b20:	e1a02007 	mov	r2, r7
-    9b24:	e1a03004 	mov	r3, r4
-    9b28:	e1a0100a 	mov	r1, sl
-    9b2c:	e1a00005 	mov	r0, r5
-    9b30:	e58d9000 	str	r9, [sp]
-    9b34:	e2877001 	add	r7, r7, #1
-    9b38:	eb00d08c 	bl	3dd70 <CString::Format(char const*, ...)>
-    9b3c:	e1a00005 	mov	r0, r5
-    9b40:	eb00cab7 	bl	3c624 <CString::operator char const*() const>
-    9b44:	e1a08000 	mov	r8, r0
-    9b48:	e1a00005 	mov	r0, r5
-    9b4c:	eb00caf8 	bl	3c734 <CString::GetLength() const>
-    9b50:	e1a01008 	mov	r1, r8
-    9b54:	e1a02000 	mov	r2, r0
-    9b58:	e1a00006 	mov	r0, r6
-    9b5c:	eb00c4cc 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9b60:	e157000b 	cmp	r7, fp
-    9b64:	1affffed 	bne	9b20 <CKernel::RenderOSD()+0x1d8>
-    9b68:	e59d300c 	ldr	r3, [sp, #12]
-    9b6c:	e59d4014 	ldr	r4, [sp, #20]
-    9b70:	e59d802c 	ldr	r8, [sp, #44]	@ 0x2c
-    9b74:	e3530000 	cmp	r3, #0
-    9b78:	0a00017b 	beq	a16c <CKernel::RenderOSD()+0x824>
-    9b7c:	e1a02009 	mov	r2, r9
-    9b80:	e3a03000 	mov	r3, #0
-    9b84:	e3a01020 	mov	r1, #32
-    9b88:	e2833001 	add	r3, r3, #1
-    9b8c:	e4c21001 	strb	r1, [r2], #1
-    9b90:	e1530004 	cmp	r3, r4
-    9b94:	3afffffb 	bcc	9b88 <CKernel::RenderOSD()+0x240>
-    9b98:	e59f067c 	ldr	r0, [pc, #1660]	@ a21c <CKernel::RenderOSD()+0x8d4>
-    9b9c:	eb00d50d 	bl	3efd8 <strlen>
-    9ba0:	e1500004 	cmp	r0, r4
-    9ba4:	31a02000 	movcc	r2, r0
-    9ba8:	21a02004 	movcs	r2, r4
-    9bac:	e1520004 	cmp	r2, r4
-    9bb0:	30440002 	subcc	r0, r4, r2
-    9bb4:	21a00009 	movcs	r0, r9
-    9bb8:	308900a0 	addcc	r0, r9, r0, lsr #1
-    9bbc:	e59f1658 	ldr	r1, [pc, #1624]	@ a21c <CKernel::RenderOSD()+0x8d4>
-    9bc0:	eb00d750 	bl	3f908 <memcpy>
-    9bc4:	e59f1654 	ldr	r1, [pc, #1620]	@ a220 <CKernel::RenderOSD()+0x8d8>
-    9bc8:	e3a02005 	mov	r2, #5
-    9bcc:	e1a00006 	mov	r0, r6
-    9bd0:	eb00c4af 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9bd4:	e59f163c 	ldr	r1, [pc, #1596]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    9bd8:	e3a02005 	mov	r2, #5
-    9bdc:	e1a00006 	mov	r0, r6
-    9be0:	eb00c4ab 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9be4:	e59da020 	ldr	sl, [sp, #32]
-    9be8:	e59d3010 	ldr	r3, [sp, #16]
-    9bec:	e1a00005 	mov	r0, r5
-    9bf0:	e59f162c 	ldr	r1, [pc, #1580]	@ a224 <CKernel::RenderOSD()+0x8dc>
-    9bf4:	e1a0200a 	mov	r2, sl
-    9bf8:	e58d9000 	str	r9, [sp]
-    9bfc:	eb00d05b 	bl	3dd70 <CString::Format(char const*, ...)>
-    9c00:	e1a00005 	mov	r0, r5
-    9c04:	eb00ca86 	bl	3c624 <CString::operator char const*() const>
-    9c08:	e1a07000 	mov	r7, r0
-    9c0c:	e1a00005 	mov	r0, r5
-    9c10:	eb00cac7 	bl	3c734 <CString::GetLength() const>
-    9c14:	e1a01007 	mov	r1, r7
-    9c18:	e1a02000 	mov	r2, r0
-    9c1c:	e3a07000 	mov	r7, #0
-    9c20:	e1a00006 	mov	r0, r6
-    9c24:	eb00c49a 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9c28:	e28a3001 	add	r3, sl, #1
-    9c2c:	e58d3014 	str	r3, [sp, #20]
-    9c30:	e59d300c 	ldr	r3, [sp, #12]
-    9c34:	e5980438 	ldr	r0, [r8, #1080]	@ 0x438
-    9c38:	e3530000 	cmp	r3, #0
-    9c3c:	e59d3014 	ldr	r3, [sp, #20]
-    9c40:	e598e434 	ldr	lr, [r8, #1076]	@ 0x434
-    9c44:	e0870000 	add	r0, r7, r0
-    9c48:	e083a007 	add	sl, r3, r7
-    9c4c:	0a000105 	beq	a068 <CKernel::RenderOSD()+0x720>
-    9c50:	e1a02009 	mov	r2, r9
-    9c54:	e3a03000 	mov	r3, #0
-    9c58:	e3a01020 	mov	r1, #32
-    9c5c:	e2833001 	add	r3, r3, #1
-    9c60:	e4c21001 	strb	r1, [r2], #1
-    9c64:	e1530004 	cmp	r3, r4
-    9c68:	3afffffb 	bcc	9c5c <CKernel::RenderOSD()+0x314>
-    9c6c:	e59d1018 	ldr	r1, [sp, #24]
-    9c70:	e15e0000 	cmp	lr, r0
-    9c74:	13a03020 	movne	r3, #32
-    9c78:	03a0303e 	moveq	r3, #62	@ 0x3e
-    9c7c:	e3a02000 	mov	r2, #0
-    9c80:	e3500000 	cmp	r0, #0
-    9c84:	e5412084 	strb	r2, [r1, #-132]	@ 0xffffff7c
-    9c88:	e5cd3044 	strb	r3, [sp, #68]	@ 0x44
-    9c8c:	e5d8342f 	ldrb	r3, [r8, #1071]	@ 0x42f
-    9c90:	0a0000c8 	beq	9fb8 <CKernel::RenderOSD()+0x670>
-    9c94:	e3530000 	cmp	r3, #0
-    9c98:	e2403001 	sub	r3, r0, #1
-    9c9c:	0a00009b 	beq	9f10 <CKernel::RenderOSD()+0x5c8>
-    9ca0:	e353000a 	cmp	r3, #10
-    9ca4:	9a0000f5 	bls	a080 <CKernel::RenderOSD()+0x738>
-    9ca8:	e15e0000 	cmp	lr, r0
-    9cac:	0a0000b8 	beq	9f94 <CKernel::RenderOSD()+0x64c>
-    9cb0:	e59f155c 	ldr	r1, [pc, #1372]	@ a214 <CKernel::RenderOSD()+0x8cc>
-    9cb4:	e3a02005 	mov	r2, #5
-    9cb8:	e1a00006 	mov	r0, r6
-    9cbc:	eb00c474 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9cc0:	e59f1550 	ldr	r1, [pc, #1360]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    9cc4:	e3a02005 	mov	r2, #5
-    9cc8:	e1a00006 	mov	r0, r6
-    9ccc:	eb00c470 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9cd0:	e1a0200a 	mov	r2, sl
-    9cd4:	e59f1548 	ldr	r1, [pc, #1352]	@ a224 <CKernel::RenderOSD()+0x8dc>
-    9cd8:	e59d3010 	ldr	r3, [sp, #16]
-    9cdc:	e1a00005 	mov	r0, r5
-    9ce0:	e58d9000 	str	r9, [sp]
-    9ce4:	e2877001 	add	r7, r7, #1
-    9ce8:	eb00d020 	bl	3dd70 <CString::Format(char const*, ...)>
-    9cec:	e1a00005 	mov	r0, r5
-    9cf0:	eb00ca4b 	bl	3c624 <CString::operator char const*() const>
-    9cf4:	e1a0a000 	mov	sl, r0
-    9cf8:	e1a00005 	mov	r0, r5
-    9cfc:	eb00ca8c 	bl	3c734 <CString::GetLength() const>
-    9d00:	e1a0100a 	mov	r1, sl
-    9d04:	e1a02000 	mov	r2, r0
-    9d08:	e1a00006 	mov	r0, r6
-    9d0c:	eb00c460 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9d10:	e357000c 	cmp	r7, #12
-    9d14:	1affffc5 	bne	9c30 <CKernel::RenderOSD()+0x2e8>
-    9d18:	e59d301c 	ldr	r3, [sp, #28]
-    9d1c:	e3730002 	cmn	r3, #2
-    9d20:	11a02009 	movne	r2, r9
-    9d24:	13a03000 	movne	r3, #0
-    9d28:	13a01020 	movne	r1, #32
-    9d2c:	0a000003 	beq	9d40 <CKernel::RenderOSD()+0x3f8>
-    9d30:	e2833001 	add	r3, r3, #1
-    9d34:	e4c21001 	strb	r1, [r2], #1
-    9d38:	e1530004 	cmp	r3, r4
-    9d3c:	3afffffb 	bcc	9d30 <CKernel::RenderOSD()+0x3e8>
-    9d40:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    9d44:	e1a00005 	mov	r0, r5
-    9d48:	e59f14d8 	ldr	r1, [pc, #1240]	@ a228 <CKernel::RenderOSD()+0x8e0>
-    9d4c:	e2833a2e 	add	r3, r3, #188416	@ 0x2e000
-    9d50:	e2412008 	sub	r2, r1, #8
-    9d54:	e5d33b6c 	ldrb	r3, [r3, #2924]	@ 0xb6c
-    9d58:	e3530000 	cmp	r3, #0
-    9d5c:	01a02001 	moveq	r2, r1
-    9d60:	e2811f41 	add	r1, r1, #260	@ 0x104
-    9d64:	eb00d001 	bl	3dd70 <CString::Format(char const*, ...)>
-    9d68:	e1a00005 	mov	r0, r5
-    9d6c:	eb00ca2c 	bl	3c624 <CString::operator char const*() const>
-    9d70:	e1a0a000 	mov	sl, r0
-    9d74:	eb00d497 	bl	3efd8 <strlen>
-    9d78:	e1500004 	cmp	r0, r4
-    9d7c:	31a02000 	movcc	r2, r0
-    9d80:	21a02004 	movcs	r2, r4
-    9d84:	e1520004 	cmp	r2, r4
-    9d88:	21a00009 	movcs	r0, r9
-    9d8c:	30440002 	subcc	r0, r4, r2
-    9d90:	308900a0 	addcc	r0, r9, r0, lsr #1
-    9d94:	e59d301c 	ldr	r3, [sp, #28]
-    9d98:	e3730002 	cmn	r3, #2
-    9d9c:	e59d3020 	ldr	r3, [sp, #32]
-    9da0:	e283800d 	add	r8, r3, #13
-    9da4:	0a0000f5 	beq	a180 <CKernel::RenderOSD()+0x838>
-    9da8:	e1a07009 	mov	r7, r9
-    9dac:	e1a01009 	mov	r1, r9
-    9db0:	e3a03000 	mov	r3, #0
-    9db4:	e3a0c020 	mov	ip, #32
-    9db8:	e2833001 	add	r3, r3, #1
-    9dbc:	e4c1c001 	strb	ip, [r1], #1
-    9dc0:	e1530004 	cmp	r3, r4
-    9dc4:	3afffffb 	bcc	9db8 <CKernel::RenderOSD()+0x470>
-    9dc8:	e1a0100a 	mov	r1, sl
-    9dcc:	eb00d6cd 	bl	3f908 <memcpy>
-    9dd0:	e59f1454 	ldr	r1, [pc, #1108]	@ a22c <CKernel::RenderOSD()+0x8e4>
-    9dd4:	e3a02005 	mov	r2, #5
-    9dd8:	e1a00006 	mov	r0, r6
-    9ddc:	eb00c42c 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9de0:	e59f1430 	ldr	r1, [pc, #1072]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    9de4:	e3a02005 	mov	r2, #5
-    9de8:	e1a00006 	mov	r0, r6
-    9dec:	eb00c428 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9df0:	e59d3010 	ldr	r3, [sp, #16]
-    9df4:	e1a02008 	mov	r2, r8
-    9df8:	e59f1424 	ldr	r1, [pc, #1060]	@ a224 <CKernel::RenderOSD()+0x8dc>
-    9dfc:	e1a00005 	mov	r0, r5
-    9e00:	e58d9000 	str	r9, [sp]
-    9e04:	eb00cfd9 	bl	3dd70 <CString::Format(char const*, ...)>
-    9e08:	e1a00005 	mov	r0, r5
-    9e0c:	eb00ca04 	bl	3c624 <CString::operator char const*() const>
-    9e10:	e1a08000 	mov	r8, r0
-    9e14:	e1a00005 	mov	r0, r5
-    9e18:	eb00ca45 	bl	3c734 <CString::GetLength() const>
-    9e1c:	e1a01008 	mov	r1, r8
-    9e20:	e1a02000 	mov	r2, r0
-    9e24:	e1a00006 	mov	r0, r6
-    9e28:	eb00c419 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9e2c:	e3a03000 	mov	r3, #0
-    9e30:	e3a02020 	mov	r2, #32
-    9e34:	e2833001 	add	r3, r3, #1
-    9e38:	e4c72001 	strb	r2, [r7], #1
-    9e3c:	e1530004 	cmp	r3, r4
-    9e40:	3afffffb 	bcc	9e34 <CKernel::RenderOSD()+0x4ec>
-    9e44:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    9e48:	e305743c 	movw	r7, #21564	@ 0x543c
-    9e4c:	e3407008 	movt	r7, #8
-    9e50:	e0837007 	add	r7, r3, r7
-    9e54:	e1a00007 	mov	r0, r7
-    9e58:	eb00d45e 	bl	3efd8 <strlen>
-    9e5c:	e1500004 	cmp	r0, r4
-    9e60:	31a02000 	movcc	r2, r0
-    9e64:	21a02004 	movcs	r2, r4
-    9e68:	e1520004 	cmp	r2, r4
-    9e6c:	30440002 	subcc	r0, r4, r2
-    9e70:	21a00009 	movcs	r0, r9
-    9e74:	308900a0 	addcc	r0, r9, r0, lsr #1
-    9e78:	e1a01007 	mov	r1, r7
-    9e7c:	eb00d6a1 	bl	3f908 <memcpy>
-    9e80:	e59f138c 	ldr	r1, [pc, #908]	@ a214 <CKernel::RenderOSD()+0x8cc>
-    9e84:	e3a02005 	mov	r2, #5
-    9e88:	e1a00006 	mov	r0, r6
-    9e8c:	eb00c400 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9e90:	e59f1380 	ldr	r1, [pc, #896]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    9e94:	e3a02005 	mov	r2, #5
-    9e98:	e1a00006 	mov	r0, r6
-    9e9c:	eb00c3fc 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9ea0:	e59d2020 	ldr	r2, [sp, #32]
-    9ea4:	e59d3010 	ldr	r3, [sp, #16]
-    9ea8:	e1a00005 	mov	r0, r5
-    9eac:	e59f1370 	ldr	r1, [pc, #880]	@ a224 <CKernel::RenderOSD()+0x8dc>
-    9eb0:	e282200e 	add	r2, r2, #14
-    9eb4:	e58d9000 	str	r9, [sp]
-    9eb8:	eb00cfac 	bl	3dd70 <CString::Format(char const*, ...)>
-    9ebc:	e1a00005 	mov	r0, r5
-    9ec0:	eb00c9d7 	bl	3c624 <CString::operator char const*() const>
-    9ec4:	e1a04000 	mov	r4, r0
-    9ec8:	e1a00005 	mov	r0, r5
-    9ecc:	eb00ca18 	bl	3c734 <CString::GetLength() const>
-    9ed0:	e1a01004 	mov	r1, r4
-    9ed4:	e1a02000 	mov	r2, r0
-    9ed8:	e1a00006 	mov	r0, r6
-    9edc:	eb00c3ec 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9ee0:	e59f1348 	ldr	r1, [pc, #840]	@ a230 <CKernel::RenderOSD()+0x8e8>
-    9ee4:	e3a02004 	mov	r2, #4
-    9ee8:	e1a00006 	mov	r0, r6
-    9eec:	eb00c3e8 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9ef0:	e59f1318 	ldr	r1, [pc, #792]	@ a210 <CKernel::RenderOSD()+0x8c8>
-    9ef4:	e3a02006 	mov	r2, #6
-    9ef8:	e1a00006 	mov	r0, r6
-    9efc:	eb00c3e4 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9f00:	e1a00005 	mov	r0, r5
-    9f04:	eb00c95b 	bl	3c478 <CString::~CString()>
-    9f08:	e28dd0cc 	add	sp, sp, #204	@ 0xcc
-    9f0c:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
-    9f10:	e5d8242e 	ldrb	r2, [r8, #1070]	@ 0x42e
-    9f14:	e3520000 	cmp	r2, #0
-    9f18:	1a00003b 	bne	a00c <CKernel::RenderOSD()+0x6c4>
-    9f1c:	e3500001 	cmp	r0, #1
-    9f20:	15982430 	ldrne	r2, [r8, #1072]	@ 0x430
-    9f24:	0a00006a 	beq	a0d4 <CKernel::RenderOSD()+0x78c>
-    9f28:	e1520003 	cmp	r2, r3
-    9f2c:	9affff5d 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    9f30:	e303243c 	movw	r2, #13372	@ 0x343c
-    9f34:	e3402008 	movt	r2, #8
-    9f38:	e0823303 	add	r3, r2, r3, lsl #6
-    9f3c:	e59d2024 	ldr	r2, [sp, #36]	@ 0x24
-    9f40:	e082b003 	add	fp, r2, r3
-    9f44:	e19220d3 	ldrsb	r2, [r2, r3]
-    9f48:	e3520000 	cmp	r2, #0
-    9f4c:	0affff55 	beq	9ca8 <CKernel::RenderOSD()+0x360>
-    9f50:	e59d300c 	ldr	r3, [sp, #12]
-    9f54:	e3530002 	cmp	r3, #2
-    9f58:	9affff52 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    9f5c:	e28dc045 	add	ip, sp, #69	@ 0x45
-    9f60:	e1a0100b 	mov	r1, fp
-    9f64:	ea000001 	b	9f70 <CKernel::RenderOSD()+0x628>
-    9f68:	e1540003 	cmp	r4, r3
-    9f6c:	9affff4d 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    9f70:	e1a03001 	mov	r3, r1
-    9f74:	e5ec2001 	strb	r2, [ip, #1]!
-    9f78:	e1f120d1 	ldrsb	r2, [r1, #1]!
-    9f7c:	e2833003 	add	r3, r3, #3
-    9f80:	e043300b 	sub	r3, r3, fp
-    9f84:	e3520000 	cmp	r2, #0
-    9f88:	1afffff6 	bne	9f68 <CKernel::RenderOSD()+0x620>
-    9f8c:	e15e0000 	cmp	lr, r0
-    9f90:	1affff46 	bne	9cb0 <CKernel::RenderOSD()+0x368>
-    9f94:	e59f1278 	ldr	r1, [pc, #632]	@ a214 <CKernel::RenderOSD()+0x8cc>
-    9f98:	e3a02005 	mov	r2, #5
-    9f9c:	e1a00006 	mov	r0, r6
-    9fa0:	eb00c3bb 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9fa4:	e59f1288 	ldr	r1, [pc, #648]	@ a234 <CKernel::RenderOSD()+0x8ec>
-    9fa8:	e3a02005 	mov	r2, #5
-    9fac:	e1a00006 	mov	r0, r6
-    9fb0:	eb00c3b7 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9fb4:	eaffff45 	b	9cd0 <CKernel::RenderOSD()+0x388>
-    9fb8:	e59fb278 	ldr	fp, [pc, #632]	@ a238 <CKernel::RenderOSD()+0x8f0>
-    9fbc:	e3530000 	cmp	r3, #0
-    9fc0:	e59d300c 	ldr	r3, [sp, #12]
-    9fc4:	e24b2028 	sub	r2, fp, #40	@ 0x28
-    9fc8:	01a0b002 	moveq	fp, r2
-    9fcc:	e3530002 	cmp	r3, #2
-    9fd0:	9affff34 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    9fd4:	e28dc045 	add	ip, sp, #69	@ 0x45
-    9fd8:	e1a0100b 	mov	r1, fp
-    9fdc:	e3a0204b 	mov	r2, #75	@ 0x4b
-    9fe0:	ea000001 	b	9fec <CKernel::RenderOSD()+0x6a4>
-    9fe4:	e1530004 	cmp	r3, r4
-    9fe8:	2affff2e 	bcs	9ca8 <CKernel::RenderOSD()+0x360>
-    9fec:	e1a03001 	mov	r3, r1
-    9ff0:	e5ec2001 	strb	r2, [ip, #1]!
-    9ff4:	e1f120d1 	ldrsb	r2, [r1, #1]!
-    9ff8:	e2833003 	add	r3, r3, #3
-    9ffc:	e043300b 	sub	r3, r3, fp
-    a000:	e3520000 	cmp	r2, #0
-    a004:	1afffff6 	bne	9fe4 <CKernel::RenderOSD()+0x69c>
-    a008:	eaffff26 	b	9ca8 <CKernel::RenderOSD()+0x360>
-    a00c:	e5982430 	ldr	r2, [r8, #1072]	@ 0x430
-    a010:	e3520000 	cmp	r2, #0
-    a014:	1affffc3 	bne	9f28 <CKernel::RenderOSD()+0x5e0>
-    a018:	e3500001 	cmp	r0, #1
-    a01c:	1affff21 	bne	9ca8 <CKernel::RenderOSD()+0x360>
-    a020:	e59d300c 	ldr	r3, [sp, #12]
-    a024:	e3530002 	cmp	r3, #2
-    a028:	9affff1e 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    a02c:	e59fb208 	ldr	fp, [pc, #520]	@ a23c <CKernel::RenderOSD()+0x8f4>
-    a030:	e28dc045 	add	ip, sp, #69	@ 0x45
-    a034:	e3a0104e 	mov	r1, #78	@ 0x4e
-    a038:	e1a0200b 	mov	r2, fp
-    a03c:	ea000001 	b	a048 <CKernel::RenderOSD()+0x700>
-    a040:	e1540003 	cmp	r4, r3
-    a044:	9affff17 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    a048:	e1a03002 	mov	r3, r2
-    a04c:	e5ec1001 	strb	r1, [ip, #1]!
-    a050:	e1f210d1 	ldrsb	r1, [r2, #1]!
-    a054:	e2833003 	add	r3, r3, #3
-    a058:	e043300b 	sub	r3, r3, fp
-    a05c:	e3510000 	cmp	r1, #0
-    a060:	1afffff6 	bne	a040 <CKernel::RenderOSD()+0x6f8>
-    a064:	eaffff0f 	b	9ca8 <CKernel::RenderOSD()+0x360>
-    a068:	e59d300c 	ldr	r3, [sp, #12]
-    a06c:	e3500000 	cmp	r0, #0
-    a070:	e5cd3044 	strb	r3, [sp, #68]	@ 0x44
-    a074:	0affff0b 	beq	9ca8 <CKernel::RenderOSD()+0x360>
-    a078:	e5d8342f 	ldrb	r3, [r8, #1071]	@ 0x42f
-    a07c:	eaffff04 	b	9c94 <CKernel::RenderOSD()+0x34c>
-    a080:	e59d2028 	ldr	r2, [sp, #40]	@ 0x28
-    a084:	e0823103 	add	r3, r2, r3, lsl #2
-    a088:	e593b480 	ldr	fp, [r3, #1152]	@ 0x480
-    a08c:	e1db20d0 	ldrsb	r2, [fp]
-    a090:	e3520000 	cmp	r2, #0
-    a094:	0affff03 	beq	9ca8 <CKernel::RenderOSD()+0x360>
-    a098:	e59d300c 	ldr	r3, [sp, #12]
-    a09c:	e3530002 	cmp	r3, #2
-    a0a0:	9affff00 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    a0a4:	e28dc045 	add	ip, sp, #69	@ 0x45
-    a0a8:	e1a0100b 	mov	r1, fp
-    a0ac:	ea000001 	b	a0b8 <CKernel::RenderOSD()+0x770>
-    a0b0:	e1530004 	cmp	r3, r4
-    a0b4:	2afffefb 	bcs	9ca8 <CKernel::RenderOSD()+0x360>
-    a0b8:	e5ec2001 	strb	r2, [ip, #1]!
-    a0bc:	e2813003 	add	r3, r1, #3
-    a0c0:	e043300b 	sub	r3, r3, fp
-    a0c4:	e1f120d1 	ldrsb	r2, [r1, #1]!
-    a0c8:	e3520000 	cmp	r2, #0
-    a0cc:	1afffff7 	bne	a0b0 <CKernel::RenderOSD()+0x768>
-    a0d0:	eafffef4 	b	9ca8 <CKernel::RenderOSD()+0x360>
-    a0d4:	e59d300c 	ldr	r3, [sp, #12]
-    a0d8:	e3530002 	cmp	r3, #2
-    a0dc:	9afffef1 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    a0e0:	e59fb158 	ldr	fp, [pc, #344]	@ a240 <CKernel::RenderOSD()+0x8f8>
-    a0e4:	e28dc045 	add	ip, sp, #69	@ 0x45
-    a0e8:	e3a01053 	mov	r1, #83	@ 0x53
-    a0ec:	e1a0200b 	mov	r2, fp
-    a0f0:	ea000001 	b	a0fc <CKernel::RenderOSD()+0x7b4>
-    a0f4:	e1540003 	cmp	r4, r3
-    a0f8:	9afffeea 	bls	9ca8 <CKernel::RenderOSD()+0x360>
-    a0fc:	e1a03002 	mov	r3, r2
-    a100:	e5ec1001 	strb	r1, [ip, #1]!
-    a104:	e1f210d1 	ldrsb	r1, [r2, #1]!
-    a108:	e2833003 	add	r3, r3, #3
-    a10c:	e043300b 	sub	r3, r3, fp
-    a110:	e3510000 	cmp	r1, #0
-    a114:	1afffff6 	bne	a0f4 <CKernel::RenderOSD()+0x7ac>
-    a118:	eafffee2 	b	9ca8 <CKernel::RenderOSD()+0x360>
-    a11c:	e3570001 	cmp	r7, #1
-    a120:	e28d5034 	add	r5, sp, #52	@ 0x34
-    a124:	21a03007 	movcs	r3, r7
-    a128:	33a03001 	movcc	r3, #1
-    a12c:	e1a00005 	mov	r0, r5
-    a130:	e3520001 	cmp	r2, #1
-    a134:	e58d3010 	str	r3, [sp, #16]
-    a138:	21a03002 	movcs	r3, r2
-    a13c:	33a03001 	movcc	r3, #1
-    a140:	e58d3020 	str	r3, [sp, #32]
-    a144:	eb00c8fe 	bl	3c544 <CString::CString()>
-    a148:	e3a03002 	mov	r3, #2
-    a14c:	e1a04003 	mov	r4, r3
-    a150:	e58d300c 	str	r3, [sp, #12]
-    a154:	eafffe52 	b	9aa4 <CKernel::RenderOSD()+0x15c>
-    a158:	e3e03001 	mvn	r3, #1
-    a15c:	e59d400c 	ldr	r4, [sp, #12]
-    a160:	e28d9044 	add	r9, sp, #68	@ 0x44
-    a164:	e58d301c 	str	r3, [sp, #28]
-    a168:	eafffe55 	b	9ac4 <CKernel::RenderOSD()+0x17c>
-    a16c:	e59f00a8 	ldr	r0, [pc, #168]	@ a21c <CKernel::RenderOSD()+0x8d4>
-    a170:	eb00d398 	bl	3efd8 <strlen>
-    a174:	e59d200c 	ldr	r2, [sp, #12]
-    a178:	e1a00009 	mov	r0, r9
-    a17c:	eafffe8e 	b	9bbc <CKernel::RenderOSD()+0x274>
-    a180:	e1a0100a 	mov	r1, sl
-    a184:	eb00d5df 	bl	3f908 <memcpy>
-    a188:	e59f109c 	ldr	r1, [pc, #156]	@ a22c <CKernel::RenderOSD()+0x8e4>
-    a18c:	e3a02005 	mov	r2, #5
-    a190:	e1a00006 	mov	r0, r6
-    a194:	eb00c33e 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    a198:	e59f1078 	ldr	r1, [pc, #120]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    a19c:	e3a02005 	mov	r2, #5
-    a1a0:	e1a00006 	mov	r0, r6
-    a1a4:	eb00c33a 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    a1a8:	e59d3010 	ldr	r3, [sp, #16]
-    a1ac:	e59f1070 	ldr	r1, [pc, #112]	@ a224 <CKernel::RenderOSD()+0x8dc>
-    a1b0:	e1a02008 	mov	r2, r8
-    a1b4:	e1a00005 	mov	r0, r5
-    a1b8:	e58d9000 	str	r9, [sp]
-    a1bc:	eb00ceeb 	bl	3dd70 <CString::Format(char const*, ...)>
-    a1c0:	e1a00005 	mov	r0, r5
-    a1c4:	eb00c916 	bl	3c624 <CString::operator char const*() const>
-    a1c8:	e1a07000 	mov	r7, r0
-    a1cc:	e1a00005 	mov	r0, r5
-    a1d0:	eb00c957 	bl	3c734 <CString::GetLength() const>
-    a1d4:	e1a01007 	mov	r1, r7
-    a1d8:	e1a02000 	mov	r2, r0
-    a1dc:	e1a00006 	mov	r0, r6
-    a1e0:	eb00c32b 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    a1e4:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    a1e8:	e305743c 	movw	r7, #21564	@ 0x543c
-    a1ec:	e3407008 	movt	r7, #8
-    a1f0:	e0837007 	add	r7, r3, r7
-    a1f4:	e1a00007 	mov	r0, r7
-    a1f8:	eb00d376 	bl	3efd8 <strlen>
-    a1fc:	e1500004 	cmp	r0, r4
-    a200:	31a02000 	movcc	r2, r0
-    a204:	21a02004 	movcs	r2, r4
-    a208:	e1a00009 	mov	r0, r9
-    a20c:	eaffff19 	b	9e78 <CKernel::RenderOSD()+0x530>
-    a210:	00046b78 	.word	0x00046b78
-    a214:	00046cd8 	.word	0x00046cd8
-    a218:	00046ce0 	.word	0x00046ce0
-    a21c:	00046cf4 	.word	0x00046cf4
-    a220:	00046d10 	.word	0x00046d10
-    a224:	00046ce8 	.word	0x00046ce8
-    a228:	00046c88 	.word	0x00046c88
-    a22c:	00046dcc 	.word	0x00046dcc
-    a230:	00046dd4 	.word	0x00046dd4
-    a234:	00046d84 	.word	0x00046d84
-    a238:	00046cb4 	.word	0x00046cb4
-    a23c:	00046d64 	.word	0x00046d64
-    a240:	00046d44 	.word	0x00046d44
+    9974:	e1a00006 	mov	r0, r6
+    9978:	eb00c5e2 	bl	3b108 <CScreenDevice::GetColumns() const>
+    997c:	e1a04000 	mov	r4, r0
+    9980:	e1a00006 	mov	r0, r6
+    9984:	eb00c5e1 	bl	3b110 <CScreenDevice::GetRows() const>
+    9988:	e59872c8 	ldr	r7, [r8, #712]	@ 0x2c8
+    998c:	e1a09000 	mov	r9, r0
+    9990:	e1a00006 	mov	r0, r6
+    9994:	eb00c5d7 	bl	3b0f8 <CScreenDevice::GetWidth() const>
+    9998:	e598a2cc 	ldr	sl, [r8, #716]	@ 0x2cc
+    999c:	e0070497 	mul	r7, r7, r4
+    99a0:	e00a099a 	mul	sl, sl, r9
+    99a4:	e737f017 	udiv	r7, r7, r0
+    99a8:	e1a00006 	mov	r0, r6
+    99ac:	eb00c5d3 	bl	3b100 <CScreenDevice::GetHeight() const>
+    99b0:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
+    99b4:	e59852c8 	ldr	r5, [r8, #712]	@ 0x2c8
+    99b8:	e3a02d05 	mov	r2, #320	@ 0x140
+    99bc:	e73af01a 	udiv	sl, sl, r0
+    99c0:	e1a00006 	mov	r0, r6
+    99c4:	e0255392 	mla	r5, r2, r3, r5
+    99c8:	eb00c5ca 	bl	3b0f8 <CScreenDevice::GetWidth() const>
+    99cc:	e59822d0 	ldr	r2, [r8, #720]	@ 0x2d0
+    99d0:	e59832cc 	ldr	r3, [r8, #716]	@ 0x2cc
+    99d4:	e0050594 	mul	r5, r4, r5
+    99d8:	e0833402 	add	r3, r3, r2, lsl #8
+    99dc:	e735f015 	udiv	r5, r5, r0
+    99e0:	e0090399 	mul	r9, r9, r3
+    99e4:	e1a00006 	mov	r0, r6
+    99e8:	e58d501c 	str	r5, [sp, #28]
+    99ec:	eb00c5c3 	bl	3b100 <CScreenDevice::GetHeight() const>
+    99f0:	e733f019 	udiv	r3, r9, r0
+    99f4:	e1570005 	cmp	r7, r5
+    99f8:	22872001 	addcs	r2, r7, #1
+    99fc:	258d201c 	strcs	r2, [sp, #28]
+    9a00:	21a07002 	movcs	r7, r2
+    9a04:	e28a2002 	add	r2, sl, #2
+    9a08:	32877001 	addcc	r7, r7, #1
+    9a0c:	e1520003 	cmp	r2, r3
+    9a10:	228a3003 	addcs	r3, sl, #3
+    9a14:	e28aa012 	add	sl, sl, #18
+    9a18:	e15a0003 	cmp	sl, r3
+    9a1c:	3a000002 	bcc	9a2c <CKernel::RenderOSD()+0xe4>
+    9a20:	e3530011 	cmp	r3, #17
+    9a24:	33a03011 	movcc	r3, #17
+    9a28:	e2432010 	sub	r2, r3, #16
+    9a2c:	e59d301c 	ldr	r3, [sp, #28]
+    9a30:	e3530000 	cmp	r3, #0
+    9a34:	0a0001b6 	beq	a114 <CKernel::RenderOSD()+0x7cc>
+    9a38:	e3570001 	cmp	r7, #1
+    9a3c:	e2433001 	sub	r3, r3, #1
+    9a40:	21a01007 	movcs	r1, r7
+    9a44:	33a01001 	movcc	r1, #1
+    9a48:	e3520001 	cmp	r2, #1
+    9a4c:	e28d5034 	add	r5, sp, #52	@ 0x34
+    9a50:	33a02001 	movcc	r2, #1
+    9a54:	e1530004 	cmp	r3, r4
+    9a58:	21a03004 	movcs	r3, r4
+    9a5c:	e58d2020 	str	r2, [sp, #32]
+    9a60:	e1a02001 	mov	r2, r1
+    9a64:	e1a00005 	mov	r0, r5
+    9a68:	e1530001 	cmp	r3, r1
+    9a6c:	20622003 	rsbcs	r2, r2, r3
+    9a70:	30622001 	rsbcc	r2, r2, r1
+    9a74:	e58d1010 	str	r1, [sp, #16]
+    9a78:	e2827002 	add	r7, r2, #2
+    9a7c:	e58d201c 	str	r2, [sp, #28]
+    9a80:	e3570080 	cmp	r7, #128	@ 0x80
+    9a84:	e58d700c 	str	r7, [sp, #12]
+    9a88:	31a04007 	movcc	r4, r7
+    9a8c:	23a04080 	movcs	r4, #128	@ 0x80
+    9a90:	eb00caab 	bl	3c544 <CString::CString()>
+    9a94:	e3570000 	cmp	r7, #0
+    9a98:	0a0001ac 	beq	a150 <CKernel::RenderOSD()+0x808>
+    9a9c:	e28d9044 	add	r9, sp, #68	@ 0x44
+    9aa0:	e3a03000 	mov	r3, #0
+    9aa4:	e1a02009 	mov	r2, r9
+    9aa8:	e3a01020 	mov	r1, #32
+    9aac:	e2833001 	add	r3, r3, #1
+    9ab0:	e4c21001 	strb	r1, [r2], #1
+    9ab4:	e1530004 	cmp	r3, r4
+    9ab8:	3afffffb 	bcc	9aac <CKernel::RenderOSD()+0x164>
+    9abc:	e28430c8 	add	r3, r4, #200	@ 0xc8
+    9ac0:	e59f1744 	ldr	r1, [pc, #1860]	@ a20c <CKernel::RenderOSD()+0x8c4>
+    9ac4:	e08d3003 	add	r3, sp, r3
+    9ac8:	e3a02005 	mov	r2, #5
+    9acc:	e1a0c003 	mov	ip, r3
+    9ad0:	e1a00006 	mov	r0, r6
+    9ad4:	e58d3018 	str	r3, [sp, #24]
+    9ad8:	e3a03000 	mov	r3, #0
+    9adc:	e54c3084 	strb	r3, [ip, #-132]	@ 0xffffff7c
+    9ae0:	eb00c4eb 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9ae4:	e59f1724 	ldr	r1, [pc, #1828]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    9ae8:	e3a02005 	mov	r2, #5
+    9aec:	e1a00006 	mov	r0, r6
+    9af0:	eb00c4e7 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9af4:	e59d7020 	ldr	r7, [sp, #32]
+    9af8:	e3063898 	movw	r3, #26776	@ 0x6898
+    9afc:	e3403004 	movt	r3, #4
+    9b00:	e58d4014 	str	r4, [sp, #20]
+    9b04:	e287b00f 	add	fp, r7, #15
+    9b08:	e59d4010 	ldr	r4, [sp, #16]
+    9b0c:	e283ae45 	add	sl, r3, #1104	@ 0x450
+    9b10:	e58d3028 	str	r3, [sp, #40]	@ 0x28
+    9b14:	e58d802c 	str	r8, [sp, #44]	@ 0x2c
+    9b18:	e1a02007 	mov	r2, r7
+    9b1c:	e1a03004 	mov	r3, r4
+    9b20:	e1a0100a 	mov	r1, sl
+    9b24:	e1a00005 	mov	r0, r5
+    9b28:	e58d9000 	str	r9, [sp]
+    9b2c:	e2877001 	add	r7, r7, #1
+    9b30:	eb00d08e 	bl	3dd70 <CString::Format(char const*, ...)>
+    9b34:	e1a00005 	mov	r0, r5
+    9b38:	eb00cab9 	bl	3c624 <CString::operator char const*() const>
+    9b3c:	e1a08000 	mov	r8, r0
+    9b40:	e1a00005 	mov	r0, r5
+    9b44:	eb00cafa 	bl	3c734 <CString::GetLength() const>
+    9b48:	e1a01008 	mov	r1, r8
+    9b4c:	e1a02000 	mov	r2, r0
+    9b50:	e1a00006 	mov	r0, r6
+    9b54:	eb00c4ce 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9b58:	e157000b 	cmp	r7, fp
+    9b5c:	1affffed 	bne	9b18 <CKernel::RenderOSD()+0x1d0>
+    9b60:	e59d300c 	ldr	r3, [sp, #12]
+    9b64:	e59d4014 	ldr	r4, [sp, #20]
+    9b68:	e59d802c 	ldr	r8, [sp, #44]	@ 0x2c
+    9b6c:	e3530000 	cmp	r3, #0
+    9b70:	0a00017b 	beq	a164 <CKernel::RenderOSD()+0x81c>
+    9b74:	e1a02009 	mov	r2, r9
+    9b78:	e3a03000 	mov	r3, #0
+    9b7c:	e3a01020 	mov	r1, #32
+    9b80:	e2833001 	add	r3, r3, #1
+    9b84:	e4c21001 	strb	r1, [r2], #1
+    9b88:	e1530004 	cmp	r3, r4
+    9b8c:	3afffffb 	bcc	9b80 <CKernel::RenderOSD()+0x238>
+    9b90:	e59f067c 	ldr	r0, [pc, #1660]	@ a214 <CKernel::RenderOSD()+0x8cc>
+    9b94:	eb00d50f 	bl	3efd8 <strlen>
+    9b98:	e1500004 	cmp	r0, r4
+    9b9c:	31a02000 	movcc	r2, r0
+    9ba0:	21a02004 	movcs	r2, r4
+    9ba4:	e1520004 	cmp	r2, r4
+    9ba8:	30440002 	subcc	r0, r4, r2
+    9bac:	21a00009 	movcs	r0, r9
+    9bb0:	308900a0 	addcc	r0, r9, r0, lsr #1
+    9bb4:	e59f1658 	ldr	r1, [pc, #1624]	@ a214 <CKernel::RenderOSD()+0x8cc>
+    9bb8:	eb00d752 	bl	3f908 <memcpy>
+    9bbc:	e59f1654 	ldr	r1, [pc, #1620]	@ a218 <CKernel::RenderOSD()+0x8d0>
+    9bc0:	e3a02005 	mov	r2, #5
+    9bc4:	e1a00006 	mov	r0, r6
+    9bc8:	eb00c4b1 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9bcc:	e59f163c 	ldr	r1, [pc, #1596]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    9bd0:	e3a02005 	mov	r2, #5
+    9bd4:	e1a00006 	mov	r0, r6
+    9bd8:	eb00c4ad 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9bdc:	e59da020 	ldr	sl, [sp, #32]
+    9be0:	e59d3010 	ldr	r3, [sp, #16]
+    9be4:	e1a00005 	mov	r0, r5
+    9be8:	e59f162c 	ldr	r1, [pc, #1580]	@ a21c <CKernel::RenderOSD()+0x8d4>
+    9bec:	e1a0200a 	mov	r2, sl
+    9bf0:	e58d9000 	str	r9, [sp]
+    9bf4:	eb00d05d 	bl	3dd70 <CString::Format(char const*, ...)>
+    9bf8:	e1a00005 	mov	r0, r5
+    9bfc:	eb00ca88 	bl	3c624 <CString::operator char const*() const>
+    9c00:	e1a07000 	mov	r7, r0
+    9c04:	e1a00005 	mov	r0, r5
+    9c08:	eb00cac9 	bl	3c734 <CString::GetLength() const>
+    9c0c:	e1a01007 	mov	r1, r7
+    9c10:	e1a02000 	mov	r2, r0
+    9c14:	e3a07000 	mov	r7, #0
+    9c18:	e1a00006 	mov	r0, r6
+    9c1c:	eb00c49c 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9c20:	e28a3001 	add	r3, sl, #1
+    9c24:	e58d3014 	str	r3, [sp, #20]
+    9c28:	e59d300c 	ldr	r3, [sp, #12]
+    9c2c:	e5980438 	ldr	r0, [r8, #1080]	@ 0x438
+    9c30:	e3530000 	cmp	r3, #0
+    9c34:	e59d3014 	ldr	r3, [sp, #20]
+    9c38:	e598e434 	ldr	lr, [r8, #1076]	@ 0x434
+    9c3c:	e0870000 	add	r0, r7, r0
+    9c40:	e083a007 	add	sl, r3, r7
+    9c44:	0a000105 	beq	a060 <CKernel::RenderOSD()+0x718>
+    9c48:	e1a02009 	mov	r2, r9
+    9c4c:	e3a03000 	mov	r3, #0
+    9c50:	e3a01020 	mov	r1, #32
+    9c54:	e2833001 	add	r3, r3, #1
+    9c58:	e4c21001 	strb	r1, [r2], #1
+    9c5c:	e1530004 	cmp	r3, r4
+    9c60:	3afffffb 	bcc	9c54 <CKernel::RenderOSD()+0x30c>
+    9c64:	e59d1018 	ldr	r1, [sp, #24]
+    9c68:	e15e0000 	cmp	lr, r0
+    9c6c:	13a03020 	movne	r3, #32
+    9c70:	03a0303e 	moveq	r3, #62	@ 0x3e
+    9c74:	e3a02000 	mov	r2, #0
+    9c78:	e3500000 	cmp	r0, #0
+    9c7c:	e5412084 	strb	r2, [r1, #-132]	@ 0xffffff7c
+    9c80:	e5cd3044 	strb	r3, [sp, #68]	@ 0x44
+    9c84:	e5d8342f 	ldrb	r3, [r8, #1071]	@ 0x42f
+    9c88:	0a0000c8 	beq	9fb0 <CKernel::RenderOSD()+0x668>
+    9c8c:	e3530000 	cmp	r3, #0
+    9c90:	e2403001 	sub	r3, r0, #1
+    9c94:	0a00009b 	beq	9f08 <CKernel::RenderOSD()+0x5c0>
+    9c98:	e353000a 	cmp	r3, #10
+    9c9c:	9a0000f5 	bls	a078 <CKernel::RenderOSD()+0x730>
+    9ca0:	e15e0000 	cmp	lr, r0
+    9ca4:	0a0000b8 	beq	9f8c <CKernel::RenderOSD()+0x644>
+    9ca8:	e59f155c 	ldr	r1, [pc, #1372]	@ a20c <CKernel::RenderOSD()+0x8c4>
+    9cac:	e3a02005 	mov	r2, #5
+    9cb0:	e1a00006 	mov	r0, r6
+    9cb4:	eb00c476 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9cb8:	e59f1550 	ldr	r1, [pc, #1360]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    9cbc:	e3a02005 	mov	r2, #5
+    9cc0:	e1a00006 	mov	r0, r6
+    9cc4:	eb00c472 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9cc8:	e1a0200a 	mov	r2, sl
+    9ccc:	e59f1548 	ldr	r1, [pc, #1352]	@ a21c <CKernel::RenderOSD()+0x8d4>
+    9cd0:	e59d3010 	ldr	r3, [sp, #16]
+    9cd4:	e1a00005 	mov	r0, r5
+    9cd8:	e58d9000 	str	r9, [sp]
+    9cdc:	e2877001 	add	r7, r7, #1
+    9ce0:	eb00d022 	bl	3dd70 <CString::Format(char const*, ...)>
+    9ce4:	e1a00005 	mov	r0, r5
+    9ce8:	eb00ca4d 	bl	3c624 <CString::operator char const*() const>
+    9cec:	e1a0a000 	mov	sl, r0
+    9cf0:	e1a00005 	mov	r0, r5
+    9cf4:	eb00ca8e 	bl	3c734 <CString::GetLength() const>
+    9cf8:	e1a0100a 	mov	r1, sl
+    9cfc:	e1a02000 	mov	r2, r0
+    9d00:	e1a00006 	mov	r0, r6
+    9d04:	eb00c462 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9d08:	e357000c 	cmp	r7, #12
+    9d0c:	1affffc5 	bne	9c28 <CKernel::RenderOSD()+0x2e0>
+    9d10:	e59d301c 	ldr	r3, [sp, #28]
+    9d14:	e3730002 	cmn	r3, #2
+    9d18:	11a02009 	movne	r2, r9
+    9d1c:	13a03000 	movne	r3, #0
+    9d20:	13a01020 	movne	r1, #32
+    9d24:	0a000003 	beq	9d38 <CKernel::RenderOSD()+0x3f0>
+    9d28:	e2833001 	add	r3, r3, #1
+    9d2c:	e4c21001 	strb	r1, [r2], #1
+    9d30:	e1530004 	cmp	r3, r4
+    9d34:	3afffffb 	bcc	9d28 <CKernel::RenderOSD()+0x3e0>
+    9d38:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    9d3c:	e1a00005 	mov	r0, r5
+    9d40:	e59f14d8 	ldr	r1, [pc, #1240]	@ a220 <CKernel::RenderOSD()+0x8d8>
+    9d44:	e2833a2e 	add	r3, r3, #188416	@ 0x2e000
+    9d48:	e2412008 	sub	r2, r1, #8
+    9d4c:	e5d33b6c 	ldrb	r3, [r3, #2924]	@ 0xb6c
+    9d50:	e3530000 	cmp	r3, #0
+    9d54:	01a02001 	moveq	r2, r1
+    9d58:	e2811f41 	add	r1, r1, #260	@ 0x104
+    9d5c:	eb00d003 	bl	3dd70 <CString::Format(char const*, ...)>
+    9d60:	e1a00005 	mov	r0, r5
+    9d64:	eb00ca2e 	bl	3c624 <CString::operator char const*() const>
+    9d68:	e1a0a000 	mov	sl, r0
+    9d6c:	eb00d499 	bl	3efd8 <strlen>
+    9d70:	e1500004 	cmp	r0, r4
+    9d74:	31a02000 	movcc	r2, r0
+    9d78:	21a02004 	movcs	r2, r4
+    9d7c:	e1520004 	cmp	r2, r4
+    9d80:	21a00009 	movcs	r0, r9
+    9d84:	30440002 	subcc	r0, r4, r2
+    9d88:	308900a0 	addcc	r0, r9, r0, lsr #1
+    9d8c:	e59d301c 	ldr	r3, [sp, #28]
+    9d90:	e3730002 	cmn	r3, #2
+    9d94:	e59d3020 	ldr	r3, [sp, #32]
+    9d98:	e283800d 	add	r8, r3, #13
+    9d9c:	0a0000f5 	beq	a178 <CKernel::RenderOSD()+0x830>
+    9da0:	e1a07009 	mov	r7, r9
+    9da4:	e1a01009 	mov	r1, r9
+    9da8:	e3a03000 	mov	r3, #0
+    9dac:	e3a0c020 	mov	ip, #32
+    9db0:	e2833001 	add	r3, r3, #1
+    9db4:	e4c1c001 	strb	ip, [r1], #1
+    9db8:	e1530004 	cmp	r3, r4
+    9dbc:	3afffffb 	bcc	9db0 <CKernel::RenderOSD()+0x468>
+    9dc0:	e1a0100a 	mov	r1, sl
+    9dc4:	eb00d6cf 	bl	3f908 <memcpy>
+    9dc8:	e59f1454 	ldr	r1, [pc, #1108]	@ a224 <CKernel::RenderOSD()+0x8dc>
+    9dcc:	e3a02005 	mov	r2, #5
+    9dd0:	e1a00006 	mov	r0, r6
+    9dd4:	eb00c42e 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9dd8:	e59f1430 	ldr	r1, [pc, #1072]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    9ddc:	e3a02005 	mov	r2, #5
+    9de0:	e1a00006 	mov	r0, r6
+    9de4:	eb00c42a 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9de8:	e59d3010 	ldr	r3, [sp, #16]
+    9dec:	e1a02008 	mov	r2, r8
+    9df0:	e59f1424 	ldr	r1, [pc, #1060]	@ a21c <CKernel::RenderOSD()+0x8d4>
+    9df4:	e1a00005 	mov	r0, r5
+    9df8:	e58d9000 	str	r9, [sp]
+    9dfc:	eb00cfdb 	bl	3dd70 <CString::Format(char const*, ...)>
+    9e00:	e1a00005 	mov	r0, r5
+    9e04:	eb00ca06 	bl	3c624 <CString::operator char const*() const>
+    9e08:	e1a08000 	mov	r8, r0
+    9e0c:	e1a00005 	mov	r0, r5
+    9e10:	eb00ca47 	bl	3c734 <CString::GetLength() const>
+    9e14:	e1a01008 	mov	r1, r8
+    9e18:	e1a02000 	mov	r2, r0
+    9e1c:	e1a00006 	mov	r0, r6
+    9e20:	eb00c41b 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9e24:	e3a03000 	mov	r3, #0
+    9e28:	e3a02020 	mov	r2, #32
+    9e2c:	e2833001 	add	r3, r3, #1
+    9e30:	e4c72001 	strb	r2, [r7], #1
+    9e34:	e1530004 	cmp	r3, r4
+    9e38:	3afffffb 	bcc	9e2c <CKernel::RenderOSD()+0x4e4>
+    9e3c:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    9e40:	e305743c 	movw	r7, #21564	@ 0x543c
+    9e44:	e3407008 	movt	r7, #8
+    9e48:	e0837007 	add	r7, r3, r7
+    9e4c:	e1a00007 	mov	r0, r7
+    9e50:	eb00d460 	bl	3efd8 <strlen>
+    9e54:	e1500004 	cmp	r0, r4
+    9e58:	31a02000 	movcc	r2, r0
+    9e5c:	21a02004 	movcs	r2, r4
+    9e60:	e1520004 	cmp	r2, r4
+    9e64:	30440002 	subcc	r0, r4, r2
+    9e68:	21a00009 	movcs	r0, r9
+    9e6c:	308900a0 	addcc	r0, r9, r0, lsr #1
+    9e70:	e1a01007 	mov	r1, r7
+    9e74:	eb00d6a3 	bl	3f908 <memcpy>
+    9e78:	e59f138c 	ldr	r1, [pc, #908]	@ a20c <CKernel::RenderOSD()+0x8c4>
+    9e7c:	e3a02005 	mov	r2, #5
+    9e80:	e1a00006 	mov	r0, r6
+    9e84:	eb00c402 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9e88:	e59f1380 	ldr	r1, [pc, #896]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    9e8c:	e3a02005 	mov	r2, #5
+    9e90:	e1a00006 	mov	r0, r6
+    9e94:	eb00c3fe 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9e98:	e59d2020 	ldr	r2, [sp, #32]
+    9e9c:	e59d3010 	ldr	r3, [sp, #16]
+    9ea0:	e1a00005 	mov	r0, r5
+    9ea4:	e59f1370 	ldr	r1, [pc, #880]	@ a21c <CKernel::RenderOSD()+0x8d4>
+    9ea8:	e282200e 	add	r2, r2, #14
+    9eac:	e58d9000 	str	r9, [sp]
+    9eb0:	eb00cfae 	bl	3dd70 <CString::Format(char const*, ...)>
+    9eb4:	e1a00005 	mov	r0, r5
+    9eb8:	eb00c9d9 	bl	3c624 <CString::operator char const*() const>
+    9ebc:	e1a04000 	mov	r4, r0
+    9ec0:	e1a00005 	mov	r0, r5
+    9ec4:	eb00ca1a 	bl	3c734 <CString::GetLength() const>
+    9ec8:	e1a01004 	mov	r1, r4
+    9ecc:	e1a02000 	mov	r2, r0
+    9ed0:	e1a00006 	mov	r0, r6
+    9ed4:	eb00c3ee 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9ed8:	e59f1348 	ldr	r1, [pc, #840]	@ a228 <CKernel::RenderOSD()+0x8e0>
+    9edc:	e3a02004 	mov	r2, #4
+    9ee0:	e1a00006 	mov	r0, r6
+    9ee4:	eb00c3ea 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9ee8:	e59f1318 	ldr	r1, [pc, #792]	@ a208 <CKernel::RenderOSD()+0x8c0>
+    9eec:	e3a02006 	mov	r2, #6
+    9ef0:	e1a00006 	mov	r0, r6
+    9ef4:	eb00c3e6 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9ef8:	e1a00005 	mov	r0, r5
+    9efc:	eb00c95d 	bl	3c478 <CString::~CString()>
+    9f00:	e28dd0cc 	add	sp, sp, #204	@ 0xcc
+    9f04:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+    9f08:	e5d8242e 	ldrb	r2, [r8, #1070]	@ 0x42e
+    9f0c:	e3520000 	cmp	r2, #0
+    9f10:	1a00003b 	bne	a004 <CKernel::RenderOSD()+0x6bc>
+    9f14:	e3500001 	cmp	r0, #1
+    9f18:	15982430 	ldrne	r2, [r8, #1072]	@ 0x430
+    9f1c:	0a00006a 	beq	a0cc <CKernel::RenderOSD()+0x784>
+    9f20:	e1520003 	cmp	r2, r3
+    9f24:	9affff5d 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    9f28:	e303243c 	movw	r2, #13372	@ 0x343c
+    9f2c:	e3402008 	movt	r2, #8
+    9f30:	e0823303 	add	r3, r2, r3, lsl #6
+    9f34:	e59d2024 	ldr	r2, [sp, #36]	@ 0x24
+    9f38:	e082b003 	add	fp, r2, r3
+    9f3c:	e19220d3 	ldrsb	r2, [r2, r3]
+    9f40:	e3520000 	cmp	r2, #0
+    9f44:	0affff55 	beq	9ca0 <CKernel::RenderOSD()+0x358>
+    9f48:	e59d300c 	ldr	r3, [sp, #12]
+    9f4c:	e3530002 	cmp	r3, #2
+    9f50:	9affff52 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    9f54:	e28dc045 	add	ip, sp, #69	@ 0x45
+    9f58:	e1a0100b 	mov	r1, fp
+    9f5c:	ea000001 	b	9f68 <CKernel::RenderOSD()+0x620>
+    9f60:	e1540003 	cmp	r4, r3
+    9f64:	9affff4d 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    9f68:	e1a03001 	mov	r3, r1
+    9f6c:	e5ec2001 	strb	r2, [ip, #1]!
+    9f70:	e1f120d1 	ldrsb	r2, [r1, #1]!
+    9f74:	e2833003 	add	r3, r3, #3
+    9f78:	e043300b 	sub	r3, r3, fp
+    9f7c:	e3520000 	cmp	r2, #0
+    9f80:	1afffff6 	bne	9f60 <CKernel::RenderOSD()+0x618>
+    9f84:	e15e0000 	cmp	lr, r0
+    9f88:	1affff46 	bne	9ca8 <CKernel::RenderOSD()+0x360>
+    9f8c:	e59f1278 	ldr	r1, [pc, #632]	@ a20c <CKernel::RenderOSD()+0x8c4>
+    9f90:	e3a02005 	mov	r2, #5
+    9f94:	e1a00006 	mov	r0, r6
+    9f98:	eb00c3bd 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9f9c:	e59f1288 	ldr	r1, [pc, #648]	@ a22c <CKernel::RenderOSD()+0x8e4>
+    9fa0:	e3a02005 	mov	r2, #5
+    9fa4:	e1a00006 	mov	r0, r6
+    9fa8:	eb00c3b9 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9fac:	eaffff45 	b	9cc8 <CKernel::RenderOSD()+0x380>
+    9fb0:	e59fb278 	ldr	fp, [pc, #632]	@ a230 <CKernel::RenderOSD()+0x8e8>
+    9fb4:	e3530000 	cmp	r3, #0
+    9fb8:	e59d300c 	ldr	r3, [sp, #12]
+    9fbc:	e24b2028 	sub	r2, fp, #40	@ 0x28
+    9fc0:	01a0b002 	moveq	fp, r2
+    9fc4:	e3530002 	cmp	r3, #2
+    9fc8:	9affff34 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    9fcc:	e28dc045 	add	ip, sp, #69	@ 0x45
+    9fd0:	e1a0100b 	mov	r1, fp
+    9fd4:	e3a0204b 	mov	r2, #75	@ 0x4b
+    9fd8:	ea000001 	b	9fe4 <CKernel::RenderOSD()+0x69c>
+    9fdc:	e1530004 	cmp	r3, r4
+    9fe0:	2affff2e 	bcs	9ca0 <CKernel::RenderOSD()+0x358>
+    9fe4:	e1a03001 	mov	r3, r1
+    9fe8:	e5ec2001 	strb	r2, [ip, #1]!
+    9fec:	e1f120d1 	ldrsb	r2, [r1, #1]!
+    9ff0:	e2833003 	add	r3, r3, #3
+    9ff4:	e043300b 	sub	r3, r3, fp
+    9ff8:	e3520000 	cmp	r2, #0
+    9ffc:	1afffff6 	bne	9fdc <CKernel::RenderOSD()+0x694>
+    a000:	eaffff26 	b	9ca0 <CKernel::RenderOSD()+0x358>
+    a004:	e5982430 	ldr	r2, [r8, #1072]	@ 0x430
+    a008:	e3520000 	cmp	r2, #0
+    a00c:	1affffc3 	bne	9f20 <CKernel::RenderOSD()+0x5d8>
+    a010:	e3500001 	cmp	r0, #1
+    a014:	1affff21 	bne	9ca0 <CKernel::RenderOSD()+0x358>
+    a018:	e59d300c 	ldr	r3, [sp, #12]
+    a01c:	e3530002 	cmp	r3, #2
+    a020:	9affff1e 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    a024:	e59fb208 	ldr	fp, [pc, #520]	@ a234 <CKernel::RenderOSD()+0x8ec>
+    a028:	e28dc045 	add	ip, sp, #69	@ 0x45
+    a02c:	e3a0104e 	mov	r1, #78	@ 0x4e
+    a030:	e1a0200b 	mov	r2, fp
+    a034:	ea000001 	b	a040 <CKernel::RenderOSD()+0x6f8>
+    a038:	e1540003 	cmp	r4, r3
+    a03c:	9affff17 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    a040:	e1a03002 	mov	r3, r2
+    a044:	e5ec1001 	strb	r1, [ip, #1]!
+    a048:	e1f210d1 	ldrsb	r1, [r2, #1]!
+    a04c:	e2833003 	add	r3, r3, #3
+    a050:	e043300b 	sub	r3, r3, fp
+    a054:	e3510000 	cmp	r1, #0
+    a058:	1afffff6 	bne	a038 <CKernel::RenderOSD()+0x6f0>
+    a05c:	eaffff0f 	b	9ca0 <CKernel::RenderOSD()+0x358>
+    a060:	e59d300c 	ldr	r3, [sp, #12]
+    a064:	e3500000 	cmp	r0, #0
+    a068:	e5cd3044 	strb	r3, [sp, #68]	@ 0x44
+    a06c:	0affff0b 	beq	9ca0 <CKernel::RenderOSD()+0x358>
+    a070:	e5d8342f 	ldrb	r3, [r8, #1071]	@ 0x42f
+    a074:	eaffff04 	b	9c8c <CKernel::RenderOSD()+0x344>
+    a078:	e59d2028 	ldr	r2, [sp, #40]	@ 0x28
+    a07c:	e0823103 	add	r3, r2, r3, lsl #2
+    a080:	e593b480 	ldr	fp, [r3, #1152]	@ 0x480
+    a084:	e1db20d0 	ldrsb	r2, [fp]
+    a088:	e3520000 	cmp	r2, #0
+    a08c:	0affff03 	beq	9ca0 <CKernel::RenderOSD()+0x358>
+    a090:	e59d300c 	ldr	r3, [sp, #12]
+    a094:	e3530002 	cmp	r3, #2
+    a098:	9affff00 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    a09c:	e28dc045 	add	ip, sp, #69	@ 0x45
+    a0a0:	e1a0100b 	mov	r1, fp
+    a0a4:	ea000001 	b	a0b0 <CKernel::RenderOSD()+0x768>
+    a0a8:	e1530004 	cmp	r3, r4
+    a0ac:	2afffefb 	bcs	9ca0 <CKernel::RenderOSD()+0x358>
+    a0b0:	e5ec2001 	strb	r2, [ip, #1]!
+    a0b4:	e2813003 	add	r3, r1, #3
+    a0b8:	e043300b 	sub	r3, r3, fp
+    a0bc:	e1f120d1 	ldrsb	r2, [r1, #1]!
+    a0c0:	e3520000 	cmp	r2, #0
+    a0c4:	1afffff7 	bne	a0a8 <CKernel::RenderOSD()+0x760>
+    a0c8:	eafffef4 	b	9ca0 <CKernel::RenderOSD()+0x358>
+    a0cc:	e59d300c 	ldr	r3, [sp, #12]
+    a0d0:	e3530002 	cmp	r3, #2
+    a0d4:	9afffef1 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    a0d8:	e59fb158 	ldr	fp, [pc, #344]	@ a238 <CKernel::RenderOSD()+0x8f0>
+    a0dc:	e28dc045 	add	ip, sp, #69	@ 0x45
+    a0e0:	e3a01053 	mov	r1, #83	@ 0x53
+    a0e4:	e1a0200b 	mov	r2, fp
+    a0e8:	ea000001 	b	a0f4 <CKernel::RenderOSD()+0x7ac>
+    a0ec:	e1540003 	cmp	r4, r3
+    a0f0:	9afffeea 	bls	9ca0 <CKernel::RenderOSD()+0x358>
+    a0f4:	e1a03002 	mov	r3, r2
+    a0f8:	e5ec1001 	strb	r1, [ip, #1]!
+    a0fc:	e1f210d1 	ldrsb	r1, [r2, #1]!
+    a100:	e2833003 	add	r3, r3, #3
+    a104:	e043300b 	sub	r3, r3, fp
+    a108:	e3510000 	cmp	r1, #0
+    a10c:	1afffff6 	bne	a0ec <CKernel::RenderOSD()+0x7a4>
+    a110:	eafffee2 	b	9ca0 <CKernel::RenderOSD()+0x358>
+    a114:	e3570001 	cmp	r7, #1
+    a118:	e28d5034 	add	r5, sp, #52	@ 0x34
+    a11c:	21a03007 	movcs	r3, r7
+    a120:	33a03001 	movcc	r3, #1
+    a124:	e1a00005 	mov	r0, r5
+    a128:	e3520001 	cmp	r2, #1
+    a12c:	e58d3010 	str	r3, [sp, #16]
+    a130:	21a03002 	movcs	r3, r2
+    a134:	33a03001 	movcc	r3, #1
+    a138:	e58d3020 	str	r3, [sp, #32]
+    a13c:	eb00c900 	bl	3c544 <CString::CString()>
+    a140:	e3a03002 	mov	r3, #2
+    a144:	e1a04003 	mov	r4, r3
+    a148:	e58d300c 	str	r3, [sp, #12]
+    a14c:	eafffe52 	b	9a9c <CKernel::RenderOSD()+0x154>
+    a150:	e3e03001 	mvn	r3, #1
+    a154:	e59d400c 	ldr	r4, [sp, #12]
+    a158:	e28d9044 	add	r9, sp, #68	@ 0x44
+    a15c:	e58d301c 	str	r3, [sp, #28]
+    a160:	eafffe55 	b	9abc <CKernel::RenderOSD()+0x174>
+    a164:	e59f00a8 	ldr	r0, [pc, #168]	@ a214 <CKernel::RenderOSD()+0x8cc>
+    a168:	eb00d39a 	bl	3efd8 <strlen>
+    a16c:	e59d200c 	ldr	r2, [sp, #12]
+    a170:	e1a00009 	mov	r0, r9
+    a174:	eafffe8e 	b	9bb4 <CKernel::RenderOSD()+0x26c>
+    a178:	e1a0100a 	mov	r1, sl
+    a17c:	eb00d5e1 	bl	3f908 <memcpy>
+    a180:	e59f109c 	ldr	r1, [pc, #156]	@ a224 <CKernel::RenderOSD()+0x8dc>
+    a184:	e3a02005 	mov	r2, #5
+    a188:	e1a00006 	mov	r0, r6
+    a18c:	eb00c340 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    a190:	e59f1078 	ldr	r1, [pc, #120]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    a194:	e3a02005 	mov	r2, #5
+    a198:	e1a00006 	mov	r0, r6
+    a19c:	eb00c33c 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    a1a0:	e59d3010 	ldr	r3, [sp, #16]
+    a1a4:	e59f1070 	ldr	r1, [pc, #112]	@ a21c <CKernel::RenderOSD()+0x8d4>
+    a1a8:	e1a02008 	mov	r2, r8
+    a1ac:	e1a00005 	mov	r0, r5
+    a1b0:	e58d9000 	str	r9, [sp]
+    a1b4:	eb00ceed 	bl	3dd70 <CString::Format(char const*, ...)>
+    a1b8:	e1a00005 	mov	r0, r5
+    a1bc:	eb00c918 	bl	3c624 <CString::operator char const*() const>
+    a1c0:	e1a07000 	mov	r7, r0
+    a1c4:	e1a00005 	mov	r0, r5
+    a1c8:	eb00c959 	bl	3c734 <CString::GetLength() const>
+    a1cc:	e1a01007 	mov	r1, r7
+    a1d0:	e1a02000 	mov	r2, r0
+    a1d4:	e1a00006 	mov	r0, r6
+    a1d8:	eb00c32d 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    a1dc:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    a1e0:	e305743c 	movw	r7, #21564	@ 0x543c
+    a1e4:	e3407008 	movt	r7, #8
+    a1e8:	e0837007 	add	r7, r3, r7
+    a1ec:	e1a00007 	mov	r0, r7
+    a1f0:	eb00d378 	bl	3efd8 <strlen>
+    a1f4:	e1500004 	cmp	r0, r4
+    a1f8:	31a02000 	movcc	r2, r0
+    a1fc:	21a02004 	movcs	r2, r4
+    a200:	e1a00009 	mov	r0, r9
+    a204:	eaffff19 	b	9e70 <CKernel::RenderOSD()+0x528>
+    a208:	00046b78 	.word	0x00046b78
+    a20c:	00046cd8 	.word	0x00046cd8
+    a210:	00046ce0 	.word	0x00046ce0
+    a214:	00046cf4 	.word	0x00046cf4
+    a218:	00046d10 	.word	0x00046d10
+    a21c:	00046ce8 	.word	0x00046ce8
+    a220:	00046c88 	.word	0x00046c88
+    a224:	00046dcc 	.word	0x00046dcc
+    a228:	00046dd4 	.word	0x00046dd4
+    a22c:	00046d84 	.word	0x00046d84
+    a230:	00046cb4 	.word	0x00046cb4
+    a234:	00046d64 	.word	0x00046d64
+    a238:	00046d44 	.word	0x00046d44
 
-0000a244 <CKernel::ToggleOSD()>:
-    a244:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
-    a248:	e2808a83 	add	r8, r0, #536576	@ 0x83000
-    a24c:	e1a05000 	mov	r5, r0
-    a250:	e24dd0a4 	sub	sp, sp, #164	@ 0xa4
-    a254:	e5d8342c 	ldrb	r3, [r8, #1068]	@ 0x42c
-    a258:	e2233001 	eor	r3, r3, #1
-    a25c:	e5c8342c 	strb	r3, [r8, #1068]	@ 0x42c
-    a260:	e3530000 	cmp	r3, #0
-    a264:	0a00002b 	beq	a318 <CKernel::ToggleOSD()+0xd4>
-    a268:	e5d8342e 	ldrb	r3, [r8, #1070]	@ 0x42e
-    a26c:	e3530000 	cmp	r3, #0
-    a270:	0a000013 	beq	a2c4 <CKernel::ToggleOSD()+0x80>
-    a274:	e1a00005 	mov	r0, r5
-    a278:	e3a04000 	mov	r4, #0
-    a27c:	ebfffc47 	bl	93a0 <CKernel::ReloadSnapshots()>
-    a280:	f2c00010 	vmov.i32	d16, #0	@ 0x00000000
-    a284:	e2883e43 	add	r3, r8, #1072	@ 0x430
-    a288:	e305043c 	movw	r0, #21564	@ 0x543c
-    a28c:	e3400008 	movt	r0, #8
-    a290:	e2833004 	add	r3, r3, #4
-    a294:	e0850000 	add	r0, r5, r0
-    a298:	e2855a85 	add	r5, r5, #544768	@ 0x85000
-    a29c:	e5c8442f 	strb	r4, [r8, #1071]	@ 0x42f
-    a2a0:	e3a0203f 	mov	r2, #63	@ 0x3f
-    a2a4:	f443078f 	vst1.32	{d16}, [r3]
-    a2a8:	e59f1244 	ldr	r1, [pc, #580]	@ a4f4 <CKernel::ToggleOSD()+0x2b0>
-    a2ac:	eb00d401 	bl	3f2b8 <strncpy>
-    a2b0:	e3a03001 	mov	r3, #1
-    a2b4:	e5c5447b 	strb	r4, [r5, #1147]	@ 0x47b
-    a2b8:	e5c8342d 	strb	r3, [r8, #1069]	@ 0x42d
-    a2bc:	e28dd0a4 	add	sp, sp, #164	@ 0xa4
-    a2c0:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
-    a2c4:	e2800e8a 	add	r0, r0, #2208	@ 0x8a0
-    a2c8:	e59f1228 	ldr	r1, [pc, #552]	@ a4f8 <CKernel::ToggleOSD()+0x2b4>
-    a2cc:	e3a02001 	mov	r2, #1
-    a2d0:	e2800004 	add	r0, r0, #4
-    a2d4:	eb00b53e 	bl	377d4 <CDeviceNameService::GetDevice(char const*, bool)>
-    a2d8:	e2501000 	subs	r1, r0, #0
-    a2dc:	0affffe4 	beq	a274 <CKernel::ToggleOSD()+0x30>
-    a2e0:	e2850d8e 	add	r0, r5, #9088	@ 0x2380
-    a2e4:	e2800030 	add	r0, r0, #48	@ 0x30
-    a2e8:	eb00a1f3 	bl	32abc <CFATFileSystem::Mount(CDevice*)>
-    a2ec:	e3500000 	cmp	r0, #0
-    a2f0:	0affffdf 	beq	a274 <CKernel::ToggleOSD()+0x30>
-    a2f4:	e59f3200 	ldr	r3, [pc, #512]	@ a4fc <CKernel::ToggleOSD()+0x2b8>
-    a2f8:	e2850c1d 	add	r0, r5, #7424	@ 0x1d00
-    a2fc:	e3a01001 	mov	r1, #1
-    a300:	e3a02003 	mov	r2, #3
-    a304:	e5c8142e 	strb	r1, [r8, #1070]	@ 0x42e
-    a308:	e2800024 	add	r0, r0, #36	@ 0x24
-    a30c:	e2431feb 	sub	r1, r3, #940	@ 0x3ac
-    a310:	eb00bf0a 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    a314:	eaffffd6 	b	a274 <CKernel::ToggleOSD()+0x30>
-    a318:	e2805e8a 	add	r5, r0, #2208	@ 0x8a0
-    a31c:	e285500c 	add	r5, r5, #12
-    a320:	e1a00005 	mov	r0, r5
-    a324:	eb00c377 	bl	3b108 <CScreenDevice::GetColumns() const>
-    a328:	e1a09000 	mov	r9, r0
-    a32c:	e1a00005 	mov	r0, r5
-    a330:	eb00c376 	bl	3b110 <CScreenDevice::GetRows() const>
-    a334:	e59872c8 	ldr	r7, [r8, #712]	@ 0x2c8
-    a338:	e1a06000 	mov	r6, r0
-    a33c:	e1a00005 	mov	r0, r5
-    a340:	eb00c36c 	bl	3b0f8 <CScreenDevice::GetWidth() const>
-    a344:	e598b2cc 	ldr	fp, [r8, #716]	@ 0x2cc
-    a348:	e0070997 	mul	r7, r7, r9
-    a34c:	e00b069b 	mul	fp, fp, r6
-    a350:	e737f017 	udiv	r7, r7, r0
-    a354:	e1a00005 	mov	r0, r5
-    a358:	eb00c368 	bl	3b100 <CScreenDevice::GetHeight() const>
-    a35c:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
-    a360:	e598a2c8 	ldr	sl, [r8, #712]	@ 0x2c8
-    a364:	e3a02d05 	mov	r2, #320	@ 0x140
-    a368:	e73bf01b 	udiv	fp, fp, r0
-    a36c:	e1a00005 	mov	r0, r5
-    a370:	e02aa392 	mla	sl, r2, r3, sl
-    a374:	eb00c35f 	bl	3b0f8 <CScreenDevice::GetWidth() const>
-    a378:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
-    a37c:	e59842cc 	ldr	r4, [r8, #716]	@ 0x2cc
-    a380:	e00a0a99 	mul	sl, r9, sl
-    a384:	e0844403 	add	r4, r4, r3, lsl #8
-    a388:	e73af01a 	udiv	sl, sl, r0
-    a38c:	e0040496 	mul	r4, r6, r4
-    a390:	e1a00005 	mov	r0, r5
-    a394:	eb00c359 	bl	3b100 <CScreenDevice::GetHeight() const>
-    a398:	e28b3002 	add	r3, fp, #2
-    a39c:	e734f014 	udiv	r4, r4, r0
-    a3a0:	e157000a 	cmp	r7, sl
-    a3a4:	2287a001 	addcs	sl, r7, #1
-    a3a8:	32877001 	addcc	r7, r7, #1
-    a3ac:	21a0700a 	movcs	r7, sl
-    a3b0:	e1a00005 	mov	r0, r5
-    a3b4:	e1530004 	cmp	r3, r4
-    a3b8:	e59832cc 	ldr	r3, [r8, #716]	@ 0x2cc
-    a3bc:	228b4003 	addcs	r4, fp, #3
-    a3c0:	e0060693 	mul	r6, r3, r6
-    a3c4:	eb00c34d 	bl	3b100 <CScreenDevice::GetHeight() const>
-    a3c8:	e733f016 	udiv	r3, r6, r0
-    a3cc:	e2832012 	add	r2, r3, #18
-    a3d0:	e1520004 	cmp	r2, r4
-    a3d4:	32834002 	addcc	r4, r3, #2
-    a3d8:	2a00003f 	bcs	a4dc <CKernel::ToggleOSD()+0x298>
-    a3dc:	e35a0000 	cmp	sl, #0
-    a3e0:	1a00002a 	bne	a490 <CKernel::ToggleOSD()+0x24c>
-    a3e4:	e3a0a002 	mov	sl, #2
-    a3e8:	e28d600c 	add	r6, sp, #12
-    a3ec:	e3570001 	cmp	r7, #1
-    a3f0:	e1a00006 	mov	r0, r6
-    a3f4:	33a07001 	movcc	r7, #1
-    a3f8:	eb00c851 	bl	3c544 <CString::CString()>
-    a3fc:	e28d901c 	add	r9, sp, #28
-    a400:	e3a03000 	mov	r3, #0
-    a404:	e1a02009 	mov	r2, r9
-    a408:	e3a01020 	mov	r1, #32
-    a40c:	e2833001 	add	r3, r3, #1
-    a410:	e4c21001 	strb	r1, [r2], #1
-    a414:	e153000a 	cmp	r3, sl
-    a418:	3afffffb 	bcc	a40c <CKernel::ToggleOSD()+0x1c8>
-    a41c:	e28a30a0 	add	r3, sl, #160	@ 0xa0
-    a420:	e08da003 	add	sl, sp, r3
-    a424:	e3a03000 	mov	r3, #0
-    a428:	e54a3084 	strb	r3, [sl, #-132]	@ 0xffffff7c
-    a42c:	e284a00f 	add	sl, r4, #15
-    a430:	e1a02004 	mov	r2, r4
-    a434:	e59f10c4 	ldr	r1, [pc, #196]	@ a500 <CKernel::ToggleOSD()+0x2bc>
-    a438:	e1a03007 	mov	r3, r7
-    a43c:	e1a00006 	mov	r0, r6
-    a440:	e58d9000 	str	r9, [sp]
-    a444:	e2844001 	add	r4, r4, #1
-    a448:	eb00ce48 	bl	3dd70 <CString::Format(char const*, ...)>
-    a44c:	e1a00006 	mov	r0, r6
-    a450:	eb00c873 	bl	3c624 <CString::operator char const*() const>
-    a454:	e1a0b000 	mov	fp, r0
-    a458:	e1a00006 	mov	r0, r6
-    a45c:	eb00c8b4 	bl	3c734 <CString::GetLength() const>
-    a460:	e1a0100b 	mov	r1, fp
-    a464:	e1a02000 	mov	r2, r0
-    a468:	e1a00005 	mov	r0, r5
-    a46c:	eb00c288 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    a470:	e15a0004 	cmp	sl, r4
-    a474:	1affffed 	bne	a430 <CKernel::ToggleOSD()+0x1ec>
-    a478:	e3a03000 	mov	r3, #0
-    a47c:	e1a00006 	mov	r0, r6
-    a480:	e5c8342d 	strb	r3, [r8, #1069]	@ 0x42d
-    a484:	eb00c7fb 	bl	3c478 <CString::~CString()>
-    a488:	e28dd0a4 	add	sp, sp, #164	@ 0xa4
-    a48c:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
-    a490:	e24a3001 	sub	r3, sl, #1
-    a494:	e3570001 	cmp	r7, #1
-    a498:	33a07001 	movcc	r7, #1
-    a49c:	e1530009 	cmp	r3, r9
-    a4a0:	21a03009 	movcs	r3, r9
-    a4a4:	e28d600c 	add	r6, sp, #12
-    a4a8:	e1530007 	cmp	r3, r7
-    a4ac:	20679003 	rsbcs	r9, r7, r3
-    a4b0:	30679007 	rsbcc	r9, r7, r7
-    a4b4:	e1a00006 	mov	r0, r6
-    a4b8:	e289a002 	add	sl, r9, #2
-    a4bc:	e35a0080 	cmp	sl, #128	@ 0x80
-    a4c0:	23a0a080 	movcs	sl, #128	@ 0x80
-    a4c4:	eb00c81e 	bl	3c544 <CString::CString()>
-    a4c8:	e3790002 	cmn	r9, #2
-    a4cc:	1affffca 	bne	a3fc <CKernel::ToggleOSD()+0x1b8>
-    a4d0:	e3a0a000 	mov	sl, #0
-    a4d4:	e28d901c 	add	r9, sp, #28
-    a4d8:	eaffffcf 	b	a41c <CKernel::ToggleOSD()+0x1d8>
-    a4dc:	e3540011 	cmp	r4, #17
-    a4e0:	33a04011 	movcc	r4, #17
-    a4e4:	e35a0000 	cmp	sl, #0
-    a4e8:	e2444010 	sub	r4, r4, #16
-    a4ec:	0affffbc 	beq	a3e4 <CKernel::ToggleOSD()+0x1a0>
-    a4f0:	eaffffe6 	b	a490 <CKernel::ToggleOSD()+0x24c>
-    a4f4:	00046ddc 	.word	0x00046ddc
+0000a23c <CKernel::ToggleOSD()>:
+    a23c:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    a240:	e2808a83 	add	r8, r0, #536576	@ 0x83000
+    a244:	e1a06000 	mov	r6, r0
+    a248:	e24dd0a4 	sub	sp, sp, #164	@ 0xa4
+    a24c:	e5d8342c 	ldrb	r3, [r8, #1068]	@ 0x42c
+    a250:	e2233001 	eor	r3, r3, #1
+    a254:	e5c8342c 	strb	r3, [r8, #1068]	@ 0x42c
+    a258:	e3530000 	cmp	r3, #0
+    a25c:	0a000017 	beq	a2c0 <CKernel::ToggleOSD()+0x84>
+    a260:	ebfff941 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
+    a264:	e5d8342e 	ldrb	r3, [r8, #1070]	@ 0x42e
+    a268:	e3530000 	cmp	r3, #0
+    a26c:	0a00008a 	beq	a49c <CKernel::ToggleOSD()+0x260>
+    a270:	e1a00006 	mov	r0, r6
+    a274:	e3a04000 	mov	r4, #0
+    a278:	ebfffc48 	bl	93a0 <CKernel::ReloadSnapshots()>
+    a27c:	f2c00010 	vmov.i32	d16, #0	@ 0x00000000
+    a280:	e2883e43 	add	r3, r8, #1072	@ 0x430
+    a284:	e305043c 	movw	r0, #21564	@ 0x543c
+    a288:	e3400008 	movt	r0, #8
+    a28c:	e2833004 	add	r3, r3, #4
+    a290:	e0860000 	add	r0, r6, r0
+    a294:	e2866a85 	add	r6, r6, #544768	@ 0x85000
+    a298:	e5c8442f 	strb	r4, [r8, #1071]	@ 0x42f
+    a29c:	e3a0203f 	mov	r2, #63	@ 0x3f
+    a2a0:	f443078f 	vst1.32	{d16}, [r3]
+    a2a4:	e59f1244 	ldr	r1, [pc, #580]	@ a4f0 <CKernel::ToggleOSD()+0x2b4>
+    a2a8:	eb00d402 	bl	3f2b8 <strncpy>
+    a2ac:	e3a03001 	mov	r3, #1
+    a2b0:	e5c6447b 	strb	r4, [r6, #1147]	@ 0x47b
+    a2b4:	e5c8342d 	strb	r3, [r8, #1069]	@ 0x42d
+    a2b8:	e28dd0a4 	add	sp, sp, #164	@ 0xa4
+    a2bc:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+    a2c0:	e2806e8a 	add	r6, r0, #2208	@ 0x8a0
+    a2c4:	e286600c 	add	r6, r6, #12
+    a2c8:	e1a00006 	mov	r0, r6
+    a2cc:	eb00c38d 	bl	3b108 <CScreenDevice::GetColumns() const>
+    a2d0:	e1a0a000 	mov	sl, r0
+    a2d4:	e1a00006 	mov	r0, r6
+    a2d8:	eb00c38c 	bl	3b110 <CScreenDevice::GetRows() const>
+    a2dc:	e59872c8 	ldr	r7, [r8, #712]	@ 0x2c8
+    a2e0:	e1a09000 	mov	r9, r0
+    a2e4:	e1a00006 	mov	r0, r6
+    a2e8:	eb00c382 	bl	3b0f8 <CScreenDevice::GetWidth() const>
+    a2ec:	e598b2cc 	ldr	fp, [r8, #716]	@ 0x2cc
+    a2f0:	e0070a97 	mul	r7, r7, sl
+    a2f4:	e00b099b 	mul	fp, fp, r9
+    a2f8:	e737f017 	udiv	r7, r7, r0
+    a2fc:	e1a00006 	mov	r0, r6
+    a300:	eb00c37e 	bl	3b100 <CScreenDevice::GetHeight() const>
+    a304:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
+    a308:	e59852c8 	ldr	r5, [r8, #712]	@ 0x2c8
+    a30c:	e3a02d05 	mov	r2, #320	@ 0x140
+    a310:	e73bf01b 	udiv	fp, fp, r0
+    a314:	e1a00006 	mov	r0, r6
+    a318:	e0255392 	mla	r5, r2, r3, r5
+    a31c:	eb00c375 	bl	3b0f8 <CScreenDevice::GetWidth() const>
+    a320:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
+    a324:	e59842cc 	ldr	r4, [r8, #716]	@ 0x2cc
+    a328:	e005059a 	mul	r5, sl, r5
+    a32c:	e0844403 	add	r4, r4, r3, lsl #8
+    a330:	e735f015 	udiv	r5, r5, r0
+    a334:	e0040499 	mul	r4, r9, r4
+    a338:	e1a00006 	mov	r0, r6
+    a33c:	eb00c36f 	bl	3b100 <CScreenDevice::GetHeight() const>
+    a340:	e28b3002 	add	r3, fp, #2
+    a344:	e734f014 	udiv	r4, r4, r0
+    a348:	e1570005 	cmp	r7, r5
+    a34c:	22875001 	addcs	r5, r7, #1
+    a350:	32877001 	addcc	r7, r7, #1
+    a354:	21a07005 	movcs	r7, r5
+    a358:	e1a00006 	mov	r0, r6
+    a35c:	e1530004 	cmp	r3, r4
+    a360:	e59832cc 	ldr	r3, [r8, #716]	@ 0x2cc
+    a364:	228b4003 	addcs	r4, fp, #3
+    a368:	e0090993 	mul	r9, r3, r9
+    a36c:	eb00c363 	bl	3b100 <CScreenDevice::GetHeight() const>
+    a370:	e733f019 	udiv	r3, r9, r0
+    a374:	e2832012 	add	r2, r3, #18
+    a378:	e1520004 	cmp	r2, r4
+    a37c:	32834002 	addcc	r4, r3, #2
+    a380:	2a00003f 	bcs	a484 <CKernel::ToggleOSD()+0x248>
+    a384:	e3550000 	cmp	r5, #0
+    a388:	1a00002a 	bne	a438 <CKernel::ToggleOSD()+0x1fc>
+    a38c:	e3a0a002 	mov	sl, #2
+    a390:	e28d500c 	add	r5, sp, #12
+    a394:	e3570001 	cmp	r7, #1
+    a398:	e1a00005 	mov	r0, r5
+    a39c:	33a07001 	movcc	r7, #1
+    a3a0:	eb00c867 	bl	3c544 <CString::CString()>
+    a3a4:	e28d901c 	add	r9, sp, #28
+    a3a8:	e3a03000 	mov	r3, #0
+    a3ac:	e1a02009 	mov	r2, r9
+    a3b0:	e3a01020 	mov	r1, #32
+    a3b4:	e2833001 	add	r3, r3, #1
+    a3b8:	e4c21001 	strb	r1, [r2], #1
+    a3bc:	e153000a 	cmp	r3, sl
+    a3c0:	3afffffb 	bcc	a3b4 <CKernel::ToggleOSD()+0x178>
+    a3c4:	e28a30a0 	add	r3, sl, #160	@ 0xa0
+    a3c8:	e08da003 	add	sl, sp, r3
+    a3cc:	e3a03000 	mov	r3, #0
+    a3d0:	e54a3084 	strb	r3, [sl, #-132]	@ 0xffffff7c
+    a3d4:	e284a00f 	add	sl, r4, #15
+    a3d8:	e1a02004 	mov	r2, r4
+    a3dc:	e59f1110 	ldr	r1, [pc, #272]	@ a4f4 <CKernel::ToggleOSD()+0x2b8>
+    a3e0:	e1a03007 	mov	r3, r7
+    a3e4:	e1a00005 	mov	r0, r5
+    a3e8:	e58d9000 	str	r9, [sp]
+    a3ec:	e2844001 	add	r4, r4, #1
+    a3f0:	eb00ce5e 	bl	3dd70 <CString::Format(char const*, ...)>
+    a3f4:	e1a00005 	mov	r0, r5
+    a3f8:	eb00c889 	bl	3c624 <CString::operator char const*() const>
+    a3fc:	e1a0b000 	mov	fp, r0
+    a400:	e1a00005 	mov	r0, r5
+    a404:	eb00c8ca 	bl	3c734 <CString::GetLength() const>
+    a408:	e1a0100b 	mov	r1, fp
+    a40c:	e1a02000 	mov	r2, r0
+    a410:	e1a00006 	mov	r0, r6
+    a414:	eb00c29e 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    a418:	e15a0004 	cmp	sl, r4
+    a41c:	1affffed 	bne	a3d8 <CKernel::ToggleOSD()+0x19c>
+    a420:	e3a03000 	mov	r3, #0
+    a424:	e1a00005 	mov	r0, r5
+    a428:	e5c8342d 	strb	r3, [r8, #1069]	@ 0x42d
+    a42c:	eb00c811 	bl	3c478 <CString::~CString()>
+    a430:	e28dd0a4 	add	sp, sp, #164	@ 0xa4
+    a434:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+    a438:	e2455001 	sub	r5, r5, #1
+    a43c:	e3570001 	cmp	r7, #1
+    a440:	33a07001 	movcc	r7, #1
+    a444:	e155000a 	cmp	r5, sl
+    a448:	21a0500a 	movcs	r5, sl
+    a44c:	e1550007 	cmp	r5, r7
+    a450:	20679005 	rsbcs	r9, r7, r5
+    a454:	30679007 	rsbcc	r9, r7, r7
+    a458:	e28d500c 	add	r5, sp, #12
+    a45c:	e289a002 	add	sl, r9, #2
+    a460:	e1a00005 	mov	r0, r5
+    a464:	e35a0080 	cmp	sl, #128	@ 0x80
+    a468:	23a0a080 	movcs	sl, #128	@ 0x80
+    a46c:	eb00c834 	bl	3c544 <CString::CString()>
+    a470:	e3790002 	cmn	r9, #2
+    a474:	1affffca 	bne	a3a4 <CKernel::ToggleOSD()+0x168>
+    a478:	e3a0a000 	mov	sl, #0
+    a47c:	e28d901c 	add	r9, sp, #28
+    a480:	eaffffcf 	b	a3c4 <CKernel::ToggleOSD()+0x188>
+    a484:	e3540011 	cmp	r4, #17
+    a488:	33a04011 	movcc	r4, #17
+    a48c:	e3550000 	cmp	r5, #0
+    a490:	e2444010 	sub	r4, r4, #16
+    a494:	0affffbc 	beq	a38c <CKernel::ToggleOSD()+0x150>
+    a498:	eaffffe6 	b	a438 <CKernel::ToggleOSD()+0x1fc>
+    a49c:	e2860e8a 	add	r0, r6, #2208	@ 0x8a0
+    a4a0:	e59f1050 	ldr	r1, [pc, #80]	@ a4f8 <CKernel::ToggleOSD()+0x2bc>
+    a4a4:	e3a02001 	mov	r2, #1
+    a4a8:	e2800004 	add	r0, r0, #4
+    a4ac:	eb00b4c8 	bl	377d4 <CDeviceNameService::GetDevice(char const*, bool)>
+    a4b0:	e2501000 	subs	r1, r0, #0
+    a4b4:	0affff6d 	beq	a270 <CKernel::ToggleOSD()+0x34>
+    a4b8:	e2860d8e 	add	r0, r6, #9088	@ 0x2380
+    a4bc:	e2800030 	add	r0, r0, #48	@ 0x30
+    a4c0:	eb00a17d 	bl	32abc <CFATFileSystem::Mount(CDevice*)>
+    a4c4:	e3500000 	cmp	r0, #0
+    a4c8:	0affff68 	beq	a270 <CKernel::ToggleOSD()+0x34>
+    a4cc:	e59f3028 	ldr	r3, [pc, #40]	@ a4fc <CKernel::ToggleOSD()+0x2c0>
+    a4d0:	e2860c1d 	add	r0, r6, #7424	@ 0x1d00
+    a4d4:	e3a01001 	mov	r1, #1
+    a4d8:	e3a02003 	mov	r2, #3
+    a4dc:	e5c8142e 	strb	r1, [r8, #1070]	@ 0x42e
+    a4e0:	e2800024 	add	r0, r0, #36	@ 0x24
+    a4e4:	e2431feb 	sub	r1, r3, #940	@ 0x3ac
+    a4e8:	eb00be94 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    a4ec:	eaffff5f 	b	a270 <CKernel::ToggleOSD()+0x34>
+    a4f0:	00046ddc 	.word	0x00046ddc
+    a4f4:	00046ce8 	.word	0x00046ce8
     a4f8:	00046c28 	.word	0x00046c28
     a4fc:	00046c5c 	.word	0x00046c5c
-    a500:	00046ce8 	.word	0x00046ce8
 
-0000a504 <CKernel::ApplyInputReport()>:
-    a504:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
-    a508:	e303c2d9 	movw	ip, #13017	@ 0x32d9
-    a50c:	e340c008 	movt	ip, #8
-    a510:	e24dd064 	sub	sp, sp, #100	@ 0x64
-    a514:	e1a04000 	mov	r4, r0
-    a518:	e2806a83 	add	r6, r0, #536576	@ 0x83000
-    a51c:	e59602d4 	ldr	r0, [r6, #724]	@ 0x2d4
-    a520:	e28db030 	add	fp, sp, #48	@ 0x30
-    a524:	e5d612d8 	ldrb	r1, [r6, #728]	@ 0x2d8
-    a528:	e1a0200b 	mov	r2, fp
-    a52c:	e3a03000 	mov	r3, #0
-    a530:	e6ef8071 	uxtb	r8, r1
-    a534:	e0841003 	add	r1, r4, r3
-    a538:	e2833001 	add	r3, r3, #1
-    a53c:	e3530006 	cmp	r3, #6
-    a540:	e7d1100c 	ldrb	r1, [r1, ip]
-    a544:	e4c21001 	strb	r1, [r2], #1
-    a548:	1afffff9 	bne	a534 <CKernel::ApplyInputReport()+0x30>
-    a54c:	e59632d4 	ldr	r3, [r6, #724]	@ 0x2d4
-    a550:	e1500003 	cmp	r0, r3
-    a554:	1afffff0 	bne	a51c <CKernel::ApplyInputReport()+0x18>
-    a558:	e28da036 	add	sl, sp, #54	@ 0x36
-    a55c:	e28d3030 	add	r3, sp, #48	@ 0x30
-    a560:	e58602e8 	str	r0, [r6, #744]	@ 0x2e8
-    a564:	e4d32001 	ldrb	r2, [r3], #1
-    a568:	e352003a 	cmp	r2, #58	@ 0x3a
-    a56c:	0a00018f 	beq	abb0 <CKernel::ApplyInputReport()+0x6ac>
-    a570:	e15a0003 	cmp	sl, r3
-    a574:	1afffffa 	bne	a564 <CKernel::ApplyInputReport()+0x60>
-    a578:	e3a03000 	mov	r3, #0
-    a57c:	e5c6342b 	strb	r3, [r6, #1067]	@ 0x42b
-    a580:	e28d3030 	add	r3, sp, #48	@ 0x30
-    a584:	e4d32001 	ldrb	r2, [r3], #1
-    a588:	e352003c 	cmp	r2, #60	@ 0x3c
-    a58c:	0a00017e 	beq	ab8c <CKernel::ApplyInputReport()+0x688>
-    a590:	e15a0003 	cmp	sl, r3
-    a594:	1afffffa 	bne	a584 <CKernel::ApplyInputReport()+0x80>
-    a598:	e3a03000 	mov	r3, #0
-    a59c:	e2845a85 	add	r5, r4, #544768	@ 0x85000
-    a5a0:	e5c53509 	strb	r3, [r5, #1289]	@ 0x509
-    a5a4:	e28d3030 	add	r3, sp, #48	@ 0x30
-    a5a8:	e4d32001 	ldrb	r2, [r3], #1
-    a5ac:	e352003d 	cmp	r2, #61	@ 0x3d
-    a5b0:	0a00016d 	beq	ab6c <CKernel::ApplyInputReport()+0x668>
-    a5b4:	e15a0003 	cmp	sl, r3
-    a5b8:	1afffffa 	bne	a5a8 <CKernel::ApplyInputReport()+0xa4>
-    a5bc:	e3a03000 	mov	r3, #0
-    a5c0:	e5c5350a 	strb	r3, [r5, #1290]	@ 0x50a
-    a5c4:	e28d3030 	add	r3, sp, #48	@ 0x30
-    a5c8:	e4d37001 	ldrb	r7, [r3], #1
-    a5cc:	e357003f 	cmp	r7, #63	@ 0x3f
-    a5d0:	0a000145 	beq	aaec <CKernel::ApplyInputReport()+0x5e8>
-    a5d4:	e15a0003 	cmp	sl, r3
-    a5d8:	1afffffa 	bne	a5c8 <CKernel::ApplyInputReport()+0xc4>
-    a5dc:	e3a03000 	mov	r3, #0
-    a5e0:	e5c5350b 	strb	r3, [r5, #1291]	@ 0x50b
-    a5e4:	e5d6342c 	ldrb	r3, [r6, #1068]	@ 0x42c
-    a5e8:	e3530000 	cmp	r3, #0
-    a5ec:	1a000114 	bne	aa44 <CKernel::ApplyInputReport()+0x540>
-    a5f0:	e2847a83 	add	r7, r4, #536576	@ 0x83000
-    a5f4:	e30352de 	movw	r5, #13022	@ 0x32de
-    a5f8:	e3405008 	movt	r5, #8
-    a5fc:	e2877fb9 	add	r7, r7, #740	@ 0x2e4
-    a600:	e0845005 	add	r5, r4, r5
-    a604:	e1a03005 	mov	r3, r5
-    a608:	e28d2030 	add	r2, sp, #48	@ 0x30
-    a60c:	e4d21001 	ldrb	r1, [r2], #1
-    a610:	e5e31001 	strb	r1, [r3, #1]!
-    a614:	e1570003 	cmp	r7, r3
-    a618:	1afffffb 	bne	a60c <CKernel::ApplyInputReport()+0x108>
-    a61c:	e59632f4 	ldr	r3, [r6, #756]	@ 0x2f4
-    a620:	e5969304 	ldr	r9, [r6, #772]	@ 0x304
-    a624:	e59673d8 	ldr	r7, [r6, #984]	@ 0x3d8
-    a628:	e59622f8 	ldr	r2, [r6, #760]	@ 0x2f8
-    a62c:	e58d2008 	str	r2, [sp, #8]
-    a630:	e59622ec 	ldr	r2, [r6, #748]	@ 0x2ec
-    a634:	e59612ec 	ldr	r1, [r6, #748]	@ 0x2ec
-    a638:	e1520001 	cmp	r2, r1
-    a63c:	1afffffb 	bne	a630 <CKernel::ApplyInputReport()+0x12c>
-    a640:	e3a01000 	mov	r1, #0
-    a644:	e58622f0 	str	r2, [r6, #752]	@ 0x2f0
-    a648:	e28d0038 	add	r0, sp, #56	@ 0x38
-    a64c:	e3a02028 	mov	r2, #40	@ 0x28
-    a650:	e59653f4 	ldr	r5, [r6, #1012]	@ 0x3f4
-    a654:	e58d3004 	str	r3, [sp, #4]
-    a658:	eb00d493 	bl	3f8ac <memset>
-    a65c:	e5d6142c 	ldrb	r1, [r6, #1068]	@ 0x42c
-    a660:	e0255007 	eor	r5, r5, r7
-    a664:	e59d3004 	ldr	r3, [sp, #4]
-    a668:	e3510000 	cmp	r1, #0
-    a66c:	1a00006d 	bne	a828 <CKernel::ApplyInputReport()+0x324>
-    a670:	e3180022 	tst	r8, #34	@ 0x22
-    a674:	13a02001 	movne	r2, #1
-    a678:	15cd2038 	strbne	r2, [sp, #56]	@ 0x38
-    a67c:	e3180011 	tst	r8, #17
-    a680:	13a02001 	movne	r2, #1
-    a684:	15cd205c 	strbne	r2, [sp, #92]	@ 0x5c
-    a688:	e3a02000 	mov	r2, #0
-    a68c:	e58d2004 	str	r2, [sp, #4]
-    a690:	e1a00002 	mov	r0, r2
-    a694:	e4db2001 	ldrb	r2, [fp], #1
-    a698:	e2422004 	sub	r2, r2, #4
-    a69c:	e352004e 	cmp	r2, #78	@ 0x4e
-    a6a0:	979ff102 	ldrls	pc, [pc, r2, lsl #2]
-    a6a4:	ea000050 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    a6a8:	0000a7e4 	.word	0x0000a7e4
-    a6ac:	0000b0ec 	.word	0x0000b0ec
-    a6b0:	0000b0f8 	.word	0x0000b0f8
-    a6b4:	0000b104 	.word	0x0000b104
-    a6b8:	0000b110 	.word	0x0000b110
-    a6bc:	0000b11c 	.word	0x0000b11c
-    a6c0:	0000b128 	.word	0x0000b128
-    a6c4:	0000b134 	.word	0x0000b134
-    a6c8:	0000b140 	.word	0x0000b140
-    a6cc:	0000b14c 	.word	0x0000b14c
-    a6d0:	0000b158 	.word	0x0000b158
-    a6d4:	0000b164 	.word	0x0000b164
-    a6d8:	0000b170 	.word	0x0000b170
-    a6dc:	0000b17c 	.word	0x0000b17c
-    a6e0:	0000b188 	.word	0x0000b188
-    a6e4:	0000b194 	.word	0x0000b194
-    a6e8:	0000b250 	.word	0x0000b250
-    a6ec:	0000b25c 	.word	0x0000b25c
-    a6f0:	0000b268 	.word	0x0000b268
-    a6f4:	0000b274 	.word	0x0000b274
-    a6f8:	0000b280 	.word	0x0000b280
-    a6fc:	0000b28c 	.word	0x0000b28c
-    a700:	0000b298 	.word	0x0000b298
-    a704:	0000b2a4 	.word	0x0000b2a4
-    a708:	0000b2b0 	.word	0x0000b2b0
-    a70c:	0000b2bc 	.word	0x0000b2bc
-    a710:	0000b2c8 	.word	0x0000b2c8
-    a714:	0000b2d4 	.word	0x0000b2d4
-    a718:	0000b2e0 	.word	0x0000b2e0
-    a71c:	0000b2ec 	.word	0x0000b2ec
-    a720:	0000b2f8 	.word	0x0000b2f8
-    a724:	0000b304 	.word	0x0000b304
-    a728:	0000b220 	.word	0x0000b220
-    a72c:	0000b22c 	.word	0x0000b22c
-    a730:	0000b238 	.word	0x0000b238
-    a734:	0000b244 	.word	0x0000b244
-    a738:	0000b1a0 	.word	0x0000b1a0
-    a73c:	0000a7ec 	.word	0x0000a7ec
-    a740:	0000b1ac 	.word	0x0000b1ac
-    a744:	0000b1bc 	.word	0x0000b1bc
-    a748:	0000b1c4 	.word	0x0000b1c4
-    a74c:	0000a7ec 	.word	0x0000a7ec
-    a750:	0000a7ec 	.word	0x0000a7ec
-    a754:	0000a7ec 	.word	0x0000a7ec
-    a758:	0000a7ec 	.word	0x0000a7ec
-    a75c:	0000a7ec 	.word	0x0000a7ec
-    a760:	0000a7ec 	.word	0x0000a7ec
-    a764:	0000a7ec 	.word	0x0000a7ec
-    a768:	0000a7ec 	.word	0x0000a7ec
-    a76c:	0000a7ec 	.word	0x0000a7ec
-    a770:	0000a7ec 	.word	0x0000a7ec
-    a774:	0000a7ec 	.word	0x0000a7ec
-    a778:	0000a7ec 	.word	0x0000a7ec
-    a77c:	0000a7ec 	.word	0x0000a7ec
-    a780:	0000a7ec 	.word	0x0000a7ec
-    a784:	0000b368 	.word	0x0000b368
-    a788:	0000a7ec 	.word	0x0000a7ec
-    a78c:	0000a7ec 	.word	0x0000a7ec
-    a790:	0000a7ec 	.word	0x0000a7ec
-    a794:	0000a7ec 	.word	0x0000a7ec
-    a798:	0000a7ec 	.word	0x0000a7ec
-    a79c:	0000a7ec 	.word	0x0000a7ec
-    a7a0:	0000a7ec 	.word	0x0000a7ec
-    a7a4:	0000a7ec 	.word	0x0000a7ec
-    a7a8:	0000a7ec 	.word	0x0000a7ec
-    a7ac:	0000a7ec 	.word	0x0000a7ec
-    a7b0:	0000a7ec 	.word	0x0000a7ec
-    a7b4:	0000a7ec 	.word	0x0000a7ec
-    a7b8:	0000a7ec 	.word	0x0000a7ec
-    a7bc:	0000a7ec 	.word	0x0000a7ec
-    a7c0:	0000a7ec 	.word	0x0000a7ec
-    a7c4:	0000a7ec 	.word	0x0000a7ec
-    a7c8:	0000a7ec 	.word	0x0000a7ec
-    a7cc:	0000a7ec 	.word	0x0000a7ec
-    a7d0:	0000a7ec 	.word	0x0000a7ec
-    a7d4:	0000b1e4 	.word	0x0000b1e4
-    a7d8:	0000b1f8 	.word	0x0000b1f8
-    a7dc:	0000b20c 	.word	0x0000b20c
-    a7e0:	0000b1d0 	.word	0x0000b1d0
-    a7e4:	e3a02001 	mov	r2, #1
-    a7e8:	e5cd203d 	strb	r2, [sp, #61]	@ 0x3d
-    a7ec:	e15b000a 	cmp	fp, sl
-    a7f0:	1affffa7 	bne	a694 <CKernel::ApplyInputReport()+0x190>
-    a7f4:	e3530000 	cmp	r3, #0
-    a7f8:	da000123 	ble	ac8c <CKernel::ApplyInputReport()+0x788>
-    a7fc:	e3530001 	cmp	r3, #1
-    a800:	e59d3008 	ldr	r3, [sp, #8]
-    a804:	03a09080 	moveq	r9, #128	@ 0x80
-    a808:	e3170701 	tst	r7, #262144	@ 0x40000
-    a80c:	1a000151 	bne	ad58 <CKernel::ApplyInputReport()+0x854>
-    a810:	e353005f 	cmp	r3, #95	@ 0x5f
-    a814:	ca0002e3 	bgt	b3a8 <CKernel::ApplyInputReport()+0xea4>
-    a818:	e3800002 	orr	r0, r0, #2
-    a81c:	e3170801 	tst	r7, #65536	@ 0x10000
-    a820:	1a000121 	bne	acac <CKernel::ApplyInputReport()+0x7a8>
-    a824:	ea000121 	b	acb0 <CKernel::ApplyInputReport()+0x7ac>
-    a828:	e3530000 	cmp	r3, #0
-    a82c:	da0000e4 	ble	abc4 <CKernel::ApplyInputReport()+0x6c0>
-    a830:	e3530001 	cmp	r3, #1
-    a834:	e207ab02 	and	sl, r7, #2048	@ 0x800
-    a838:	03a09080 	moveq	r9, #128	@ 0x80
-    a83c:	e1a0200a 	mov	r2, sl
-    a840:	e3170901 	tst	r7, #16384	@ 0x4000
-    a844:	0a0000e5 	beq	abe0 <CKernel::ApplyInputReport()+0x6dc>
-    a848:	e3150901 	tst	r5, #16384	@ 0x4000
-    a84c:	0a0000e3 	beq	abe0 <CKernel::ApplyInputReport()+0x6dc>
-    a850:	e1a00004 	mov	r0, r4
-    a854:	e58da00c 	str	sl, [sp, #12]
-    a858:	ebfffa40 	bl	9160 <CKernel::OSDActivateSelection()>
-    a85c:	e59d200c 	ldr	r2, [sp, #12]
-    a860:	e2503000 	subs	r3, r0, #0
-    a864:	e58d3004 	str	r3, [sp, #4]
-    a868:	0a0002b2 	beq	b338 <CKernel::ApplyInputReport()+0xe34>
-    a86c:	e3a0b000 	mov	fp, #0
-    a870:	e35a0000 	cmp	sl, #0
-    a874:	e5c6b42c 	strb	fp, [r6, #1068]	@ 0x42c
-    a878:	1a0002bd 	bne	b374 <CKernel::ApplyInputReport()+0xe70>
-    a87c:	e1a0300a 	mov	r3, sl
-    a880:	e58da02c 	str	sl, [sp, #44]	@ 0x2c
-    a884:	e58da020 	str	sl, [sp, #32]
-    a888:	e58da01c 	str	sl, [sp, #28]
-    a88c:	e58da018 	str	sl, [sp, #24]
-    a890:	e58da014 	str	sl, [sp, #20]
-    a894:	e58da010 	str	sl, [sp, #16]
-    a898:	e58da00c 	str	sl, [sp, #12]
-    a89c:	e58da004 	str	sl, [sp, #4]
-    a8a0:	e3a0b000 	mov	fp, #0
-    a8a4:	e28d8038 	add	r8, sp, #56	@ 0x38
-    a8a8:	e58d7024 	str	r7, [sp, #36]	@ 0x24
-    a8ac:	e1a07008 	mov	r7, r8
-    a8b0:	e58d6028 	str	r6, [sp, #40]	@ 0x28
-    a8b4:	e1a0600b 	mov	r6, fp
-    a8b8:	e1a0b003 	mov	fp, r3
-    a8bc:	e1a08007 	mov	r8, r7
-    a8c0:	e3a05000 	mov	r5, #0
-    a8c4:	e1a02005 	mov	r2, r5
-    a8c8:	e4d83001 	ldrb	r3, [r8], #1
-    a8cc:	e1a01006 	mov	r1, r6
-    a8d0:	e1a00004 	mov	r0, r4
-    a8d4:	e2855001 	add	r5, r5, #1
-    a8d8:	ebfff6ef 	bl	849c <CKernel::SetZXKeyState(int, int, bool)>
-    a8dc:	e3550005 	cmp	r5, #5
-    a8e0:	1afffff7 	bne	a8c4 <CKernel::ApplyInputReport()+0x3c0>
-    a8e4:	e2866001 	add	r6, r6, #1
-    a8e8:	e2877005 	add	r7, r7, #5
-    a8ec:	e3560008 	cmp	r6, #8
-    a8f0:	1afffff1 	bne	a8bc <CKernel::ApplyInputReport()+0x3b8>
-    a8f4:	e59d6028 	ldr	r6, [sp, #40]	@ 0x28
-    a8f8:	e59d7024 	ldr	r7, [sp, #36]	@ 0x24
-    a8fc:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    a900:	e2021001 	and	r1, r2, #1
-    a904:	e151000b 	cmp	r1, fp
-    a908:	0a000008 	beq	a930 <CKernel::ApplyInputReport()+0x42c>
-    a90c:	e35b0000 	cmp	fp, #0
-    a910:	0a00012a 	beq	adc0 <CKernel::ApplyInputReport()+0x8bc>
-    a914:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    a918:	e3822001 	orr	r2, r2, #1
-    a91c:	e2800020 	add	r0, r0, #32
-    a920:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    a924:	e3a01001 	mov	r1, #1
-    a928:	eb001c96 	bl	11b88 <zx_joy_down>
-    a92c:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    a930:	e59d100c 	ldr	r1, [sp, #12]
-    a934:	e7e030d2 	ubfx	r3, r2, #1, #1
-    a938:	e1530001 	cmp	r3, r1
-    a93c:	0a000008 	beq	a964 <CKernel::ApplyInputReport()+0x460>
-    a940:	e35a0000 	cmp	sl, #0
-    a944:	0a000125 	beq	ade0 <CKernel::ApplyInputReport()+0x8dc>
-    a948:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    a94c:	e3822002 	orr	r2, r2, #2
-    a950:	e2800020 	add	r0, r0, #32
-    a954:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    a958:	e3a01002 	mov	r1, #2
-    a95c:	eb001c89 	bl	11b88 <zx_joy_down>
-    a960:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    a964:	e59d1010 	ldr	r1, [sp, #16]
-    a968:	e7e03152 	ubfx	r3, r2, #2, #1
-    a96c:	e1530001 	cmp	r3, r1
-    a970:	0a000009 	beq	a99c <CKernel::ApplyInputReport()+0x498>
-    a974:	e59d301c 	ldr	r3, [sp, #28]
-    a978:	e3530000 	cmp	r3, #0
-    a97c:	0a00011f 	beq	ae00 <CKernel::ApplyInputReport()+0x8fc>
-    a980:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    a984:	e3822004 	orr	r2, r2, #4
-    a988:	e2800020 	add	r0, r0, #32
-    a98c:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    a990:	e3a01004 	mov	r1, #4
-    a994:	eb001c7b 	bl	11b88 <zx_joy_down>
-    a998:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    a99c:	e59d1014 	ldr	r1, [sp, #20]
-    a9a0:	e7e031d2 	ubfx	r3, r2, #3, #1
-    a9a4:	e1530001 	cmp	r3, r1
-    a9a8:	0a000009 	beq	a9d4 <CKernel::ApplyInputReport()+0x4d0>
-    a9ac:	e59d3020 	ldr	r3, [sp, #32]
-    a9b0:	e3530000 	cmp	r3, #0
-    a9b4:	0a000119 	beq	ae20 <CKernel::ApplyInputReport()+0x91c>
-    a9b8:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    a9bc:	e3822008 	orr	r2, r2, #8
-    a9c0:	e2800020 	add	r0, r0, #32
-    a9c4:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    a9c8:	e3a01008 	mov	r1, #8
-    a9cc:	eb001c6d 	bl	11b88 <zx_joy_down>
-    a9d0:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    a9d4:	e59d1018 	ldr	r1, [sp, #24]
-    a9d8:	e7e03252 	ubfx	r3, r2, #4, #1
-    a9dc:	e1530001 	cmp	r3, r1
-    a9e0:	0a000008 	beq	aa08 <CKernel::ApplyInputReport()+0x504>
-    a9e4:	e59d302c 	ldr	r3, [sp, #44]	@ 0x2c
-    a9e8:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    a9ec:	e3530000 	cmp	r3, #0
-    a9f0:	0a000112 	beq	ae40 <CKernel::ApplyInputReport()+0x93c>
-    a9f4:	e3822010 	orr	r2, r2, #16
-    a9f8:	e2800020 	add	r0, r0, #32
-    a9fc:	e3a01010 	mov	r1, #16
-    aa00:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    aa04:	eb001c5f 	bl	11b88 <zx_joy_down>
-    aa08:	e59d3004 	ldr	r3, [sp, #4]
-    aa0c:	e3530000 	cmp	r3, #0
-    aa10:	0a000003 	beq	aa24 <CKernel::ApplyInputReport()+0x520>
-    aa14:	e5d63429 	ldrb	r3, [r6, #1065]	@ 0x429
-    aa18:	e3530000 	cmp	r3, #0
-    aa1c:	03a03001 	moveq	r3, #1
-    aa20:	05c6342a 	strbeq	r3, [r6, #1066]	@ 0x42a
-    aa24:	e59d3004 	ldr	r3, [sp, #4]
-    aa28:	e5c63429 	strb	r3, [r6, #1065]	@ 0x429
-    aa2c:	e59d3008 	ldr	r3, [sp, #8]
-    aa30:	e58673f4 	str	r7, [r6, #1012]	@ 0x3f4
-    aa34:	e58633f8 	str	r3, [r6, #1016]	@ 0x3f8
-    aa38:	e58693fc 	str	r9, [r6, #1020]	@ 0x3fc
-    aa3c:	e28dd064 	add	sp, sp, #100	@ 0x64
-    aa40:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
-    aa44:	e28d3030 	add	r3, sp, #48	@ 0x30
-    aa48:	e4d32001 	ldrb	r2, [r3], #1
-    aa4c:	e3520029 	cmp	r2, #41	@ 0x29
-    aa50:	0a000128 	beq	aef8 <CKernel::ApplyInputReport()+0x9f4>
-    aa54:	e15a0003 	cmp	sl, r3
-    aa58:	1afffffa 	bne	aa48 <CKernel::ApplyInputReport()+0x544>
-    aa5c:	e2847a83 	add	r7, r4, #536576	@ 0x83000
-    aa60:	e30352de 	movw	r5, #13022	@ 0x32de
-    aa64:	e3405008 	movt	r5, #8
-    aa68:	e2877fb9 	add	r7, r7, #740	@ 0x2e4
-    aa6c:	e0845005 	add	r5, r4, r5
-    aa70:	e28d3030 	add	r3, sp, #48	@ 0x30
-    aa74:	e4d32001 	ldrb	r2, [r3], #1
-    aa78:	e3520052 	cmp	r2, #82	@ 0x52
-    aa7c:	0a00012a 	beq	af2c <CKernel::ApplyInputReport()+0xa28>
-    aa80:	e15a0003 	cmp	sl, r3
-    aa84:	1afffffa 	bne	aa74 <CKernel::ApplyInputReport()+0x570>
-    aa88:	e28d3030 	add	r3, sp, #48	@ 0x30
-    aa8c:	e4d32001 	ldrb	r2, [r3], #1
-    aa90:	e3520051 	cmp	r2, #81	@ 0x51
-    aa94:	0a00021d 	beq	b310 <CKernel::ApplyInputReport()+0xe0c>
-    aa98:	e153000a 	cmp	r3, sl
-    aa9c:	1afffffa 	bne	aa8c <CKernel::ApplyInputReport()+0x588>
-    aaa0:	e28d3030 	add	r3, sp, #48	@ 0x30
-    aaa4:	ea000001 	b	aab0 <CKernel::ApplyInputReport()+0x5ac>
-    aaa8:	e153000a 	cmp	r3, sl
-    aaac:	0afffed4 	beq	a604 <CKernel::ApplyInputReport()+0x100>
-    aab0:	e4d32001 	ldrb	r2, [r3], #1
-    aab4:	e3520028 	cmp	r2, #40	@ 0x28
-    aab8:	1afffffa 	bne	aaa8 <CKernel::ApplyInputReport()+0x5a4>
-    aabc:	e1a03005 	mov	r3, r5
-    aac0:	e5f32001 	ldrb	r2, [r3, #1]!
-    aac4:	e3520028 	cmp	r2, #40	@ 0x28
-    aac8:	0afffecd 	beq	a604 <CKernel::ApplyInputReport()+0x100>
-    aacc:	e1570003 	cmp	r7, r3
-    aad0:	1afffffa 	bne	aac0 <CKernel::ApplyInputReport()+0x5bc>
-    aad4:	e1a00004 	mov	r0, r4
-    aad8:	ebfff9a0 	bl	9160 <CKernel::OSDActivateSelection()>
-    aadc:	e3500000 	cmp	r0, #0
-    aae0:	13a03000 	movne	r3, #0
-    aae4:	15c6342c 	strbne	r3, [r6, #1068]	@ 0x42c
-    aae8:	eafffec5 	b	a604 <CKernel::ApplyInputReport()+0x100>
-    aaec:	e5d5350b 	ldrb	r3, [r5, #1291]	@ 0x50b
-    aaf0:	e3530000 	cmp	r3, #0
-    aaf4:	1a00001a 	bne	ab64 <CKernel::ApplyInputReport()+0x660>
-    aaf8:	e5d5350c 	ldrb	r3, [r5, #1292]	@ 0x50c
-    aafc:	e2850e49 	add	r0, r5, #1168	@ 0x490
-    ab00:	e2233001 	eor	r3, r3, #1
-    ab04:	e5c5350c 	strb	r3, [r5, #1292]	@ 0x50c
-    ab08:	e3530000 	cmp	r3, #0
-    ab0c:	03a01001 	moveq	r1, #1
-    ab10:	13a01004 	movne	r1, #4
-    ab14:	eb001e7b 	bl	12508 <tzx_set_speedup>
-    ab18:	e5d5350c 	ldrb	r3, [r5, #1292]	@ 0x50c
-    ab1c:	e305043c 	movw	r0, #21564	@ 0x543c
-    ab20:	e3400008 	movt	r0, #8
-    ab24:	e1a02007 	mov	r2, r7
-    ab28:	e0840000 	add	r0, r4, r0
-    ab2c:	e3530000 	cmp	r3, #0
-    ab30:	1a00011a 	bne	afa0 <CKernel::ApplyInputReport()+0xa9c>
-    ab34:	e59f187c 	ldr	r1, [pc, #2172]	@ b3b8 <CKernel::ApplyInputReport()+0xeb4>
-    ab38:	eb00d1de 	bl	3f2b8 <strncpy>
-    ab3c:	e59f3878 	ldr	r3, [pc, #2168]	@ b3bc <CKernel::ApplyInputReport()+0xeb8>
-    ab40:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
-    ab44:	e3a02003 	mov	r2, #3
-    ab48:	e2800024 	add	r0, r0, #36	@ 0x24
-    ab4c:	e2431e5d 	sub	r1, r3, #1488	@ 0x5d0
-    ab50:	eb00bcfa 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    ab54:	e3a03000 	mov	r3, #0
-    ab58:	e5c5347b 	strb	r3, [r5, #1147]	@ 0x47b
-    ab5c:	e3a03001 	mov	r3, #1
-    ab60:	e5c6342d 	strb	r3, [r6, #1069]	@ 0x42d
-    ab64:	e3a03001 	mov	r3, #1
-    ab68:	eafffe9c 	b	a5e0 <CKernel::ApplyInputReport()+0xdc>
-    ab6c:	e5d5750a 	ldrb	r7, [r5, #1290]	@ 0x50a
-    ab70:	e3570000 	cmp	r7, #0
-    ab74:	1a000002 	bne	ab84 <CKernel::ApplyInputReport()+0x680>
-    ab78:	e5d53508 	ldrb	r3, [r5, #1288]	@ 0x508
-    ab7c:	e3530000 	cmp	r3, #0
-    ab80:	1a00012b 	bne	b034 <CKernel::ApplyInputReport()+0xb30>
-    ab84:	e3a03001 	mov	r3, #1
-    ab88:	eafffe8c 	b	a5c0 <CKernel::ApplyInputReport()+0xbc>
-    ab8c:	e2845a85 	add	r5, r4, #544768	@ 0x85000
-    ab90:	e5d57509 	ldrb	r7, [r5, #1289]	@ 0x509
-    ab94:	e3570000 	cmp	r7, #0
-    ab98:	1a000002 	bne	aba8 <CKernel::ApplyInputReport()+0x6a4>
-    ab9c:	e5d53508 	ldrb	r3, [r5, #1288]	@ 0x508
-    aba0:	e3530000 	cmp	r3, #0
-    aba4:	1a000136 	bne	b084 <CKernel::ApplyInputReport()+0xb80>
-    aba8:	e3a03001 	mov	r3, #1
-    abac:	eafffe7b 	b	a5a0 <CKernel::ApplyInputReport()+0x9c>
-    abb0:	e5d6342b 	ldrb	r3, [r6, #1067]	@ 0x42b
-    abb4:	e3530000 	cmp	r3, #0
-    abb8:	0a0000ef 	beq	af7c <CKernel::ApplyInputReport()+0xa78>
-    abbc:	e3a03001 	mov	r3, #1
-    abc0:	eafffe6d 	b	a57c <CKernel::ApplyInputReport()+0x78>
-    abc4:	e3a03080 	mov	r3, #128	@ 0x80
-    abc8:	e207ab02 	and	sl, r7, #2048	@ 0x800
-    abcc:	e1a09003 	mov	r9, r3
-    abd0:	e3170901 	tst	r7, #16384	@ 0x4000
-    abd4:	e1a0200a 	mov	r2, sl
-    abd8:	e58d3008 	str	r3, [sp, #8]
-    abdc:	1affff19 	bne	a848 <CKernel::ApplyInputReport()+0x344>
-    abe0:	e3520000 	cmp	r2, #0
-    abe4:	0a0000da 	beq	af54 <CKernel::ApplyInputReport()+0xa50>
-    abe8:	e3a03000 	mov	r3, #0
-    abec:	e3150b02 	tst	r5, #2048	@ 0x800
-    abf0:	e1a0a003 	mov	sl, r3
-    abf4:	e58d3018 	str	r3, [sp, #24]
-    abf8:	e58d302c 	str	r3, [sp, #44]	@ 0x2c
-    abfc:	e58d3014 	str	r3, [sp, #20]
-    ac00:	e58d3020 	str	r3, [sp, #32]
-    ac04:	e58d3010 	str	r3, [sp, #16]
-    ac08:	e58d301c 	str	r3, [sp, #28]
-    ac0c:	e58d300c 	str	r3, [sp, #12]
-    ac10:	e58d3004 	str	r3, [sp, #4]
-    ac14:	1a00004a 	bne	ad44 <CKernel::ApplyInputReport()+0x840>
-    ac18:	e3510000 	cmp	r1, #0
-    ac1c:	0affff1f 	beq	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ac20:	e3170c02 	tst	r7, #512	@ 0x200
-    ac24:	0a000001 	beq	ac30 <CKernel::ApplyInputReport()+0x72c>
-    ac28:	e3150c02 	tst	r5, #512	@ 0x200
-    ac2c:	1a000126 	bne	b0cc <CKernel::ApplyInputReport()+0xbc8>
-    ac30:	e7e058d7 	ubfx	r5, r7, #17, #1
-    ac34:	e2171902 	ands	r1, r7, #32768	@ 0x8000
-    ac38:	1a00004b 	bne	ad6c <CKernel::ApplyInputReport()+0x868>
-    ac3c:	e359005f 	cmp	r9, #95	@ 0x5f
-    ac40:	d3a01001 	movle	r1, #1
-    ac44:	ca000049 	bgt	ad70 <CKernel::ApplyInputReport()+0x86c>
-    ac48:	e59623f4 	ldr	r2, [r6, #1012]	@ 0x3f4
-    ac4c:	e3120902 	tst	r2, #32768	@ 0x8000
-    ac50:	e2022802 	and	r2, r2, #131072	@ 0x20000
-    ac54:	0a00004b 	beq	ad88 <CKernel::ApplyInputReport()+0x884>
-    ac58:	e3520000 	cmp	r2, #0
-    ac5c:	1affff0f 	bne	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ac60:	e59623fc 	ldr	r2, [r6, #1020]	@ 0x3fc
-    ac64:	e35200a0 	cmp	r2, #160	@ 0xa0
-    ac68:	caffff0c 	bgt	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ac6c:	e3550000 	cmp	r5, #0
-    ac70:	0affff0a 	beq	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ac74:	e3a01001 	mov	r1, #1
-    ac78:	e1a00004 	mov	r0, r4
-    ac7c:	e58d3024 	str	r3, [sp, #36]	@ 0x24
-    ac80:	ebfff780 	bl	8a88 <CKernel::OSDMoveSelection(int)>
-    ac84:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    ac88:	eaffff04 	b	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ac8c:	e3a03080 	mov	r3, #128	@ 0x80
-    ac90:	e3170701 	tst	r7, #262144	@ 0x40000
-    ac94:	e1a09003 	mov	r9, r3
-    ac98:	e58d3008 	str	r3, [sp, #8]
-    ac9c:	1a000030 	bne	ad64 <CKernel::ApplyInputReport()+0x860>
-    aca0:	e7e03857 	ubfx	r3, r7, #16, #1
-    aca4:	e1913003 	orrs	r3, r1, r3
-    aca8:	0a000000 	beq	acb0 <CKernel::ApplyInputReport()+0x7ac>
-    acac:	e3800001 	orr	r0, r0, #1
-    acb0:	e3170902 	tst	r7, #32768	@ 0x8000
-    acb4:	e2073802 	and	r3, r7, #131072	@ 0x20000
-    acb8:	1a00008c 	bne	aef0 <CKernel::ApplyInputReport()+0x9ec>
-    acbc:	e359005f 	cmp	r9, #95	@ 0x5f
-    acc0:	da0000d1 	ble	b00c <CKernel::ApplyInputReport()+0xb08>
-    acc4:	e35900a0 	cmp	r9, #160	@ 0xa0
-    acc8:	d3530000 	cmple	r3, #0
-    accc:	0a000000 	beq	acd4 <CKernel::ApplyInputReport()+0x7d0>
-    acd0:	e3800004 	orr	r0, r0, #4
-    acd4:	e3170e35 	tst	r7, #848	@ 0x350
-    acd8:	e2073901 	and	r3, r7, #16384	@ 0x4000
-    acdc:	1a00005d 	bne	ae58 <CKernel::ApplyInputReport()+0x954>
-    ace0:	e2001001 	and	r1, r0, #1
-    ace4:	e7e020d0 	ubfx	r2, r0, #1, #1
-    ace8:	e3530000 	cmp	r3, #0
-    acec:	e58d200c 	str	r2, [sp, #12]
-    acf0:	e1a03001 	mov	r3, r1
-    acf4:	e2002004 	and	r2, r0, #4
-    acf8:	e200a002 	and	sl, r0, #2
-    acfc:	e58d201c 	str	r2, [sp, #28]
-    ad00:	e7e02150 	ubfx	r2, r0, #2, #1
-    ad04:	e58d2010 	str	r2, [sp, #16]
-    ad08:	e2002008 	and	r2, r0, #8
-    ad0c:	e58d2020 	str	r2, [sp, #32]
-    ad10:	e7e021d0 	ubfx	r2, r0, #3, #1
-    ad14:	e58d2014 	str	r2, [sp, #20]
-    ad18:	e2002010 	and	r2, r0, #16
-    ad1c:	e58d202c 	str	r2, [sp, #44]	@ 0x2c
-    ad20:	e7e02250 	ubfx	r2, r0, #4, #1
-    ad24:	e58d2018 	str	r2, [sp, #24]
-    ad28:	1a0000b2 	bne	aff8 <CKernel::ApplyInputReport()+0xaf4>
-    ad2c:	e2072b02 	and	r2, r7, #2048	@ 0x800
-    ad30:	e5d6142c 	ldrb	r1, [r6, #1068]	@ 0x42c
-    ad34:	e3520000 	cmp	r2, #0
-    ad38:	0affffb6 	beq	ac18 <CKernel::ApplyInputReport()+0x714>
-    ad3c:	e3150b02 	tst	r5, #2048	@ 0x800
-    ad40:	0affffb4 	beq	ac18 <CKernel::ApplyInputReport()+0x714>
-    ad44:	e3510000 	cmp	r1, #0
-    ad48:	1a0000b3 	bne	b01c <CKernel::ApplyInputReport()+0xb18>
-    ad4c:	e3a02001 	mov	r2, #1
-    ad50:	e5c6242a 	strb	r2, [r6, #1066]	@ 0x42a
-    ad54:	eafffed1 	b	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ad58:	e35300a0 	cmp	r3, #160	@ 0xa0
-    ad5c:	d3a01000 	movle	r1, #0
-    ad60:	c3a01001 	movgt	r1, #1
-    ad64:	e3800002 	orr	r0, r0, #2
-    ad68:	eaffffcc 	b	aca0 <CKernel::ApplyInputReport()+0x79c>
-    ad6c:	e3a01001 	mov	r1, #1
-    ad70:	e59623f4 	ldr	r2, [r6, #1012]	@ 0x3f4
-    ad74:	e35900a0 	cmp	r9, #160	@ 0xa0
-    ad78:	c3855001 	orrgt	r5, r5, #1
-    ad7c:	e3120902 	tst	r2, #32768	@ 0x8000
-    ad80:	e2022802 	and	r2, r2, #131072	@ 0x20000
-    ad84:	1affffb3 	bne	ac58 <CKernel::ApplyInputReport()+0x754>
-    ad88:	e3520000 	cmp	r2, #0
-    ad8c:	e59623fc 	ldr	r2, [r6, #1020]	@ 0x3fc
-    ad90:	0a00008b 	beq	afc4 <CKernel::ApplyInputReport()+0xac0>
-    ad94:	e352005f 	cmp	r2, #95	@ 0x5f
-    ad98:	d3a01000 	movle	r1, #0
-    ad9c:	c2011001 	andgt	r1, r1, #1
-    ada0:	e3510000 	cmp	r1, #0
-    ada4:	0afffebd 	beq	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    ada8:	e1a00004 	mov	r0, r4
-    adac:	e3e01000 	mvn	r1, #0
-    adb0:	e58d3024 	str	r3, [sp, #36]	@ 0x24
-    adb4:	ebfff733 	bl	8a88 <CKernel::OSDMoveSelection(int)>
-    adb8:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    adbc:	eafffeb7 	b	a8a0 <CKernel::ApplyInputReport()+0x39c>
-    adc0:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    adc4:	e3c22001 	bic	r2, r2, #1
-    adc8:	e2800020 	add	r0, r0, #32
-    adcc:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    add0:	e3a01001 	mov	r1, #1
-    add4:	eb001b71 	bl	11ba0 <zx_joy_up>
-    add8:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    addc:	eafffed3 	b	a930 <CKernel::ApplyInputReport()+0x42c>
-    ade0:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    ade4:	e3c22002 	bic	r2, r2, #2
-    ade8:	e2800020 	add	r0, r0, #32
-    adec:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    adf0:	e3a01002 	mov	r1, #2
-    adf4:	eb001b69 	bl	11ba0 <zx_joy_up>
-    adf8:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    adfc:	eafffed8 	b	a964 <CKernel::ApplyInputReport()+0x460>
-    ae00:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    ae04:	e3c22004 	bic	r2, r2, #4
-    ae08:	e2800020 	add	r0, r0, #32
-    ae0c:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    ae10:	e3a01004 	mov	r1, #4
-    ae14:	eb001b61 	bl	11ba0 <zx_joy_up>
-    ae18:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    ae1c:	eafffede 	b	a99c <CKernel::ApplyInputReport()+0x498>
-    ae20:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    ae24:	e3c22008 	bic	r2, r2, #8
-    ae28:	e2800020 	add	r0, r0, #32
-    ae2c:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    ae30:	e3a01008 	mov	r1, #8
-    ae34:	eb001b59 	bl	11ba0 <zx_joy_up>
-    ae38:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
-    ae3c:	eafffee4 	b	a9d4 <CKernel::ApplyInputReport()+0x4d0>
-    ae40:	e3c22010 	bic	r2, r2, #16
-    ae44:	e2800020 	add	r0, r0, #32
-    ae48:	e3a01010 	mov	r1, #16
-    ae4c:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
-    ae50:	eb001b52 	bl	11ba0 <zx_joy_up>
-    ae54:	eafffeeb 	b	aa08 <CKernel::ApplyInputReport()+0x504>
-    ae58:	e200b001 	and	fp, r0, #1
-    ae5c:	e7e020d0 	ubfx	r2, r0, #1, #1
-    ae60:	e3530000 	cmp	r3, #0
-    ae64:	e58d200c 	str	r2, [sp, #12]
-    ae68:	e3808010 	orr	r8, r0, #16
-    ae6c:	e2002004 	and	r2, r0, #4
-    ae70:	e1a0300b 	mov	r3, fp
-    ae74:	e58d201c 	str	r2, [sp, #28]
-    ae78:	e200a002 	and	sl, r0, #2
-    ae7c:	e7e02150 	ubfx	r2, r0, #2, #1
-    ae80:	e58d2010 	str	r2, [sp, #16]
-    ae84:	e2002008 	and	r2, r0, #8
-    ae88:	e58d2020 	str	r2, [sp, #32]
-    ae8c:	e7e021d0 	ubfx	r2, r0, #3, #1
-    ae90:	e58d2014 	str	r2, [sp, #20]
-    ae94:	0a00003c 	beq	af8c <CKernel::ApplyInputReport()+0xa88>
-    ae98:	e3150901 	tst	r5, #16384	@ 0x4000
-    ae9c:	0a00003a 	beq	af8c <CKernel::ApplyInputReport()+0xa88>
-    aea0:	e3a03001 	mov	r3, #1
-    aea4:	e58d3018 	str	r3, [sp, #24]
-    aea8:	e3a03010 	mov	r3, #16
-    aeac:	e58d302c 	str	r3, [sp, #44]	@ 0x2c
-    aeb0:	e1a00004 	mov	r0, r4
-    aeb4:	e208a002 	and	sl, r8, #2
-    aeb8:	ebfffce1 	bl	a244 <CKernel::ToggleOSD()>
-    aebc:	e7e020d8 	ubfx	r2, r8, #1, #1
-    aec0:	e6ef307b 	uxtb	r3, fp
-    aec4:	e58d200c 	str	r2, [sp, #12]
-    aec8:	e2082004 	and	r2, r8, #4
-    aecc:	e58d201c 	str	r2, [sp, #28]
-    aed0:	e7e02158 	ubfx	r2, r8, #2, #1
-    aed4:	e58d2010 	str	r2, [sp, #16]
-    aed8:	e2082008 	and	r2, r8, #8
-    aedc:	e58d2020 	str	r2, [sp, #32]
-    aee0:	e7e021d8 	ubfx	r2, r8, #3, #1
-    aee4:	e58d2014 	str	r2, [sp, #20]
-    aee8:	e2072b02 	and	r2, r7, #2048	@ 0x800
-    aeec:	eaffff8f 	b	ad30 <CKernel::ApplyInputReport()+0x82c>
-    aef0:	e3800008 	orr	r0, r0, #8
-    aef4:	eaffff72 	b	acc4 <CKernel::ApplyInputReport()+0x7c0>
-    aef8:	e30352de 	movw	r5, #13022	@ 0x32de
-    aefc:	e3405008 	movt	r5, #8
-    af00:	e0845005 	add	r5, r4, r5
-    af04:	e2867fb9 	add	r7, r6, #740	@ 0x2e4
-    af08:	e1a03005 	mov	r3, r5
-    af0c:	e5f32001 	ldrb	r2, [r3, #1]!
-    af10:	e3520029 	cmp	r2, #41	@ 0x29
-    af14:	0a000111 	beq	b360 <CKernel::ApplyInputReport()+0xe5c>
-    af18:	e1530007 	cmp	r3, r7
-    af1c:	1afffffa 	bne	af0c <CKernel::ApplyInputReport()+0xa08>
-    af20:	e1a00004 	mov	r0, r4
-    af24:	ebfffcc6 	bl	a244 <CKernel::ToggleOSD()>
-    af28:	eafffdb5 	b	a604 <CKernel::ApplyInputReport()+0x100>
-    af2c:	e1a03005 	mov	r3, r5
-    af30:	e5f32001 	ldrb	r2, [r3, #1]!
-    af34:	e3520052 	cmp	r2, #82	@ 0x52
-    af38:	0afffed2 	beq	aa88 <CKernel::ApplyInputReport()+0x584>
-    af3c:	e1530007 	cmp	r3, r7
-    af40:	1afffffa 	bne	af30 <CKernel::ApplyInputReport()+0xa2c>
-    af44:	e1a00004 	mov	r0, r4
-    af48:	e3e01000 	mvn	r1, #0
-    af4c:	ebfff6cd 	bl	8a88 <CKernel::OSDMoveSelection(int)>
-    af50:	eafffdab 	b	a604 <CKernel::ApplyInputReport()+0x100>
-    af54:	e1a03002 	mov	r3, r2
-    af58:	e58d202c 	str	r2, [sp, #44]	@ 0x2c
-    af5c:	e58d2020 	str	r2, [sp, #32]
-    af60:	e58d201c 	str	r2, [sp, #28]
-    af64:	e58d2018 	str	r2, [sp, #24]
-    af68:	e58d2014 	str	r2, [sp, #20]
-    af6c:	e58d2010 	str	r2, [sp, #16]
-    af70:	e58d200c 	str	r2, [sp, #12]
-    af74:	e58d2004 	str	r2, [sp, #4]
-    af78:	eaffff28 	b	ac20 <CKernel::ApplyInputReport()+0x71c>
-    af7c:	e1a00004 	mov	r0, r4
-    af80:	ebfffcaf 	bl	a244 <CKernel::ToggleOSD()>
-    af84:	e3a03001 	mov	r3, #1
-    af88:	eafffd7b 	b	a57c <CKernel::ApplyInputReport()+0x78>
-    af8c:	e3a02001 	mov	r2, #1
-    af90:	e58d2018 	str	r2, [sp, #24]
-    af94:	e3a02010 	mov	r2, #16
-    af98:	e58d202c 	str	r2, [sp, #44]	@ 0x2c
-    af9c:	eaffff62 	b	ad2c <CKernel::ApplyInputReport()+0x828>
-    afa0:	e59f1418 	ldr	r1, [pc, #1048]	@ b3c0 <CKernel::ApplyInputReport()+0xebc>
-    afa4:	eb00d0c3 	bl	3f2b8 <strncpy>
-    afa8:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
-    afac:	e59f3410 	ldr	r3, [pc, #1040]	@ b3c4 <CKernel::ApplyInputReport()+0xec0>
-    afb0:	e2800024 	add	r0, r0, #36	@ 0x24
-    afb4:	e59f140c 	ldr	r1, [pc, #1036]	@ b3c8 <CKernel::ApplyInputReport()+0xec4>
-    afb8:	e3a02003 	mov	r2, #3
-    afbc:	eb00bbdf 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    afc0:	eafffee3 	b	ab54 <CKernel::ApplyInputReport()+0x650>
-    afc4:	e35200a0 	cmp	r2, #160	@ 0xa0
-    afc8:	caffff71 	bgt	ad94 <CKernel::ApplyInputReport()+0x890>
-    afcc:	e352005f 	cmp	r2, #95	@ 0x5f
-    afd0:	d3a01000 	movle	r1, #0
-    afd4:	c2011001 	andgt	r1, r1, #1
-    afd8:	e3510000 	cmp	r1, #0
-    afdc:	0affff22 	beq	ac6c <CKernel::ApplyInputReport()+0x768>
-    afe0:	e1a00004 	mov	r0, r4
-    afe4:	e3e01000 	mvn	r1, #0
-    afe8:	e58d3024 	str	r3, [sp, #36]	@ 0x24
-    afec:	ebfff6a5 	bl	8a88 <CKernel::OSDMoveSelection(int)>
-    aff0:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    aff4:	eaffff1c 	b	ac6c <CKernel::ApplyInputReport()+0x768>
-    aff8:	e3150901 	tst	r5, #16384	@ 0x4000
-    affc:	0affff4a 	beq	ad2c <CKernel::ApplyInputReport()+0x828>
-    b000:	e1a08000 	mov	r8, r0
-    b004:	e1a0b001 	mov	fp, r1
-    b008:	eaffffa8 	b	aeb0 <CKernel::ApplyInputReport()+0x9ac>
-    b00c:	e3530000 	cmp	r3, #0
-    b010:	e3800008 	orr	r0, r0, #8
-    b014:	1affff2d 	bne	acd0 <CKernel::ApplyInputReport()+0x7cc>
-    b018:	eaffff2d 	b	acd4 <CKernel::ApplyInputReport()+0x7d0>
-    b01c:	e1a00004 	mov	r0, r4
-    b020:	e58d3024 	str	r3, [sp, #36]	@ 0x24
-    b024:	ebfffc86 	bl	a244 <CKernel::ToggleOSD()>
-    b028:	e5d6142c 	ldrb	r1, [r6, #1068]	@ 0x42c
-    b02c:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    b030:	eafffef8 	b	ac18 <CKernel::ApplyInputReport()+0x714>
-    b034:	e2850e49 	add	r0, r5, #1168	@ 0x490
-    b038:	eb001d2e 	bl	124f8 <tzx_stop>
-    b03c:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
-    b040:	e1a01007 	mov	r1, r7
-    b044:	e2800020 	add	r0, r0, #32
-    b048:	eb001ada 	bl	11bb8 <zx_set_ear>
-    b04c:	e305043c 	movw	r0, #21564	@ 0x543c
-    b050:	e3400008 	movt	r0, #8
-    b054:	e59f1370 	ldr	r1, [pc, #880]	@ b3cc <CKernel::ApplyInputReport()+0xec8>
-    b058:	e0840000 	add	r0, r4, r0
-    b05c:	e3a0203f 	mov	r2, #63	@ 0x3f
-    b060:	eb00d094 	bl	3f2b8 <strncpy>
-    b064:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
-    b068:	e59f3360 	ldr	r3, [pc, #864]	@ b3d0 <CKernel::ApplyInputReport()+0xecc>
-    b06c:	e2800024 	add	r0, r0, #36	@ 0x24
-    b070:	e59f1350 	ldr	r1, [pc, #848]	@ b3c8 <CKernel::ApplyInputReport()+0xec4>
-    b074:	e3a02003 	mov	r2, #3
-    b078:	e5c5747b 	strb	r7, [r5, #1147]	@ 0x47b
-    b07c:	eb00bbaf 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b080:	eafffebf 	b	ab84 <CKernel::ApplyInputReport()+0x680>
-    b084:	e2843dad 	add	r3, r4, #11072	@ 0x2b40
-    b088:	e2850e49 	add	r0, r5, #1168	@ 0x490
-    b08c:	e1c320d0 	ldrd	r2, [r3]
-    b090:	eb001d04 	bl	124a8 <tzx_play>
-    b094:	e305043c 	movw	r0, #21564	@ 0x543c
-    b098:	e3400008 	movt	r0, #8
-    b09c:	e59f1330 	ldr	r1, [pc, #816]	@ b3d4 <CKernel::ApplyInputReport()+0xed0>
-    b0a0:	e0840000 	add	r0, r4, r0
-    b0a4:	e3a0203f 	mov	r2, #63	@ 0x3f
-    b0a8:	eb00d082 	bl	3f2b8 <strncpy>
-    b0ac:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
-    b0b0:	e59f3320 	ldr	r3, [pc, #800]	@ b3d8 <CKernel::ApplyInputReport()+0xed4>
-    b0b4:	e2800024 	add	r0, r0, #36	@ 0x24
-    b0b8:	e59f1308 	ldr	r1, [pc, #776]	@ b3c8 <CKernel::ApplyInputReport()+0xec4>
-    b0bc:	e3a02003 	mov	r2, #3
-    b0c0:	e5c5747b 	strb	r7, [r5, #1147]	@ 0x47b
-    b0c4:	eb00bb9d 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b0c8:	eafffeb6 	b	aba8 <CKernel::ApplyInputReport()+0x6a4>
-    b0cc:	e1a00004 	mov	r0, r4
-    b0d0:	e58d3024 	str	r3, [sp, #36]	@ 0x24
-    b0d4:	ebfff821 	bl	9160 <CKernel::OSDActivateSelection()>
-    b0d8:	e3500000 	cmp	r0, #0
-    b0dc:	13a02000 	movne	r2, #0
-    b0e0:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
-    b0e4:	15c6242c 	strbne	r2, [r6, #1068]	@ 0x42c
-    b0e8:	eafffed0 	b	ac30 <CKernel::ApplyInputReport()+0x72c>
-    b0ec:	e3a02001 	mov	r2, #1
-    b0f0:	e5cd205f 	strb	r2, [sp, #95]	@ 0x5f
-    b0f4:	eafffdbc 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b0f8:	e3a02001 	mov	r2, #1
-    b0fc:	e5cd203b 	strb	r2, [sp, #59]	@ 0x3b
-    b100:	eafffdb9 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b104:	e3a02001 	mov	r2, #1
-    b108:	e5cd203f 	strb	r2, [sp, #63]	@ 0x3f
-    b10c:	eafffdb6 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b110:	e3a02001 	mov	r2, #1
-    b114:	e5cd2044 	strb	r2, [sp, #68]	@ 0x44
-    b118:	eafffdb3 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b11c:	e3a02001 	mov	r2, #1
-    b120:	e5cd2040 	strb	r2, [sp, #64]	@ 0x40
-    b124:	eafffdb0 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b128:	e3a02001 	mov	r2, #1
-    b12c:	e5cd2041 	strb	r2, [sp, #65]	@ 0x41
-    b130:	eafffdad 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b134:	e3a02001 	mov	r2, #1
-    b138:	e5cd205a 	strb	r2, [sp, #90]	@ 0x5a
-    b13c:	eafffdaa 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b140:	e3a02001 	mov	r2, #1
-    b144:	e5cd2053 	strb	r2, [sp, #83]	@ 0x53
-    b148:	eafffda7 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b14c:	e3a02001 	mov	r2, #1
-    b150:	e5cd2059 	strb	r2, [sp, #89]	@ 0x59
-    b154:	eafffda4 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b158:	e3a02001 	mov	r2, #1
-    b15c:	e5cd2058 	strb	r2, [sp, #88]	@ 0x58
-    b160:	eafffda1 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b164:	e3a02001 	mov	r2, #1
-    b168:	e5cd2057 	strb	r2, [sp, #87]	@ 0x57
-    b16c:	eafffd9e 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b170:	e3a02001 	mov	r2, #1
-    b174:	e5cd205d 	strb	r2, [sp, #93]	@ 0x5d
-    b178:	eafffd9b 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b17c:	e3a02001 	mov	r2, #1
-    b180:	e5cd205e 	strb	r2, [sp, #94]	@ 0x5e
-    b184:	eafffd98 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b188:	e3a02001 	mov	r2, #1
-    b18c:	e5cd2052 	strb	r2, [sp, #82]	@ 0x52
-    b190:	eafffd95 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b194:	e3a02001 	mov	r2, #1
-    b198:	e5cd2051 	strb	r2, [sp, #81]	@ 0x51
-    b19c:	eafffd92 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1a0:	e3a02001 	mov	r2, #1
-    b1a4:	e5cd2056 	strb	r2, [sp, #86]	@ 0x56
-    b1a8:	eafffd8f 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1ac:	e3a02001 	mov	r2, #1
-    b1b0:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
-    b1b4:	e5cd204c 	strb	r2, [sp, #76]	@ 0x4c
-    b1b8:	eafffd8b 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1bc:	e3800010 	orr	r0, r0, #16
-    b1c0:	eafffd89 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1c4:	e3a02001 	mov	r2, #1
-    b1c8:	e5cd205b 	strb	r2, [sp, #91]	@ 0x5b
-    b1cc:	eafffd86 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1d0:	e3a02001 	mov	r2, #1
-    b1d4:	e3800008 	orr	r0, r0, #8
-    b1d8:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
-    b1dc:	e5cd204f 	strb	r2, [sp, #79]	@ 0x4f
-    b1e0:	eafffd81 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1e4:	e3a02001 	mov	r2, #1
-    b1e8:	e3800001 	orr	r0, r0, #1
-    b1ec:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
-    b1f0:	e5cd204e 	strb	r2, [sp, #78]	@ 0x4e
-    b1f4:	eafffd7c 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b1f8:	e3a02001 	mov	r2, #1
-    b1fc:	e3800002 	orr	r0, r0, #2
-    b200:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
-    b204:	e5cd204b 	strb	r2, [sp, #75]	@ 0x4b
-    b208:	eafffd77 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b20c:	e3a02001 	mov	r2, #1
-    b210:	e3800004 	orr	r0, r0, #4
-    b214:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
-    b218:	e5cd2050 	strb	r2, [sp, #80]	@ 0x50
-    b21c:	eafffd72 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b220:	e3a02001 	mov	r2, #1
-    b224:	e5cd204f 	strb	r2, [sp, #79]	@ 0x4f
-    b228:	eafffd6f 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b22c:	e3a02001 	mov	r2, #1
-    b230:	e5cd204e 	strb	r2, [sp, #78]	@ 0x4e
-    b234:	eafffd6c 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b238:	e3a02001 	mov	r2, #1
-    b23c:	e5cd204d 	strb	r2, [sp, #77]	@ 0x4d
-    b240:	eafffd69 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b244:	e3a02001 	mov	r2, #1
-    b248:	e5cd204c 	strb	r2, [sp, #76]	@ 0x4c
-    b24c:	eafffd66 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b250:	e3a02001 	mov	r2, #1
-    b254:	e5cd2042 	strb	r2, [sp, #66]	@ 0x42
-    b258:	eafffd63 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b25c:	e3a02001 	mov	r2, #1
-    b260:	e5cd2045 	strb	r2, [sp, #69]	@ 0x45
-    b264:	eafffd60 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b268:	e3a02001 	mov	r2, #1
-    b26c:	e5cd203e 	strb	r2, [sp, #62]	@ 0x3e
-    b270:	eafffd5d 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b274:	e3a02001 	mov	r2, #1
-    b278:	e5cd2046 	strb	r2, [sp, #70]	@ 0x46
-    b27c:	eafffd5a 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b280:	e3a02001 	mov	r2, #1
-    b284:	e5cd2054 	strb	r2, [sp, #84]	@ 0x54
-    b288:	eafffd57 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b28c:	e3a02001 	mov	r2, #1
-    b290:	e5cd203c 	strb	r2, [sp, #60]	@ 0x3c
-    b294:	eafffd54 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b298:	e3a02001 	mov	r2, #1
-    b29c:	e5cd2043 	strb	r2, [sp, #67]	@ 0x43
-    b2a0:	eafffd51 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2a4:	e3a02001 	mov	r2, #1
-    b2a8:	e5cd203a 	strb	r2, [sp, #58]	@ 0x3a
-    b2ac:	eafffd4e 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2b0:	e3a02001 	mov	r2, #1
-    b2b4:	e5cd2055 	strb	r2, [sp, #85]	@ 0x55
-    b2b8:	eafffd4b 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2bc:	e3a02001 	mov	r2, #1
-    b2c0:	e5cd2039 	strb	r2, [sp, #57]	@ 0x39
-    b2c4:	eafffd48 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2c8:	e3a02001 	mov	r2, #1
-    b2cc:	e5cd2047 	strb	r2, [sp, #71]	@ 0x47
-    b2d0:	eafffd45 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2d4:	e3a02001 	mov	r2, #1
-    b2d8:	e5cd2048 	strb	r2, [sp, #72]	@ 0x48
-    b2dc:	eafffd42 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2e0:	e3a02001 	mov	r2, #1
-    b2e4:	e5cd2049 	strb	r2, [sp, #73]	@ 0x49
-    b2e8:	eafffd3f 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2ec:	e3a02001 	mov	r2, #1
-    b2f0:	e5cd204a 	strb	r2, [sp, #74]	@ 0x4a
-    b2f4:	eafffd3c 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b2f8:	e3a02001 	mov	r2, #1
-    b2fc:	e5cd204b 	strb	r2, [sp, #75]	@ 0x4b
-    b300:	eafffd39 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b304:	e3a02001 	mov	r2, #1
-    b308:	e5cd2050 	strb	r2, [sp, #80]	@ 0x50
-    b30c:	eafffd36 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b310:	e1a03005 	mov	r3, r5
-    b314:	e5f32001 	ldrb	r2, [r3, #1]!
-    b318:	e3520051 	cmp	r2, #81	@ 0x51
-    b31c:	0afffddf 	beq	aaa0 <CKernel::ApplyInputReport()+0x59c>
-    b320:	e1570003 	cmp	r7, r3
-    b324:	1afffffa 	bne	b314 <CKernel::ApplyInputReport()+0xe10>
-    b328:	e3a01001 	mov	r1, #1
-    b32c:	e1a00004 	mov	r0, r4
-    b330:	ebfff5d4 	bl	8a88 <CKernel::OSDMoveSelection(int)>
-    b334:	eafffcb2 	b	a604 <CKernel::ApplyInputReport()+0x100>
-    b338:	e59da004 	ldr	sl, [sp, #4]
-    b33c:	e58da018 	str	sl, [sp, #24]
-    b340:	e1a0300a 	mov	r3, sl
-    b344:	e58da014 	str	sl, [sp, #20]
-    b348:	e58da010 	str	sl, [sp, #16]
-    b34c:	e58da00c 	str	sl, [sp, #12]
-    b350:	e58da02c 	str	sl, [sp, #44]	@ 0x2c
-    b354:	e58da020 	str	sl, [sp, #32]
-    b358:	e58da01c 	str	sl, [sp, #28]
-    b35c:	eafffe73 	b	ad30 <CKernel::ApplyInputReport()+0x82c>
-    b360:	e28d3030 	add	r3, sp, #48	@ 0x30
-    b364:	eafffdc2 	b	aa74 <CKernel::ApplyInputReport()+0x570>
-    b368:	e3a02001 	mov	r2, #1
-    b36c:	e58d2004 	str	r2, [sp, #4]
-    b370:	eafffd1d 	b	a7ec <CKernel::ApplyInputReport()+0x2e8>
-    b374:	e215ab02 	ands	sl, r5, #2048	@ 0x800
-    b378:	0afffd3f 	beq	a87c <CKernel::ApplyInputReport()+0x378>
-    b37c:	e1a0300b 	mov	r3, fp
-    b380:	e1a0a00b 	mov	sl, fp
-    b384:	e58db018 	str	fp, [sp, #24]
-    b388:	e58db02c 	str	fp, [sp, #44]	@ 0x2c
-    b38c:	e58db014 	str	fp, [sp, #20]
-    b390:	e58db020 	str	fp, [sp, #32]
-    b394:	e58db010 	str	fp, [sp, #16]
-    b398:	e58db01c 	str	fp, [sp, #28]
-    b39c:	e58db00c 	str	fp, [sp, #12]
-    b3a0:	e58db004 	str	fp, [sp, #4]
-    b3a4:	eafffe68 	b	ad4c <CKernel::ApplyInputReport()+0x848>
-    b3a8:	e35300a0 	cmp	r3, #160	@ 0xa0
-    b3ac:	d3a01000 	movle	r1, #0
-    b3b0:	c3a01001 	movgt	r1, #1
-    b3b4:	eafffe39 	b	aca0 <CKernel::ApplyInputReport()+0x79c>
-    b3b8:	00046e70 	.word	0x00046e70
-    b3bc:	00046e80 	.word	0x00046e80
-    b3c0:	00046e48 	.word	0x00046e48
-    b3c4:	00046e58 	.word	0x00046e58
-    b3c8:	000468b0 	.word	0x000468b0
-    b3cc:	00046e28 	.word	0x00046e28
-    b3d0:	00046e38 	.word	0x00046e38
-    b3d4:	00046e08 	.word	0x00046e08
-    b3d8:	00046e18 	.word	0x00046e18
+0000a500 <CKernel::ApplyInputReport()>:
+    a500:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    a504:	e303c2d9 	movw	ip, #13017	@ 0x32d9
+    a508:	e340c008 	movt	ip, #8
+    a50c:	e24dd064 	sub	sp, sp, #100	@ 0x64
+    a510:	e1a04000 	mov	r4, r0
+    a514:	e2806a83 	add	r6, r0, #536576	@ 0x83000
+    a518:	e59602d4 	ldr	r0, [r6, #724]	@ 0x2d4
+    a51c:	e28db030 	add	fp, sp, #48	@ 0x30
+    a520:	e5d612d8 	ldrb	r1, [r6, #728]	@ 0x2d8
+    a524:	e1a0200b 	mov	r2, fp
+    a528:	e3a03000 	mov	r3, #0
+    a52c:	e6ef8071 	uxtb	r8, r1
+    a530:	e0841003 	add	r1, r4, r3
+    a534:	e2833001 	add	r3, r3, #1
+    a538:	e3530006 	cmp	r3, #6
+    a53c:	e7d1100c 	ldrb	r1, [r1, ip]
+    a540:	e4c21001 	strb	r1, [r2], #1
+    a544:	1afffff9 	bne	a530 <CKernel::ApplyInputReport()+0x30>
+    a548:	e59632d4 	ldr	r3, [r6, #724]	@ 0x2d4
+    a54c:	e1500003 	cmp	r0, r3
+    a550:	1afffff0 	bne	a518 <CKernel::ApplyInputReport()+0x18>
+    a554:	e28da036 	add	sl, sp, #54	@ 0x36
+    a558:	e28d3030 	add	r3, sp, #48	@ 0x30
+    a55c:	e58602e8 	str	r0, [r6, #744]	@ 0x2e8
+    a560:	e4d32001 	ldrb	r2, [r3], #1
+    a564:	e352003a 	cmp	r2, #58	@ 0x3a
+    a568:	0a00018f 	beq	abac <CKernel::ApplyInputReport()+0x6ac>
+    a56c:	e15a0003 	cmp	sl, r3
+    a570:	1afffffa 	bne	a560 <CKernel::ApplyInputReport()+0x60>
+    a574:	e3a03000 	mov	r3, #0
+    a578:	e5c6342b 	strb	r3, [r6, #1067]	@ 0x42b
+    a57c:	e28d3030 	add	r3, sp, #48	@ 0x30
+    a580:	e4d32001 	ldrb	r2, [r3], #1
+    a584:	e352003c 	cmp	r2, #60	@ 0x3c
+    a588:	0a00017e 	beq	ab88 <CKernel::ApplyInputReport()+0x688>
+    a58c:	e15a0003 	cmp	sl, r3
+    a590:	1afffffa 	bne	a580 <CKernel::ApplyInputReport()+0x80>
+    a594:	e3a03000 	mov	r3, #0
+    a598:	e2845a85 	add	r5, r4, #544768	@ 0x85000
+    a59c:	e5c53509 	strb	r3, [r5, #1289]	@ 0x509
+    a5a0:	e28d3030 	add	r3, sp, #48	@ 0x30
+    a5a4:	e4d32001 	ldrb	r2, [r3], #1
+    a5a8:	e352003d 	cmp	r2, #61	@ 0x3d
+    a5ac:	0a00016d 	beq	ab68 <CKernel::ApplyInputReport()+0x668>
+    a5b0:	e15a0003 	cmp	sl, r3
+    a5b4:	1afffffa 	bne	a5a4 <CKernel::ApplyInputReport()+0xa4>
+    a5b8:	e3a03000 	mov	r3, #0
+    a5bc:	e5c5350a 	strb	r3, [r5, #1290]	@ 0x50a
+    a5c0:	e28d3030 	add	r3, sp, #48	@ 0x30
+    a5c4:	e4d37001 	ldrb	r7, [r3], #1
+    a5c8:	e357003f 	cmp	r7, #63	@ 0x3f
+    a5cc:	0a000145 	beq	aae8 <CKernel::ApplyInputReport()+0x5e8>
+    a5d0:	e15a0003 	cmp	sl, r3
+    a5d4:	1afffffa 	bne	a5c4 <CKernel::ApplyInputReport()+0xc4>
+    a5d8:	e3a03000 	mov	r3, #0
+    a5dc:	e5c5350b 	strb	r3, [r5, #1291]	@ 0x50b
+    a5e0:	e5d6342c 	ldrb	r3, [r6, #1068]	@ 0x42c
+    a5e4:	e3530000 	cmp	r3, #0
+    a5e8:	1a000114 	bne	aa40 <CKernel::ApplyInputReport()+0x540>
+    a5ec:	e2847a83 	add	r7, r4, #536576	@ 0x83000
+    a5f0:	e30352de 	movw	r5, #13022	@ 0x32de
+    a5f4:	e3405008 	movt	r5, #8
+    a5f8:	e2877fb9 	add	r7, r7, #740	@ 0x2e4
+    a5fc:	e0845005 	add	r5, r4, r5
+    a600:	e1a03005 	mov	r3, r5
+    a604:	e28d2030 	add	r2, sp, #48	@ 0x30
+    a608:	e4d21001 	ldrb	r1, [r2], #1
+    a60c:	e5e31001 	strb	r1, [r3, #1]!
+    a610:	e1570003 	cmp	r7, r3
+    a614:	1afffffb 	bne	a608 <CKernel::ApplyInputReport()+0x108>
+    a618:	e59632f4 	ldr	r3, [r6, #756]	@ 0x2f4
+    a61c:	e5969304 	ldr	r9, [r6, #772]	@ 0x304
+    a620:	e59673d8 	ldr	r7, [r6, #984]	@ 0x3d8
+    a624:	e59622f8 	ldr	r2, [r6, #760]	@ 0x2f8
+    a628:	e58d2008 	str	r2, [sp, #8]
+    a62c:	e59622ec 	ldr	r2, [r6, #748]	@ 0x2ec
+    a630:	e59612ec 	ldr	r1, [r6, #748]	@ 0x2ec
+    a634:	e1520001 	cmp	r2, r1
+    a638:	1afffffb 	bne	a62c <CKernel::ApplyInputReport()+0x12c>
+    a63c:	e3a01000 	mov	r1, #0
+    a640:	e58622f0 	str	r2, [r6, #752]	@ 0x2f0
+    a644:	e28d0038 	add	r0, sp, #56	@ 0x38
+    a648:	e3a02028 	mov	r2, #40	@ 0x28
+    a64c:	e59653f4 	ldr	r5, [r6, #1012]	@ 0x3f4
+    a650:	e58d3004 	str	r3, [sp, #4]
+    a654:	eb00d494 	bl	3f8ac <memset>
+    a658:	e5d6142c 	ldrb	r1, [r6, #1068]	@ 0x42c
+    a65c:	e0255007 	eor	r5, r5, r7
+    a660:	e59d3004 	ldr	r3, [sp, #4]
+    a664:	e3510000 	cmp	r1, #0
+    a668:	1a00006d 	bne	a824 <CKernel::ApplyInputReport()+0x324>
+    a66c:	e3180022 	tst	r8, #34	@ 0x22
+    a670:	13a02001 	movne	r2, #1
+    a674:	15cd2038 	strbne	r2, [sp, #56]	@ 0x38
+    a678:	e3180011 	tst	r8, #17
+    a67c:	13a02001 	movne	r2, #1
+    a680:	15cd205c 	strbne	r2, [sp, #92]	@ 0x5c
+    a684:	e3a02000 	mov	r2, #0
+    a688:	e58d2004 	str	r2, [sp, #4]
+    a68c:	e1a00002 	mov	r0, r2
+    a690:	e4db2001 	ldrb	r2, [fp], #1
+    a694:	e2422004 	sub	r2, r2, #4
+    a698:	e352004e 	cmp	r2, #78	@ 0x4e
+    a69c:	979ff102 	ldrls	pc, [pc, r2, lsl #2]
+    a6a0:	ea000050 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    a6a4:	0000a7e0 	.word	0x0000a7e0
+    a6a8:	0000b0e8 	.word	0x0000b0e8
+    a6ac:	0000b0f4 	.word	0x0000b0f4
+    a6b0:	0000b100 	.word	0x0000b100
+    a6b4:	0000b10c 	.word	0x0000b10c
+    a6b8:	0000b118 	.word	0x0000b118
+    a6bc:	0000b124 	.word	0x0000b124
+    a6c0:	0000b130 	.word	0x0000b130
+    a6c4:	0000b13c 	.word	0x0000b13c
+    a6c8:	0000b148 	.word	0x0000b148
+    a6cc:	0000b154 	.word	0x0000b154
+    a6d0:	0000b160 	.word	0x0000b160
+    a6d4:	0000b16c 	.word	0x0000b16c
+    a6d8:	0000b178 	.word	0x0000b178
+    a6dc:	0000b184 	.word	0x0000b184
+    a6e0:	0000b190 	.word	0x0000b190
+    a6e4:	0000b24c 	.word	0x0000b24c
+    a6e8:	0000b258 	.word	0x0000b258
+    a6ec:	0000b264 	.word	0x0000b264
+    a6f0:	0000b270 	.word	0x0000b270
+    a6f4:	0000b27c 	.word	0x0000b27c
+    a6f8:	0000b288 	.word	0x0000b288
+    a6fc:	0000b294 	.word	0x0000b294
+    a700:	0000b2a0 	.word	0x0000b2a0
+    a704:	0000b2ac 	.word	0x0000b2ac
+    a708:	0000b2b8 	.word	0x0000b2b8
+    a70c:	0000b2c4 	.word	0x0000b2c4
+    a710:	0000b2d0 	.word	0x0000b2d0
+    a714:	0000b2dc 	.word	0x0000b2dc
+    a718:	0000b2e8 	.word	0x0000b2e8
+    a71c:	0000b2f4 	.word	0x0000b2f4
+    a720:	0000b300 	.word	0x0000b300
+    a724:	0000b21c 	.word	0x0000b21c
+    a728:	0000b228 	.word	0x0000b228
+    a72c:	0000b234 	.word	0x0000b234
+    a730:	0000b240 	.word	0x0000b240
+    a734:	0000b19c 	.word	0x0000b19c
+    a738:	0000a7e8 	.word	0x0000a7e8
+    a73c:	0000b1a8 	.word	0x0000b1a8
+    a740:	0000b1b8 	.word	0x0000b1b8
+    a744:	0000b1c0 	.word	0x0000b1c0
+    a748:	0000a7e8 	.word	0x0000a7e8
+    a74c:	0000a7e8 	.word	0x0000a7e8
+    a750:	0000a7e8 	.word	0x0000a7e8
+    a754:	0000a7e8 	.word	0x0000a7e8
+    a758:	0000a7e8 	.word	0x0000a7e8
+    a75c:	0000a7e8 	.word	0x0000a7e8
+    a760:	0000a7e8 	.word	0x0000a7e8
+    a764:	0000a7e8 	.word	0x0000a7e8
+    a768:	0000a7e8 	.word	0x0000a7e8
+    a76c:	0000a7e8 	.word	0x0000a7e8
+    a770:	0000a7e8 	.word	0x0000a7e8
+    a774:	0000a7e8 	.word	0x0000a7e8
+    a778:	0000a7e8 	.word	0x0000a7e8
+    a77c:	0000a7e8 	.word	0x0000a7e8
+    a780:	0000b364 	.word	0x0000b364
+    a784:	0000a7e8 	.word	0x0000a7e8
+    a788:	0000a7e8 	.word	0x0000a7e8
+    a78c:	0000a7e8 	.word	0x0000a7e8
+    a790:	0000a7e8 	.word	0x0000a7e8
+    a794:	0000a7e8 	.word	0x0000a7e8
+    a798:	0000a7e8 	.word	0x0000a7e8
+    a79c:	0000a7e8 	.word	0x0000a7e8
+    a7a0:	0000a7e8 	.word	0x0000a7e8
+    a7a4:	0000a7e8 	.word	0x0000a7e8
+    a7a8:	0000a7e8 	.word	0x0000a7e8
+    a7ac:	0000a7e8 	.word	0x0000a7e8
+    a7b0:	0000a7e8 	.word	0x0000a7e8
+    a7b4:	0000a7e8 	.word	0x0000a7e8
+    a7b8:	0000a7e8 	.word	0x0000a7e8
+    a7bc:	0000a7e8 	.word	0x0000a7e8
+    a7c0:	0000a7e8 	.word	0x0000a7e8
+    a7c4:	0000a7e8 	.word	0x0000a7e8
+    a7c8:	0000a7e8 	.word	0x0000a7e8
+    a7cc:	0000a7e8 	.word	0x0000a7e8
+    a7d0:	0000b1e0 	.word	0x0000b1e0
+    a7d4:	0000b1f4 	.word	0x0000b1f4
+    a7d8:	0000b208 	.word	0x0000b208
+    a7dc:	0000b1cc 	.word	0x0000b1cc
+    a7e0:	e3a02001 	mov	r2, #1
+    a7e4:	e5cd203d 	strb	r2, [sp, #61]	@ 0x3d
+    a7e8:	e15b000a 	cmp	fp, sl
+    a7ec:	1affffa7 	bne	a690 <CKernel::ApplyInputReport()+0x190>
+    a7f0:	e3530000 	cmp	r3, #0
+    a7f4:	da000123 	ble	ac88 <CKernel::ApplyInputReport()+0x788>
+    a7f8:	e3530001 	cmp	r3, #1
+    a7fc:	e59d3008 	ldr	r3, [sp, #8]
+    a800:	03a09080 	moveq	r9, #128	@ 0x80
+    a804:	e3170701 	tst	r7, #262144	@ 0x40000
+    a808:	1a000151 	bne	ad54 <CKernel::ApplyInputReport()+0x854>
+    a80c:	e353005f 	cmp	r3, #95	@ 0x5f
+    a810:	ca0002e3 	bgt	b3a4 <CKernel::ApplyInputReport()+0xea4>
+    a814:	e3800002 	orr	r0, r0, #2
+    a818:	e3170801 	tst	r7, #65536	@ 0x10000
+    a81c:	1a000121 	bne	aca8 <CKernel::ApplyInputReport()+0x7a8>
+    a820:	ea000121 	b	acac <CKernel::ApplyInputReport()+0x7ac>
+    a824:	e3530000 	cmp	r3, #0
+    a828:	da0000e4 	ble	abc0 <CKernel::ApplyInputReport()+0x6c0>
+    a82c:	e3530001 	cmp	r3, #1
+    a830:	e207ab02 	and	sl, r7, #2048	@ 0x800
+    a834:	03a09080 	moveq	r9, #128	@ 0x80
+    a838:	e1a0200a 	mov	r2, sl
+    a83c:	e3170901 	tst	r7, #16384	@ 0x4000
+    a840:	0a0000e5 	beq	abdc <CKernel::ApplyInputReport()+0x6dc>
+    a844:	e3150901 	tst	r5, #16384	@ 0x4000
+    a848:	0a0000e3 	beq	abdc <CKernel::ApplyInputReport()+0x6dc>
+    a84c:	e1a00004 	mov	r0, r4
+    a850:	e58da00c 	str	sl, [sp, #12]
+    a854:	ebfffa41 	bl	9160 <CKernel::OSDActivateSelection()>
+    a858:	e59d200c 	ldr	r2, [sp, #12]
+    a85c:	e2503000 	subs	r3, r0, #0
+    a860:	e58d3004 	str	r3, [sp, #4]
+    a864:	0a0002b2 	beq	b334 <CKernel::ApplyInputReport()+0xe34>
+    a868:	e3a0b000 	mov	fp, #0
+    a86c:	e35a0000 	cmp	sl, #0
+    a870:	e5c6b42c 	strb	fp, [r6, #1068]	@ 0x42c
+    a874:	1a0002bd 	bne	b370 <CKernel::ApplyInputReport()+0xe70>
+    a878:	e1a0300a 	mov	r3, sl
+    a87c:	e58da02c 	str	sl, [sp, #44]	@ 0x2c
+    a880:	e58da020 	str	sl, [sp, #32]
+    a884:	e58da01c 	str	sl, [sp, #28]
+    a888:	e58da018 	str	sl, [sp, #24]
+    a88c:	e58da014 	str	sl, [sp, #20]
+    a890:	e58da010 	str	sl, [sp, #16]
+    a894:	e58da00c 	str	sl, [sp, #12]
+    a898:	e58da004 	str	sl, [sp, #4]
+    a89c:	e3a0b000 	mov	fp, #0
+    a8a0:	e28d8038 	add	r8, sp, #56	@ 0x38
+    a8a4:	e58d7024 	str	r7, [sp, #36]	@ 0x24
+    a8a8:	e1a07008 	mov	r7, r8
+    a8ac:	e58d6028 	str	r6, [sp, #40]	@ 0x28
+    a8b0:	e1a0600b 	mov	r6, fp
+    a8b4:	e1a0b003 	mov	fp, r3
+    a8b8:	e1a08007 	mov	r8, r7
+    a8bc:	e3a05000 	mov	r5, #0
+    a8c0:	e1a02005 	mov	r2, r5
+    a8c4:	e4d83001 	ldrb	r3, [r8], #1
+    a8c8:	e1a01006 	mov	r1, r6
+    a8cc:	e1a00004 	mov	r0, r4
+    a8d0:	e2855001 	add	r5, r5, #1
+    a8d4:	ebfff6f0 	bl	849c <CKernel::SetZXKeyState(int, int, bool)>
+    a8d8:	e3550005 	cmp	r5, #5
+    a8dc:	1afffff7 	bne	a8c0 <CKernel::ApplyInputReport()+0x3c0>
+    a8e0:	e2866001 	add	r6, r6, #1
+    a8e4:	e2877005 	add	r7, r7, #5
+    a8e8:	e3560008 	cmp	r6, #8
+    a8ec:	1afffff1 	bne	a8b8 <CKernel::ApplyInputReport()+0x3b8>
+    a8f0:	e59d6028 	ldr	r6, [sp, #40]	@ 0x28
+    a8f4:	e59d7024 	ldr	r7, [sp, #36]	@ 0x24
+    a8f8:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    a8fc:	e2021001 	and	r1, r2, #1
+    a900:	e151000b 	cmp	r1, fp
+    a904:	0a000008 	beq	a92c <CKernel::ApplyInputReport()+0x42c>
+    a908:	e35b0000 	cmp	fp, #0
+    a90c:	0a00012a 	beq	adbc <CKernel::ApplyInputReport()+0x8bc>
+    a910:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    a914:	e3822001 	orr	r2, r2, #1
+    a918:	e2800020 	add	r0, r0, #32
+    a91c:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    a920:	e3a01001 	mov	r1, #1
+    a924:	eb001c97 	bl	11b88 <zx_joy_down>
+    a928:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    a92c:	e59d100c 	ldr	r1, [sp, #12]
+    a930:	e7e030d2 	ubfx	r3, r2, #1, #1
+    a934:	e1530001 	cmp	r3, r1
+    a938:	0a000008 	beq	a960 <CKernel::ApplyInputReport()+0x460>
+    a93c:	e35a0000 	cmp	sl, #0
+    a940:	0a000125 	beq	addc <CKernel::ApplyInputReport()+0x8dc>
+    a944:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    a948:	e3822002 	orr	r2, r2, #2
+    a94c:	e2800020 	add	r0, r0, #32
+    a950:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    a954:	e3a01002 	mov	r1, #2
+    a958:	eb001c8a 	bl	11b88 <zx_joy_down>
+    a95c:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    a960:	e59d1010 	ldr	r1, [sp, #16]
+    a964:	e7e03152 	ubfx	r3, r2, #2, #1
+    a968:	e1530001 	cmp	r3, r1
+    a96c:	0a000009 	beq	a998 <CKernel::ApplyInputReport()+0x498>
+    a970:	e59d301c 	ldr	r3, [sp, #28]
+    a974:	e3530000 	cmp	r3, #0
+    a978:	0a00011f 	beq	adfc <CKernel::ApplyInputReport()+0x8fc>
+    a97c:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    a980:	e3822004 	orr	r2, r2, #4
+    a984:	e2800020 	add	r0, r0, #32
+    a988:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    a98c:	e3a01004 	mov	r1, #4
+    a990:	eb001c7c 	bl	11b88 <zx_joy_down>
+    a994:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    a998:	e59d1014 	ldr	r1, [sp, #20]
+    a99c:	e7e031d2 	ubfx	r3, r2, #3, #1
+    a9a0:	e1530001 	cmp	r3, r1
+    a9a4:	0a000009 	beq	a9d0 <CKernel::ApplyInputReport()+0x4d0>
+    a9a8:	e59d3020 	ldr	r3, [sp, #32]
+    a9ac:	e3530000 	cmp	r3, #0
+    a9b0:	0a000119 	beq	ae1c <CKernel::ApplyInputReport()+0x91c>
+    a9b4:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    a9b8:	e3822008 	orr	r2, r2, #8
+    a9bc:	e2800020 	add	r0, r0, #32
+    a9c0:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    a9c4:	e3a01008 	mov	r1, #8
+    a9c8:	eb001c6e 	bl	11b88 <zx_joy_down>
+    a9cc:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    a9d0:	e59d1018 	ldr	r1, [sp, #24]
+    a9d4:	e7e03252 	ubfx	r3, r2, #4, #1
+    a9d8:	e1530001 	cmp	r3, r1
+    a9dc:	0a000008 	beq	aa04 <CKernel::ApplyInputReport()+0x504>
+    a9e0:	e59d302c 	ldr	r3, [sp, #44]	@ 0x2c
+    a9e4:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    a9e8:	e3530000 	cmp	r3, #0
+    a9ec:	0a000112 	beq	ae3c <CKernel::ApplyInputReport()+0x93c>
+    a9f0:	e3822010 	orr	r2, r2, #16
+    a9f4:	e2800020 	add	r0, r0, #32
+    a9f8:	e3a01010 	mov	r1, #16
+    a9fc:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    aa00:	eb001c60 	bl	11b88 <zx_joy_down>
+    aa04:	e59d3004 	ldr	r3, [sp, #4]
+    aa08:	e3530000 	cmp	r3, #0
+    aa0c:	0a000003 	beq	aa20 <CKernel::ApplyInputReport()+0x520>
+    aa10:	e5d63429 	ldrb	r3, [r6, #1065]	@ 0x429
+    aa14:	e3530000 	cmp	r3, #0
+    aa18:	03a03001 	moveq	r3, #1
+    aa1c:	05c6342a 	strbeq	r3, [r6, #1066]	@ 0x42a
+    aa20:	e59d3004 	ldr	r3, [sp, #4]
+    aa24:	e5c63429 	strb	r3, [r6, #1065]	@ 0x429
+    aa28:	e59d3008 	ldr	r3, [sp, #8]
+    aa2c:	e58673f4 	str	r7, [r6, #1012]	@ 0x3f4
+    aa30:	e58633f8 	str	r3, [r6, #1016]	@ 0x3f8
+    aa34:	e58693fc 	str	r9, [r6, #1020]	@ 0x3fc
+    aa38:	e28dd064 	add	sp, sp, #100	@ 0x64
+    aa3c:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+    aa40:	e28d3030 	add	r3, sp, #48	@ 0x30
+    aa44:	e4d32001 	ldrb	r2, [r3], #1
+    aa48:	e3520029 	cmp	r2, #41	@ 0x29
+    aa4c:	0a000128 	beq	aef4 <CKernel::ApplyInputReport()+0x9f4>
+    aa50:	e15a0003 	cmp	sl, r3
+    aa54:	1afffffa 	bne	aa44 <CKernel::ApplyInputReport()+0x544>
+    aa58:	e2847a83 	add	r7, r4, #536576	@ 0x83000
+    aa5c:	e30352de 	movw	r5, #13022	@ 0x32de
+    aa60:	e3405008 	movt	r5, #8
+    aa64:	e2877fb9 	add	r7, r7, #740	@ 0x2e4
+    aa68:	e0845005 	add	r5, r4, r5
+    aa6c:	e28d3030 	add	r3, sp, #48	@ 0x30
+    aa70:	e4d32001 	ldrb	r2, [r3], #1
+    aa74:	e3520052 	cmp	r2, #82	@ 0x52
+    aa78:	0a00012a 	beq	af28 <CKernel::ApplyInputReport()+0xa28>
+    aa7c:	e15a0003 	cmp	sl, r3
+    aa80:	1afffffa 	bne	aa70 <CKernel::ApplyInputReport()+0x570>
+    aa84:	e28d3030 	add	r3, sp, #48	@ 0x30
+    aa88:	e4d32001 	ldrb	r2, [r3], #1
+    aa8c:	e3520051 	cmp	r2, #81	@ 0x51
+    aa90:	0a00021d 	beq	b30c <CKernel::ApplyInputReport()+0xe0c>
+    aa94:	e153000a 	cmp	r3, sl
+    aa98:	1afffffa 	bne	aa88 <CKernel::ApplyInputReport()+0x588>
+    aa9c:	e28d3030 	add	r3, sp, #48	@ 0x30
+    aaa0:	ea000001 	b	aaac <CKernel::ApplyInputReport()+0x5ac>
+    aaa4:	e153000a 	cmp	r3, sl
+    aaa8:	0afffed4 	beq	a600 <CKernel::ApplyInputReport()+0x100>
+    aaac:	e4d32001 	ldrb	r2, [r3], #1
+    aab0:	e3520028 	cmp	r2, #40	@ 0x28
+    aab4:	1afffffa 	bne	aaa4 <CKernel::ApplyInputReport()+0x5a4>
+    aab8:	e1a03005 	mov	r3, r5
+    aabc:	e5f32001 	ldrb	r2, [r3, #1]!
+    aac0:	e3520028 	cmp	r2, #40	@ 0x28
+    aac4:	0afffecd 	beq	a600 <CKernel::ApplyInputReport()+0x100>
+    aac8:	e1570003 	cmp	r7, r3
+    aacc:	1afffffa 	bne	aabc <CKernel::ApplyInputReport()+0x5bc>
+    aad0:	e1a00004 	mov	r0, r4
+    aad4:	ebfff9a1 	bl	9160 <CKernel::OSDActivateSelection()>
+    aad8:	e3500000 	cmp	r0, #0
+    aadc:	13a03000 	movne	r3, #0
+    aae0:	15c6342c 	strbne	r3, [r6, #1068]	@ 0x42c
+    aae4:	eafffec5 	b	a600 <CKernel::ApplyInputReport()+0x100>
+    aae8:	e5d5350b 	ldrb	r3, [r5, #1291]	@ 0x50b
+    aaec:	e3530000 	cmp	r3, #0
+    aaf0:	1a00001a 	bne	ab60 <CKernel::ApplyInputReport()+0x660>
+    aaf4:	e5d5350c 	ldrb	r3, [r5, #1292]	@ 0x50c
+    aaf8:	e2850e49 	add	r0, r5, #1168	@ 0x490
+    aafc:	e2233001 	eor	r3, r3, #1
+    ab00:	e5c5350c 	strb	r3, [r5, #1292]	@ 0x50c
+    ab04:	e3530000 	cmp	r3, #0
+    ab08:	03a01001 	moveq	r1, #1
+    ab0c:	13a01004 	movne	r1, #4
+    ab10:	eb001e7c 	bl	12508 <tzx_set_speedup>
+    ab14:	e5d5350c 	ldrb	r3, [r5, #1292]	@ 0x50c
+    ab18:	e305043c 	movw	r0, #21564	@ 0x543c
+    ab1c:	e3400008 	movt	r0, #8
+    ab20:	e1a02007 	mov	r2, r7
+    ab24:	e0840000 	add	r0, r4, r0
+    ab28:	e3530000 	cmp	r3, #0
+    ab2c:	1a00011a 	bne	af9c <CKernel::ApplyInputReport()+0xa9c>
+    ab30:	e59f187c 	ldr	r1, [pc, #2172]	@ b3b4 <CKernel::ApplyInputReport()+0xeb4>
+    ab34:	eb00d1df 	bl	3f2b8 <strncpy>
+    ab38:	e59f3878 	ldr	r3, [pc, #2168]	@ b3b8 <CKernel::ApplyInputReport()+0xeb8>
+    ab3c:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
+    ab40:	e3a02003 	mov	r2, #3
+    ab44:	e2800024 	add	r0, r0, #36	@ 0x24
+    ab48:	e2431e5d 	sub	r1, r3, #1488	@ 0x5d0
+    ab4c:	eb00bcfb 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    ab50:	e3a03000 	mov	r3, #0
+    ab54:	e5c5347b 	strb	r3, [r5, #1147]	@ 0x47b
+    ab58:	e3a03001 	mov	r3, #1
+    ab5c:	e5c6342d 	strb	r3, [r6, #1069]	@ 0x42d
+    ab60:	e3a03001 	mov	r3, #1
+    ab64:	eafffe9c 	b	a5dc <CKernel::ApplyInputReport()+0xdc>
+    ab68:	e5d5750a 	ldrb	r7, [r5, #1290]	@ 0x50a
+    ab6c:	e3570000 	cmp	r7, #0
+    ab70:	1a000002 	bne	ab80 <CKernel::ApplyInputReport()+0x680>
+    ab74:	e5d53508 	ldrb	r3, [r5, #1288]	@ 0x508
+    ab78:	e3530000 	cmp	r3, #0
+    ab7c:	1a00012b 	bne	b030 <CKernel::ApplyInputReport()+0xb30>
+    ab80:	e3a03001 	mov	r3, #1
+    ab84:	eafffe8c 	b	a5bc <CKernel::ApplyInputReport()+0xbc>
+    ab88:	e2845a85 	add	r5, r4, #544768	@ 0x85000
+    ab8c:	e5d57509 	ldrb	r7, [r5, #1289]	@ 0x509
+    ab90:	e3570000 	cmp	r7, #0
+    ab94:	1a000002 	bne	aba4 <CKernel::ApplyInputReport()+0x6a4>
+    ab98:	e5d53508 	ldrb	r3, [r5, #1288]	@ 0x508
+    ab9c:	e3530000 	cmp	r3, #0
+    aba0:	1a000136 	bne	b080 <CKernel::ApplyInputReport()+0xb80>
+    aba4:	e3a03001 	mov	r3, #1
+    aba8:	eafffe7b 	b	a59c <CKernel::ApplyInputReport()+0x9c>
+    abac:	e5d6342b 	ldrb	r3, [r6, #1067]	@ 0x42b
+    abb0:	e3530000 	cmp	r3, #0
+    abb4:	0a0000ef 	beq	af78 <CKernel::ApplyInputReport()+0xa78>
+    abb8:	e3a03001 	mov	r3, #1
+    abbc:	eafffe6d 	b	a578 <CKernel::ApplyInputReport()+0x78>
+    abc0:	e3a03080 	mov	r3, #128	@ 0x80
+    abc4:	e207ab02 	and	sl, r7, #2048	@ 0x800
+    abc8:	e1a09003 	mov	r9, r3
+    abcc:	e3170901 	tst	r7, #16384	@ 0x4000
+    abd0:	e1a0200a 	mov	r2, sl
+    abd4:	e58d3008 	str	r3, [sp, #8]
+    abd8:	1affff19 	bne	a844 <CKernel::ApplyInputReport()+0x344>
+    abdc:	e3520000 	cmp	r2, #0
+    abe0:	0a0000da 	beq	af50 <CKernel::ApplyInputReport()+0xa50>
+    abe4:	e3a03000 	mov	r3, #0
+    abe8:	e3150b02 	tst	r5, #2048	@ 0x800
+    abec:	e1a0a003 	mov	sl, r3
+    abf0:	e58d3018 	str	r3, [sp, #24]
+    abf4:	e58d302c 	str	r3, [sp, #44]	@ 0x2c
+    abf8:	e58d3014 	str	r3, [sp, #20]
+    abfc:	e58d3020 	str	r3, [sp, #32]
+    ac00:	e58d3010 	str	r3, [sp, #16]
+    ac04:	e58d301c 	str	r3, [sp, #28]
+    ac08:	e58d300c 	str	r3, [sp, #12]
+    ac0c:	e58d3004 	str	r3, [sp, #4]
+    ac10:	1a00004a 	bne	ad40 <CKernel::ApplyInputReport()+0x840>
+    ac14:	e3510000 	cmp	r1, #0
+    ac18:	0affff1f 	beq	a89c <CKernel::ApplyInputReport()+0x39c>
+    ac1c:	e3170c02 	tst	r7, #512	@ 0x200
+    ac20:	0a000001 	beq	ac2c <CKernel::ApplyInputReport()+0x72c>
+    ac24:	e3150c02 	tst	r5, #512	@ 0x200
+    ac28:	1a000126 	bne	b0c8 <CKernel::ApplyInputReport()+0xbc8>
+    ac2c:	e7e058d7 	ubfx	r5, r7, #17, #1
+    ac30:	e2171902 	ands	r1, r7, #32768	@ 0x8000
+    ac34:	1a00004b 	bne	ad68 <CKernel::ApplyInputReport()+0x868>
+    ac38:	e359005f 	cmp	r9, #95	@ 0x5f
+    ac3c:	d3a01001 	movle	r1, #1
+    ac40:	ca000049 	bgt	ad6c <CKernel::ApplyInputReport()+0x86c>
+    ac44:	e59623f4 	ldr	r2, [r6, #1012]	@ 0x3f4
+    ac48:	e3120902 	tst	r2, #32768	@ 0x8000
+    ac4c:	e2022802 	and	r2, r2, #131072	@ 0x20000
+    ac50:	0a00004b 	beq	ad84 <CKernel::ApplyInputReport()+0x884>
+    ac54:	e3520000 	cmp	r2, #0
+    ac58:	1affff0f 	bne	a89c <CKernel::ApplyInputReport()+0x39c>
+    ac5c:	e59623fc 	ldr	r2, [r6, #1020]	@ 0x3fc
+    ac60:	e35200a0 	cmp	r2, #160	@ 0xa0
+    ac64:	caffff0c 	bgt	a89c <CKernel::ApplyInputReport()+0x39c>
+    ac68:	e3550000 	cmp	r5, #0
+    ac6c:	0affff0a 	beq	a89c <CKernel::ApplyInputReport()+0x39c>
+    ac70:	e3a01001 	mov	r1, #1
+    ac74:	e1a00004 	mov	r0, r4
+    ac78:	e58d3024 	str	r3, [sp, #36]	@ 0x24
+    ac7c:	ebfff781 	bl	8a88 <CKernel::OSDMoveSelection(int)>
+    ac80:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    ac84:	eaffff04 	b	a89c <CKernel::ApplyInputReport()+0x39c>
+    ac88:	e3a03080 	mov	r3, #128	@ 0x80
+    ac8c:	e3170701 	tst	r7, #262144	@ 0x40000
+    ac90:	e1a09003 	mov	r9, r3
+    ac94:	e58d3008 	str	r3, [sp, #8]
+    ac98:	1a000030 	bne	ad60 <CKernel::ApplyInputReport()+0x860>
+    ac9c:	e7e03857 	ubfx	r3, r7, #16, #1
+    aca0:	e1913003 	orrs	r3, r1, r3
+    aca4:	0a000000 	beq	acac <CKernel::ApplyInputReport()+0x7ac>
+    aca8:	e3800001 	orr	r0, r0, #1
+    acac:	e3170902 	tst	r7, #32768	@ 0x8000
+    acb0:	e2073802 	and	r3, r7, #131072	@ 0x20000
+    acb4:	1a00008c 	bne	aeec <CKernel::ApplyInputReport()+0x9ec>
+    acb8:	e359005f 	cmp	r9, #95	@ 0x5f
+    acbc:	da0000d1 	ble	b008 <CKernel::ApplyInputReport()+0xb08>
+    acc0:	e35900a0 	cmp	r9, #160	@ 0xa0
+    acc4:	d3530000 	cmple	r3, #0
+    acc8:	0a000000 	beq	acd0 <CKernel::ApplyInputReport()+0x7d0>
+    accc:	e3800004 	orr	r0, r0, #4
+    acd0:	e3170e35 	tst	r7, #848	@ 0x350
+    acd4:	e2073901 	and	r3, r7, #16384	@ 0x4000
+    acd8:	1a00005d 	bne	ae54 <CKernel::ApplyInputReport()+0x954>
+    acdc:	e2001001 	and	r1, r0, #1
+    ace0:	e7e020d0 	ubfx	r2, r0, #1, #1
+    ace4:	e3530000 	cmp	r3, #0
+    ace8:	e58d200c 	str	r2, [sp, #12]
+    acec:	e1a03001 	mov	r3, r1
+    acf0:	e2002004 	and	r2, r0, #4
+    acf4:	e200a002 	and	sl, r0, #2
+    acf8:	e58d201c 	str	r2, [sp, #28]
+    acfc:	e7e02150 	ubfx	r2, r0, #2, #1
+    ad00:	e58d2010 	str	r2, [sp, #16]
+    ad04:	e2002008 	and	r2, r0, #8
+    ad08:	e58d2020 	str	r2, [sp, #32]
+    ad0c:	e7e021d0 	ubfx	r2, r0, #3, #1
+    ad10:	e58d2014 	str	r2, [sp, #20]
+    ad14:	e2002010 	and	r2, r0, #16
+    ad18:	e58d202c 	str	r2, [sp, #44]	@ 0x2c
+    ad1c:	e7e02250 	ubfx	r2, r0, #4, #1
+    ad20:	e58d2018 	str	r2, [sp, #24]
+    ad24:	1a0000b2 	bne	aff4 <CKernel::ApplyInputReport()+0xaf4>
+    ad28:	e2072b02 	and	r2, r7, #2048	@ 0x800
+    ad2c:	e5d6142c 	ldrb	r1, [r6, #1068]	@ 0x42c
+    ad30:	e3520000 	cmp	r2, #0
+    ad34:	0affffb6 	beq	ac14 <CKernel::ApplyInputReport()+0x714>
+    ad38:	e3150b02 	tst	r5, #2048	@ 0x800
+    ad3c:	0affffb4 	beq	ac14 <CKernel::ApplyInputReport()+0x714>
+    ad40:	e3510000 	cmp	r1, #0
+    ad44:	1a0000b3 	bne	b018 <CKernel::ApplyInputReport()+0xb18>
+    ad48:	e3a02001 	mov	r2, #1
+    ad4c:	e5c6242a 	strb	r2, [r6, #1066]	@ 0x42a
+    ad50:	eafffed1 	b	a89c <CKernel::ApplyInputReport()+0x39c>
+    ad54:	e35300a0 	cmp	r3, #160	@ 0xa0
+    ad58:	d3a01000 	movle	r1, #0
+    ad5c:	c3a01001 	movgt	r1, #1
+    ad60:	e3800002 	orr	r0, r0, #2
+    ad64:	eaffffcc 	b	ac9c <CKernel::ApplyInputReport()+0x79c>
+    ad68:	e3a01001 	mov	r1, #1
+    ad6c:	e59623f4 	ldr	r2, [r6, #1012]	@ 0x3f4
+    ad70:	e35900a0 	cmp	r9, #160	@ 0xa0
+    ad74:	c3855001 	orrgt	r5, r5, #1
+    ad78:	e3120902 	tst	r2, #32768	@ 0x8000
+    ad7c:	e2022802 	and	r2, r2, #131072	@ 0x20000
+    ad80:	1affffb3 	bne	ac54 <CKernel::ApplyInputReport()+0x754>
+    ad84:	e3520000 	cmp	r2, #0
+    ad88:	e59623fc 	ldr	r2, [r6, #1020]	@ 0x3fc
+    ad8c:	0a00008b 	beq	afc0 <CKernel::ApplyInputReport()+0xac0>
+    ad90:	e352005f 	cmp	r2, #95	@ 0x5f
+    ad94:	d3a01000 	movle	r1, #0
+    ad98:	c2011001 	andgt	r1, r1, #1
+    ad9c:	e3510000 	cmp	r1, #0
+    ada0:	0afffebd 	beq	a89c <CKernel::ApplyInputReport()+0x39c>
+    ada4:	e1a00004 	mov	r0, r4
+    ada8:	e3e01000 	mvn	r1, #0
+    adac:	e58d3024 	str	r3, [sp, #36]	@ 0x24
+    adb0:	ebfff734 	bl	8a88 <CKernel::OSDMoveSelection(int)>
+    adb4:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    adb8:	eafffeb7 	b	a89c <CKernel::ApplyInputReport()+0x39c>
+    adbc:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    adc0:	e3c22001 	bic	r2, r2, #1
+    adc4:	e2800020 	add	r0, r0, #32
+    adc8:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    adcc:	e3a01001 	mov	r1, #1
+    add0:	eb001b72 	bl	11ba0 <zx_joy_up>
+    add4:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    add8:	eafffed3 	b	a92c <CKernel::ApplyInputReport()+0x42c>
+    addc:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    ade0:	e3c22002 	bic	r2, r2, #2
+    ade4:	e2800020 	add	r0, r0, #32
+    ade8:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    adec:	e3a01002 	mov	r1, #2
+    adf0:	eb001b6a 	bl	11ba0 <zx_joy_up>
+    adf4:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    adf8:	eafffed8 	b	a960 <CKernel::ApplyInputReport()+0x460>
+    adfc:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    ae00:	e3c22004 	bic	r2, r2, #4
+    ae04:	e2800020 	add	r0, r0, #32
+    ae08:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    ae0c:	e3a01004 	mov	r1, #4
+    ae10:	eb001b62 	bl	11ba0 <zx_joy_up>
+    ae14:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    ae18:	eafffede 	b	a998 <CKernel::ApplyInputReport()+0x498>
+    ae1c:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    ae20:	e3c22008 	bic	r2, r2, #8
+    ae24:	e2800020 	add	r0, r0, #32
+    ae28:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    ae2c:	e3a01008 	mov	r1, #8
+    ae30:	eb001b5a 	bl	11ba0 <zx_joy_up>
+    ae34:	e5d62428 	ldrb	r2, [r6, #1064]	@ 0x428
+    ae38:	eafffee4 	b	a9d0 <CKernel::ApplyInputReport()+0x4d0>
+    ae3c:	e3c22010 	bic	r2, r2, #16
+    ae40:	e2800020 	add	r0, r0, #32
+    ae44:	e3a01010 	mov	r1, #16
+    ae48:	e5c62428 	strb	r2, [r6, #1064]	@ 0x428
+    ae4c:	eb001b53 	bl	11ba0 <zx_joy_up>
+    ae50:	eafffeeb 	b	aa04 <CKernel::ApplyInputReport()+0x504>
+    ae54:	e200b001 	and	fp, r0, #1
+    ae58:	e7e020d0 	ubfx	r2, r0, #1, #1
+    ae5c:	e3530000 	cmp	r3, #0
+    ae60:	e58d200c 	str	r2, [sp, #12]
+    ae64:	e3808010 	orr	r8, r0, #16
+    ae68:	e2002004 	and	r2, r0, #4
+    ae6c:	e1a0300b 	mov	r3, fp
+    ae70:	e58d201c 	str	r2, [sp, #28]
+    ae74:	e200a002 	and	sl, r0, #2
+    ae78:	e7e02150 	ubfx	r2, r0, #2, #1
+    ae7c:	e58d2010 	str	r2, [sp, #16]
+    ae80:	e2002008 	and	r2, r0, #8
+    ae84:	e58d2020 	str	r2, [sp, #32]
+    ae88:	e7e021d0 	ubfx	r2, r0, #3, #1
+    ae8c:	e58d2014 	str	r2, [sp, #20]
+    ae90:	0a00003c 	beq	af88 <CKernel::ApplyInputReport()+0xa88>
+    ae94:	e3150901 	tst	r5, #16384	@ 0x4000
+    ae98:	0a00003a 	beq	af88 <CKernel::ApplyInputReport()+0xa88>
+    ae9c:	e3a03001 	mov	r3, #1
+    aea0:	e58d3018 	str	r3, [sp, #24]
+    aea4:	e3a03010 	mov	r3, #16
+    aea8:	e58d302c 	str	r3, [sp, #44]	@ 0x2c
+    aeac:	e1a00004 	mov	r0, r4
+    aeb0:	e208a002 	and	sl, r8, #2
+    aeb4:	ebfffce0 	bl	a23c <CKernel::ToggleOSD()>
+    aeb8:	e7e020d8 	ubfx	r2, r8, #1, #1
+    aebc:	e6ef307b 	uxtb	r3, fp
+    aec0:	e58d200c 	str	r2, [sp, #12]
+    aec4:	e2082004 	and	r2, r8, #4
+    aec8:	e58d201c 	str	r2, [sp, #28]
+    aecc:	e7e02158 	ubfx	r2, r8, #2, #1
+    aed0:	e58d2010 	str	r2, [sp, #16]
+    aed4:	e2082008 	and	r2, r8, #8
+    aed8:	e58d2020 	str	r2, [sp, #32]
+    aedc:	e7e021d8 	ubfx	r2, r8, #3, #1
+    aee0:	e58d2014 	str	r2, [sp, #20]
+    aee4:	e2072b02 	and	r2, r7, #2048	@ 0x800
+    aee8:	eaffff8f 	b	ad2c <CKernel::ApplyInputReport()+0x82c>
+    aeec:	e3800008 	orr	r0, r0, #8
+    aef0:	eaffff72 	b	acc0 <CKernel::ApplyInputReport()+0x7c0>
+    aef4:	e30352de 	movw	r5, #13022	@ 0x32de
+    aef8:	e3405008 	movt	r5, #8
+    aefc:	e0845005 	add	r5, r4, r5
+    af00:	e2867fb9 	add	r7, r6, #740	@ 0x2e4
+    af04:	e1a03005 	mov	r3, r5
+    af08:	e5f32001 	ldrb	r2, [r3, #1]!
+    af0c:	e3520029 	cmp	r2, #41	@ 0x29
+    af10:	0a000111 	beq	b35c <CKernel::ApplyInputReport()+0xe5c>
+    af14:	e1530007 	cmp	r3, r7
+    af18:	1afffffa 	bne	af08 <CKernel::ApplyInputReport()+0xa08>
+    af1c:	e1a00004 	mov	r0, r4
+    af20:	ebfffcc5 	bl	a23c <CKernel::ToggleOSD()>
+    af24:	eafffdb5 	b	a600 <CKernel::ApplyInputReport()+0x100>
+    af28:	e1a03005 	mov	r3, r5
+    af2c:	e5f32001 	ldrb	r2, [r3, #1]!
+    af30:	e3520052 	cmp	r2, #82	@ 0x52
+    af34:	0afffed2 	beq	aa84 <CKernel::ApplyInputReport()+0x584>
+    af38:	e1530007 	cmp	r3, r7
+    af3c:	1afffffa 	bne	af2c <CKernel::ApplyInputReport()+0xa2c>
+    af40:	e1a00004 	mov	r0, r4
+    af44:	e3e01000 	mvn	r1, #0
+    af48:	ebfff6ce 	bl	8a88 <CKernel::OSDMoveSelection(int)>
+    af4c:	eafffdab 	b	a600 <CKernel::ApplyInputReport()+0x100>
+    af50:	e1a03002 	mov	r3, r2
+    af54:	e58d202c 	str	r2, [sp, #44]	@ 0x2c
+    af58:	e58d2020 	str	r2, [sp, #32]
+    af5c:	e58d201c 	str	r2, [sp, #28]
+    af60:	e58d2018 	str	r2, [sp, #24]
+    af64:	e58d2014 	str	r2, [sp, #20]
+    af68:	e58d2010 	str	r2, [sp, #16]
+    af6c:	e58d200c 	str	r2, [sp, #12]
+    af70:	e58d2004 	str	r2, [sp, #4]
+    af74:	eaffff28 	b	ac1c <CKernel::ApplyInputReport()+0x71c>
+    af78:	e1a00004 	mov	r0, r4
+    af7c:	ebfffcae 	bl	a23c <CKernel::ToggleOSD()>
+    af80:	e3a03001 	mov	r3, #1
+    af84:	eafffd7b 	b	a578 <CKernel::ApplyInputReport()+0x78>
+    af88:	e3a02001 	mov	r2, #1
+    af8c:	e58d2018 	str	r2, [sp, #24]
+    af90:	e3a02010 	mov	r2, #16
+    af94:	e58d202c 	str	r2, [sp, #44]	@ 0x2c
+    af98:	eaffff62 	b	ad28 <CKernel::ApplyInputReport()+0x828>
+    af9c:	e59f1418 	ldr	r1, [pc, #1048]	@ b3bc <CKernel::ApplyInputReport()+0xebc>
+    afa0:	eb00d0c4 	bl	3f2b8 <strncpy>
+    afa4:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
+    afa8:	e59f3410 	ldr	r3, [pc, #1040]	@ b3c0 <CKernel::ApplyInputReport()+0xec0>
+    afac:	e2800024 	add	r0, r0, #36	@ 0x24
+    afb0:	e59f140c 	ldr	r1, [pc, #1036]	@ b3c4 <CKernel::ApplyInputReport()+0xec4>
+    afb4:	e3a02003 	mov	r2, #3
+    afb8:	eb00bbe0 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    afbc:	eafffee3 	b	ab50 <CKernel::ApplyInputReport()+0x650>
+    afc0:	e35200a0 	cmp	r2, #160	@ 0xa0
+    afc4:	caffff71 	bgt	ad90 <CKernel::ApplyInputReport()+0x890>
+    afc8:	e352005f 	cmp	r2, #95	@ 0x5f
+    afcc:	d3a01000 	movle	r1, #0
+    afd0:	c2011001 	andgt	r1, r1, #1
+    afd4:	e3510000 	cmp	r1, #0
+    afd8:	0affff22 	beq	ac68 <CKernel::ApplyInputReport()+0x768>
+    afdc:	e1a00004 	mov	r0, r4
+    afe0:	e3e01000 	mvn	r1, #0
+    afe4:	e58d3024 	str	r3, [sp, #36]	@ 0x24
+    afe8:	ebfff6a6 	bl	8a88 <CKernel::OSDMoveSelection(int)>
+    afec:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    aff0:	eaffff1c 	b	ac68 <CKernel::ApplyInputReport()+0x768>
+    aff4:	e3150901 	tst	r5, #16384	@ 0x4000
+    aff8:	0affff4a 	beq	ad28 <CKernel::ApplyInputReport()+0x828>
+    affc:	e1a08000 	mov	r8, r0
+    b000:	e1a0b001 	mov	fp, r1
+    b004:	eaffffa8 	b	aeac <CKernel::ApplyInputReport()+0x9ac>
+    b008:	e3530000 	cmp	r3, #0
+    b00c:	e3800008 	orr	r0, r0, #8
+    b010:	1affff2d 	bne	accc <CKernel::ApplyInputReport()+0x7cc>
+    b014:	eaffff2d 	b	acd0 <CKernel::ApplyInputReport()+0x7d0>
+    b018:	e1a00004 	mov	r0, r4
+    b01c:	e58d3024 	str	r3, [sp, #36]	@ 0x24
+    b020:	ebfffc85 	bl	a23c <CKernel::ToggleOSD()>
+    b024:	e5d6142c 	ldrb	r1, [r6, #1068]	@ 0x42c
+    b028:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    b02c:	eafffef8 	b	ac14 <CKernel::ApplyInputReport()+0x714>
+    b030:	e2850e49 	add	r0, r5, #1168	@ 0x490
+    b034:	eb001d2f 	bl	124f8 <tzx_stop>
+    b038:	e2840c2b 	add	r0, r4, #11008	@ 0x2b00
+    b03c:	e1a01007 	mov	r1, r7
+    b040:	e2800020 	add	r0, r0, #32
+    b044:	eb001adb 	bl	11bb8 <zx_set_ear>
+    b048:	e305043c 	movw	r0, #21564	@ 0x543c
+    b04c:	e3400008 	movt	r0, #8
+    b050:	e59f1370 	ldr	r1, [pc, #880]	@ b3c8 <CKernel::ApplyInputReport()+0xec8>
+    b054:	e0840000 	add	r0, r4, r0
+    b058:	e3a0203f 	mov	r2, #63	@ 0x3f
+    b05c:	eb00d095 	bl	3f2b8 <strncpy>
+    b060:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
+    b064:	e59f3360 	ldr	r3, [pc, #864]	@ b3cc <CKernel::ApplyInputReport()+0xecc>
+    b068:	e2800024 	add	r0, r0, #36	@ 0x24
+    b06c:	e59f1350 	ldr	r1, [pc, #848]	@ b3c4 <CKernel::ApplyInputReport()+0xec4>
+    b070:	e3a02003 	mov	r2, #3
+    b074:	e5c5747b 	strb	r7, [r5, #1147]	@ 0x47b
+    b078:	eb00bbb0 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b07c:	eafffebf 	b	ab80 <CKernel::ApplyInputReport()+0x680>
+    b080:	e2843dad 	add	r3, r4, #11072	@ 0x2b40
+    b084:	e2850e49 	add	r0, r5, #1168	@ 0x490
+    b088:	e1c320d0 	ldrd	r2, [r3]
+    b08c:	eb001d05 	bl	124a8 <tzx_play>
+    b090:	e305043c 	movw	r0, #21564	@ 0x543c
+    b094:	e3400008 	movt	r0, #8
+    b098:	e59f1330 	ldr	r1, [pc, #816]	@ b3d0 <CKernel::ApplyInputReport()+0xed0>
+    b09c:	e0840000 	add	r0, r4, r0
+    b0a0:	e3a0203f 	mov	r2, #63	@ 0x3f
+    b0a4:	eb00d083 	bl	3f2b8 <strncpy>
+    b0a8:	e2840c1d 	add	r0, r4, #7424	@ 0x1d00
+    b0ac:	e59f3320 	ldr	r3, [pc, #800]	@ b3d4 <CKernel::ApplyInputReport()+0xed4>
+    b0b0:	e2800024 	add	r0, r0, #36	@ 0x24
+    b0b4:	e59f1308 	ldr	r1, [pc, #776]	@ b3c4 <CKernel::ApplyInputReport()+0xec4>
+    b0b8:	e3a02003 	mov	r2, #3
+    b0bc:	e5c5747b 	strb	r7, [r5, #1147]	@ 0x47b
+    b0c0:	eb00bb9e 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b0c4:	eafffeb6 	b	aba4 <CKernel::ApplyInputReport()+0x6a4>
+    b0c8:	e1a00004 	mov	r0, r4
+    b0cc:	e58d3024 	str	r3, [sp, #36]	@ 0x24
+    b0d0:	ebfff822 	bl	9160 <CKernel::OSDActivateSelection()>
+    b0d4:	e3500000 	cmp	r0, #0
+    b0d8:	13a02000 	movne	r2, #0
+    b0dc:	e59d3024 	ldr	r3, [sp, #36]	@ 0x24
+    b0e0:	15c6242c 	strbne	r2, [r6, #1068]	@ 0x42c
+    b0e4:	eafffed0 	b	ac2c <CKernel::ApplyInputReport()+0x72c>
+    b0e8:	e3a02001 	mov	r2, #1
+    b0ec:	e5cd205f 	strb	r2, [sp, #95]	@ 0x5f
+    b0f0:	eafffdbc 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b0f4:	e3a02001 	mov	r2, #1
+    b0f8:	e5cd203b 	strb	r2, [sp, #59]	@ 0x3b
+    b0fc:	eafffdb9 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b100:	e3a02001 	mov	r2, #1
+    b104:	e5cd203f 	strb	r2, [sp, #63]	@ 0x3f
+    b108:	eafffdb6 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b10c:	e3a02001 	mov	r2, #1
+    b110:	e5cd2044 	strb	r2, [sp, #68]	@ 0x44
+    b114:	eafffdb3 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b118:	e3a02001 	mov	r2, #1
+    b11c:	e5cd2040 	strb	r2, [sp, #64]	@ 0x40
+    b120:	eafffdb0 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b124:	e3a02001 	mov	r2, #1
+    b128:	e5cd2041 	strb	r2, [sp, #65]	@ 0x41
+    b12c:	eafffdad 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b130:	e3a02001 	mov	r2, #1
+    b134:	e5cd205a 	strb	r2, [sp, #90]	@ 0x5a
+    b138:	eafffdaa 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b13c:	e3a02001 	mov	r2, #1
+    b140:	e5cd2053 	strb	r2, [sp, #83]	@ 0x53
+    b144:	eafffda7 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b148:	e3a02001 	mov	r2, #1
+    b14c:	e5cd2059 	strb	r2, [sp, #89]	@ 0x59
+    b150:	eafffda4 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b154:	e3a02001 	mov	r2, #1
+    b158:	e5cd2058 	strb	r2, [sp, #88]	@ 0x58
+    b15c:	eafffda1 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b160:	e3a02001 	mov	r2, #1
+    b164:	e5cd2057 	strb	r2, [sp, #87]	@ 0x57
+    b168:	eafffd9e 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b16c:	e3a02001 	mov	r2, #1
+    b170:	e5cd205d 	strb	r2, [sp, #93]	@ 0x5d
+    b174:	eafffd9b 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b178:	e3a02001 	mov	r2, #1
+    b17c:	e5cd205e 	strb	r2, [sp, #94]	@ 0x5e
+    b180:	eafffd98 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b184:	e3a02001 	mov	r2, #1
+    b188:	e5cd2052 	strb	r2, [sp, #82]	@ 0x52
+    b18c:	eafffd95 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b190:	e3a02001 	mov	r2, #1
+    b194:	e5cd2051 	strb	r2, [sp, #81]	@ 0x51
+    b198:	eafffd92 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b19c:	e3a02001 	mov	r2, #1
+    b1a0:	e5cd2056 	strb	r2, [sp, #86]	@ 0x56
+    b1a4:	eafffd8f 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b1a8:	e3a02001 	mov	r2, #1
+    b1ac:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
+    b1b0:	e5cd204c 	strb	r2, [sp, #76]	@ 0x4c
+    b1b4:	eafffd8b 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b1b8:	e3800010 	orr	r0, r0, #16
+    b1bc:	eafffd89 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b1c0:	e3a02001 	mov	r2, #1
+    b1c4:	e5cd205b 	strb	r2, [sp, #91]	@ 0x5b
+    b1c8:	eafffd86 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b1cc:	e3a02001 	mov	r2, #1
+    b1d0:	e3800008 	orr	r0, r0, #8
+    b1d4:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
+    b1d8:	e5cd204f 	strb	r2, [sp, #79]	@ 0x4f
+    b1dc:	eafffd81 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b1e0:	e3a02001 	mov	r2, #1
+    b1e4:	e3800001 	orr	r0, r0, #1
+    b1e8:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
+    b1ec:	e5cd204e 	strb	r2, [sp, #78]	@ 0x4e
+    b1f0:	eafffd7c 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b1f4:	e3a02001 	mov	r2, #1
+    b1f8:	e3800002 	orr	r0, r0, #2
+    b1fc:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
+    b200:	e5cd204b 	strb	r2, [sp, #75]	@ 0x4b
+    b204:	eafffd77 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b208:	e3a02001 	mov	r2, #1
+    b20c:	e3800004 	orr	r0, r0, #4
+    b210:	e5cd2038 	strb	r2, [sp, #56]	@ 0x38
+    b214:	e5cd2050 	strb	r2, [sp, #80]	@ 0x50
+    b218:	eafffd72 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b21c:	e3a02001 	mov	r2, #1
+    b220:	e5cd204f 	strb	r2, [sp, #79]	@ 0x4f
+    b224:	eafffd6f 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b228:	e3a02001 	mov	r2, #1
+    b22c:	e5cd204e 	strb	r2, [sp, #78]	@ 0x4e
+    b230:	eafffd6c 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b234:	e3a02001 	mov	r2, #1
+    b238:	e5cd204d 	strb	r2, [sp, #77]	@ 0x4d
+    b23c:	eafffd69 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b240:	e3a02001 	mov	r2, #1
+    b244:	e5cd204c 	strb	r2, [sp, #76]	@ 0x4c
+    b248:	eafffd66 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b24c:	e3a02001 	mov	r2, #1
+    b250:	e5cd2042 	strb	r2, [sp, #66]	@ 0x42
+    b254:	eafffd63 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b258:	e3a02001 	mov	r2, #1
+    b25c:	e5cd2045 	strb	r2, [sp, #69]	@ 0x45
+    b260:	eafffd60 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b264:	e3a02001 	mov	r2, #1
+    b268:	e5cd203e 	strb	r2, [sp, #62]	@ 0x3e
+    b26c:	eafffd5d 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b270:	e3a02001 	mov	r2, #1
+    b274:	e5cd2046 	strb	r2, [sp, #70]	@ 0x46
+    b278:	eafffd5a 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b27c:	e3a02001 	mov	r2, #1
+    b280:	e5cd2054 	strb	r2, [sp, #84]	@ 0x54
+    b284:	eafffd57 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b288:	e3a02001 	mov	r2, #1
+    b28c:	e5cd203c 	strb	r2, [sp, #60]	@ 0x3c
+    b290:	eafffd54 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b294:	e3a02001 	mov	r2, #1
+    b298:	e5cd2043 	strb	r2, [sp, #67]	@ 0x43
+    b29c:	eafffd51 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2a0:	e3a02001 	mov	r2, #1
+    b2a4:	e5cd203a 	strb	r2, [sp, #58]	@ 0x3a
+    b2a8:	eafffd4e 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2ac:	e3a02001 	mov	r2, #1
+    b2b0:	e5cd2055 	strb	r2, [sp, #85]	@ 0x55
+    b2b4:	eafffd4b 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2b8:	e3a02001 	mov	r2, #1
+    b2bc:	e5cd2039 	strb	r2, [sp, #57]	@ 0x39
+    b2c0:	eafffd48 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2c4:	e3a02001 	mov	r2, #1
+    b2c8:	e5cd2047 	strb	r2, [sp, #71]	@ 0x47
+    b2cc:	eafffd45 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2d0:	e3a02001 	mov	r2, #1
+    b2d4:	e5cd2048 	strb	r2, [sp, #72]	@ 0x48
+    b2d8:	eafffd42 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2dc:	e3a02001 	mov	r2, #1
+    b2e0:	e5cd2049 	strb	r2, [sp, #73]	@ 0x49
+    b2e4:	eafffd3f 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2e8:	e3a02001 	mov	r2, #1
+    b2ec:	e5cd204a 	strb	r2, [sp, #74]	@ 0x4a
+    b2f0:	eafffd3c 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b2f4:	e3a02001 	mov	r2, #1
+    b2f8:	e5cd204b 	strb	r2, [sp, #75]	@ 0x4b
+    b2fc:	eafffd39 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b300:	e3a02001 	mov	r2, #1
+    b304:	e5cd2050 	strb	r2, [sp, #80]	@ 0x50
+    b308:	eafffd36 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b30c:	e1a03005 	mov	r3, r5
+    b310:	e5f32001 	ldrb	r2, [r3, #1]!
+    b314:	e3520051 	cmp	r2, #81	@ 0x51
+    b318:	0afffddf 	beq	aa9c <CKernel::ApplyInputReport()+0x59c>
+    b31c:	e1570003 	cmp	r7, r3
+    b320:	1afffffa 	bne	b310 <CKernel::ApplyInputReport()+0xe10>
+    b324:	e3a01001 	mov	r1, #1
+    b328:	e1a00004 	mov	r0, r4
+    b32c:	ebfff5d5 	bl	8a88 <CKernel::OSDMoveSelection(int)>
+    b330:	eafffcb2 	b	a600 <CKernel::ApplyInputReport()+0x100>
+    b334:	e59da004 	ldr	sl, [sp, #4]
+    b338:	e58da018 	str	sl, [sp, #24]
+    b33c:	e1a0300a 	mov	r3, sl
+    b340:	e58da014 	str	sl, [sp, #20]
+    b344:	e58da010 	str	sl, [sp, #16]
+    b348:	e58da00c 	str	sl, [sp, #12]
+    b34c:	e58da02c 	str	sl, [sp, #44]	@ 0x2c
+    b350:	e58da020 	str	sl, [sp, #32]
+    b354:	e58da01c 	str	sl, [sp, #28]
+    b358:	eafffe73 	b	ad2c <CKernel::ApplyInputReport()+0x82c>
+    b35c:	e28d3030 	add	r3, sp, #48	@ 0x30
+    b360:	eafffdc2 	b	aa70 <CKernel::ApplyInputReport()+0x570>
+    b364:	e3a02001 	mov	r2, #1
+    b368:	e58d2004 	str	r2, [sp, #4]
+    b36c:	eafffd1d 	b	a7e8 <CKernel::ApplyInputReport()+0x2e8>
+    b370:	e215ab02 	ands	sl, r5, #2048	@ 0x800
+    b374:	0afffd3f 	beq	a878 <CKernel::ApplyInputReport()+0x378>
+    b378:	e1a0300b 	mov	r3, fp
+    b37c:	e1a0a00b 	mov	sl, fp
+    b380:	e58db018 	str	fp, [sp, #24]
+    b384:	e58db02c 	str	fp, [sp, #44]	@ 0x2c
+    b388:	e58db014 	str	fp, [sp, #20]
+    b38c:	e58db020 	str	fp, [sp, #32]
+    b390:	e58db010 	str	fp, [sp, #16]
+    b394:	e58db01c 	str	fp, [sp, #28]
+    b398:	e58db00c 	str	fp, [sp, #12]
+    b39c:	e58db004 	str	fp, [sp, #4]
+    b3a0:	eafffe68 	b	ad48 <CKernel::ApplyInputReport()+0x848>
+    b3a4:	e35300a0 	cmp	r3, #160	@ 0xa0
+    b3a8:	d3a01000 	movle	r1, #0
+    b3ac:	c3a01001 	movgt	r1, #1
+    b3b0:	eafffe39 	b	ac9c <CKernel::ApplyInputReport()+0x79c>
+    b3b4:	00046e70 	.word	0x00046e70
+    b3b8:	00046e80 	.word	0x00046e80
+    b3bc:	00046e48 	.word	0x00046e48
+    b3c0:	00046e58 	.word	0x00046e58
+    b3c4:	000468b0 	.word	0x000468b0
+    b3c8:	00046e28 	.word	0x00046e28
+    b3cc:	00046e38 	.word	0x00046e38
+    b3d0:	00046e08 	.word	0x00046e08
+    b3d4:	00046e18 	.word	0x00046e18
 
-0000b3dc <CKernel::Run()>:
-    b3dc:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
-    b3e0:	e2808c1d 	add	r8, r0, #7424	@ 0x1d00
-    b3e4:	e1a05000 	mov	r5, r0
-    b3e8:	e2888024 	add	r8, r8, #36	@ 0x24
-    b3ec:	e24dd01c 	sub	sp, sp, #28
-    b3f0:	e59f33f8 	ldr	r3, [pc, #1016]	@ b7f0 <CKernel::Run()+0x414>
-    b3f4:	e3a02003 	mov	r2, #3
-    b3f8:	e59f13f4 	ldr	r1, [pc, #1012]	@ b7f4 <CKernel::Run()+0x418>
-    b3fc:	e1a00008 	mov	r0, r8
-    b400:	e285ba02 	add	fp, r5, #8192	@ 0x2000
-    b404:	eb00bacd 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b408:	e59f33e8 	ldr	r3, [pc, #1000]	@ b7f8 <CKernel::Run()+0x41c>
-    b40c:	e3a02003 	mov	r2, #3
-    b410:	e59f13dc 	ldr	r1, [pc, #988]	@ b7f4 <CKernel::Run()+0x418>
-    b414:	e1a00008 	mov	r0, r8
-    b418:	eb00bac8 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b41c:	e1a00005 	mov	r0, r5
-    b420:	ebfff553 	bl	8974 <CKernel::RenderSplashWithFade()>
-    b424:	e5db3b1c 	ldrb	r3, [fp, #2844]	@ 0xb1c
-    b428:	e3530000 	cmp	r3, #0
-    b42c:	1a000059 	bne	b598 <CKernel::Run()+0x1bc>
-    b430:	e285ac23 	add	sl, r5, #8960	@ 0x2300
-    b434:	e3062bde 	movw	r2, #27614	@ 0x6bde
-    b438:	e3402004 	movt	r2, #4
-    b43c:	e2854a83 	add	r4, r5, #536576	@ 0x83000
-    b440:	e0852002 	add	r2, r5, r2
-    b444:	e28aa018 	add	sl, sl, #24
-    b448:	e2856a85 	add	r6, r5, #544768	@ 0x85000
-    b44c:	e58d8004 	str	r8, [sp, #4]
-    b450:	e58d2008 	str	r2, [sp, #8]
-    b454:	ea00000a 	b	b484 <CKernel::Run()+0xa8>
-    b458:	e5d4342d 	ldrb	r3, [r4, #1069]	@ 0x42d
-    b45c:	e3530000 	cmp	r3, #0
-    b460:	1a000064 	bne	b5f8 <CKernel::Run()+0x21c>
-    b464:	e5d63514 	ldrb	r3, [r6, #1300]	@ 0x514
-    b468:	e3530000 	cmp	r3, #0
-    b46c:	1a000056 	bne	b5cc <CKernel::Run()+0x1f0>
-    b470:	e3010388 	movw	r0, #5000	@ 0x1388
-    b474:	eb00ce57 	bl	3edd8 <CTimer::SimpleusDelay(unsigned int)>
-    b478:	e5db3b1c 	ldrb	r3, [fp, #2844]	@ 0xb1c
-    b47c:	e3530000 	cmp	r3, #0
-    b480:	1a000044 	bne	b598 <CKernel::Run()+0x1bc>
-    b484:	e1a0000a 	mov	r0, sl
-    b488:	eb001f64 	bl	13220 <CUSBHostController::UpdatePlugAndPlay()>
-    b48c:	e3500000 	cmp	r0, #0
-    b490:	0a000005 	beq	b4ac <CKernel::Run()+0xd0>
-    b494:	e59b7b14 	ldr	r7, [fp, #2836]	@ 0xb14
-    b498:	e3570000 	cmp	r7, #0
-    b49c:	0a000087 	beq	b6c0 <CKernel::Run()+0x2e4>
-    b4a0:	e59b7b18 	ldr	r7, [fp, #2840]	@ 0xb18
-    b4a4:	e3570000 	cmp	r7, #0
-    b4a8:	0a000057 	beq	b60c <CKernel::Run()+0x230>
-    b4ac:	e59422d4 	ldr	r2, [r4, #724]	@ 0x2d4
-    b4b0:	e59432e8 	ldr	r3, [r4, #744]	@ 0x2e8
-    b4b4:	e1520003 	cmp	r2, r3
-    b4b8:	1a000003 	bne	b4cc <CKernel::Run()+0xf0>
-    b4bc:	e59422ec 	ldr	r2, [r4, #748]	@ 0x2ec
-    b4c0:	e59432f0 	ldr	r3, [r4, #752]	@ 0x2f0
-    b4c4:	e1520003 	cmp	r2, r3
-    b4c8:	0a000001 	beq	b4d4 <CKernel::Run()+0xf8>
-    b4cc:	e1a00005 	mov	r0, r5
-    b4d0:	ebfffc0b 	bl	a504 <CKernel::ApplyInputReport()>
-    b4d4:	e5d4342a 	ldrb	r3, [r4, #1066]	@ 0x42a
-    b4d8:	e3530000 	cmp	r3, #0
-    b4dc:	1a000030 	bne	b5a4 <CKernel::Run()+0x1c8>
-    b4e0:	e5d4342c 	ldrb	r3, [r4, #1068]	@ 0x42c
-    b4e4:	e3530000 	cmp	r3, #0
-    b4e8:	1affffda 	bne	b458 <CKernel::Run()+0x7c>
-    b4ec:	eb00cb6f 	bl	3e2b0 <CTimer::GetClockTicks64()>
-    b4f0:	e5d63508 	ldrb	r3, [r6, #1288]	@ 0x508
-    b4f4:	e1a07000 	mov	r7, r0
-    b4f8:	e1a08001 	mov	r8, r1
-    b4fc:	e3530000 	cmp	r3, #0
-    b500:	0a000004 	beq	b518 <CKernel::Run()+0x13c>
-    b504:	e2869e49 	add	r9, r6, #1168	@ 0x490
-    b508:	e1a00009 	mov	r0, r9
-    b50c:	eb001c09 	bl	12538 <tzx_is_playing>
-    b510:	e3500000 	cmp	r0, #0
-    b514:	1a00008e 	bne	b754 <CKernel::Run()+0x378>
-    b518:	e2850c2b 	add	r0, r5, #11008	@ 0x2b00
-    b51c:	e2800020 	add	r0, r0, #32
-    b520:	eb00197c 	bl	11b18 <zx_frame>
-    b524:	e3a03000 	mov	r3, #0
-    b528:	e1a00005 	mov	r0, r5
-    b52c:	e5863510 	str	r3, [r6, #1296]	@ 0x510
-    b530:	ebfff48d 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
-    b534:	e5d63514 	ldrb	r3, [r6, #1300]	@ 0x514
-    b538:	e3530000 	cmp	r3, #0
-    b53c:	0a000009 	beq	b568 <CKernel::Run()+0x18c>
-    b540:	e5d61515 	ldrb	r1, [r6, #1301]	@ 0x515
-    b544:	e3510000 	cmp	r1, #0
-    b548:	0a000075 	beq	b724 <CKernel::Run()+0x348>
-    b54c:	e2850c1e 	add	r0, r5, #7680	@ 0x1e00
-    b550:	e3061bde 	movw	r1, #27614	@ 0x6bde
-    b554:	e3401004 	movt	r1, #4
-    b558:	e2800020 	add	r0, r0, #32
-    b55c:	e0851001 	add	r1, r5, r1
-    b560:	e30026e4 	movw	r2, #1764	@ 0x6e4
-    b564:	eb0085ae 	bl	2cc24 <CSoundBaseDevice::Write(void const*, unsigned int)>
-    b568:	eb00cb50 	bl	3e2b0 <CTimer::GetClockTicks64()>
-    b56c:	e0500007 	subs	r0, r0, r7
-    b570:	e0c11008 	sbc	r1, r1, r8
-    b574:	e3043e20 	movw	r3, #20000	@ 0x4e20
-    b578:	e1500003 	cmp	r0, r3
-    b57c:	e2d11000 	sbcs	r1, r1, #0
-    b580:	2affffbc 	bcs	b478 <CKernel::Run()+0x9c>
-    b584:	e0430000 	sub	r0, r3, r0
-    b588:	eb00ce12 	bl	3edd8 <CTimer::SimpleusDelay(unsigned int)>
-    b58c:	e5db3b1c 	ldrb	r3, [fp, #2844]	@ 0xb1c
-    b590:	e3530000 	cmp	r3, #0
-    b594:	0affffba 	beq	b484 <CKernel::Run()+0xa8>
-    b598:	e5db0b1c 	ldrb	r0, [fp, #2844]	@ 0xb1c
-    b59c:	e28dd01c 	add	sp, sp, #28
-    b5a0:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
-    b5a4:	e3a03000 	mov	r3, #0
-    b5a8:	e1a00005 	mov	r0, r5
-    b5ac:	e5c4342a 	strb	r3, [r4, #1066]	@ 0x42a
-    b5b0:	ebfff3e3 	bl	8544 <CKernel::ResetSpectrum()>
-    b5b4:	e59f3240 	ldr	r3, [pc, #576]	@ b7fc <CKernel::Run()+0x420>
-    b5b8:	e59f1234 	ldr	r1, [pc, #564]	@ b7f4 <CKernel::Run()+0x418>
-    b5bc:	e3a02003 	mov	r2, #3
-    b5c0:	e59d0004 	ldr	r0, [sp, #4]
-    b5c4:	eb00ba5d 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b5c8:	eaffffc4 	b	b4e0 <CKernel::Run()+0x104>
-    b5cc:	e59d7008 	ldr	r7, [sp, #8]
-    b5d0:	e3a01000 	mov	r1, #0
-    b5d4:	e30026e4 	movw	r2, #1764	@ 0x6e4
-    b5d8:	e1a00007 	mov	r0, r7
-    b5dc:	eb00d0b2 	bl	3f8ac <memset>
-    b5e0:	e2850c1e 	add	r0, r5, #7680	@ 0x1e00
-    b5e4:	e1a01007 	mov	r1, r7
-    b5e8:	e30026e4 	movw	r2, #1764	@ 0x6e4
-    b5ec:	e2800020 	add	r0, r0, #32
-    b5f0:	eb00858b 	bl	2cc24 <CSoundBaseDevice::Write(void const*, unsigned int)>
-    b5f4:	eaffff9d 	b	b470 <CKernel::Run()+0x94>
-    b5f8:	e1a00005 	mov	r0, r5
-    b5fc:	ebfff8d1 	bl	9948 <CKernel::RenderOSD()>
-    b600:	e3a03000 	mov	r3, #0
-    b604:	e5c4342d 	strb	r3, [r4, #1069]	@ 0x42d
-    b608:	eaffff95 	b	b464 <CKernel::Run()+0x88>
-    b60c:	e2850e8a 	add	r0, r5, #2208	@ 0x8a0
-    b610:	e1a03007 	mov	r3, r7
-    b614:	e59f11e4 	ldr	r1, [pc, #484]	@ b800 <CKernel::Run()+0x424>
-    b618:	e2800004 	add	r0, r0, #4
-    b61c:	e3a02001 	mov	r2, #1
-    b620:	eb00b10d 	bl	37a5c <CDeviceNameService::GetDevice(char const*, unsigned int, bool)>
-    b624:	e58b0b18 	str	r0, [fp, #2840]	@ 0xb18
-    b628:	e59b3b18 	ldr	r3, [fp, #2840]	@ 0xb18
-    b62c:	e3530000 	cmp	r3, #0
-    b630:	0affff9d 	beq	b4ac <CKernel::Run()+0xd0>
-    b634:	e1a02007 	mov	r2, r7
-    b638:	e59b0b18 	ldr	r0, [fp, #2840]	@ 0xb18
-    b63c:	e308118c 	movw	r1, #33164	@ 0x818c
-    b640:	e3401000 	movt	r1, #0
-    b644:	eb00af6b 	bl	373f8 <CDevice::RegisterRemovedHandler(void (*)(CDevice*, void*), void*)>
-    b648:	e59b0b18 	ldr	r0, [fp, #2840]	@ 0xb18
-    b64c:	e308110c 	movw	r1, #33036	@ 0x810c
-    b650:	e3401000 	movt	r1, #0
-    b654:	e5903000 	ldr	r3, [r0]
-    b658:	e5933038 	ldr	r3, [r3, #56]	@ 0x38
-    b65c:	e12fff33 	blx	r3
-    b660:	e59b0b18 	ldr	r0, [fp, #2840]	@ 0xb18
-    b664:	e5903000 	ldr	r3, [r0]
-    b668:	e5933034 	ldr	r3, [r3, #52]	@ 0x34
-    b66c:	e12fff33 	blx	r3
-    b670:	e2501000 	subs	r1, r0, #0
-    b674:	0a00000b 	beq	b6a8 <CKernel::Run()+0x2cc>
-    b678:	e3033830 	movw	r3, #14384	@ 0x3830
-    b67c:	e3403009 	movt	r3, #9
-    b680:	e5933000 	ldr	r3, [r3]
-    b684:	e3530000 	cmp	r3, #0
-    b688:	0a000006 	beq	b6a8 <CKernel::Run()+0x2cc>
-    b68c:	e2837a83 	add	r7, r3, #536576	@ 0x83000
-    b690:	e3a02c01 	mov	r2, #256	@ 0x100
-    b694:	e2870fbd 	add	r0, r7, #756	@ 0x2f4
-    b698:	eb00d09a 	bl	3f908 <memcpy>
-    b69c:	e59732ec 	ldr	r3, [r7, #748]	@ 0x2ec
-    b6a0:	e2833001 	add	r3, r3, #1
-    b6a4:	e58732ec 	str	r3, [r7, #748]	@ 0x2ec
-    b6a8:	e59f3154 	ldr	r3, [pc, #340]	@ b804 <CKernel::Run()+0x428>
-    b6ac:	e3a02003 	mov	r2, #3
-    b6b0:	e59d0004 	ldr	r0, [sp, #4]
-    b6b4:	e2431e69 	sub	r1, r3, #1680	@ 0x690
-    b6b8:	eb00ba20 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b6bc:	eaffff7a 	b	b4ac <CKernel::Run()+0xd0>
-    b6c0:	e2850e8a 	add	r0, r5, #2208	@ 0x8a0
-    b6c4:	e59f113c 	ldr	r1, [pc, #316]	@ b808 <CKernel::Run()+0x42c>
-    b6c8:	e2800004 	add	r0, r0, #4
-    b6cc:	e1a02007 	mov	r2, r7
-    b6d0:	eb00b03f 	bl	377d4 <CDeviceNameService::GetDevice(char const*, bool)>
-    b6d4:	e58b0b14 	str	r0, [fp, #2836]	@ 0xb14
-    b6d8:	e59b3b14 	ldr	r3, [fp, #2836]	@ 0xb14
-    b6dc:	e3530000 	cmp	r3, #0
-    b6e0:	0affff6e 	beq	b4a0 <CKernel::Run()+0xc4>
-    b6e4:	e1a02007 	mov	r2, r7
-    b6e8:	e59b0b14 	ldr	r0, [fp, #2836]	@ 0xb14
-    b6ec:	e3081148 	movw	r1, #33096	@ 0x8148
-    b6f0:	e3401000 	movt	r1, #0
-    b6f4:	eb00af3f 	bl	373f8 <CDevice::RegisterRemovedHandler(void (*)(CDevice*, void*), void*)>
-    b6f8:	e59b0b14 	ldr	r0, [fp, #2836]	@ 0xb14
-    b6fc:	e1a02007 	mov	r2, r7
-    b700:	e30810b0 	movw	r1, #32944	@ 0x80b0
-    b704:	e3401000 	movt	r1, #0
-    b708:	eb0020f0 	bl	13ad0 <CUSBKeyboardDevice::RegisterKeyStatusHandlerRaw(void (*)(unsigned char, unsigned char const*), bool)>
-    b70c:	e59f30f8 	ldr	r3, [pc, #248]	@ b80c <CKernel::Run()+0x430>
-    b710:	e59d0004 	ldr	r0, [sp, #4]
-    b714:	e3a02003 	mov	r2, #3
-    b718:	e2431e67 	sub	r1, r3, #1648	@ 0x670
-    b71c:	eb00ba07 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
-    b720:	eaffff5e 	b	b4a0 <CKernel::Run()+0xc4>
-    b724:	e3069bde 	movw	r9, #27614	@ 0x6bde
-    b728:	e3409004 	movt	r9, #4
-    b72c:	e0859009 	add	r9, r5, r9
-    b730:	e30026e4 	movw	r2, #1764	@ 0x6e4
-    b734:	e1a00009 	mov	r0, r9
-    b738:	eb00d05b 	bl	3f8ac <memset>
-    b73c:	e2850c1e 	add	r0, r5, #7680	@ 0x1e00
-    b740:	e1a01009 	mov	r1, r9
-    b744:	e30026e4 	movw	r2, #1764	@ 0x6e4
-    b748:	e2800020 	add	r0, r0, #32
-    b74c:	eb008534 	bl	2cc24 <CSoundBaseDevice::Write(void const*, unsigned int)>
-    b750:	eaffff84 	b	b568 <CKernel::Run()+0x18c>
-    b754:	e2853a2e 	add	r3, r5, #188416	@ 0x2e000
-    b758:	e1a00009 	mov	r0, r9
-    b75c:	e5d31b6c 	ldrb	r1, [r3, #2924]	@ 0xb6c
-    b760:	e5d6350c 	ldrb	r3, [r6, #1292]	@ 0x50c
-    b764:	e58d300c 	str	r3, [sp, #12]
-    b768:	eb001b6c 	bl	12520 <tzx_set_machine>
-    b76c:	e2853c2b 	add	r3, r5, #11008	@ 0x2b00
-    b770:	e2852dad 	add	r2, r5, #11072	@ 0x2b40
-    b774:	e2833020 	add	r3, r3, #32
-    b778:	e58d5010 	str	r5, [sp, #16]
-    b77c:	e58d7014 	str	r7, [sp, #20]
-    b780:	e1a05003 	mov	r5, r3
-    b784:	e1a07002 	mov	r7, r2
-    b788:	e1c720d0 	ldrd	r2, [r7]
-    b78c:	e1a00009 	mov	r0, r9
-    b790:	eb001b6a 	bl	12540 <tzx_update>
-    b794:	e1a01000 	mov	r1, r0
-    b798:	e1a00005 	mov	r0, r5
-    b79c:	eb001905 	bl	11bb8 <zx_set_ear>
-    b7a0:	e3a01000 	mov	r1, #0
-    b7a4:	e1a00005 	mov	r0, r5
-    b7a8:	eb00174d 	bl	114e4 <zx_tick>
-    b7ac:	e3500000 	cmp	r0, #0
-    b7b0:	0afffff4 	beq	b788 <CKernel::Run()+0x3ac>
-    b7b4:	e28d300c 	add	r3, sp, #12
-    b7b8:	e89300a8 	ldm	r3, {r3, r5, r7}
-    b7bc:	e3530000 	cmp	r3, #0
-    b7c0:	0affff57 	beq	b524 <CKernel::Run()+0x148>
-    b7c4:	e5963510 	ldr	r3, [r6, #1296]	@ 0x510
-    b7c8:	e2833001 	add	r3, r3, #1
-    b7cc:	e5863510 	str	r3, [r6, #1296]	@ 0x510
-    b7d0:	e3130007 	tst	r3, #7
-    b7d4:	0a000001 	beq	b7e0 <CKernel::Run()+0x404>
-    b7d8:	eb00cab4 	bl	3e2b0 <CTimer::GetClockTicks64()>
-    b7dc:	eaffff25 	b	b478 <CKernel::Run()+0x9c>
-    b7e0:	e1a00005 	mov	r0, r5
-    b7e4:	ebfff3e0 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
-    b7e8:	eb00cab0 	bl	3e2b0 <CTimer::GetClockTicks64()>
-    b7ec:	eaffff21 	b	b478 <CKernel::Run()+0x9c>
-    b7f0:	00046e9c 	.word	0x00046e9c
-    b7f4:	000468b0 	.word	0x000468b0
-    b7f8:	00046ec8 	.word	0x00046ec8
-    b7fc:	00046f58 	.word	0x00046f58
-    b800:	00046f38 	.word	0x00046f38
-    b804:	00046f40 	.word	0x00046f40
-    b808:	00046f18 	.word	0x00046f18
-    b80c:	00046f20 	.word	0x00046f20
+0000b3d8 <CKernel::Run()>:
+    b3d8:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    b3dc:	e2808c1d 	add	r8, r0, #7424	@ 0x1d00
+    b3e0:	e1a05000 	mov	r5, r0
+    b3e4:	e2888024 	add	r8, r8, #36	@ 0x24
+    b3e8:	e24dd01c 	sub	sp, sp, #28
+    b3ec:	e59f33f8 	ldr	r3, [pc, #1016]	@ b7ec <CKernel::Run()+0x414>
+    b3f0:	e3a02003 	mov	r2, #3
+    b3f4:	e59f13f4 	ldr	r1, [pc, #1012]	@ b7f0 <CKernel::Run()+0x418>
+    b3f8:	e1a00008 	mov	r0, r8
+    b3fc:	e285ba02 	add	fp, r5, #8192	@ 0x2000
+    b400:	eb00bace 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b404:	e59f33e8 	ldr	r3, [pc, #1000]	@ b7f4 <CKernel::Run()+0x41c>
+    b408:	e3a02003 	mov	r2, #3
+    b40c:	e59f13dc 	ldr	r1, [pc, #988]	@ b7f0 <CKernel::Run()+0x418>
+    b410:	e1a00008 	mov	r0, r8
+    b414:	eb00bac9 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b418:	e1a00005 	mov	r0, r5
+    b41c:	ebfff554 	bl	8974 <CKernel::RenderSplashWithFade()>
+    b420:	e5db3b1c 	ldrb	r3, [fp, #2844]	@ 0xb1c
+    b424:	e3530000 	cmp	r3, #0
+    b428:	1a000059 	bne	b594 <CKernel::Run()+0x1bc>
+    b42c:	e285ac23 	add	sl, r5, #8960	@ 0x2300
+    b430:	e3062bde 	movw	r2, #27614	@ 0x6bde
+    b434:	e3402004 	movt	r2, #4
+    b438:	e2854a83 	add	r4, r5, #536576	@ 0x83000
+    b43c:	e0852002 	add	r2, r5, r2
+    b440:	e28aa018 	add	sl, sl, #24
+    b444:	e2856a85 	add	r6, r5, #544768	@ 0x85000
+    b448:	e58d8004 	str	r8, [sp, #4]
+    b44c:	e58d2008 	str	r2, [sp, #8]
+    b450:	ea00000a 	b	b480 <CKernel::Run()+0xa8>
+    b454:	e5d4342d 	ldrb	r3, [r4, #1069]	@ 0x42d
+    b458:	e3530000 	cmp	r3, #0
+    b45c:	1a000064 	bne	b5f4 <CKernel::Run()+0x21c>
+    b460:	e5d63514 	ldrb	r3, [r6, #1300]	@ 0x514
+    b464:	e3530000 	cmp	r3, #0
+    b468:	1a000056 	bne	b5c8 <CKernel::Run()+0x1f0>
+    b46c:	e3010388 	movw	r0, #5000	@ 0x1388
+    b470:	eb00ce58 	bl	3edd8 <CTimer::SimpleusDelay(unsigned int)>
+    b474:	e5db3b1c 	ldrb	r3, [fp, #2844]	@ 0xb1c
+    b478:	e3530000 	cmp	r3, #0
+    b47c:	1a000044 	bne	b594 <CKernel::Run()+0x1bc>
+    b480:	e1a0000a 	mov	r0, sl
+    b484:	eb001f65 	bl	13220 <CUSBHostController::UpdatePlugAndPlay()>
+    b488:	e3500000 	cmp	r0, #0
+    b48c:	0a000005 	beq	b4a8 <CKernel::Run()+0xd0>
+    b490:	e59b7b14 	ldr	r7, [fp, #2836]	@ 0xb14
+    b494:	e3570000 	cmp	r7, #0
+    b498:	0a000087 	beq	b6bc <CKernel::Run()+0x2e4>
+    b49c:	e59b7b18 	ldr	r7, [fp, #2840]	@ 0xb18
+    b4a0:	e3570000 	cmp	r7, #0
+    b4a4:	0a000057 	beq	b608 <CKernel::Run()+0x230>
+    b4a8:	e59422d4 	ldr	r2, [r4, #724]	@ 0x2d4
+    b4ac:	e59432e8 	ldr	r3, [r4, #744]	@ 0x2e8
+    b4b0:	e1520003 	cmp	r2, r3
+    b4b4:	1a000003 	bne	b4c8 <CKernel::Run()+0xf0>
+    b4b8:	e59422ec 	ldr	r2, [r4, #748]	@ 0x2ec
+    b4bc:	e59432f0 	ldr	r3, [r4, #752]	@ 0x2f0
+    b4c0:	e1520003 	cmp	r2, r3
+    b4c4:	0a000001 	beq	b4d0 <CKernel::Run()+0xf8>
+    b4c8:	e1a00005 	mov	r0, r5
+    b4cc:	ebfffc0b 	bl	a500 <CKernel::ApplyInputReport()>
+    b4d0:	e5d4342a 	ldrb	r3, [r4, #1066]	@ 0x42a
+    b4d4:	e3530000 	cmp	r3, #0
+    b4d8:	1a000030 	bne	b5a0 <CKernel::Run()+0x1c8>
+    b4dc:	e5d4342c 	ldrb	r3, [r4, #1068]	@ 0x42c
+    b4e0:	e3530000 	cmp	r3, #0
+    b4e4:	1affffda 	bne	b454 <CKernel::Run()+0x7c>
+    b4e8:	eb00cb70 	bl	3e2b0 <CTimer::GetClockTicks64()>
+    b4ec:	e5d63508 	ldrb	r3, [r6, #1288]	@ 0x508
+    b4f0:	e1a07000 	mov	r7, r0
+    b4f4:	e1a08001 	mov	r8, r1
+    b4f8:	e3530000 	cmp	r3, #0
+    b4fc:	0a000004 	beq	b514 <CKernel::Run()+0x13c>
+    b500:	e2869e49 	add	r9, r6, #1168	@ 0x490
+    b504:	e1a00009 	mov	r0, r9
+    b508:	eb001c0a 	bl	12538 <tzx_is_playing>
+    b50c:	e3500000 	cmp	r0, #0
+    b510:	1a00008e 	bne	b750 <CKernel::Run()+0x378>
+    b514:	e2850c2b 	add	r0, r5, #11008	@ 0x2b00
+    b518:	e2800020 	add	r0, r0, #32
+    b51c:	eb00197d 	bl	11b18 <zx_frame>
+    b520:	e3a03000 	mov	r3, #0
+    b524:	e1a00005 	mov	r0, r5
+    b528:	e5863510 	str	r3, [r6, #1296]	@ 0x510
+    b52c:	ebfff48e 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
+    b530:	e5d63514 	ldrb	r3, [r6, #1300]	@ 0x514
+    b534:	e3530000 	cmp	r3, #0
+    b538:	0a000009 	beq	b564 <CKernel::Run()+0x18c>
+    b53c:	e5d61515 	ldrb	r1, [r6, #1301]	@ 0x515
+    b540:	e3510000 	cmp	r1, #0
+    b544:	0a000075 	beq	b720 <CKernel::Run()+0x348>
+    b548:	e2850c1e 	add	r0, r5, #7680	@ 0x1e00
+    b54c:	e3061bde 	movw	r1, #27614	@ 0x6bde
+    b550:	e3401004 	movt	r1, #4
+    b554:	e2800020 	add	r0, r0, #32
+    b558:	e0851001 	add	r1, r5, r1
+    b55c:	e30026e4 	movw	r2, #1764	@ 0x6e4
+    b560:	eb0085af 	bl	2cc24 <CSoundBaseDevice::Write(void const*, unsigned int)>
+    b564:	eb00cb51 	bl	3e2b0 <CTimer::GetClockTicks64()>
+    b568:	e0500007 	subs	r0, r0, r7
+    b56c:	e0c11008 	sbc	r1, r1, r8
+    b570:	e3043e20 	movw	r3, #20000	@ 0x4e20
+    b574:	e1500003 	cmp	r0, r3
+    b578:	e2d11000 	sbcs	r1, r1, #0
+    b57c:	2affffbc 	bcs	b474 <CKernel::Run()+0x9c>
+    b580:	e0430000 	sub	r0, r3, r0
+    b584:	eb00ce13 	bl	3edd8 <CTimer::SimpleusDelay(unsigned int)>
+    b588:	e5db3b1c 	ldrb	r3, [fp, #2844]	@ 0xb1c
+    b58c:	e3530000 	cmp	r3, #0
+    b590:	0affffba 	beq	b480 <CKernel::Run()+0xa8>
+    b594:	e5db0b1c 	ldrb	r0, [fp, #2844]	@ 0xb1c
+    b598:	e28dd01c 	add	sp, sp, #28
+    b59c:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+    b5a0:	e3a03000 	mov	r3, #0
+    b5a4:	e1a00005 	mov	r0, r5
+    b5a8:	e5c4342a 	strb	r3, [r4, #1066]	@ 0x42a
+    b5ac:	ebfff3e4 	bl	8544 <CKernel::ResetSpectrum()>
+    b5b0:	e59f3240 	ldr	r3, [pc, #576]	@ b7f8 <CKernel::Run()+0x420>
+    b5b4:	e59f1234 	ldr	r1, [pc, #564]	@ b7f0 <CKernel::Run()+0x418>
+    b5b8:	e3a02003 	mov	r2, #3
+    b5bc:	e59d0004 	ldr	r0, [sp, #4]
+    b5c0:	eb00ba5e 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b5c4:	eaffffc4 	b	b4dc <CKernel::Run()+0x104>
+    b5c8:	e59d7008 	ldr	r7, [sp, #8]
+    b5cc:	e3a01000 	mov	r1, #0
+    b5d0:	e30026e4 	movw	r2, #1764	@ 0x6e4
+    b5d4:	e1a00007 	mov	r0, r7
+    b5d8:	eb00d0b3 	bl	3f8ac <memset>
+    b5dc:	e2850c1e 	add	r0, r5, #7680	@ 0x1e00
+    b5e0:	e1a01007 	mov	r1, r7
+    b5e4:	e30026e4 	movw	r2, #1764	@ 0x6e4
+    b5e8:	e2800020 	add	r0, r0, #32
+    b5ec:	eb00858c 	bl	2cc24 <CSoundBaseDevice::Write(void const*, unsigned int)>
+    b5f0:	eaffff9d 	b	b46c <CKernel::Run()+0x94>
+    b5f4:	e1a00005 	mov	r0, r5
+    b5f8:	ebfff8d2 	bl	9948 <CKernel::RenderOSD()>
+    b5fc:	e3a03000 	mov	r3, #0
+    b600:	e5c4342d 	strb	r3, [r4, #1069]	@ 0x42d
+    b604:	eaffff95 	b	b460 <CKernel::Run()+0x88>
+    b608:	e2850e8a 	add	r0, r5, #2208	@ 0x8a0
+    b60c:	e1a03007 	mov	r3, r7
+    b610:	e59f11e4 	ldr	r1, [pc, #484]	@ b7fc <CKernel::Run()+0x424>
+    b614:	e2800004 	add	r0, r0, #4
+    b618:	e3a02001 	mov	r2, #1
+    b61c:	eb00b10e 	bl	37a5c <CDeviceNameService::GetDevice(char const*, unsigned int, bool)>
+    b620:	e58b0b18 	str	r0, [fp, #2840]	@ 0xb18
+    b624:	e59b3b18 	ldr	r3, [fp, #2840]	@ 0xb18
+    b628:	e3530000 	cmp	r3, #0
+    b62c:	0affff9d 	beq	b4a8 <CKernel::Run()+0xd0>
+    b630:	e1a02007 	mov	r2, r7
+    b634:	e59b0b18 	ldr	r0, [fp, #2840]	@ 0xb18
+    b638:	e308118c 	movw	r1, #33164	@ 0x818c
+    b63c:	e3401000 	movt	r1, #0
+    b640:	eb00af6c 	bl	373f8 <CDevice::RegisterRemovedHandler(void (*)(CDevice*, void*), void*)>
+    b644:	e59b0b18 	ldr	r0, [fp, #2840]	@ 0xb18
+    b648:	e308110c 	movw	r1, #33036	@ 0x810c
+    b64c:	e3401000 	movt	r1, #0
+    b650:	e5903000 	ldr	r3, [r0]
+    b654:	e5933038 	ldr	r3, [r3, #56]	@ 0x38
+    b658:	e12fff33 	blx	r3
+    b65c:	e59b0b18 	ldr	r0, [fp, #2840]	@ 0xb18
+    b660:	e5903000 	ldr	r3, [r0]
+    b664:	e5933034 	ldr	r3, [r3, #52]	@ 0x34
+    b668:	e12fff33 	blx	r3
+    b66c:	e2501000 	subs	r1, r0, #0
+    b670:	0a00000b 	beq	b6a4 <CKernel::Run()+0x2cc>
+    b674:	e3033830 	movw	r3, #14384	@ 0x3830
+    b678:	e3403009 	movt	r3, #9
+    b67c:	e5933000 	ldr	r3, [r3]
+    b680:	e3530000 	cmp	r3, #0
+    b684:	0a000006 	beq	b6a4 <CKernel::Run()+0x2cc>
+    b688:	e2837a83 	add	r7, r3, #536576	@ 0x83000
+    b68c:	e3a02c01 	mov	r2, #256	@ 0x100
+    b690:	e2870fbd 	add	r0, r7, #756	@ 0x2f4
+    b694:	eb00d09b 	bl	3f908 <memcpy>
+    b698:	e59732ec 	ldr	r3, [r7, #748]	@ 0x2ec
+    b69c:	e2833001 	add	r3, r3, #1
+    b6a0:	e58732ec 	str	r3, [r7, #748]	@ 0x2ec
+    b6a4:	e59f3154 	ldr	r3, [pc, #340]	@ b800 <CKernel::Run()+0x428>
+    b6a8:	e3a02003 	mov	r2, #3
+    b6ac:	e59d0004 	ldr	r0, [sp, #4]
+    b6b0:	e2431e69 	sub	r1, r3, #1680	@ 0x690
+    b6b4:	eb00ba21 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b6b8:	eaffff7a 	b	b4a8 <CKernel::Run()+0xd0>
+    b6bc:	e2850e8a 	add	r0, r5, #2208	@ 0x8a0
+    b6c0:	e59f113c 	ldr	r1, [pc, #316]	@ b804 <CKernel::Run()+0x42c>
+    b6c4:	e2800004 	add	r0, r0, #4
+    b6c8:	e1a02007 	mov	r2, r7
+    b6cc:	eb00b040 	bl	377d4 <CDeviceNameService::GetDevice(char const*, bool)>
+    b6d0:	e58b0b14 	str	r0, [fp, #2836]	@ 0xb14
+    b6d4:	e59b3b14 	ldr	r3, [fp, #2836]	@ 0xb14
+    b6d8:	e3530000 	cmp	r3, #0
+    b6dc:	0affff6e 	beq	b49c <CKernel::Run()+0xc4>
+    b6e0:	e1a02007 	mov	r2, r7
+    b6e4:	e59b0b14 	ldr	r0, [fp, #2836]	@ 0xb14
+    b6e8:	e3081148 	movw	r1, #33096	@ 0x8148
+    b6ec:	e3401000 	movt	r1, #0
+    b6f0:	eb00af40 	bl	373f8 <CDevice::RegisterRemovedHandler(void (*)(CDevice*, void*), void*)>
+    b6f4:	e59b0b14 	ldr	r0, [fp, #2836]	@ 0xb14
+    b6f8:	e1a02007 	mov	r2, r7
+    b6fc:	e30810b0 	movw	r1, #32944	@ 0x80b0
+    b700:	e3401000 	movt	r1, #0
+    b704:	eb0020f1 	bl	13ad0 <CUSBKeyboardDevice::RegisterKeyStatusHandlerRaw(void (*)(unsigned char, unsigned char const*), bool)>
+    b708:	e59f30f8 	ldr	r3, [pc, #248]	@ b808 <CKernel::Run()+0x430>
+    b70c:	e59d0004 	ldr	r0, [sp, #4]
+    b710:	e3a02003 	mov	r2, #3
+    b714:	e2431e67 	sub	r1, r3, #1648	@ 0x670
+    b718:	eb00ba08 	bl	39f40 <CLogger::Write(char const*, TLogSeverity, char const*, ...)>
+    b71c:	eaffff5e 	b	b49c <CKernel::Run()+0xc4>
+    b720:	e3069bde 	movw	r9, #27614	@ 0x6bde
+    b724:	e3409004 	movt	r9, #4
+    b728:	e0859009 	add	r9, r5, r9
+    b72c:	e30026e4 	movw	r2, #1764	@ 0x6e4
+    b730:	e1a00009 	mov	r0, r9
+    b734:	eb00d05c 	bl	3f8ac <memset>
+    b738:	e2850c1e 	add	r0, r5, #7680	@ 0x1e00
+    b73c:	e1a01009 	mov	r1, r9
+    b740:	e30026e4 	movw	r2, #1764	@ 0x6e4
+    b744:	e2800020 	add	r0, r0, #32
+    b748:	eb008535 	bl	2cc24 <CSoundBaseDevice::Write(void const*, unsigned int)>
+    b74c:	eaffff84 	b	b564 <CKernel::Run()+0x18c>
+    b750:	e2853a2e 	add	r3, r5, #188416	@ 0x2e000
+    b754:	e1a00009 	mov	r0, r9
+    b758:	e5d31b6c 	ldrb	r1, [r3, #2924]	@ 0xb6c
+    b75c:	e5d6350c 	ldrb	r3, [r6, #1292]	@ 0x50c
+    b760:	e58d300c 	str	r3, [sp, #12]
+    b764:	eb001b6d 	bl	12520 <tzx_set_machine>
+    b768:	e2853c2b 	add	r3, r5, #11008	@ 0x2b00
+    b76c:	e2852dad 	add	r2, r5, #11072	@ 0x2b40
+    b770:	e2833020 	add	r3, r3, #32
+    b774:	e58d5010 	str	r5, [sp, #16]
+    b778:	e58d7014 	str	r7, [sp, #20]
+    b77c:	e1a05003 	mov	r5, r3
+    b780:	e1a07002 	mov	r7, r2
+    b784:	e1c720d0 	ldrd	r2, [r7]
+    b788:	e1a00009 	mov	r0, r9
+    b78c:	eb001b6b 	bl	12540 <tzx_update>
+    b790:	e1a01000 	mov	r1, r0
+    b794:	e1a00005 	mov	r0, r5
+    b798:	eb001906 	bl	11bb8 <zx_set_ear>
+    b79c:	e3a01000 	mov	r1, #0
+    b7a0:	e1a00005 	mov	r0, r5
+    b7a4:	eb00174e 	bl	114e4 <zx_tick>
+    b7a8:	e3500000 	cmp	r0, #0
+    b7ac:	0afffff4 	beq	b784 <CKernel::Run()+0x3ac>
+    b7b0:	e28d300c 	add	r3, sp, #12
+    b7b4:	e89300a8 	ldm	r3, {r3, r5, r7}
+    b7b8:	e3530000 	cmp	r3, #0
+    b7bc:	0affff57 	beq	b520 <CKernel::Run()+0x148>
+    b7c0:	e5963510 	ldr	r3, [r6, #1296]	@ 0x510
+    b7c4:	e2833001 	add	r3, r3, #1
+    b7c8:	e5863510 	str	r3, [r6, #1296]	@ 0x510
+    b7cc:	e3130007 	tst	r3, #7
+    b7d0:	0a000001 	beq	b7dc <CKernel::Run()+0x404>
+    b7d4:	eb00cab5 	bl	3e2b0 <CTimer::GetClockTicks64()>
+    b7d8:	eaffff25 	b	b474 <CKernel::Run()+0x9c>
+    b7dc:	e1a00005 	mov	r0, r5
+    b7e0:	ebfff3e1 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
+    b7e4:	eb00cab1 	bl	3e2b0 <CTimer::GetClockTicks64()>
+    b7e8:	eaffff21 	b	b474 <CKernel::Run()+0x9c>
+    b7ec:	00046e9c 	.word	0x00046e9c
+    b7f0:	000468b0 	.word	0x000468b0
+    b7f4:	00046ec8 	.word	0x00046ec8
+    b7f8:	00046f58 	.word	0x00046f58
+    b7fc:	00046f38 	.word	0x00046f38
+    b800:	00046f40 	.word	0x00046f40
+    b804:	00046f18 	.word	0x00046f18
+    b808:	00046f20 	.word	0x00046f20
 
-0000b810 <printf>:
-    b810:	e92d000f 	push	{r0, r1, r2, r3}
-    b814:	e3a00000 	mov	r0, #0
-    b818:	e28dd010 	add	sp, sp, #16
-    b81c:	e12fff1e 	bx	lr
+0000b80c <printf>:
+    b80c:	e92d000f 	push	{r0, r1, r2, r3}
+    b810:	e3a00000 	mov	r0, #0
+    b814:	e28dd010 	add	sp, sp, #16
+    b818:	e12fff1e 	bx	lr
+    b81c:	00000000 	andeq	r0, r0, r0
 
 0000b820 <alu_add>:
     b820:	e3520000 	cmp	r2, #0
@@ -10647,7 +10647,7 @@ Disassembly of section .text:
    12434:	e30700e8 	movw	r0, #28904	@ 0x70e8
    12438:	e3400004 	movt	r0, #4
    1243c:	edc40b02 	vstr	d16, [r4, #8]
-   12440:	ebffe4f2 	bl	b810 <printf>
+   12440:	ebffe4f1 	bl	b80c <printf>
    12444:	e3a00000 	mov	r0, #0
    12448:	e8bd8070 	pop	{r4, r5, r6, pc}
    1244c:	e3a02008 	mov	r2, #8
@@ -10664,7 +10664,7 @@ Disassembly of section .text:
    12478:	edc40b02 	vstr	d16, [r4, #8]
    1247c:	e5d62009 	ldrb	r2, [r6, #9]
    12480:	e5d61008 	ldrb	r1, [r6, #8]
-   12484:	ebffe4e1 	bl	b810 <printf>
+   12484:	ebffe4e0 	bl	b80c <printf>
    12488:	e3a00000 	mov	r0, #0
    1248c:	e8bd8070 	pop	{r4, r5, r6, pc}
    12490:	e3e00000 	mvn	r0, #0
@@ -11087,12 +11087,12 @@ Disassembly of section .text:
    12ae4:	e7d0200c 	ldrb	r2, [r0, ip]
    12ae8:	e3070178 	movw	r0, #29048	@ 0x7178
    12aec:	e3400004 	movt	r0, #4
-   12af0:	ebffe346 	bl	b810 <printf>
+   12af0:	ebffe345 	bl	b80c <printf>
    12af4:	e5d43020 	ldrb	r3, [r4, #32]
    12af8:	eafffea6 	b	12598 <tzx_update+0x58>
    12afc:	e3070244 	movw	r0, #29252	@ 0x7244
    12b00:	e3400004 	movt	r0, #4
-   12b04:	ebffe341 	bl	b810 <printf>
+   12b04:	ebffe340 	bl	b80c <printf>
    12b08:	eaffff68 	b	128b0 <tzx_update+0x370>
    12b0c:	e1a07003 	mov	r7, r3
    12b10:	e3560011 	cmp	r6, #17
@@ -11207,7 +11207,7 @@ Disassembly of section .text:
    12cc4:	1a0000eb 	bne	13078 <tzx_update+0xb38>
    12cc8:	e30701e8 	movw	r0, #29160	@ 0x71e8
    12ccc:	e3400004 	movt	r0, #4
-   12cd0:	ebffe2ce 	bl	b810 <printf>
+   12cd0:	ebffe2cd 	bl	b80c <printf>
    12cd4:	eafffef5 	b	128b0 <tzx_update+0x370>
    12cd8:	e3560004 	cmp	r6, #4
    12cdc:	dafffef3 	ble	128b0 <tzx_update+0x370>
@@ -11362,7 +11362,7 @@ Disassembly of section .text:
    12f30:	e2882001 	add	r2, r8, #1
    12f34:	e1a01005 	mov	r1, r5
    12f38:	e58d3000 	str	r3, [sp]
-   12f3c:	ebffe233 	bl	b810 <printf>
+   12f3c:	ebffe232 	bl	b80c <printf>
    12f40:	e5941008 	ldr	r1, [r4, #8]
    12f44:	e2852002 	add	r2, r5, #2
    12f48:	e5947004 	ldr	r7, [r4, #4]
@@ -11404,7 +11404,7 @@ Disassembly of section .text:
    12fd8:	e307021c 	movw	r0, #29212	@ 0x721c
    12fdc:	e3400004 	movt	r0, #4
    12fe0:	e58d3000 	str	r3, [sp]
-   12fe4:	ebffe209 	bl	b810 <printf>
+   12fe4:	ebffe208 	bl	b80c <printf>
    12fe8:	e5942008 	ldr	r2, [r4, #8]
    12fec:	e5947004 	ldr	r7, [r4, #4]
    12ff0:	e0852002 	add	r2, r5, r2
@@ -11444,14 +11444,14 @@ Disassembly of section .text:
    13078:	e30701c0 	movw	r0, #29120	@ 0x71c0
    1307c:	e3400004 	movt	r0, #4
    13080:	e58d3000 	str	r3, [sp]
-   13084:	ebffe1e1 	bl	b810 <printf>
+   13084:	ebffe1e0 	bl	b80c <printf>
    13088:	e5942008 	ldr	r2, [r4, #8]
    1308c:	e5947004 	ldr	r7, [r4, #4]
    13090:	e59d3000 	ldr	r3, [sp]
    13094:	eaffffb7 	b	12f78 <tzx_update+0xa38>
    13098:	e307019c 	movw	r0, #29084	@ 0x719c
    1309c:	e3400004 	movt	r0, #4
-   130a0:	ebffe1da 	bl	b810 <printf>
+   130a0:	ebffe1d9 	bl	b80c <printf>
    130a4:	eafffe01 	b	128b0 <tzx_update+0x370>
    130a8:	e5d82002 	ldrb	r2, [r8, #2]
    130ac:	e58d200c 	str	r2, [sp, #12]
@@ -11501,7 +11501,7 @@ Disassembly of section .text:
    1315c:	e0883003 	add	r3, r8, r3
    13160:	e1a00004 	mov	r0, r4
    13164:	e2877001 	add	r7, r7, #1
-   13168:	ebffe1a8 	bl	b810 <printf>
+   13168:	ebffe1a7 	bl	b80c <printf>
    1316c:	e1550006 	cmp	r5, r6
    13170:	a1590007 	cmpge	r9, r7
    13174:	da000007 	ble	13198 <tzx_update+0xc58>
