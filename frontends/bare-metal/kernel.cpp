@@ -924,6 +924,10 @@ boolean CKernel::OSDActivateSelection(void)
 void CKernel::RenderOSD(void)
 {
     m_Screen.Write("\x1b[?25l", 6); /* Hide cursor */
+
+    /* Always draw the background first as the base layer. */
+    BlitSpectrumFramebuffer();
+
     static const unsigned MaxPanelChars = 128;
     const unsigned panel_rows = OSDVisibleRows + 3; /* Title + Entries + Help + Status */
     const unsigned cols = m_Screen.GetColumns();
@@ -969,8 +973,6 @@ void CKernel::RenderOSD(void)
         line.Format("\x1b[%u;%uH%s", start_row + i, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
     }
-
-    BlitSpectrumFramebuffer();
 
     for (unsigned i = 0; i < width; i++) {
         rowbuf[i] = ' ';

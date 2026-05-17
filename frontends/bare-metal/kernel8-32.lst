@@ -1679,141 +1679,141 @@ Disassembly of section .text:
     994c:	e2806e8a 	add	r6, r0, #2208	@ 0x8a0
     9950:	e286600c 	add	r6, r6, #12
     9954:	e24dd0cc 	sub	sp, sp, #204	@ 0xcc
-    9958:	e1a05000 	mov	r5, r0
-    995c:	e59f18ac 	ldr	r1, [pc, #2220]	@ a210 <CKernel::RenderOSD()+0x8c8>
-    9960:	e3a02006 	mov	r2, #6
+    9958:	e59f18b0 	ldr	r1, [pc, #2224]	@ a210 <CKernel::RenderOSD()+0x8c8>
+    995c:	e3a02006 	mov	r2, #6
+    9960:	e1a05000 	mov	r5, r0
     9964:	e2858a83 	add	r8, r5, #536576	@ 0x83000
     9968:	e58d0024 	str	r0, [sp, #36]	@ 0x24
     996c:	e1a00006 	mov	r0, r6
     9970:	eb00c547 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9974:	e1a00006 	mov	r0, r6
-    9978:	eb00c5e2 	bl	3b108 <CScreenDevice::GetColumns() const>
-    997c:	e1a04000 	mov	r4, r0
-    9980:	e1a00006 	mov	r0, r6
-    9984:	eb00c5e1 	bl	3b110 <CScreenDevice::GetRows() const>
-    9988:	e59872c8 	ldr	r7, [r8, #712]	@ 0x2c8
-    998c:	e1a09000 	mov	r9, r0
-    9990:	e1a00006 	mov	r0, r6
-    9994:	eb00c5d7 	bl	3b0f8 <CScreenDevice::GetWidth() const>
-    9998:	e598a2cc 	ldr	sl, [r8, #716]	@ 0x2cc
-    999c:	e0070497 	mul	r7, r7, r4
-    99a0:	e00a099a 	mul	sl, sl, r9
-    99a4:	e737f017 	udiv	r7, r7, r0
-    99a8:	e1a00006 	mov	r0, r6
-    99ac:	eb00c5d3 	bl	3b100 <CScreenDevice::GetHeight() const>
-    99b0:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
-    99b4:	e59852c8 	ldr	r5, [r8, #712]	@ 0x2c8
-    99b8:	e3a02d05 	mov	r2, #320	@ 0x140
-    99bc:	e73af01a 	udiv	sl, sl, r0
-    99c0:	e1a00006 	mov	r0, r6
-    99c4:	e0255392 	mla	r5, r2, r3, r5
-    99c8:	eb00c5ca 	bl	3b0f8 <CScreenDevice::GetWidth() const>
-    99cc:	e59822d0 	ldr	r2, [r8, #720]	@ 0x2d0
-    99d0:	e59832cc 	ldr	r3, [r8, #716]	@ 0x2cc
-    99d4:	e0050594 	mul	r5, r4, r5
-    99d8:	e0833402 	add	r3, r3, r2, lsl #8
-    99dc:	e735f015 	udiv	r5, r5, r0
-    99e0:	e0090399 	mul	r9, r9, r3
-    99e4:	e1a00006 	mov	r0, r6
-    99e8:	e58d501c 	str	r5, [sp, #28]
-    99ec:	eb00c5c3 	bl	3b100 <CScreenDevice::GetHeight() const>
-    99f0:	e733f019 	udiv	r3, r9, r0
-    99f4:	e1570005 	cmp	r7, r5
-    99f8:	22872001 	addcs	r2, r7, #1
-    99fc:	258d201c 	strcs	r2, [sp, #28]
-    9a00:	21a07002 	movcs	r7, r2
-    9a04:	e28a2002 	add	r2, sl, #2
-    9a08:	32877001 	addcc	r7, r7, #1
-    9a0c:	e1520003 	cmp	r2, r3
-    9a10:	228a3003 	addcs	r3, sl, #3
-    9a14:	e28aa012 	add	sl, sl, #18
-    9a18:	e15a0003 	cmp	sl, r3
-    9a1c:	3a000002 	bcc	9a2c <CKernel::RenderOSD()+0xe4>
-    9a20:	e3530011 	cmp	r3, #17
-    9a24:	33a03011 	movcc	r3, #17
-    9a28:	e2432010 	sub	r2, r3, #16
-    9a2c:	e59d301c 	ldr	r3, [sp, #28]
-    9a30:	e3530000 	cmp	r3, #0
-    9a34:	0a0001b8 	beq	a11c <CKernel::RenderOSD()+0x7d4>
-    9a38:	e3570001 	cmp	r7, #1
-    9a3c:	e2433001 	sub	r3, r3, #1
-    9a40:	21a01007 	movcs	r1, r7
-    9a44:	33a01001 	movcc	r1, #1
-    9a48:	e3520001 	cmp	r2, #1
-    9a4c:	e28d5034 	add	r5, sp, #52	@ 0x34
-    9a50:	33a02001 	movcc	r2, #1
-    9a54:	e1530004 	cmp	r3, r4
-    9a58:	21a03004 	movcs	r3, r4
-    9a5c:	e58d2020 	str	r2, [sp, #32]
-    9a60:	e1a02001 	mov	r2, r1
-    9a64:	e1a00005 	mov	r0, r5
-    9a68:	e1530001 	cmp	r3, r1
-    9a6c:	20622003 	rsbcs	r2, r2, r3
-    9a70:	30622001 	rsbcc	r2, r2, r1
-    9a74:	e58d1010 	str	r1, [sp, #16]
-    9a78:	e2827002 	add	r7, r2, #2
-    9a7c:	e58d201c 	str	r2, [sp, #28]
-    9a80:	e3570080 	cmp	r7, #128	@ 0x80
-    9a84:	e58d700c 	str	r7, [sp, #12]
-    9a88:	31a04007 	movcc	r4, r7
-    9a8c:	23a04080 	movcs	r4, #128	@ 0x80
-    9a90:	eb00caab 	bl	3c544 <CString::CString()>
-    9a94:	e3570000 	cmp	r7, #0
-    9a98:	0a0001ae 	beq	a158 <CKernel::RenderOSD()+0x810>
-    9a9c:	e28d9044 	add	r9, sp, #68	@ 0x44
-    9aa0:	e3a03000 	mov	r3, #0
-    9aa4:	e1a02009 	mov	r2, r9
-    9aa8:	e3a01020 	mov	r1, #32
-    9aac:	e2833001 	add	r3, r3, #1
-    9ab0:	e4c21001 	strb	r1, [r2], #1
-    9ab4:	e1530004 	cmp	r3, r4
-    9ab8:	3afffffb 	bcc	9aac <CKernel::RenderOSD()+0x164>
-    9abc:	e28430c8 	add	r3, r4, #200	@ 0xc8
-    9ac0:	e59f174c 	ldr	r1, [pc, #1868]	@ a214 <CKernel::RenderOSD()+0x8cc>
-    9ac4:	e08d3003 	add	r3, sp, r3
-    9ac8:	e3a02005 	mov	r2, #5
-    9acc:	e1a0c003 	mov	ip, r3
-    9ad0:	e1a00006 	mov	r0, r6
-    9ad4:	e58d3018 	str	r3, [sp, #24]
-    9ad8:	e3a03000 	mov	r3, #0
-    9adc:	e54c3084 	strb	r3, [ip, #-132]	@ 0xffffff7c
-    9ae0:	eb00c4eb 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9ae4:	e59f172c 	ldr	r1, [pc, #1836]	@ a218 <CKernel::RenderOSD()+0x8d0>
-    9ae8:	e3a02005 	mov	r2, #5
-    9aec:	e1a00006 	mov	r0, r6
-    9af0:	eb00c4e7 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9af4:	e59d7020 	ldr	r7, [sp, #32]
-    9af8:	e3063898 	movw	r3, #26776	@ 0x6898
-    9afc:	e3403004 	movt	r3, #4
-    9b00:	e58d4014 	str	r4, [sp, #20]
-    9b04:	e287b00f 	add	fp, r7, #15
-    9b08:	e59d4010 	ldr	r4, [sp, #16]
-    9b0c:	e283ae45 	add	sl, r3, #1104	@ 0x450
-    9b10:	e58d3028 	str	r3, [sp, #40]	@ 0x28
-    9b14:	e58d802c 	str	r8, [sp, #44]	@ 0x2c
-    9b18:	e1a02007 	mov	r2, r7
-    9b1c:	e1a03004 	mov	r3, r4
-    9b20:	e1a0100a 	mov	r1, sl
-    9b24:	e1a00005 	mov	r0, r5
-    9b28:	e58d9000 	str	r9, [sp]
-    9b2c:	e2877001 	add	r7, r7, #1
-    9b30:	eb00d08e 	bl	3dd70 <CString::Format(char const*, ...)>
-    9b34:	e1a00005 	mov	r0, r5
-    9b38:	eb00cab9 	bl	3c624 <CString::operator char const*() const>
-    9b3c:	e1a08000 	mov	r8, r0
-    9b40:	e1a00005 	mov	r0, r5
-    9b44:	eb00cafa 	bl	3c734 <CString::GetLength() const>
-    9b48:	e1a01008 	mov	r1, r8
-    9b4c:	e1a02000 	mov	r2, r0
-    9b50:	e1a00006 	mov	r0, r6
-    9b54:	eb00c4ce 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
-    9b58:	e157000b 	cmp	r7, fp
-    9b5c:	1affffed 	bne	9b18 <CKernel::RenderOSD()+0x1d0>
-    9b60:	e59d0024 	ldr	r0, [sp, #36]	@ 0x24
-    9b64:	e59d4014 	ldr	r4, [sp, #20]
-    9b68:	e59d802c 	ldr	r8, [sp, #44]	@ 0x2c
-    9b6c:	ebfffafe 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
-    9b70:	e59d300c 	ldr	r3, [sp, #12]
+    9974:	e1a00005 	mov	r0, r5
+    9978:	ebfffb7b 	bl	876c <CKernel::BlitSpectrumFramebuffer()>
+    997c:	e1a00006 	mov	r0, r6
+    9980:	eb00c5e0 	bl	3b108 <CScreenDevice::GetColumns() const>
+    9984:	e1a04000 	mov	r4, r0
+    9988:	e1a00006 	mov	r0, r6
+    998c:	eb00c5df 	bl	3b110 <CScreenDevice::GetRows() const>
+    9990:	e59872c8 	ldr	r7, [r8, #712]	@ 0x2c8
+    9994:	e1a09000 	mov	r9, r0
+    9998:	e1a00006 	mov	r0, r6
+    999c:	eb00c5d5 	bl	3b0f8 <CScreenDevice::GetWidth() const>
+    99a0:	e598a2cc 	ldr	sl, [r8, #716]	@ 0x2cc
+    99a4:	e0070497 	mul	r7, r7, r4
+    99a8:	e00a099a 	mul	sl, sl, r9
+    99ac:	e737f017 	udiv	r7, r7, r0
+    99b0:	e1a00006 	mov	r0, r6
+    99b4:	eb00c5d1 	bl	3b100 <CScreenDevice::GetHeight() const>
+    99b8:	e59832d0 	ldr	r3, [r8, #720]	@ 0x2d0
+    99bc:	e59852c8 	ldr	r5, [r8, #712]	@ 0x2c8
+    99c0:	e3a02d05 	mov	r2, #320	@ 0x140
+    99c4:	e73af01a 	udiv	sl, sl, r0
+    99c8:	e1a00006 	mov	r0, r6
+    99cc:	e0255392 	mla	r5, r2, r3, r5
+    99d0:	eb00c5c8 	bl	3b0f8 <CScreenDevice::GetWidth() const>
+    99d4:	e59822d0 	ldr	r2, [r8, #720]	@ 0x2d0
+    99d8:	e59832cc 	ldr	r3, [r8, #716]	@ 0x2cc
+    99dc:	e0050594 	mul	r5, r4, r5
+    99e0:	e0833402 	add	r3, r3, r2, lsl #8
+    99e4:	e735f015 	udiv	r5, r5, r0
+    99e8:	e0090399 	mul	r9, r9, r3
+    99ec:	e1a00006 	mov	r0, r6
+    99f0:	e58d501c 	str	r5, [sp, #28]
+    99f4:	eb00c5c1 	bl	3b100 <CScreenDevice::GetHeight() const>
+    99f8:	e733f019 	udiv	r3, r9, r0
+    99fc:	e1570005 	cmp	r7, r5
+    9a00:	22872001 	addcs	r2, r7, #1
+    9a04:	258d201c 	strcs	r2, [sp, #28]
+    9a08:	21a07002 	movcs	r7, r2
+    9a0c:	e28a2002 	add	r2, sl, #2
+    9a10:	32877001 	addcc	r7, r7, #1
+    9a14:	e1520003 	cmp	r2, r3
+    9a18:	228a3003 	addcs	r3, sl, #3
+    9a1c:	e28aa012 	add	sl, sl, #18
+    9a20:	e15a0003 	cmp	sl, r3
+    9a24:	3a000002 	bcc	9a34 <CKernel::RenderOSD()+0xec>
+    9a28:	e3530011 	cmp	r3, #17
+    9a2c:	33a03011 	movcc	r3, #17
+    9a30:	e2432010 	sub	r2, r3, #16
+    9a34:	e59d301c 	ldr	r3, [sp, #28]
+    9a38:	e3530000 	cmp	r3, #0
+    9a3c:	0a0001b6 	beq	a11c <CKernel::RenderOSD()+0x7d4>
+    9a40:	e3570001 	cmp	r7, #1
+    9a44:	e2433001 	sub	r3, r3, #1
+    9a48:	21a01007 	movcs	r1, r7
+    9a4c:	33a01001 	movcc	r1, #1
+    9a50:	e3520001 	cmp	r2, #1
+    9a54:	e28d5034 	add	r5, sp, #52	@ 0x34
+    9a58:	33a02001 	movcc	r2, #1
+    9a5c:	e1530004 	cmp	r3, r4
+    9a60:	21a03004 	movcs	r3, r4
+    9a64:	e58d2020 	str	r2, [sp, #32]
+    9a68:	e1a02001 	mov	r2, r1
+    9a6c:	e1a00005 	mov	r0, r5
+    9a70:	e1530001 	cmp	r3, r1
+    9a74:	20622003 	rsbcs	r2, r2, r3
+    9a78:	30622001 	rsbcc	r2, r2, r1
+    9a7c:	e58d1010 	str	r1, [sp, #16]
+    9a80:	e2827002 	add	r7, r2, #2
+    9a84:	e58d201c 	str	r2, [sp, #28]
+    9a88:	e3570080 	cmp	r7, #128	@ 0x80
+    9a8c:	e58d700c 	str	r7, [sp, #12]
+    9a90:	31a04007 	movcc	r4, r7
+    9a94:	23a04080 	movcs	r4, #128	@ 0x80
+    9a98:	eb00caa9 	bl	3c544 <CString::CString()>
+    9a9c:	e3570000 	cmp	r7, #0
+    9aa0:	0a0001ac 	beq	a158 <CKernel::RenderOSD()+0x810>
+    9aa4:	e28d9044 	add	r9, sp, #68	@ 0x44
+    9aa8:	e3a03000 	mov	r3, #0
+    9aac:	e1a02009 	mov	r2, r9
+    9ab0:	e3a01020 	mov	r1, #32
+    9ab4:	e2833001 	add	r3, r3, #1
+    9ab8:	e4c21001 	strb	r1, [r2], #1
+    9abc:	e1530004 	cmp	r3, r4
+    9ac0:	3afffffb 	bcc	9ab4 <CKernel::RenderOSD()+0x16c>
+    9ac4:	e28430c8 	add	r3, r4, #200	@ 0xc8
+    9ac8:	e59f1744 	ldr	r1, [pc, #1860]	@ a214 <CKernel::RenderOSD()+0x8cc>
+    9acc:	e08d3003 	add	r3, sp, r3
+    9ad0:	e3a02005 	mov	r2, #5
+    9ad4:	e1a0c003 	mov	ip, r3
+    9ad8:	e1a00006 	mov	r0, r6
+    9adc:	e58d3018 	str	r3, [sp, #24]
+    9ae0:	e3a03000 	mov	r3, #0
+    9ae4:	e54c3084 	strb	r3, [ip, #-132]	@ 0xffffff7c
+    9ae8:	eb00c4e9 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9aec:	e59f1724 	ldr	r1, [pc, #1828]	@ a218 <CKernel::RenderOSD()+0x8d0>
+    9af0:	e3a02005 	mov	r2, #5
+    9af4:	e1a00006 	mov	r0, r6
+    9af8:	eb00c4e5 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9afc:	e59d7020 	ldr	r7, [sp, #32]
+    9b00:	e3063898 	movw	r3, #26776	@ 0x6898
+    9b04:	e3403004 	movt	r3, #4
+    9b08:	e58d4014 	str	r4, [sp, #20]
+    9b0c:	e287b00f 	add	fp, r7, #15
+    9b10:	e59d4010 	ldr	r4, [sp, #16]
+    9b14:	e283ae45 	add	sl, r3, #1104	@ 0x450
+    9b18:	e58d3028 	str	r3, [sp, #40]	@ 0x28
+    9b1c:	e58d802c 	str	r8, [sp, #44]	@ 0x2c
+    9b20:	e1a02007 	mov	r2, r7
+    9b24:	e1a03004 	mov	r3, r4
+    9b28:	e1a0100a 	mov	r1, sl
+    9b2c:	e1a00005 	mov	r0, r5
+    9b30:	e58d9000 	str	r9, [sp]
+    9b34:	e2877001 	add	r7, r7, #1
+    9b38:	eb00d08c 	bl	3dd70 <CString::Format(char const*, ...)>
+    9b3c:	e1a00005 	mov	r0, r5
+    9b40:	eb00cab7 	bl	3c624 <CString::operator char const*() const>
+    9b44:	e1a08000 	mov	r8, r0
+    9b48:	e1a00005 	mov	r0, r5
+    9b4c:	eb00caf8 	bl	3c734 <CString::GetLength() const>
+    9b50:	e1a01008 	mov	r1, r8
+    9b54:	e1a02000 	mov	r2, r0
+    9b58:	e1a00006 	mov	r0, r6
+    9b5c:	eb00c4cc 	bl	3ae94 <CScreenDevice::Write(void const*, unsigned int)>
+    9b60:	e157000b 	cmp	r7, fp
+    9b64:	1affffed 	bne	9b20 <CKernel::RenderOSD()+0x1d8>
+    9b68:	e59d300c 	ldr	r3, [sp, #12]
+    9b6c:	e59d4014 	ldr	r4, [sp, #20]
+    9b70:	e59d802c 	ldr	r8, [sp, #44]	@ 0x2c
     9b74:	e3530000 	cmp	r3, #0
     9b78:	0a00017b 	beq	a16c <CKernel::RenderOSD()+0x824>
     9b7c:	e1a02009 	mov	r2, r9
@@ -2190,12 +2190,12 @@ Disassembly of section .text:
     a148:	e3a03002 	mov	r3, #2
     a14c:	e1a04003 	mov	r4, r3
     a150:	e58d300c 	str	r3, [sp, #12]
-    a154:	eafffe50 	b	9a9c <CKernel::RenderOSD()+0x154>
+    a154:	eafffe52 	b	9aa4 <CKernel::RenderOSD()+0x15c>
     a158:	e3e03001 	mvn	r3, #1
     a15c:	e59d400c 	ldr	r4, [sp, #12]
     a160:	e28d9044 	add	r9, sp, #68	@ 0x44
     a164:	e58d301c 	str	r3, [sp, #28]
-    a168:	eafffe53 	b	9abc <CKernel::RenderOSD()+0x174>
+    a168:	eafffe55 	b	9ac4 <CKernel::RenderOSD()+0x17c>
     a16c:	e59f00a8 	ldr	r0, [pc, #168]	@ a21c <CKernel::RenderOSD()+0x8d4>
     a170:	eb00d398 	bl	3efd8 <strlen>
     a174:	e59d200c 	ldr	r2, [sp, #12]
