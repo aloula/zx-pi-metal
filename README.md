@@ -1,19 +1,24 @@
 # ZX Spectrum Bare Metal for Raspberry Pi 3B+
 
-This project combines the [ZOT ZX Spectrum](https://github.com/antirez/ZOT) emulator core with a Raspberry Pi bare-metal frontend built on the [Circle](https://github.com/rsta2/circle) environment.
-
-The active frontend is `circle-zx/`.
+This project combines a high-performance Z80 emulator core with a Raspberry Pi bare-metal frontend built on the [Circle](https://github.com/rsta2/circle) environment.
 
 ## Features
 
-- ZX Spectrum 48K core with native 128K snapshot paging
-- Scaled framebuffer output
-- USB keyboard input mapping
-- Kempston joystick mapping (keyboard)
-- OSD browser for `.z80`, `.tap`, `.tzx`
-- OSD keyboard typing reference (readable text)
-- Tape playback controls and turbo tape mode
-- PWM beeper audio output
+- **Dual-Model Support**: Native ZX Spectrum 48K and 128K (Toastrack/Grey +2) emulation.
+- **Cycle-Accurate Audio**: Mid-frame AY-3-8910 event logging for perfect software envelopes and PCM effects.
+- **Hardware Quirks**: Full Floating Bus emulation (fixes *Arkanoid* and other beam-synced games).
+- **Bare-Metal Performance**: Boots in seconds with low-latency input and audio.
+- **OSD File Browser**: Integrated browser for `.z80` snapshots, `.tap`, and `.tzx` tapes.
+- **Modern Input**: Support for USB keyboards and XBox 360-style gamepads (mapped to Kempston).
+- **Visuals**: Scaled RGB framebuffer with border effects.
+
+## Project Structure
+
+- `src/`: Core emulator logic (Z80, ULA, AY-PSG, TZX).
+- `frontends/bare-metal/`: Raspberry Pi specific code (Circle environment).
+- `frontends/sdl/`: Desktop frontend (Linux/Windows via SDL2).
+- `docs/`: Technical specifications and hardware reference.
+- `tests/`: Automated test suite for CPU and ULA correctness.
 
 ## Build (Raspberry Pi 3B+)
 
@@ -30,68 +35,42 @@ cd addon/SDCard && make RASPPI=3
 
 ```bash
 cd /path/to/zx-pi-metal
-make circle_zx CIRCLEHOME=/path/to/zx-pi-metal/circle RASPPI=3 AARCH=32
+make circle_zx
 ```
 
-Generated image:
+Generated image: `frontends/bare-metal/kernel8-32.img`
 
-- `circle-zx/kernel8-32.img`
+## SD Card Setup
 
-## SD Card Boot Files
+Copy the following to the FAT root of your SD card:
 
-Copy to the FAT boot partition:
-
-- `circle-zx/kernel8-32.img`
-- `circle-zx/config.txt`
-- Circle boot firmware files from `circle/boot/` (`bootcode.bin`, `start.elf`, `fixup.dat`, DTBs)
-
-If needed:
-
-```bash
-cd circle/boot
-make
-```
-
-## Game Files
-
-Put `.z80`, `.tap`, or `.tzx` files in the SD card root directory used by `emmc1-1` (the OSD scan path).
-
-Optional 128K ROM support:
-
-- Circle frontend: place `128-0.rom` and optionally `128-1.rom` in the SD card root.
-- SDL frontend: place `128-0.rom` and optionally `128-1.rom` in `roms/`.
-- Each ROM file must be exactly 16KB. If only `128-0.rom` is present, it is used for both ROM banks.
+1.  **Kernel**: `frontends/bare-metal/kernel8-32.img` (rename to `kernel8-32.img`).
+2.  **Config**: `frontends/bare-metal/config.txt`.
+3.  **Firmware**: Circle boot files from `circle/boot/` (`bootcode.bin`, `start.elf`, `fixup.dat`, etc).
+4.  **ROMs**:
+    *   `128-0.rom` and `128-1.rom` (16KB each) for 128K mode.
+    *   If no 128K ROMs are found, it defaults to 48K mode using the internal ROM.
+5.  **Games**: Place `.z80`, `.tap`, or `.tzx` files in the root or subdirectories.
 
 ## Controls
 
-- **F1**: open/close OSD
-- **F2**: reset
-- **F3**: play/restart tape
-- **F4**: stop tape
-- **F6**: toggle turbo tape
-- **Arrow keys + Tab**: Kempston joystick
+- **F1**: Open/Close OSD
+- **F2**: Hard Reset
+- **F3**: Play/Restart Tape
+- **F4**: Stop Tape
+- **F6**: Toggle Turbo Tape (4x speed)
+- **Arrow keys + Tab**: Kempston Joystick (Keyboard)
+- **Gamepad**: Left Stick/D-Pad + A/B/X/Y buttons
 - **Shift/Ctrl**: CAPS SHIFT / SYMBOL SHIFT
-
-Inside OSD:
-
-- **Up/Down**: select file
-- **Enter**: toggle keyboard layout (first item) or load selected file
-- **Esc/F1**: close OSD
 
 ## TAP/TZX Loading Flow
 
 1. Open OSD (`F1`)
-2. Select `.tap` or `.tzx` and press `Enter`
-3. In Spectrum BASIC type `LOAD ""`
-4. Press `F3` to start tape
-5. Optionally enable turbo with `F6`
-
-## Notes
-
-- `.z80` support includes 48K snapshots plus native 128K RAM-bank restore and `7FFD` paging.
-- The bundled ROM image is still the 48K ROM; by default 128K mode uses it for both ROM slots. The core now exposes `zx_set_128k_roms()` and the frontends can optionally load external `128-0.rom` / `128-1.rom` images.
-- AY tone, noise, and basic envelope shaping are mixed into the mono audio output for 128K snapshots. AY timing and levels are usable now, but the PSG model is still approximate rather than cycle-accurate.
+2. Select tape file and press `Enter`.
+3. In Spectrum BASIC, type `LOAD ""` (shortcut: `J` then `Ctrl+P`, `Ctrl+P`).
+4. Press `F3` to start the tape playback.
+5. Use `F6` to fast-forward through loading screens.
 
 ## License
 
-GPLv3. See `LICENSE`.
+GPLv3. See `docs/LICENSE`.
