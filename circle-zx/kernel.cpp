@@ -216,7 +216,7 @@ boolean CKernel::Initialize(void)
 
 TShutdownMode CKernel::Run(void)
 {
-    m_Logger.Write(FromKernel, LogNotice, "ZX Spectrum 48K bare-metal frontend (Circle)");
+    m_Logger.Write(FromKernel, LogNotice, "ZX Spectrum bare-metal frontend (Circle)");
     m_Logger.Write(FromKernel, LogNotice, "Attach USB keyboard. F1 OSD, F2 reset, F3 play tape, F4 stop tape, F6 turbo.");
 
     while (m_ShutdownMode == ShutdownNone) {
@@ -1096,20 +1096,11 @@ boolean CKernel::LoadSnapshot(unsigned index)
             m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
             return FALSE;
         }
-        const uint8_t hw_mode = m_pSnapshotBuffer[34];
-        if (hw_mode != 0 && hw_mode != 1) {
-            CString msg;
-            msg.Format("Unsupported .z80 HW mode %u (need 48K)", (unsigned)hw_mode);
-            strncpy(m_OsdStatus, (const char *)msg, sizeof(m_OsdStatus) - 1);
-            m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
-            m_Logger.Write(FromKernel, LogError, "%s: %s", (const char *)msg, m_SnapshotNames[index]);
-            return FALSE;
-        }
     }
 
     if (zx_load_z80(&m_ZX, m_pSnapshotBuffer, (int)total) != 0) {
         m_Logger.Write(FromKernel, LogError, "Invalid .z80 snapshot: %s", m_SnapshotNames[index]);
-        strncpy(m_OsdStatus, "Failed to parse .z80 (48K only)", sizeof(m_OsdStatus) - 1);
+        strncpy(m_OsdStatus, "Failed to parse .z80 snapshot", sizeof(m_OsdStatus) - 1);
         m_OsdStatus[sizeof(m_OsdStatus) - 1] = '\0';
         return FALSE;
     }

@@ -380,6 +380,37 @@ static void test_io_ports(void) {
         uint8_t val = zx.cpu.io_read(&zx, 0xFF);  /* Odd, not Kempston */
         ASSERT(val == 0xFF);
     } PASS();
+
+    TEST("128K paging switches the 0xC000 bank") {
+        ZXSpectrum zx;
+        zx_init(&zx, zx_spectrum_rom);
+        zx.machine_128k = 1;
+        zx.ram_banks[0][0] = 0x10;
+        zx.ram_banks[6][0] = 0x60;
+
+        zx.cpu.io_write(&zx, 0x7FFD, 0x00);
+        ASSERT(zx.cpu.mem_read(&zx, 0xC000) == 0x10);
+
+        zx.cpu.io_write(&zx, 0x7FFD, 0x06);
+        ASSERT(zx.cpu.mem_read(&zx, 0xC000) == 0x60);
+
+        zx.cpu.mem_write(&zx, 0xC000, 0x6A);
+        zx.cpu.io_write(&zx, 0x7FFD, 0x00);
+        ASSERT(zx.cpu.mem_read(&zx, 0xC000) == 0x10);
+        zx.cpu.io_write(&zx, 0x7FFD, 0x06);
+        ASSERT(zx.cpu.mem_read(&zx, 0xC000) == 0x6A);
+    } PASS();
+
+    TEST("128K AY register select and data ports work") {
+        ZXSpectrum zx;
+        zx_init(&zx, zx_spectrum_rom);
+        zx.machine_128k = 1;
+
+        zx.cpu.io_write(&zx, 0xFFFD, 7);
+        zx.cpu.io_write(&zx, 0xBFFD, 0x9C);
+        ASSERT(zx.ay_registers[7] == 0x9C);
+        ASSERT(zx.cpu.io_read(&zx, 0xFFFD) == 0x9C);
+    } PASS();
 }
 
 /* ===================================================================
@@ -585,6 +616,26 @@ static void test_rendering(void) {
         ASSERT(rgb[offset + 1] == 0xFF);
         ASSERT(rgb[offset + 2] == 0xFF);
     } PASS();
+
+    TEST("128K shadow screen renders from bank 7") {
+        ZXSpectrum zx;
+        zx_init(&zx, zx_spectrum_rom);
+        zx.machine_128k = 1;
+        memset(zx.ram_banks[5], 0, ZX_RAM_BANK_SIZE);
+        memset(zx.ram_banks[7], 0, ZX_RAM_BANK_SIZE);
+
+        zx.ram_banks[7][0] = 0x80;
+        zx.ram_banks[7][0x1800] = 0x07;
+        zx.cpu.io_write(&zx, 0x7FFD, 0x08);
+
+        uint8_t rgb[ZX_FB_WIDTH * ZX_FB_HEIGHT * 3];
+        zx_render_screen(&zx, rgb);
+
+        int offset = (32 * ZX_FB_WIDTH + 32) * 3;
+        ASSERT(rgb[offset + 0] == 0xD7);
+        ASSERT(rgb[offset + 1] == 0xD7);
+        ASSERT(rgb[offset + 2] == 0xD7);
+    } PASS();
 }
 
 /* ===================================================================
@@ -662,17 +713,97 @@ static void test_z80_loading(void) {
         ASSERT(zx_load_z80(&zx, bad, sizeof(bad)) == -1);
     } PASS();
 
-    TEST("Reject non-48K v2/v3 hardware mode") {
+    TEST("Reject unsupported v2/v3 hardware mode") {
         uint8_t bad[55] = {0};
         bad[30] = 23;       /* Extended header length => v2 */
         bad[31] = 0;
         bad[32] = 0x00;     /* PC */
         bad[33] = 0x80;
-        bad[34] = 3;        /* 128K mode */
+        bad[34] = 7;        /* +3 mode */
 
         ZXSpectrum zx;
         zx_init(&zx, zx_spectrum_rom);
         ASSERT(zx_load_z80(&zx, bad, sizeof(bad)) == -1);
+    } PASS();
+
+    TEST("Accept v3 48K+MGT hardware mode") {
+        uint8_t snap[32 + 54 + (3 * (3 + 16384))] = {0};
+        int offset = 32 + 54;
+
+        snap[8] = 0x00;     /* SP */
+        snap[9] = 0x80;
+        snap[27] = 1;       /* IFF1 */
+        snap[28] = 1;       /* IFF2 */
+        snap[29] = 1;       /* IM 1 */
+        snap[30] = 54;      /* Extended header length => v3 */
+        snap[31] = 0;
+        snap[32] = 0x00;    /* PC */
+        snap[33] = 0x80;
+        snap[34] = 3;       /* v3: 48K + MGT */
+
+        snap[offset + 0] = 0xFF;
+        snap[offset + 1] = 0xFF;
+        snap[offset + 2] = 4;
+        memset(snap + offset + 3, 0x11, 16384);
+        offset += 3 + 16384;
+
+        snap[offset + 0] = 0xFF;
+        snap[offset + 1] = 0xFF;
+        snap[offset + 2] = 5;
+        memset(snap + offset + 3, 0x22, 16384);
+        offset += 3 + 16384;
+
+        snap[offset + 0] = 0xFF;
+        snap[offset + 1] = 0xFF;
+        snap[offset + 2] = 8;
+        memset(snap + offset + 3, 0x33, 16384);
+
+        ZXSpectrum zx;
+        zx_init(&zx, zx_spectrum_rom);
+        ASSERT(zx_load_z80(&zx, snap, sizeof(snap)) == 0);
+        ASSERT(zx.cpu.pc == 0x8000);
+        ASSERT(zx.memory[0x0000] == 0x33);
+        ASSERT(zx.memory[0x4000] == 0x11);
+        ASSERT(zx.memory[0x8000] == 0x22);
+    } PASS();
+
+    TEST("Accept native 128K snapshot with banked RAM") {
+        uint8_t snap[32 + 23 + (8 * (3 + 16384))] = {0};
+        int offset = 32 + 23;
+
+        snap[8] = 0x00;     /* SP */
+        snap[9] = 0x90;
+        snap[27] = 1;       /* IFF1 */
+        snap[28] = 1;       /* IFF2 */
+        snap[29] = 1;       /* IM 1 */
+        snap[30] = 23;      /* Extended header length => v2 */
+        snap[31] = 0;
+        snap[32] = 0x00;    /* PC */
+        snap[33] = 0x80;
+        snap[34] = 3;       /* v2: 128K */
+        snap[35] = 6;       /* 7ffd bank 6 paged at 0xC000 */
+
+        for (int bank = 0; bank < 8; bank++) {
+            snap[offset + 0] = 0xFF;
+            snap[offset + 1] = 0xFF;
+            snap[offset + 2] = 3 + bank;
+            memset(snap + offset + 3, 0x10 + bank, 16384);
+            offset += 3 + 16384;
+        }
+
+        ZXSpectrum zx;
+        zx_init(&zx, zx_spectrum_rom);
+        ASSERT(zx_load_z80(&zx, snap, sizeof(snap)) == 0);
+        ASSERT(zx.machine_128k == 1);
+        ASSERT(zx.cpu.pc == 0x8000);
+        ASSERT(zx.memory[0x0000] == 0x15);
+        ASSERT(zx.memory[0x4000] == 0x12);
+        ASSERT(zx.memory[0x8000] == 0x16);
+
+        zx.cpu.io_write(&zx, 0x7FFD, 0x01);
+        ASSERT(zx.cpu.mem_read(&zx, 0xC000) == 0x11);
+        zx.cpu.io_write(&zx, 0xFFFD, 3);
+        ASSERT(zx.cpu.io_read(&zx, 0xFFFD) == 0x00);
     } PASS();
 }
 

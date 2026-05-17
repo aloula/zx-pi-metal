@@ -67,6 +67,8 @@
 #define ZX_AUDIO_RATE          44100
 #define ZX_AUDIO_SAMPLES       ((ZX_AUDIO_RATE + 25) / 50)  /* ~882 */
 #define ZX_MAX_BEEPER_EVENTS   4096
+#define ZX_RAM_BANK_SIZE       16384
+#define ZX_AY_REG_COUNT        16
 
 /* Kempston joystick button bits (active HIGH: 1 = pressed). */
 #define ZX_JOY_RIGHT   0x01
@@ -92,6 +94,13 @@ typedef struct ZXSpectrum {
     Z80 cpu;                       /* Z80 CPU core */
     const uint8_t *rom;            /* 16KB ROM pointer (caller-provided, not copied) */
     uint8_t memory[49152];         /* 48KB RAM, index 0 = address 0x4000 */
+    const uint8_t *rom_banks[2];   /* 128K machines can switch between two 16KB ROMs */
+    uint8_t ram_banks[8][ZX_RAM_BANK_SIZE]; /* 128K RAM banks */
+    uint8_t machine_128k;          /* 1 when native 128K paging is enabled */
+    uint8_t paging_7ffd;           /* Last value written to port 0x7FFD */
+    uint8_t paging_locked;         /* 1 once 0x7FFD bit 5 locks paging */
+    uint8_t ay_index;              /* Selected AY register */
+    uint8_t ay_registers[ZX_AY_REG_COUNT];
 
     /* Keyboard: 8 half-rows, bits 0-4 per row.
      * 0 = key pressed, 1 = key released (active LOW).
@@ -204,7 +213,8 @@ void zx_set_framebuffer(ZXSpectrum *zx, uint8_t *rgb);
 /* --- Snapshot loading ---------------------------------------------- */
 
 /* Load a .z80 snapshot file. Returns 0 on success, -1 on error.
- * Supports v1, v2, and v3 formats. 48K snapshots only. */
+ * Supports v1, v2, and v3 formats. 48K snapshots load directly; 128K
+ * snapshots restore all RAM banks and the current 7FFD paging state. */
 int zx_load_z80(ZXSpectrum *zx, const uint8_t *data, int size);
 
 #endif /* SPECTRUM_H */
