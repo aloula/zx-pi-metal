@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -O2 -g -Isrc
 LDFLAGS =
 
 SRC = src/z80.c src/spectrum.c src/tzx.c
-HDR = src/z80.h src/spectrum.h src/tzx.h src/rom.h src/splash.h
+HDR = src/z80.h src/spectrum.h src/tzx.h src/rom.h src/splash.h src/keyboard_layout.h
 
 all: z80_test spectrum_test circle_zx
 
@@ -27,7 +27,7 @@ fulltest: z80_test spectrum_test
 	./spectrum_test
 
 clean:
-	rm -rf z80_test spectrum_test *.o *.dSYM src/splash.h
+	rm -rf z80_test spectrum_test *.o *.dSYM src/splash.h src/keyboard_layout.h
 	$(MAKE) -C frontends/bare-metal clean
 
 .PHONY: all test fulltest clean circle_zx

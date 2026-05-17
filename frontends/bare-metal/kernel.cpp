@@ -9,24 +9,10 @@
 extern "C" {
 #include "../../src/rom.h"
 #include "../../src/splash.h"
+#include "../../src/keyboard_layout.h"
 }
 
 static const char FromKernel[] = "zx-circle";
-static const char *const KeyboardLayoutLines[] = {
-    "PC -> ZX quick reference",
-    "Shift -> CAPS SHIFT",
-    "Ctrl  -> SYMBOL SHIFT",
-    "A..Z / 0..9 -> same keys",
-    "Enter -> ENTER",
-    "Space -> BREAK/SPACE",
-    "Backspace -> CAPS SHIFT + 0",
-    "Arrows -> Kempston U/D/L/R",
-    "Tab -> Kempston FIRE",
-    "F2 reset  F3 play tape",
-    "F4 stop tape  F6 turbo"
-};
-static const unsigned KeyboardLayoutLineCount =
-    sizeof(KeyboardLayoutLines) / sizeof(KeyboardLayoutLines[0]);
 
 static char zx_upper(char c)
 {
@@ -229,11 +215,8 @@ TShutdownMode CKernel::Run(void)
     m_Logger.Write(FromKernel, LogNotice, "ZX Spectrum bare-metal frontend (Circle)");
     m_Logger.Write(FromKernel, LogNotice, "Attach USB keyboard. F1 OSD, F2 reset, F3 play tape, F4 stop tape, F6 turbo.");
 
-    /* Show splash screen for 2 seconds. */
-    memcpy(m_Framebuffer, splash_raw, sizeof(m_Framebuffer));
-    BlitSpectrumFramebuffer();
-    CTimer::SimpleusDelay(2000000);
-    memset(m_Framebuffer, 0, sizeof(m_Framebuffer));
+    /* Show animated splash screen. */
+    RenderSplashWithFade();
 
     while (m_ShutdownMode == ShutdownNone) {
         const boolean updated = m_USBHCI.UpdatePlugAndPlay();
@@ -728,11 +711,11 @@ void CKernel::LoadOptional128KROMs(void)
                            roms[i].name, ROM128Size);
         }
     }
-
 }
 
-void CKernel::BlitSpectrumFramebuffer(void)
+void CKernel::BlitSpectrumFramebuffer(const uint8_t *pBuffer)
 {
+    const uint8_t *pSrcBase = pBuffer ? pBuffer : m_Framebuffer;
 #ifndef SCREEN_HEADLESS
     CBcmFrameBuffer *pFB = m_Screen.GetFrameBuffer();
     if (pFB != 0) {
@@ -741,7 +724,7 @@ void CKernel::BlitSpectrumFramebuffer(void)
             reinterpret_cast<unsigned char *>((uintptr_t)pFB->GetBuffer());
         if (base != 0 && pitch != 0) {
             for (unsigned y = 0; y < ZX_FB_HEIGHT; y++) {
-                const uint8_t *src = &m_Framebuffer[y * ZX_FB_WIDTH * 3];
+                const uint8_t *src = &pSrcBase[y * ZX_FB_WIDTH * 3];
                 const unsigned py0 = m_DrawY + y * m_Scale;
                 for (unsigned dy = 0; dy < m_Scale; dy++) {
 #if DEPTH == 16
@@ -783,7 +766,7 @@ void CKernel::BlitSpectrumFramebuffer(void)
 #endif
 
     for (unsigned y = 0; y < ZX_FB_HEIGHT; y++) {
-        const uint8_t *src = &m_Framebuffer[y * ZX_FB_WIDTH * 3];
+        const uint8_t *src = &pSrcBase[y * ZX_FB_WIDTH * 3];
         const unsigned py0 = m_DrawY + y * m_Scale;
         for (unsigned x = 0; x < ZX_FB_WIDTH; x++) {
             const unsigned px0 = m_DrawX + x * m_Scale;
@@ -805,11 +788,40 @@ void CKernel::BlitSpectrumFramebuffer(void)
     }
 }
 
+void CKernel::RenderSplashWithFade(void)
+{
+    const unsigned FadeSteps = 32;
+    const unsigned FadeStepUs = 500000 / FadeSteps;
+
+    /* Fade in */
+    for (unsigned step = 0; step <= FadeSteps; step++) {
+        unsigned alpha = (step * 256) / FadeSteps;
+        for (unsigned i = 0; i < sizeof(m_Framebuffer); i++) {
+            m_Framebuffer[i] = (uint8_t)((unsigned)splash_raw[i] * alpha >> 8);
+        }
+        BlitSpectrumFramebuffer();
+        CTimer::SimpleusDelay(FadeStepUs);
+    }
+
+    /* Full visibility for 2 seconds */
+    CTimer::SimpleusDelay(2000000);
+
+    /* Fade out */
+    for (unsigned step = FadeSteps; step > 0; step--) {
+        unsigned alpha = (step * 256) / FadeSteps;
+        for (unsigned i = 0; i < sizeof(m_Framebuffer); i++) {
+            m_Framebuffer[i] = (uint8_t)((unsigned)splash_raw[i] * alpha >> 8);
+        }
+        BlitSpectrumFramebuffer();
+        CTimer::SimpleusDelay(FadeStepUs);
+    }
+
+    memset(m_Framebuffer, 0, sizeof(m_Framebuffer));
+    BlitSpectrumFramebuffer();
+}
+
 unsigned CKernel::GetOSDEntryCount(void) const
 {
-    if (m_ShowKeyboardLayout) {
-        return 1 + KeyboardLayoutLineCount;
-    }
     const unsigned snapshot_rows = (m_FileSystemMounted && m_SnapshotCount > 0) ? m_SnapshotCount : 1;
     return 1 + snapshot_rows;
 }
@@ -919,6 +931,10 @@ void CKernel::RenderOSD(void)
         line.Format("\x1b[%u;%uH%s", start_row + i, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
     }
+
+    /* If graphical layout is ON, blit the image. Otherwise blit the last game frame. */
+    BlitSpectrumFramebuffer(m_ShowKeyboardLayout ? keyboard_layout_raw : 0);
+
     for (unsigned i = 0; i < width; i++) {
         rowbuf[i] = ' ';
     }
@@ -949,22 +965,12 @@ void CKernel::RenderOSD(void)
 
         if (entry_index == 0) {
             const char *toggle_msg = m_ShowKeyboardLayout
-                ? "Keyboard layout: ON (Enter to hide)"
-                : "Keyboard layout: OFF (Enter to show)";
+                ? "Keyboard layout image: ON (Enter to hide)"
+                : "Keyboard layout image: OFF (Enter to show)";
             unsigned c = 0;
             while (toggle_msg[c] != '\0' && c + 2 < width) {
                 rowbuf[2 + c] = toggle_msg[c];
                 c++;
-            }
-        } else if (m_ShowKeyboardLayout) {
-            const unsigned line_index = entry_index - 1;
-            if (line_index < KeyboardLayoutLineCount) {
-                const char *msg = KeyboardLayoutLines[line_index];
-                unsigned c = 0;
-                while (msg[c] != '\0' && c + 2 < width) {
-                    rowbuf[2 + c] = msg[c];
-                    c++;
-                }
             }
         } else {
             const unsigned snapshot_index = entry_index - 1;

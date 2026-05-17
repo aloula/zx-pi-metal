@@ -55,7 +55,8 @@ private:
 
     void ApplyInputReport(void);
     void ResetSpectrum(void);
-    void BlitSpectrumFramebuffer(void);
+    void BlitSpectrumFramebuffer(const uint8_t *pBuffer = 0);
+    void RenderSplashWithFade(void);
     void RenderOSD(void);
     void SetZXKeyState(int row, int bit, boolean pressed);
     void SetZXJoyState(unsigned mask, boolean pressed);
