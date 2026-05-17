@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -O2 -g -Isrc
 LDFLAGS =
 
 SRC = src/z80.c src/spectrum.c src/tzx.c
-HDR = src/z80.h src/spectrum.h src/tzx.h src/rom.h src/splash.h src/keyboard_layout.h
+HDR = src/z80.h src/spectrum.h src/tzx.h src/rom.h src/splash.h
 
 all: z80_test spectrum_test circle_zx
 
