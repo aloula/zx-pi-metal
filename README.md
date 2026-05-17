@@ -1,13 +1,15 @@
+# ![ZX Pi Metal Logo](res/ZX_Pi_Metal_Logo.png)
+
 # ZX Spectrum Bare Metal for Raspberry Pi 3B+
 
-This project combines a high-performance Z80 emulator core with a Raspberry Pi bare-metal frontend built on the [Circle](https://github.com/rsta2/circle) environment.
+This project is a high-performance, bare-metal ZX Spectrum emulator for the Raspberry Pi 3B+, built using the [Circle](https://github.com/rsta2/circle) environment. It focuses on cycle-accurate timing, low-latency audio, and native hardware support.
 
 ## Features
 
 - **Dual-Model Support**: Native ZX Spectrum 48K and 128K (Toastrack/Grey +2) emulation.
 - **Cycle-Accurate Audio**: Mid-frame AY-3-8910 event logging for perfect software envelopes and PCM effects.
 - **Hardware Quirks**: Full Floating Bus emulation (fixes *Arkanoid* and other beam-synced games).
-- **Bare-Metal Performance**: Boots in seconds with low-latency input and audio.
+- **Bare-Metal Performance**: Boots in seconds with a custom **Splash Screen**.
 - **OSD File Browser**: Integrated browser for `.z80` snapshots, `.tap`, and `.tzx` tapes.
 - **Modern Input**: Support for USB keyboards and XBox 360-style gamepads (mapped to Kempston).
 - **Visuals**: Scaled RGB framebuffer with border effects.
