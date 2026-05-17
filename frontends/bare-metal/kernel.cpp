@@ -556,26 +556,29 @@ void CKernel::ApplyInputReport(void)
                 desired_keys[4][0] = TRUE; /* 0 */
                 break;
 
-            case HID_TAB: desired_joy |= ZX_JOY_FIRE; break;
+            case HID_TAB:
+                desired_joy |= ZX_JOY_FIRE;
+                desired_keys[4][0] = TRUE; /* 0 (Sinclair Fire / BIOS Select) */
+                break;
             case HID_UP:
                 desired_joy |= ZX_JOY_UP;
-                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
-                desired_keys[4][3] = TRUE; /* 7 */
+                desired_keys[4][3] = TRUE; /* 7 (BIOS Up) */
+                desired_keys[4][1] = TRUE; /* 9 (Sinclair 1 Up) */
                 break;
             case HID_DOWN:
                 desired_joy |= ZX_JOY_DOWN;
-                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
-                desired_keys[4][4] = TRUE; /* 6 */
+                desired_keys[4][4] = TRUE; /* 6 (BIOS Down) */
+                desired_keys[4][2] = TRUE; /* 8 (Sinclair 1 Down) */
                 break;
             case HID_LEFT:
                 desired_joy |= ZX_JOY_LEFT;
-                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
-                desired_keys[3][4] = TRUE; /* 5 */
+                desired_keys[3][4] = TRUE; /* 5 (Cursor Left) */
+                desired_keys[4][4] = TRUE; /* 6 (Sinclair 1 Left) */
                 break;
             case HID_RIGHT:
                 desired_joy |= ZX_JOY_RIGHT;
-                desired_keys[0][0] = TRUE; /* CAPS SHIFT */
-                desired_keys[4][2] = TRUE; /* 8 */
+                desired_keys[4][2] = TRUE; /* 8 (Cursor Right) */
+                desired_keys[4][3] = TRUE; /* 7 (Sinclair 1 Right) */
                 break;
 
             case HID_F2:
@@ -599,19 +602,37 @@ void CKernel::ApplyInputReport(void)
     if (!m_OsdActive) {
         if ((gamepad_buttons & GamePadButtonLeft) || left_left) {
             desired_joy |= ZX_JOY_LEFT;
+            desired_keys[4][4] = TRUE; /* 6 (Sinclair 1 Left) */
         }
         if ((gamepad_buttons & GamePadButtonRight) || left_right) {
             desired_joy |= ZX_JOY_RIGHT;
+            desired_keys[4][3] = TRUE; /* 7 (Sinclair 1 Right) */
         }
         if ((gamepad_buttons & GamePadButtonUp) || left_up) {
             desired_joy |= ZX_JOY_UP;
+            desired_keys[4][1] = TRUE; /* 9 (Sinclair 1 Up) */
         }
         if ((gamepad_buttons & GamePadButtonDown) || left_down) {
             desired_joy |= ZX_JOY_DOWN;
+            desired_keys[4][2] = TRUE; /* 8 (Sinclair 1 Down) */
         }
 
-        if (gamepad_buttons & (GamePadButtonA | GamePadButtonB | GamePadButtonRB | GamePadButtonRT)) {
+        if (gamepad_buttons & (GamePadButtonA | GamePadButtonRB | GamePadButtonRT)) {
             desired_joy |= ZX_JOY_FIRE;
+            desired_keys[4][0] = TRUE; /* 0 (Sinclair 1 Fire) */
+            desired_keys[7][0] = TRUE; /* Space (General Fire) */
+        }
+        if (gamepad_buttons & GamePadButtonB) {
+            desired_keys[6][0] = TRUE; /* Enter */
+        }
+        if (gamepad_buttons & GamePadButtonX) {
+            desired_keys[0][0] = TRUE; /* CAPS SHIFT */
+        }
+        if (gamepad_buttons & GamePadButtonY) {
+            desired_keys[7][1] = TRUE; /* SYMBOL SHIFT */
+        }
+        if (gamepad_buttons & GamePadButtonStart) {
+            desired_keys[6][0] = TRUE; /* Enter */
         }
     }
 
