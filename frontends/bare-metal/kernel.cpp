@@ -907,7 +907,7 @@ boolean CKernel::OSDActivateSelection(void)
 void CKernel::RenderOSD(void)
 {
     static const unsigned MaxPanelChars = 128;
-    const unsigned panel_rows = OSDVisibleRows + 5;
+    const unsigned panel_rows = OSDVisibleRows + 3; /* Title + Entries + Help + Status */
     const unsigned cols = m_Screen.GetColumns();
     const unsigned rows = m_Screen.GetRows();
 
@@ -931,7 +931,8 @@ void CKernel::RenderOSD(void)
     if (end_col < start_col) end_col = start_col;
     if (start_row < 1) start_row = 1;
 
-    unsigned width = end_col - start_col + 1;
+    /* width + 2 margin to fix rounding artifacts at the edge. */
+    unsigned width = end_col - start_col + 2;
     if (width > MaxPanelChars) {
         width = MaxPanelChars;
     }
@@ -970,7 +971,7 @@ void CKernel::RenderOSD(void)
     m_Screen.Write((const char *)line, line.GetLength());
 
     for (unsigned i = 0; i < OSDVisibleRows; i++) {
-        const unsigned row = start_row + 2 + i;
+        const unsigned row = start_row + 1 + i;
         const unsigned entry_index = m_OsdTopRow + i;
         boolean selected = (entry_index == m_SelectedSnapshot);
 
@@ -1056,7 +1057,7 @@ void CKernel::RenderOSD(void)
     /* Help text in Blue on White. */
     m_Screen.Write("\x1b[34m", 5);
     m_Screen.Write("\x1b[47m", 5);
-    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
+    line.Format("\x1b[%u;%uH%s", start_row + 1 + OSDVisibleRows, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     for (unsigned i = 0; i < width; i++) {
@@ -1069,7 +1070,7 @@ void CKernel::RenderOSD(void)
     /* Status bar in Black on White. */
     m_Screen.Write("\x1b[30m", 5);
     m_Screen.Write("\x1b[47m", 5);
-    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 2, start_col, rowbuf);
+    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     /* Reset color and hide cursor. */
@@ -1108,7 +1109,7 @@ void CKernel::ToggleOSD(void)
 
         unsigned start_col = draw_col0 + 1;
         unsigned start_row = (m_DrawY * rows) / m_Screen.GetHeight() + 2;
-        const unsigned total_rows = OSDVisibleRows + 5;
+        const unsigned total_rows = OSDVisibleRows + 3;
         if (start_row + total_rows + 1 >= draw_row1) {
             start_row = (draw_row1 > total_rows + 1) ? (draw_row1 - total_rows - 1) : 1;
         }
@@ -1116,7 +1117,7 @@ void CKernel::ToggleOSD(void)
         if (start_col < 1) start_col = 1;
         if (end_col > cols) end_col = cols;
         if (end_col < start_col) end_col = start_col;
-        unsigned width = end_col - start_col + 1;
+        unsigned width = end_col - start_col + 2;
         if (width > 128) width = 128;
 
         CString line;
