@@ -943,8 +943,9 @@ void CKernel::RenderOSD(void)
     }
     rowbuf[width] = '\0';
 
-    /* Set Spectrum colors: Black on White background. (8 bytes) */
-    m_Screen.Write("\x1b[30;47m", 8);
+    /* Set Spectrum colors: Black on White background. (Split ANSI) */
+    m_Screen.Write("\x1b[30m", 5);
+    m_Screen.Write("\x1b[47m", 5);
     for (unsigned i = 0; i < panel_rows; i++) {
         line.Format("\x1b[%u;%uH%s", start_row + i, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
@@ -963,7 +964,9 @@ void CKernel::RenderOSD(void)
     const unsigned title_off = (width > title_len) ? (width - title_len) / 2 : 0;
     memcpy(rowbuf + title_off, title, title_len);
     /* Title in Red on White background. */
-    line.Format("\x1b[%u;%uH\x1b[31;47m%s\x1b[30;47m", start_row, start_col, rowbuf);
+    m_Screen.Write("\x1b[31m", 5);
+    m_Screen.Write("\x1b[47m", 5);
+    line.Format("\x1b[%u;%uH%s", start_row, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     for (unsigned i = 0; i < OSDVisibleRows; i++) {
@@ -1026,10 +1029,13 @@ void CKernel::RenderOSD(void)
         }
         /* Selection in Black on Cyan, normal in Black on White. */
         if (selected) {
-            line.Format("\x1b[%u;%uH\x1b[30;46m%s\x1b[30;47m", row, start_col, rowbuf);
+            m_Screen.Write("\x1b[30m", 5);
+            m_Screen.Write("\x1b[46m", 5);
         } else {
-            line.Format("\x1b[%u;%uH%s", row, start_col, rowbuf);
+            m_Screen.Write("\x1b[30m", 5);
+            m_Screen.Write("\x1b[47m", 5);
         }
+        line.Format("\x1b[%u;%uH%s", row, start_col, rowbuf);
         m_Screen.Write((const char *)line, line.GetLength());
     }
 
@@ -1048,7 +1054,9 @@ void CKernel::RenderOSD(void)
     }
     memcpy(rowbuf + help_off, help, help_len);
     /* Help text in Blue on White. */
-    line.Format("\x1b[%u;%uH\x1b[34;47m%s\x1b[30;47m", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
+    m_Screen.Write("\x1b[34m", 5);
+    m_Screen.Write("\x1b[47m", 5);
+    line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 1, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     for (unsigned i = 0; i < width; i++) {
@@ -1059,11 +1067,14 @@ void CKernel::RenderOSD(void)
     unsigned status_off = (width > status_len) ? (width - status_len) / 2 : 0;
     memcpy(rowbuf + status_off, m_OsdStatus, status_len);
     /* Status bar in Black on White. */
+    m_Screen.Write("\x1b[30m", 5);
+    m_Screen.Write("\x1b[47m", 5);
     line.Format("\x1b[%u;%uH%s", start_row + 2 + OSDVisibleRows + 2, start_col, rowbuf);
     m_Screen.Write((const char *)line, line.GetLength());
 
     /* Reset color and hide cursor. */
-    m_Screen.Write("\x1b[0m\x1b[?25l", 10);
+    m_Screen.Write("\x1b[0m", 4);
+    m_Screen.Write("\x1b[?25l", 6);
 }
 
 void CKernel::ToggleOSD(void)
