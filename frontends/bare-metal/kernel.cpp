@@ -8,6 +8,7 @@
 
 extern "C" {
 #include "../../src/rom.h"
+#include "../../src/splash.h"
 }
 
 static const char FromKernel[] = "zx-circle";
@@ -227,6 +228,12 @@ TShutdownMode CKernel::Run(void)
 {
     m_Logger.Write(FromKernel, LogNotice, "ZX Spectrum bare-metal frontend (Circle)");
     m_Logger.Write(FromKernel, LogNotice, "Attach USB keyboard. F1 OSD, F2 reset, F3 play tape, F4 stop tape, F6 turbo.");
+
+    /* Show splash screen for 2 seconds. */
+    memcpy(m_Framebuffer, splash_raw, sizeof(m_Framebuffer));
+    BlitSpectrumFramebuffer();
+    CTimer::SimpleusDelay(2000000);
+    memset(m_Framebuffer, 0, sizeof(m_Framebuffer));
 
     while (m_ShutdownMode == ShutdownNone) {
         const boolean updated = m_USBHCI.UpdatePlugAndPlay();

@@ -16,7 +16,6 @@ This project combines a high-performance Z80 emulator core with a Raspberry Pi b
 
 - `src/`: Core emulator logic (Z80, ULA, AY-PSG, TZX).
 - `frontends/bare-metal/`: Raspberry Pi specific code (Circle environment).
-- `frontends/sdl/`: Desktop frontend (Linux/Windows via SDL2).
 - `docs/`: Technical specifications and hardware reference.
 - `tests/`: Automated test suite for CPU and ULA correctness.
 
@@ -49,6 +48,7 @@ Copy the following to the FAT root of your SD card:
 3.  **Firmware**: Circle boot files from `circle/boot/` (`bootcode.bin`, `start.elf`, `fixup.dat`, etc).
 4.  **ROMs**:
     *   `128-0.rom` and `128-1.rom` (16KB each) for 128K mode.
+    *   Place these in the SD card root.
     *   If no 128K ROMs are found, it defaults to 48K mode using the internal ROM.
 5.  **Games**: Place `.z80`, `.tap`, or `.tzx` files in the root or subdirectories.
 
